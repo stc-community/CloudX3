@@ -3,6 +3,7 @@ import { useNostrStore } from "@/store/modules/nostr";
 import { useModalStore } from "@/store/modules/modal";
 import { onMounted, reactive } from "vue";
 import type { Event } from "nostr-tools";
+import { formatTime } from "@/utils/shared";
 
 const data = reactive({
   services: [],
@@ -119,6 +120,9 @@ onMounted(async () => {
 
           <p class="mt-2 text-slate-500">Image:</p>
           <p class="break-all">{{ s.info[0].metadata?.service_image }}</p>
+
+          <p class="mt-2 text-slate-500">Last Heartbeat:</p>
+          <p class="break-all">{{ formatTime(s.info[0].renew_timestamp) }}</p>
         </div>
 
         <p class="text-sm font-semibold mt-5">Security</p>

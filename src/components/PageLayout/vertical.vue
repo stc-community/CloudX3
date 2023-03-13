@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// 经典的左右布局
+// vertical layout
 import { useRoute } from "vue-router";
 import { loadModuleRoutes } from "@/router/utils";
 

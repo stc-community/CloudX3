@@ -1,0 +1,23 @@
+{
+  "Version": "0.0.1",
+  "Title": "web3-ui",
+  "Theme": "light",
+  "Relay": [
+    {
+      "name": "gw105",
+      "url": "ws://182.61.59.53:2700",
+      "lat": 34.7732,
+      "long": 113.722,
+      "city": "Shanghai",
+      "flag": "twemoji:flag-china"
+    },
+    {
+      "name": "gw106",
+      "url": "ws://110.41.16.146:2700",
+      "lat": 1.2929,
+      "long": 103.8547,
+      "city": "Singapore",
+      "flag": "twemoji:flag-singapore"
+    }
+  ]
+}

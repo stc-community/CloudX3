@@ -1,0 +1,14 @@
+@import "./mixin.scss";
+@import "./transition.scss";
+
+:root {
+  --pure-transition-duration: 0.016s;
+}
+
+.html-grey {
+  filter: grayscale(100%);
+}
+
+.html-weakness {
+  filter: invert(80%);
+}

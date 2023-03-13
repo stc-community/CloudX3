@@ -1,44 +1,61 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { reactive } from "vue";
+
+type HostInfo = {
+  host_id: string;
+  labels: {
+    "hostcore.arch": string;
+    "hostcore.os": string;
+    "hostcore.osfamily": string;
+    kubernetes: string;
+  };
+};
+
+const hosts: Array<HostInfo> = reactive([]);
+
+hosts.push({
+  host_id: "NBPEU7NMBJ3NKX3MOXD4KUZZI6KNEOATCDQ6C2GSM5LCFVSJUNIZPLO6",
+  labels: {
+    "hostcore.arch": "x86_64",
+    "hostcore.os": "linux",
+    "hostcore.osfamily": "unix",
+    kubernetes: "true"
+  }
+});
+</script>
 <template>
   <h2>{{ $route.meta.title }}</h2>
-  <div class="card w-96 bg-base-100 shadow-md mt-10">
-    <div class="card-body">
-      <h2 class="card-title">Free Plan</h2>
-      <p>Billing Monthy</p>
-      <button class="btn btn-primary w-40">Upgrade Now</button>
-
-      <p class="text-sm font-semibold mt-5">Features</p>
-      <ul class="mt-4">
-        <li class="flex items-center gap-2 mb-3" v-for="(i, k) in 5" :key="k">
-          <input
-            type="radio"
-            :name="`name${k}`"
-            class="radio radio-success radio-sm"
-            checked
+  <div class="grid grid-cols-3 gap-4 mt-5">
+    <div class="card bg-base-100 shadow-md row-span-1" v-for="(h, i) in hosts">
+      <div class="card-body">
+        <h2 class="card-title text-primary">
+          <IconifyIconOnline
+            icon="tabler:server-2"
+            width="30px"
+            height="30px"
           />
-          Support feature {{ i }}
-        </li>
-      </ul>
+          Host {{ i + 1 }}
+        </h2>
+        <p class="text-sm break-all text-slate-600">{{ h.host_id }}</p>
 
-      <p class="text-sm font-semibold mt-5">Current Uasge</p>
-      <div class="mt-4 flex justify-between text-center">
-        <div>
-          <div class="radial-progress text-success" style="--value: 70">
-            70%
-          </div>
-          <p class="mt-2">Device</p>
-        </div>
-
-        <div>
-          <div class="radial-progress text-error" style="--value: 10">10%</div>
-          <p class="mt-2">Network</p>
-        </div>
-
-        <div>
-          <div class="radial-progress text-warning" style="--value: 30">
-            30%
-          </div>
-          <p class="mt-2">Key</p>
+        <p class="text-sm font-semibold mt-5">Information</p>
+        <div class="leading-6 text-slate-500">
+          <p>
+            ARCH:
+            <span class="text-base-content">{{
+              h.labels["hostcore.arch"]
+            }}</span>
+          </p>
+          <p>
+            OS:
+            <span class="text-base-content">{{ h.labels["hostcore.os"] }}</span>
+          </p>
+          <p>
+            OS Famliy:
+            <span class="text-base-content">{{
+              h.labels["hostcore.osfamily"]
+            }}</span>
+          </p>
         </div>
       </div>
     </div>

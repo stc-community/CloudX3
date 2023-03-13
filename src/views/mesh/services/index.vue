@@ -108,45 +108,35 @@ onMounted(async () => {
 
         <p class="text-sm font-semibold mt-5">Metadata</p>
         <div class="leading-5">
-          <p>Version:</p>
+          <p class="text-slate-500">Version:</p>
           <p>{{ s.info[0].metadata?.version }}</p>
 
-          <p class="mt-2">Runtime:</p>
+          <p class="mt-2 text-slate-500">Runtime:</p>
           <p>{{ s.info[0].metadata?.runtime }}</p>
 
-          <p class="mt-2">Hostname:</p>
+          <p class="mt-2 text-slate-500">Hostname:</p>
           <p>{{ s.info[0]?.hostname }}</p>
 
-          <p class="mt-2">Image:</p>
+          <p class="mt-2 text-slate-500">Image:</p>
           <p class="break-all">{{ s.info[0].metadata?.service_image }}</p>
         </div>
 
         <p class="text-sm font-semibold mt-5">Security</p>
-        <ul class="mt-4">
-          <li class="flex items-center gap-2 mb-3">
-            <input
-              type="radio"
-              :name="`mtls${i}`"
-              class="radio radio-sm radio-success"
-              checked
-            />
-            Mode: {{ s.info[0].metadata?.mode }}
-          </li>
-          <li class="flex items-center gap-2 mb-3">
-            <input
-              type="radio"
-              :name="`cert${i}`"
-              class="radio radio-success radio-sm"
-              :class="s.ca_active ? ['radio-success'] : ['radio-error']"
-              checked
-            />
-            {{
-              s.ca_active
-                ? "Workload Cert actived"
-                : "Workload Cert NOT actived"
-            }}
-          </li>
-        </ul>
+        <div class="text-slate-500 text-sm">
+          <p>Cert Status:</p>
+          <div class="btn-group mt-2">
+            <button class="btn btn-active normal-case">Active</button>
+            <button class="btn normal-case">Revoke</button>
+          </div>
+        </div>
+        <div class="text-slate-500 text-sm">
+          <p>Communicaiton Way:</p>
+          <div class="btn-group mt-2">
+            <button class="btn btn-active">HTTP</button>
+            <button class="btn">HTTPS</button>
+            <button class="btn normal-case">mTLS</button>
+          </div>
+        </div>
 
         <p class="text-sm font-semibold mt-5" v-if="0">Running Status</p>
         <div class="mt-4 flex justify-between text-center" v-if="0">

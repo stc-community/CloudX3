@@ -14,7 +14,7 @@ export default {
       component: () => import("@/views/container/deployments/index.vue"),
       meta: {
         title: "Deployments",
-        icon: "ant-design:deployment-unit-outlined"
+        icon: "ic:outline-autorenew"
       }
     },
     {
@@ -23,7 +23,7 @@ export default {
       component: () => import("@/views/container/pods/index.vue"),
       meta: {
         title: "Pods",
-        icon: "pajamas:pod"
+        icon: "ion:cube"
       }
     }
   ]

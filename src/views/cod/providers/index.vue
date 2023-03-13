@@ -71,7 +71,7 @@ providers.push({
               width="30px"
               height="30px"
             />
-            <span class="break-all ml-3 text-[10px] leading-3">{{
+            <span class="break-all ml-3 text-xs leading-3">{{
               p.host_id
             }}</span>
           </div>

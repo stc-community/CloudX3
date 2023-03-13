@@ -5,7 +5,7 @@
   "Relay": [
     {
       "name": "gw105",
-      "url": "ws://182.61.59.53:2700",
+      "url": "wss://nostr.gw105.oneitfarm.com",
       "lat": 34.7732,
       "long": 113.722,
       "city": "Shanghai",

@@ -3,7 +3,7 @@ import { reactive, ref, onMounted } from "vue";
 import { loadData } from "@/utils/shared";
 import type { Event } from "nostr-tools";
 import MessageVerified from "@/components/MessageVerified.vue";
-import "@/utils/web3";
+// import "@/utils/web3";
 
 type ActorInfo = {
   event: Event;

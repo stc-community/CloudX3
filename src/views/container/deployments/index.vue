@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { reactive } from "vue";
-import mockList from "./mock.js";
+import { reactive, ref, onMounted } from "vue";
+import { loadData, transMapToArr } from "@/utils/shared";
+import MessageVerified from "@/components/MessageVerified.vue";
+import type { Event } from "nostr-tools";
 
 interface Deployment {
+  event: Event;
   metadata: {
     name: string; // 名称
     namespace: string; // 命名空间
-    creationTimestamp: string; // 创建时间
     labels: {
       // labels
       [key: string]: string;
@@ -18,24 +20,25 @@ interface Deployment {
     replicas: number; // 总数
   };
   spec: {
-    selector: {
-      // Selector
-      matchLabels: {
-        [key: string]: string;
-      };
-    };
+    replicas: number;
   };
 }
 
-interface Data {
-  deployments: Array<Deployment>;
-}
+const loading = ref(true);
+const deployments: Array<Deployment> = reactive([]);
+let page = 1;
 
-const data: Data = reactive({
-  deployments: []
+onMounted(async () => {
+  loadData(
+    deployments,
+    "cloud.deployment.list",
+    {
+      page,
+      limit: 3
+    },
+    loading
+  );
 });
-
-data.deployments = mockList;
 
 const getStatusPercent = d => {
   const ready = d.status?.readyReplicas || 0;
@@ -48,19 +51,42 @@ const getStatusPercent = d => {
   return percent;
 };
 
-const transMapToArr = obj => {
-  return Object.keys(obj).map(k => {
-    return {
-      k,
-      v: obj[k]
-    };
-  });
+const loadMore = () => {
+  loading.value = true;
+
+  page++;
+  loadData(
+    deployments,
+    "cloud.deployment.list",
+    {
+      page,
+      limit: 3
+    },
+    loading
+  );
+};
+
+const isSOL = d => {
+  if (!d.metadata.labels) {
+    return false;
+  }
+
+  return d.metadata?.labels["managed-by"] === "sol";
 };
 </script>
 <template>
   <h2>{{ $route.meta.title }}</h2>
   <div class="grid grid-cols-3 gap-4 mt-5">
-    <div class="card shadow-md row-span-1 border" v-for="d in data.deployments">
+    <div
+      v-for="d in deployments"
+      class="card shadow-md row-span-1 border"
+      :class="{ 'border-primary': isSOL(d) }"
+    >
+      <span
+        v-if="isSOL(d)"
+        class="badge text-white badge-primary badge-lg absolute right-[-5px] top-[-10px]"
+        >Managed By SOL</span
+      >
       <div class="card-body">
         <h2 class="card-title text-primary">
           <IconifyIconOnline
@@ -69,6 +95,8 @@ const transMapToArr = obj => {
             height="30px"
           />
           {{ d.metadata.name }}
+
+          <MessageVerified :event="d.event" />
         </h2>
         <div class="tooltip text-left tooltip-left" data-tip="Namespace">
           <div class="badge badge-primary badge-outline break-all">
@@ -76,20 +104,10 @@ const transMapToArr = obj => {
           </div>
         </div>
 
-        <p class="text-sm font-semibold mt-5">Selector</p>
-        <div class="max-h-[200px] overflow-y-auto">
-          <p
-            v-for="label in transMapToArr(d.spec.selector.matchLabels)"
-            class="mb-2 leading-3 break-all text-xs"
-          >
-            {{ label.k }} : {{ label.v }}
-          </p>
-        </div>
-
         <p class="text-sm font-semibold mt-5">Labels</p>
-        <div class="max-h-[200px] overflow-y-auto">
+        <div class="max-h-[100px] overflow-y-auto">
           <p
-            v-for="label in transMapToArr(d.metadata.labels)"
+            v-for="label in transMapToArr(d?.metadata?.labels)"
             class="mb-2 leading-3 break-all text-xs"
           >
             {{ label.k }} : {{ label.v }}
@@ -105,8 +123,22 @@ const transMapToArr = obj => {
           >
             {{ d.status?.readyReplicas || 0 }} / {{ d.status.replicas }}
           </div>
-          <p class="mt-2">Ready/Total</p>
+          <p class="mt-2 text-slate-500 text-xs">Ready/Total</p>
         </div>
+      </div>
+    </div>
+    <div class="card shadow-md row-span-1 border">
+      <div class="card-body">
+        <progress v-if="loading" class="progress row-span-1" />
+
+        <button class="btn w-full mt-10" :disabled="loading" @click="loadMore">
+          <IconifyIconOnline
+            class="mr-2"
+            icon="material-symbols:add-circle"
+            width="30px"
+            height="30px"
+          />Load More
+        </button>
       </div>
     </div>
   </div>

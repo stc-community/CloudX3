@@ -65,3 +65,16 @@ export async function loadData(
     }
   );
 }
+
+export function transMapToArr(obj: Object) {
+  if (typeof obj !== "object") {
+    return [];
+  }
+
+  return Object.keys(obj).map(k => {
+    return {
+      k,
+      v: obj[k]
+    };
+  });
+}

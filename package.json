@@ -33,6 +33,7 @@
     "axios": "^1.2.0",
     "daisyui": "^2.50.2",
     "dayjs": "^1.11.6",
+    "ethers": "^6.1.0",
     "leaflet": "^1.9.3",
     "nostr-tools": "^1.7.4",
     "nprogress": "^0.2.0",

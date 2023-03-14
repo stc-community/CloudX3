@@ -60,7 +60,7 @@ const transMapToArr = obj => {
 <template>
   <h2>{{ $route.meta.title }}</h2>
   <div class="grid grid-cols-3 gap-4 mt-5">
-    <div class="card shadow-md row-span-1" v-for="(d, k) in data.deployments">
+    <div class="card shadow-md row-span-1 border" v-for="d in data.deployments">
       <div class="card-body">
         <h2 class="card-title text-primary">
           <IconifyIconOnline

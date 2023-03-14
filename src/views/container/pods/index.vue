@@ -61,9 +61,12 @@ const getStatusColor = (phase: string) => {
 <template>
   <h2>{{ $route.meta.title }}</h2>
   <div class="grid grid-cols-3 gap-4 mt-5">
-    <div class="card shadow-md row-span-1 relative" v-for="d in data.pods">
+    <div
+      class="card shadow-md row-span-1 relative border"
+      v-for="d in data.pods"
+    >
       <span
-        class="badge text-white absolute right-[-5px]"
+        class="badge text-white absolute right-[-5px] top-[-5px]"
         :class="getStatusColor(d.status.phase)"
         >{{ d.status.phase }}</span
       >

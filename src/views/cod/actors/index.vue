@@ -26,7 +26,10 @@ actors.push({
 <template>
   <h2>{{ $route.meta.title }}</h2>
   <div class="grid grid-cols-3 gap-4 mt-5">
-    <div class="card shadow-md row-span-1" v-for="a in actors">
+    <div
+      class="card shadow-md row-span-1 border border-primary"
+      v-for="a in actors"
+    >
       <span class="badge badge-primary text-white absolute right-[-5px]">{{
         a.count
       }}</span>

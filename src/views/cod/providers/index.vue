@@ -35,10 +35,14 @@ providers.push({
 <template>
   <h2>{{ $route.meta.title }}</h2>
   <div class="grid grid-cols-3 gap-4 mt-5">
-    <div class="card shadow-md relative" v-for="p in providers">
-      <span class="badge badge-success text-white absolute right-[-5px]">{{
-        p.status
-      }}</span>
+    <div
+      class="card shadow-md relative border border-primary"
+      v-for="p in providers"
+    >
+      <span
+        class="badge badge-success text-white absolute right-[-5px] top-[-5px]"
+        >{{ p.status }}</span
+      >
       <div class="card-body">
         <h2 class="card-title text-primary">
           <IconifyIconOnline

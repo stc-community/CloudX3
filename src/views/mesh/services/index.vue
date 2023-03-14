@@ -127,11 +127,12 @@ onMounted(async () => {
 
         <p class="text-sm font-semibold mt-5">Security</p>
         <div class="text-slate-500 text-sm">
-          <p>Cert Status:</p>
-          <div class="btn-group mt-2">
-            <button class="btn btn-active normal-case">Active</button>
-            <button class="btn normal-case">Revoke</button>
-          </div>
+          <p>Security Control Status:</p>
+          <input
+            type="checkbox"
+            class="toggle toggle-primary toggle-md mt-2"
+            :checked="s.ca === 'good'"
+          />
         </div>
         <div class="text-slate-500 text-sm">
           <p>Communicaiton Way:</p>

@@ -1,7 +1,11 @@
 <script setup lang="ts">
-import { reactive } from "vue";
+import { reactive, ref, onMounted } from "vue";
+import { loadData } from "@/utils/shared";
+import MessageVerified from "@/components/MessageVerified.vue";
+import type { Event } from "nostr-tools";
 
 type ProviderInfo = {
+  event: Event;
   contract_id: string;
   host_id: string;
   id: string;
@@ -11,30 +15,18 @@ type ProviderInfo = {
   status: string;
 };
 
+const loading = ref(true);
 const providers: Array<ProviderInfo> = reactive([]);
 
-providers.push({
-  contract_id: "wasmcloud:httpserver",
-  host_id: "NBPEU7NMBJ3NKX3MOXD4KUZZI6KNEOATCDQ6C2GSM5LCFVSJUNIZPLO6",
-  id: "VAG3QITQQ2ODAOWB5TTQSDJ53XK3SHBEIFNK4AYJ5RKAX2UNSCAPHA5M (default) (NBPEU7NMBJ3NKX3MOXD4KUZZI6KNEOATCDQ6C2GSM5LCFVSJUNIZPLO6)",
-  link_name: "default",
-  provider_id: "VAG3QITQQ2ODAOWB5TTQSDJ53XK3SHBEIFNK4AYJ5RKAX2UNSCAPHA5M",
-  provider_name: "HTTP Server",
-  status: "Healthy"
-});
-providers.push({
-  contract_id: "wasmcloud:keyvalue",
-  host_id: "NBPEU7NMBJ3NKX3MOXD4KUZZI6KNEOATCDQ6C2GSM5LCFVSJUNIZPLO6",
-  id: "VAZVC4RX54J2NVCMCW7BPCAHGGG5XZXDBXFUMDUXGESTMQEJLC3YVZWB (default) (NBPEU7NMBJ3NKX3MOXD4KUZZI6KNEOATCDQ6C2GSM5LCFVSJUNIZPLO6)",
-  link_name: "default",
-  provider_id: "VAZVC4RX54J2NVCMCW7BPCAHGGG5XZXDBXFUMDUXGESTMQEJLC3YVZWB",
-  provider_name: "Redis KeyValue Store",
-  status: "Healthy"
+onMounted(async () => {
+  loadData(providers, "cod.provider.list", null, loading);
 });
 </script>
 <template>
   <h2>{{ $route.meta.title }}</h2>
   <div class="grid grid-cols-3 gap-4 mt-5">
+    <progress v-if="loading" class="progress row-span-1" />
+
     <div
       class="card shadow-md relative border border-primary"
       v-for="p in providers"
@@ -51,6 +43,8 @@ providers.push({
             height="30px"
           />
           {{ p.provider_name }}
+
+          <MessageVerified :event="p.event" />
         </h2>
         <div class="tooltip text-left tooltip-left" data-tip="provider id">
           <span class="text-slate-600 text-sm break-all leading-3">{{

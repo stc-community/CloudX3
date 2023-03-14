@@ -1,7 +1,11 @@
 <script setup lang="ts">
-import { reactive } from "vue";
+import { reactive, ref, onMounted } from "vue";
+import { loadData } from "@/utils/shared";
+import type { Event } from "nostr-tools";
+import MessageVerified from "@/components/MessageVerified.vue";
 
 type ActorInfo = {
+  event: Event;
   actor_id: string;
   actor_name: string;
   actor_ociref: string;
@@ -11,21 +15,18 @@ type ActorInfo = {
   is_hotwatched: boolean;
 };
 
+const loading = ref(true);
 const actors: Array<ActorInfo> = reactive([]);
 
-actors.push({
-  actor_id: "MCFMFDWFHGKELOXPCNCDXKK5OFLHBVEWRAOXR5JSQUD2TOFRE3DFPM7E",
-  actor_name: "kvcounter",
-  actor_ociref: "wasmcloud.azurecr.io/kvcounter:0.4.0",
-  count: 1,
-  host_id: "NBPEU7NMBJ3NKX3MOXD4KUZZI6KNEOATCDQ6C2GSM5LCFVSJUNIZPLO6",
-  id: "MCFMFDWFHGKELOXPCNCDXKK5OFLHBVEWRAOXR5JSQUD2TOFRE3DFPM7E (NBPEU7NMBJ3NKX3MOXD4KUZZI6KNEOATCDQ6C2GSM5LCFVSJUNIZPLO6)",
-  is_hotwatched: false
+onMounted(async () => {
+  loadData(actors, "cod.actor.list", null, loading);
 });
 </script>
 <template>
   <h2>{{ $route.meta.title }}</h2>
   <div class="grid grid-cols-3 gap-4 mt-5">
+    <progress v-if="loading" class="progress row-span-1" />
+
     <div
       class="card shadow-md row-span-1 border border-primary"
       v-for="a in actors"
@@ -41,6 +42,7 @@ actors.push({
             height="30px"
           />
           {{ a.actor_name }}
+          <MessageVerified :event="a.event" />
         </h2>
         <div class="tooltip text-left tooltip-left" data-tip="Actor ID">
           <span class="text-slate-600 text-sm break-all leading-3">{{

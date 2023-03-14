@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useNostrStore } from "@/store/modules/nostr";
-import { useModalStore } from "@/store/modules/modal";
 import { onMounted, reactive } from "vue";
 import type { Event } from "nostr-tools";
 import { formatTime } from "@/utils/shared";
+import { showEventModal } from "@/utils/shared";
 
 const data = reactive({
   services: [],
@@ -13,10 +13,6 @@ const data = reactive({
 });
 
 const nostrStore = useNostrStore();
-
-const viewEvent = (event: Event) => {
-  useModalStore().setEvent(event);
-};
 
 const handleLoadService = async () => {
   loadService();
@@ -94,7 +90,7 @@ onMounted(async () => {
           <label
             class="btn btn-success w-40 text-white rounded-full"
             for="event-modal"
-            @click="viewEvent(s.event)"
+            @click="showEventModal(s.event)"
           >
             <IconifyIconOnline
               class="mr-2"

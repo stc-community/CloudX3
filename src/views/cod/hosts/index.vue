@@ -1,7 +1,11 @@
 <script setup lang="ts">
-import { reactive } from "vue";
+import { reactive, onMounted, ref } from "vue";
+import type { Event } from "nostr-tools";
+import { loadData } from "@/utils/shared";
+import MessageVerified from "@/components/MessageVerified.vue";
 
 type HostInfo = {
+  event: Event;
   host_id: string;
   labels: {
     "hostcore.arch": string;
@@ -11,21 +15,18 @@ type HostInfo = {
   };
 };
 
+const loading = ref(true);
 const hosts: Array<HostInfo> = reactive([]);
 
-hosts.push({
-  host_id: "NBPEU7NMBJ3NKX3MOXD4KUZZI6KNEOATCDQ6C2GSM5LCFVSJUNIZPLO6",
-  labels: {
-    "hostcore.arch": "x86_64",
-    "hostcore.os": "linux",
-    "hostcore.osfamily": "unix",
-    kubernetes: "true"
-  }
+onMounted(async () => {
+  loadData(hosts, "cod.host.info", null, loading);
 });
 </script>
 <template>
   <h2>{{ $route.meta.title }}</h2>
   <div class="grid grid-cols-3 gap-4 mt-5">
+    <progress v-if="loading" class="progress row-span-1" />
+
     <div
       class="card bg-base-100 shadow-md row-span-1 border border-primary"
       v-for="(h, i) in hosts"
@@ -38,6 +39,8 @@ hosts.push({
             height="30px"
           />
           Host {{ i + 1 }}
+
+          <MessageVerified :event="h.event" />
         </h2>
         <p class="text-sm break-all text-slate-600">{{ h.host_id }}</p>
 

@@ -1,11 +1,17 @@
 import { Contract, ethers } from "ethers";
 import { BrowserProvider, JsonRpcSigner } from "ethers";
 import type { InterfaceAbi } from "ethers";
+import { generatePrivateKey } from "nostr-tools";
+
+type Instance = {
+  provider: BrowserProvider;
+  signer: JsonRpcSigner;
+};
 
 let signer: JsonRpcSigner;
 let provider: BrowserProvider;
 // 获取 provider 实例
-export async function getProviderInstance(): Promise<BrowserProvider> {
+export async function getProviderSignerInstance(): Promise<Instance> {
   if (!provider) {
     // @ts-ignore
     if (window.ethereum == null) {
@@ -21,38 +27,36 @@ export async function getProviderInstance(): Promise<BrowserProvider> {
       // protocol that allows Ethers access to make all read-only
       // requests through MetaMask.
       provider = new ethers.BrowserProvider(window.ethereum);
+      signer = await provider.getSigner();
     }
   }
 
-  return provider;
+  // console.log("provider", provider);
+  // console.log("signer", signer);
+
+  return { provider, signer };
 }
 
-// 获取 signer 实例
-export async function getSignerInstance(): Promise<JsonRpcSigner> {
-  if (!signer) {
-    const provider = await getProviderInstance();
-    signer = await provider.getSigner();
-  }
-
-  return signer;
-}
-
-export async function getConractReadonlyInstance(
+export async function getReadonlyConractInstance(
   addr: string,
   abi: InterfaceAbi
 ) {
-  const provider = await getProviderInstance();
+  const { provider } = await getProviderSignerInstance();
   const contract = new Contract(addr, abi, provider);
 
   return contract;
 }
 
-export async function getContractWritebleInstance(
+export async function getWritebleContractInstance(
   addr: string,
   abi: InterfaceAbi
 ) {
-  const signer = await getSignerInstance();
+  const { signer } = await getProviderSignerInstance();
   const contract = new Contract(addr, abi, signer);
 
   return contract;
+}
+
+export function getRequestID() {
+  return "0x" + generatePrivateKey();
 }

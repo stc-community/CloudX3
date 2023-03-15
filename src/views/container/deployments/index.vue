@@ -82,7 +82,7 @@ const isSOL = d => {
       <span
         v-if="isSOL(d)"
         class="badge text-white badge-primary badge-lg absolute right-[-5px] top-[-10px]"
-        >Managed By SOL</span
+        >Managed By Contracts</span
       >
       <div class="card-body">
         <h2 class="card-title text-primary">

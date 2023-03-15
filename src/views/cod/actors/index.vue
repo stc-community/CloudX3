@@ -3,7 +3,6 @@ import { reactive, ref, onMounted } from "vue";
 import { loadData } from "@/utils/shared";
 import type { Event } from "nostr-tools";
 import MessageVerified from "@/components/MessageVerified.vue";
-// import "@/utils/web3";
 
 type ActorInfo = {
   event: Event;
@@ -27,7 +26,6 @@ onMounted(async () => {
   <h2>{{ $route.meta.title }}</h2>
   <div class="grid grid-cols-3 gap-4 mt-5">
     <progress v-if="loading" class="progress row-span-1" />
-
     <div
       class="card shadow-md row-span-1 border border-primary"
       v-for="a in actors"
@@ -65,7 +63,7 @@ onMounted(async () => {
           />
           Expose Http
         </button>
-        <button class="btn btn-primary mt-5">
+        <label for="cod-call-modal" class="btn btn-primary mt-5">
           <IconifyIconOnline
             class="mr-2"
             icon="mdi:function"
@@ -73,7 +71,7 @@ onMounted(async () => {
             height="25px"
           />
           Call Function
-        </button>
+        </label>
 
         <p class="text-sm font-semibold mt-5">More Information</p>
         <div>

@@ -27,17 +27,22 @@ interface Deployment {
 const loading = ref(true);
 const deployments: Array<Deployment> = reactive([]);
 let page = 1;
+const limit = 9;
 
-onMounted(async () => {
+const loadOnePage = () => {
   loadData(
     deployments,
     "cloud.deployment.list",
     {
       page,
-      limit: 3
+      limit
     },
     loading
   );
+};
+
+onMounted(async () => {
+  loadOnePage();
 });
 
 const getStatusPercent = d => {
@@ -55,15 +60,7 @@ const loadMore = () => {
   loading.value = true;
 
   page++;
-  loadData(
-    deployments,
-    "cloud.deployment.list",
-    {
-      page,
-      limit: 3
-    },
-    loading
-  );
+  loadOnePage();
 };
 
 const isSOL = d => {

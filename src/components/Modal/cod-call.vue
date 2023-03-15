@@ -70,6 +70,12 @@ const handleCheck = async () => {
   <input type="checkbox" id="cod-call-modal" class="modal-toggle" />
   <div class="modal">
     <div class="modal-box w-[600px]">
+      <label
+        for="cod-call-modal"
+        class="btn btn-sm btn-circle absolute right-2 top-2"
+        >✕</label
+      >
+
       <div class="flex items-center">
         <IconifyIconOnline
           class="mr-2"

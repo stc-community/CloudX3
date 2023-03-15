@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { reactive, ref, onMounted } from "vue";
+import { reactive, ref, onMounted, onBeforeUnmount } from "vue";
 import { loadData, transMapToArr } from "@/utils/shared";
 import MessageVerified from "@/components/MessageVerified.vue";
 import type { Event } from "nostr-tools";
+import eventBus from "@/utils/event-bus";
 
 interface Deployment {
   event: Event;
@@ -42,6 +43,7 @@ const loadOnePage = () => {
 };
 
 onMounted(async () => {
+  page = 1;
   loadOnePage();
 });
 
@@ -70,9 +72,27 @@ const isSOL = d => {
 
   return d.metadata?.labels["managed-by"] === "sol";
 };
+
+// 监听到事件刷新页面
+eventBus.on("deploymentSuccess", _status => {
+  console.log("on event", status);
+  page = 1;
+  loadOnePage();
+});
+onBeforeUnmount(() => {
+  eventBus.off("deploymentSuccess");
+});
 </script>
 <template>
   <h2>{{ $route.meta.title }}</h2>
+  <label for="deployment-modal" class="btn btn-primary mt-5">
+    <IconifyIconOnline
+      class="mr-2"
+      icon="material-symbols:add-circle"
+      width="30px"
+      height="30px"
+    />New Deployment
+  </label>
   <div class="grid grid-cols-3 gap-4 mt-5">
     <div
       v-for="d in deployments"

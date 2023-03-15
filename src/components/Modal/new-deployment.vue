@@ -1,21 +1,24 @@
 <script setup lang="ts">
-import { useModalStore } from "@/store/modules/modal";
-import { getCodConrtact } from "@/utils/contract/cod";
-import { getRequestID } from "@/utils/contract/web3";
+import { getContainerContract } from "@/utils/contract/container";
 import { reactive, onBeforeUnmount } from "vue";
+import type { EventLog } from "ethers";
+import eventBus from "@/utils/event-bus";
 
 defineOptions({
-  name: "cod-call"
+  name: "deployment-modal"
 });
 
-const eventStore = useModalStore();
+const PARAM = {
+  jobID: "6430c194cf5a4392a0638fee41d526ad",
+  oracle: "0x548EE2d95F693dd9373c7EEFBcF0D6729302090b",
+  request_url: "https://stc-test.gw105.oneitfarm.com/brige/providers/deployment"
+};
 
 const data = reactive({
   res: "",
   loading: false,
   // hash: "0x634647f1eef0655c27adac3531b3f1de45f209e4cea971870fa012d8ba90b986",
   hash: "",
-  requestID: "",
   requestData: "",
   resReady: false
 });
@@ -28,31 +31,30 @@ onBeforeUnmount(() => {
 const listenIfNeeded = () => {
   if (!contract) return;
 
-  contract.on("*", event => {
-    const id = event.log.args[0];
+  contract.on("*", (event: EventLog) => {
+    const name = event.fragment.name;
 
-    if (id === data.requestID) {
-      data.resReady = true;
-      handleCheck();
-    }
+    if (name !== "RequestMspContainerDeployFulfilled") return;
+
+    data.resReady = true;
+    eventBus.emit("deploymentSuccess", true);
+    const [_id, status] = event.args;
+    data.res = status;
   });
 };
 
 const handleSubmit = async () => {
   data.loading = true;
 
-  data.requestID = getRequestID();
-  contract = await getCodConrtact();
-
+  contract = await getContainerContract();
   listenIfNeeded();
 
   try {
-    const transaction = await contract.CallCOD(
-      data.requestID,
-      "s105",
-      "https://wasmcloud-httpserver.gw105.oneitfarm.com/api/counter/zhangchao",
-      "GET",
-      window.btoa(data.requestData)
+    const transaction = await contract.requestMspContainerDeploy(
+      PARAM.oracle,
+      PARAM.jobID,
+      window.btoa(data.requestData),
+      PARAM.request_url
     );
 
     await transaction.wait();
@@ -62,19 +64,14 @@ const handleSubmit = async () => {
     data.loading = false;
   }
 };
-
-const handleCheck = async () => {
-  const res = await contract.GetResultData(data.requestID);
-  data.res = res;
-};
 </script>
 <template>
   <!-- Put this part before </body> tag -->
-  <input type="checkbox" id="cod-call-modal" class="modal-toggle" />
+  <input type="checkbox" id="deployment-modal" class="modal-toggle" />
   <div class="modal">
     <div class="modal-box w-[600px]">
       <label
-        for="cod-call-modal"
+        for="deployment-modal"
         class="btn btn-sm btn-circle absolute right-2 top-2"
         >✕</label
       >
@@ -82,16 +79,16 @@ const handleCheck = async () => {
       <div class="flex items-center">
         <IconifyIconOnline
           class="mr-2"
-          icon="mdi:function"
+          icon="fluent-mdl2:redeploy"
           width="25px"
           height="25px"
         />
-        <h3>Call Function</h3>
+        <h3>New Deployment</h3>
       </div>
       <div class="form-control mt-8">
         <textarea
           class="textarea textarea-primary h-[100px]"
-          placeholder="Input your request data"
+          placeholder="Paste Deployment YAML here."
           v-model="data.requestData"
         />
         <div class="mt-2">
@@ -113,17 +110,9 @@ const handleCheck = async () => {
         class="text-left mt-2 border border-primary rounded-md p-2 text-slate-500 text-sm"
       >
         <p class="uppercase">Transaction</p>
-        <a
-          class="link link-primary text-xs break-all leading-3"
-          target="_blank"
-          :href="`https://sepolia.etherscan.io/tx/${data.hash}`"
-          >{{ data.hash }}</a
-        >
+        <span class="text-xs text-primary break-all">{{ data.hash }}</span>
 
-        <p class="uppercase mt-5">Request ID</p>
-        <p class="text-xs text-primary break-all">{{ data.requestID }}</p>
-
-        <p class="uppercase mt-5">Result</p>
+        <p class="uppercase mt-5">Waitting Deploy Status</p>
         <pre v-if="data.resReady" class="text-xs text-primary break-all">{{
           data.res
         }}</pre>

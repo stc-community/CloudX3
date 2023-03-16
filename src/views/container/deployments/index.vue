@@ -75,7 +75,8 @@ const isSOL = d => {
 
 // 监听到事件刷新页面
 eventBus.on("deploymentSuccess", _status => {
-  console.log("on event", status);
+  console.log("on event", _status);
+  deployments.length = 0; // clear
   page = 1;
   loadOnePage();
 });

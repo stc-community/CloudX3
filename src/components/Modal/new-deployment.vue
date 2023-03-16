@@ -9,8 +9,8 @@ defineOptions({
 });
 
 const PARAM = {
-  jobID: "6430c194cf5a4392a0638fee41d526ad",
-  oracle: "0x548EE2d95F693dd9373c7EEFBcF0D6729302090b",
+  jobID: "273cd4ca220749c5831e598f718f11d6",
+  oracle: "0x248E10ec1C54CB570F7A15933286BAa1D59B70c0",
   request_url: "https://stc-test.gw105.oneitfarm.com/brige/providers/deployment"
 };
 
@@ -113,9 +113,9 @@ const handleSubmit = async () => {
         <span class="text-xs text-primary break-all">{{ data.hash }}</span>
 
         <p class="uppercase mt-5">Waitting Deploy Status</p>
-        <pre v-if="data.resReady" class="text-xs text-primary break-all">{{
-          data.res
-        }}</pre>
+        <pre v-if="data.resReady" class="text-xs text-primary break-all">
+Done</pre
+        >
         <progress v-else class="progress progress-primary" />
       </div>
     </div>

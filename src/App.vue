@@ -4,6 +4,7 @@ import AccountModal from "@/components/Modal/account.vue";
 import EventModal from "@/components/Modal/event.vue";
 import CodCallModal from "@/components/Modal/cod-call.vue";
 import DeploymentModal from "@/components/Modal/new-deployment.vue";
+import MeshModal from "@/components/Modal/mesh-modal.vue";
 import { useNostrStore } from "./store/modules/nostr";
 
 defineOptions({
@@ -24,4 +25,5 @@ onBeforeMount(async () => {
   <EventModal />
   <CodCallModal />
   <DeploymentModal />
+  <MeshModal />
 </template>

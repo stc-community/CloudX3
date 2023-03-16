@@ -57,6 +57,12 @@ export async function getWritebleContractInstance(
   return contract;
 }
 
-export function getRequestID() {
-  return "0x" + generatePrivateKey();
+export function getRequestID(len = 0) {
+  const id64 = generatePrivateKey();
+
+  if (len) {
+    return id64.substr(0, 32);
+  }
+
+  return "0x" + id64;
 }

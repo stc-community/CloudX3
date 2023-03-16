@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, reactive, ref } from "vue";
+import { onMounted, reactive, ref, onUnmounted } from "vue";
 import { formatTime } from "@/utils/shared";
 import { showEventModal } from "@/utils/shared";
 import { loadData } from "@/utils/shared";
@@ -23,6 +23,7 @@ const loadService = async () => {
     data.services,
     "site.service.list",
     {
+      unique_ids: ["s10600uwnlo5s1l522042925juhp00q3"],
       page: data.page,
       limit_num: data.limit_num
     },
@@ -36,8 +37,20 @@ const loadService = async () => {
 const handleManage = service => {
   bus.emit("currentService", service);
 };
+
+bus.on("refreshServices", _ => {
+  console.log("handle refreshServices");
+  data.page = 1;
+  data.services.length = 0;
+  loadService();
+});
+
 onMounted(async () => {
   loadService();
+});
+
+onUnmounted(() => {
+  bus.off("refreshServices");
 });
 </script>
 <template>
@@ -117,12 +130,13 @@ onMounted(async () => {
           class="grid grid-cols-2 text-slate-500 text-xs border border-slate-300 rounded-md p-5"
         >
           <div>
-            <p>Cert Status</p>
-            <input
-              type="checkbox"
-              class="toggle toggle-primary toggle-md mt-2"
-              :checked="s.ca_active"
-            />
+            <p>Security Control</p>
+            <div
+              class="mt-2 inline-block text-sm uppercase"
+              :class="s.ca_active ? ['text-primary'] : ['']"
+            >
+              {{ s.ca_active ? "enabled" : "disabled" }}
+            </div>
           </div>
           <div>
             <p>Listen Mode</p>

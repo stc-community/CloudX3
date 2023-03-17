@@ -130,7 +130,8 @@ const handleChangeStatus = async () => {
         getCurrentSiteName(),
         window.btoa(
           JSON.stringify({
-            unique_id: data.service.unique_id
+            unique_id: data.service.unique_id,
+            with_cert: 1
           })
         ),
         data.requestID

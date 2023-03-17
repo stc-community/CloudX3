@@ -205,9 +205,9 @@
         "type": "string"
       },
       {
-        "internalType": "string",
+        "internalType": "bytes32",
         "name": "_requestUID",
-        "type": "string"
+        "type": "bytes32"
       }
     ],
     "name": "forbidTls",
@@ -241,9 +241,9 @@
   {
     "inputs": [
       {
-        "internalType": "string",
+        "internalType": "bytes32",
         "name": "_requestUID",
-        "type": "string"
+        "type": "bytes32"
       }
     ],
     "name": "getResultData",
@@ -283,9 +283,9 @@
         "type": "string"
       },
       {
-        "internalType": "string",
+        "internalType": "bytes32",
         "name": "_requestUID",
-        "type": "string"
+        "type": "bytes32"
       }
     ],
     "name": "recoverCert",
@@ -306,9 +306,9 @@
         "type": "string"
       },
       {
-        "internalType": "string",
+        "internalType": "bytes32",
         "name": "_requestUID",
-        "type": "string"
+        "type": "bytes32"
       }
     ],
     "name": "recoverTls",
@@ -329,9 +329,9 @@
         "type": "string"
       },
       {
-        "internalType": "string",
+        "internalType": "bytes32",
         "name": "_requestUID",
-        "type": "string"
+        "type": "bytes32"
       }
     ],
     "name": "revokeCert",
@@ -380,9 +380,9 @@
         "type": "string"
       },
       {
-        "internalType": "string",
+        "internalType": "bytes32",
         "name": "_requestUID",
-        "type": "string"
+        "type": "bytes32"
       }
     ],
     "name": "switchListen",

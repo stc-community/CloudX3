@@ -23,7 +23,8 @@ const loadService = async () => {
     data.services,
     "site.service.list",
     {
-      unique_ids: ["s10600uwnlo5s1l522042925juhp00q3"],
+      // unique_ids: ["s10600uwnlo5s1l522042925juhp00q3"],
+      // unique_ids: ["s10500uv1jxwb2602204291k5q3a0056"],
       page: data.page,
       limit_num: data.limit_num
     },

@@ -57,7 +57,7 @@ export async function loadData(
           ? content.data
           : content.data.list;
 
-        d.forEach(h => {
+        (d || []).forEach(h => {
           h.event = event;
           dataContainer.push(h);
         });

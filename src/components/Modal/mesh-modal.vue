@@ -44,6 +44,7 @@ bus.on("currentService", service => {
 const certs = reactive([]);
 const loadingCerts = ref(false);
 const loadCerts = async (unique_id: string) => {
+  certs.length = 0;
   loadData(
     certs,
     "ca.workload.certs",
@@ -210,7 +211,7 @@ const handleChangeMode = async () => {
               height="30px"
             />
           </div>
-          <div class="stat-title">Trust Status</div>
+          <div class="stat-title">Security Control</div>
           <div class="stat-value text-primary">
             <progress v-if="loadingCerts" class="progress" />
             <input
@@ -223,7 +224,7 @@ const handleChangeMode = async () => {
             />
           </div>
           <progress v-if="data.loading" class="progress" />
-          <div class="stat-desc">The workload cert status</div>
+          <div class="stat-desc">Actived: {{ data.active }}</div>
         </div>
 
         <div class="stat">
@@ -310,7 +311,7 @@ const handleChangeMode = async () => {
         <p class="text-slate-500">Certs</p>
         <progress v-if="loadingCerts" class="progress" />
 
-        <div class="overflow-x-auto mt-1">
+        <div class="overflow-x-auto mt-1 max-h-[200px]">
           <table class="table table-compact w-full">
             <thead>
               <tr>

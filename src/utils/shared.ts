@@ -2,7 +2,7 @@ import type { Event } from "nostr-tools";
 import type { Ref } from "vue";
 import { useNostrStore } from "@/store/modules/nostr";
 import { useModalStore } from "@/store/modules/modal";
-import * as dayjs from "dayjs";
+import moment from "moment";
 
 export function formatTime(timeStr, formatStr = "YYYY/MM/DD HH:mm:ss") {
   if (!timeStr) {
@@ -18,8 +18,12 @@ export function formatTime(timeStr, formatStr = "YYYY/MM/DD HH:mm:ss") {
     timeStr = timeStr * 1000;
   }
 
-  // @ts-ignore
-  return dayjs(timeStr).format(formatStr);
+  try {
+    // @ts-ignore
+    return moment(timeStr).format(formatStr);
+  } catch (_e) {
+    timeStr;
+  }
 }
 
 export function showEventModal(event: Event) {

@@ -22,7 +22,7 @@ export function viteBuildInfo(): Plugin {
           green(
             `👏Welcome${blue(
               "[stc-community]"
-            )} 💖 https://github.com/stc-community/stc-frontend`
+            )} 💖 https://github.com/rovast/web3-ui`
           )
         )
       );

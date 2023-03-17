@@ -25,15 +25,15 @@ export default {
         title: "Services",
         icon: "healthicons:provider-fst"
       }
-    },
-    {
-      path: "security",
-      name: "mesh.security",
-      component: () => import("@/views/mesh/security/index.vue"),
-      meta: {
-        title: "Security",
-        icon: "ic:baseline-security"
-      }
     }
+    // {
+    //   path: "certificate",
+    //   name: "mesh.certificate",
+    //   component: () => import("@/views/mesh/certificate/index.vue"),
+    //   meta: {
+    //     title: "Apps Identity",
+    //     icon: "mdi:certificate"
+    //   }
+    // }
   ]
 } as RouteConfigsTable;

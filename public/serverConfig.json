@@ -13,7 +13,7 @@
     },
     {
       "name": "gw106",
-      "url": "ws://110.41.16.146:2700",
+      "url": "wss://nostr.gw106.oneitfarm.com",
       "lat": 1.2929,
       "long": 103.8547,
       "city": "Singapore",

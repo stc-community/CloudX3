@@ -1,44 +1,91 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { reactive, ref, onMounted } from "vue";
+import { loadData } from "@/utils/shared";
+import MessageVerified from "@/components/MessageVerified.vue";
+import type { Event } from "nostr-tools";
+
+type ProviderInfo = {
+  event: Event;
+  contract_id: string;
+  host_id: string;
+  id: string;
+  link_name: string;
+  provider_id: string;
+  provider_name: string;
+  status: string;
+};
+
+const loading = ref(true);
+const providers: Array<ProviderInfo> = reactive([]);
+
+onMounted(async () => {
+  loadData(providers, "cod.provider.list", null, loading);
+});
+</script>
 <template>
   <h2>{{ $route.meta.title }}</h2>
-  <div class="card w-96 bg-base-100 shadow-md mt-10">
-    <div class="card-body">
-      <h2 class="card-title">Free Plan</h2>
-      <p>Billing Monthy</p>
-      <button class="btn btn-primary w-40">Upgrade Now</button>
+  <div class="grid grid-cols-3 gap-4 mt-5">
+    <progress v-if="loading" class="progress row-span-1" />
 
-      <p class="text-sm font-semibold mt-5">Features</p>
-      <ul class="mt-4">
-        <li class="flex items-center gap-2 mb-3" v-for="(i, k) in 5" :key="k">
-          <input
-            type="radio"
-            :name="`name${k}`"
-            class="radio radio-success radio-sm"
-            checked
+    <div
+      class="card shadow-md relative border border-primary"
+      v-for="p in providers"
+    >
+      <span
+        class="badge badge-success text-white absolute right-[-5px] top-[-5px]"
+        >{{ p.status }}</span
+      >
+      <div class="card-body">
+        <h2 class="card-title text-primary">
+          <IconifyIconOnline
+            icon="healthicons:provider-fst"
+            width="30px"
+            height="30px"
           />
-          Support feature {{ i }}
-        </li>
-      </ul>
+          {{ p.provider_name }}
 
-      <p class="text-sm font-semibold mt-5">Current Uasge</p>
-      <div class="mt-4 flex justify-between text-center">
-        <div>
-          <div class="radial-progress text-success" style="--value: 70">
-            70%
+          <MessageVerified :event="p.event" />
+        </h2>
+        <div class="tooltip text-left tooltip-left" data-tip="provider id">
+          <span class="text-slate-600 text-sm break-all leading-3">{{
+            p.provider_id
+          }}</span>
+        </div>
+        <div class="tooltip text-left tooltip-left" data-tip="contract id">
+          <div class="badge badge-primary badge-outline">
+            {{ p.contract_id }}
           </div>
-          <p class="mt-2">Device</p>
         </div>
 
+        <p class="text-sm font-semibold mt-5">More Information</p>
         <div>
-          <div class="radial-progress text-error" style="--value: 10">10%</div>
-          <p class="mt-2">Network</p>
-        </div>
-
-        <div>
-          <div class="radial-progress text-warning" style="--value: 30">
-            30%
+          <div
+            class="tooltip tooltip-left text-left flex items-center"
+            data-tip="Host"
+          >
+            <IconifyIconOnline
+              class="text-slate-500 flex-shrink-0"
+              icon="tabler:server-2"
+              width="30px"
+              height="30px"
+            />
+            <span class="break-all ml-3 text-xs leading-3">{{
+              p.host_id
+            }}</span>
           </div>
-          <p class="mt-2">Key</p>
+
+          <div
+            class="tooltip tooltip-left text-left flex mt-2 items-center"
+            data-tip="Link Name"
+          >
+            <IconifyIconOnline
+              class="text-slate-500 flex-shrink-0"
+              icon="mdi:link-box-variant"
+              width="30px"
+              height="30px"
+            />
+            <span class="break-all ml-3">{{ p.link_name }}</span>
+          </div>
         </div>
       </div>
     </div>

@@ -19,6 +19,11 @@ const Points = relays.map(r => {
   };
 });
 
+// FIXME 如果没有选中的，把第一个选中
+// if (!Points.find(i => !!i.current)) {
+//   Points[0].current = true;
+// }
+
 onMounted(() => {
   const map = L.map("leaflet-map").setView(
     Points.find(i => i.current).latlng,

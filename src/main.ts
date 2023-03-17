@@ -2,6 +2,7 @@ import App from "./App.vue";
 import router from "./router";
 import { setupStore } from "@/store";
 import { useAccountStore } from "@/store/modules/account";
+import { useNostrStore } from "@/store/modules/nostr";
 import { getServerConfig } from "./config";
 import { createApp } from "vue";
 import { injectResponsiveStorage } from "@/utils/responsive";
@@ -43,4 +44,11 @@ getServerConfig(app).then(async config => {
 
   // init store if needed
   useAccountStore().init();
+
+  // 尝试预获取 instance
+  try {
+    await useNostrStore().asyncGetNostrInstance();
+  } catch (e) {
+    // ignore
+  }
 });

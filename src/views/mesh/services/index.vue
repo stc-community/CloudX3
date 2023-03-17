@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { useNostrStore } from "@/store/modules/nostr";
-import { useModalStore } from "@/store/modules/modal";
-import { onMounted, reactive } from "vue";
-import type { Event } from "nostr-tools";
+import { onMounted, reactive, ref, onUnmounted } from "vue";
+import { formatTime } from "@/utils/shared";
+import { showEventModal } from "@/utils/shared";
+import { loadData } from "@/utils/shared";
+import bus from "@/utils/event-bus";
 
 const data = reactive({
   services: [],
@@ -10,54 +11,52 @@ const data = reactive({
   page: 1,
   limit_num: 3
 });
+const loading = ref(false);
 
-const nostrStore = useNostrStore();
-
-const viewEvent = (event: Event) => {
-  useModalStore().setEvent(event);
-};
-
-const handleLoadService = async () => {
+const loadMore = async () => {
   loadService();
 };
 
 const loadService = async () => {
-  const nostr = await nostrStore.asyncGetNostrInstance();
-
-  nostr.request(
+  loading.value = true;
+  loadData(
+    data.services,
+    "site.service.list",
     {
-      m: "site",
-      c: "service",
-      a: "list",
-      content: {
-        page: data.page,
-        limit_num: data.limit_num
-      }
+      // unique_ids: ["s10600uwnlo5s1l522042925juhp00q3"],
+      // unique_ids: ["s10500uv1jxwb2602204291k5q3a0056"],
+      page: data.page,
+      limit_num: data.limit_num
     },
-    function (event: Event) {
-      const content = JSON.parse(event?.content);
-      const services = content.data?.list || [];
-
-      services.forEach(s => {
-        s.event = event;
-        data.services.push(s);
-      });
-    }
+    loading
   );
-
   data.page++;
+
+  console.log(data.services);
 };
 
+const handleManage = service => {
+  bus.emit("currentService", service);
+};
+
+bus.on("refreshServices", _ => {
+  console.log("handle refreshServices");
+  data.page = 1;
+  data.services.length = 0;
+  loadService();
+});
+
 onMounted(async () => {
-  window.setTimeout(async () => {
-    await loadService();
-    data.disabled = false;
-  }, 2000);
+  loadService();
+});
+
+onUnmounted(() => {
+  bus.off("refreshServices");
 });
 </script>
 <template>
   <h2>{{ $route.meta.title }}</h2>
-  <div class="form-control w-1/3 mt-5">
+  <div class="form-control w-1/3 mt-5" v-if="0">
     <div class="input-group w-full">
       <input
         type="text"
@@ -83,17 +82,14 @@ onMounted(async () => {
     </div>
   </div>
   <div class="grid grid-flow-row grid-cols-3 gap-4 mt-5">
-    <div
-      class="card bg-base-100 shadow-xl col-span-1"
-      v-for="(s, i) in data.services"
-    >
+    <div class="card col-span-1 shadow border" v-for="s in data.services">
       <div class="card-body">
         <h2 class="card-title">
           {{ s?.info[0]?.metadata?.service_name }}
           <label
             class="btn btn-success w-40 text-white rounded-full"
             for="event-modal"
-            @click="viewEvent(s.event)"
+            @click="showEventModal(s.event)"
           >
             <IconifyIconOnline
               class="mr-2"
@@ -107,100 +103,64 @@ onMounted(async () => {
         <p class="text-sm text-slate-400">{{ s.unique_id }}</p>
 
         <p class="text-sm font-semibold mt-5">Metadata</p>
-        <div class="leading-5">
-          <p>Version:</p>
+        <div class="leading-5 text-xs">
+          <p class="text-slate-500">Version:</p>
           <p>{{ s.info[0].metadata?.version }}</p>
 
-          <p class="mt-2">Runtime:</p>
+          <p class="mt-2 text-slate-500">Runtime:</p>
           <p>{{ s.info[0].metadata?.runtime }}</p>
 
-          <p class="mt-2">Hostname:</p>
+          <p class="mt-2 text-slate-500">Hostname:</p>
           <p>{{ s.info[0]?.hostname }}</p>
 
-          <p class="mt-2">Image:</p>
+          <p class="mt-2 text-slate-500">Image:</p>
           <p class="break-all">{{ s.info[0].metadata?.service_image }}</p>
+
+          <p class="mt-2 text-slate-500">Last Heartbeat:</p>
+          <p class="break-all">{{ formatTime(s.info[0].renew_timestamp) }}</p>
         </div>
 
         <p class="text-sm font-semibold mt-5">Security</p>
-        <ul class="mt-4">
-          <li class="flex items-center gap-2 mb-3">
-            <input
-              type="radio"
-              :name="`mtls${i}`"
-              class="radio radio-sm radio-success"
-              checked
-            />
-            Mode: {{ s.info[0].metadata?.mode }}
-          </li>
-          <li class="flex items-center gap-2 mb-3">
-            <input
-              type="radio"
-              :name="`cert${i}`"
-              class="radio radio-success radio-sm"
-              :class="s.ca_active ? ['radio-success'] : ['radio-error']"
-              checked
-            />
-            {{
-              s.ca_active
-                ? "Workload Cert actived"
-                : "Workload Cert NOT actived"
-            }}
-          </li>
-        </ul>
-
-        <p class="text-sm font-semibold mt-5" v-if="0">Running Status</p>
-        <div class="mt-4 flex justify-between text-center" v-if="0">
+        <label
+          for="mesh-modal"
+          class="btn btn-primary btn-outline"
+          @click="handleManage(s)"
+          >Manage</label
+        >
+        <div
+          class="grid grid-cols-2 text-slate-500 text-xs border border-slate-300 rounded-md p-5"
+        >
           <div>
-            <div class="radial-progress text-success" style="--value: 70">
-              70%
+            <p>Security Control</p>
+            <div
+              class="mt-2 inline-block text-sm uppercase"
+              :class="s.ca_active ? ['text-primary'] : ['']"
+            >
+              {{ s.ca_active ? "enabled" : "disabled" }}
             </div>
-            <p class="mt-2">CPU</p>
           </div>
-
           <div>
-            <div class="radial-progress text-error" style="--value: 10">
-              10%
+            <p>Listen Mode</p>
+            <div class="mt-2 inline-block text-primary text-sm uppercase">
+              {{ s?.info[0].metadata.mode }}
             </div>
-            <p class="mt-2">Memory</p>
-          </div>
-
-          <div>
-            <div class="radial-progress text-warning" style="--value: 30">
-              30%
-            </div>
-            <p class="mt-2">Key</p>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="card bg-base-100 shadow-xl col-span-1">
+    <div class="card shadow-md row-span-1 border">
       <div class="card-body">
-        <button
-          class="btn btn-primary btn-lg mt-20"
-          :disabled="data.disabled"
-          @click="handleLoadService"
-        >
+        <progress v-if="loading" class="progress row-span-1" />
+
+        <button class="btn w-full mt-10" :disabled="loading" @click="loadMore">
           <IconifyIconOnline
             class="mr-2"
             icon="material-symbols:add-circle"
             width="30px"
             height="30px"
-          />
-          LOAD Service
+          />Load More
         </button>
-
-        <div class="form-control w-full max-w-xs">
-          <label class="label">
-            <span class="label-text">Services count per fetch</span>
-          </label>
-          <input
-            type="number"
-            v-model="data.limit_num"
-            placeholder="Type here"
-            class="input input-bordered w-full max-w-xs"
-          />
-        </div>
       </div>
     </div>
   </div>

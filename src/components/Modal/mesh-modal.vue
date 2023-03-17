@@ -57,7 +57,8 @@ const loadCerts = async (unique_id: string) => {
   );
 };
 watch(certs, v => {
-  data.active = !(v.length && v[0].isForbidden);
+  console.log("certs changed", v);
+  data.active = !(v.length && v[0].forbidden);
 });
 
 // ====== 合约操作部分 ==========

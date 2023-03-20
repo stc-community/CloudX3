@@ -2,7 +2,7 @@ import { getWritebleContractInstance } from "./web3";
 
 // @ts-ignore
 import ABI from "./dao-abi.json?raw";
-const ADDR = "0xA4eEea6A6E960892253a37A5fBF4b3cfD654B455";
+const ADDR = "0x07e5959627d3473e3948a7A9F9d8652Ea634510B";
 
 export async function getDaoContract() {
   const contract = await getWritebleContractInstance(ADDR, ABI);

@@ -1,4 +1,7 @@
-import { getWritebleContractInstance } from "./web3";
+import {
+  getReadonlyConractInstance,
+  getWritebleContractInstance
+} from "./web3";
 
 // @ts-ignore
 import ABI from "./dao-abi.json?raw";
@@ -9,3 +12,15 @@ export async function getDaoContract() {
 
   return contract;
 }
+
+export async function getReadonlyDaoContract() {
+  const contract = await getReadonlyConractInstance(ADDR, ABI);
+
+  return contract;
+}
+
+export type DAO = {
+  name: string;
+  description: string;
+  jsoninfo: string;
+};

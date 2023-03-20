@@ -1,19 +1,14 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
 import { getDaoContract } from "@/utils/contract/dao";
-
-type Form = {
-  name: string;
-  description: string;
-  jsoninfo: string;
-};
+import type { DAO } from "@/utils/contract/dao";
 
 type KV = {
   k: string;
   v: string;
 };
 
-const form: Form = reactive({
+const form: DAO = reactive({
   name: "",
   description: "",
   jsoninfo: ""

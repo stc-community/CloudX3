@@ -9,9 +9,9 @@ const parentRoute = name => {
   return name.split(".")[0];
 };
 
-const children: Array<RouteConfigsTable> = loadModuleRoutes().find(
-  i => i.name === parentRoute(route.name)
-)?.children;
+const children: Array<RouteConfigsTable> = loadModuleRoutes()
+  .find(i => i.name === parentRoute(route.name))
+  ?.children.filter(i => !i.meta.hiddenTag);
 </script>
 <template>
   <div class="container mx-auto py-10">

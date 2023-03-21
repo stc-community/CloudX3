@@ -53,7 +53,11 @@ const getImageSource = async () => {
         <h2 class="card-title">{{ d.name }}</h2>
         <p>{{ d.description }}</p>
         <div class="card-actions justify-end">
-          <button class="btn btn-primary">Enter</button>
+          <RouterLink
+            class="btn btn-primary hover:text-white"
+            :to="{ name: 'dao.dao.detail', params: { id: d.daoId } }"
+            >Enter</RouterLink
+          >
         </div>
       </div>
     </div>

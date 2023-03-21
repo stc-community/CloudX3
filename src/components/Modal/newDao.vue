@@ -152,7 +152,7 @@ const handleFileChange = async (e: Event) => {
         </div>
 
         <label class="label mt-2">
-          <span class="label-text">Configuration</span>
+          <span class="label-text">User Join Fields Configuration</span>
         </label>
         <div
           class="grid grid-cols-5 gap-3 mb-2"
@@ -160,13 +160,13 @@ const handleFileChange = async (e: Event) => {
         >
           <input
             type="text"
-            placeholder="Key"
+            placeholder="Name"
             v-model="i.k"
             class="input input-primary col-span-2"
           />
           <input
             type="text"
-            placeholder="Value"
+            placeholder="Description"
             v-model="i.v"
             class="input input-primary col-span-2"
           />

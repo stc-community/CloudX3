@@ -20,6 +20,7 @@ export async function getReadonlyDaoContract() {
 }
 
 export type DAO = {
+  daoId: string;
   image: string;
   name: string;
   description: string;

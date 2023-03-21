@@ -9,12 +9,21 @@ export default {
   },
   children: [
     {
-      path: "dao",
+      path: "/dao/dao",
       name: "dao.dao",
       component: () => import("@/views/dao/dao/index.vue"),
       meta: {
         title: "DAOs",
         icon: "eos-icons:organisms"
+      }
+    },
+    {
+      path: "/dao/dao/:id",
+      name: "dao.dao.detail",
+      component: () => import("@/views/dao/dao/detail.vue"),
+      meta: {
+        hiddenTag: true,
+        title: "DAO Detail"
       }
     }
   ]

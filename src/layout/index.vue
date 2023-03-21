@@ -9,7 +9,7 @@ import HeaderPage from "./components/header.vue";
       <header-page />
     </div>
 
-    <div class="min-h-[1000px]">
+    <div class="min-h-[calc(100vh-200px)]">
       <router-view />
     </div>
 

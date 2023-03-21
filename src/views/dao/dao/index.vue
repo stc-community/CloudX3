@@ -10,7 +10,7 @@ const loading = ref(true);
 onMounted(async () => {
   loading.value = true;
   const contract = await getReadonlyDaoContract();
-  const res = await contract.getDao();
+  const res = await contract.getAllDaos();
   list.push(...res);
 
   loading.value = false;

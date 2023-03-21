@@ -38,6 +38,7 @@
     "leaflet": "^1.9.3",
     "mitt": "^3.0.0",
     "moment": "^2.29.4",
+    "nft.storage": "^7.0.3",
     "nostr-tools": "^1.7.4",
     "nprogress": "^0.2.0",
     "path": "^0.12.7",

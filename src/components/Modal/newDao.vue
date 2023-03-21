@@ -2,6 +2,11 @@
 import { reactive, ref } from "vue";
 import { getDaoContract } from "@/utils/contract/dao";
 import type { DAO } from "@/utils/contract/dao";
+import { NFTStorage } from "nft.storage";
+
+const NFT_STORAGE_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDBEOGQ3MEI2MGZmYjBDODcwRGFBZDA4MTU1QWIxNmRDYjBFNDA3NjgiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY3OTMwNDA0OTU3MiwibmFtZSI6InN0YyJ9.jQu1V6HT58PB1pipWj7FVEkk0y7g_Ey2iY87i80KMHU";
+const nftStorage = new NFTStorage({ token: NFT_STORAGE_KEY });
 
 type KV = {
   k: string;
@@ -9,6 +14,7 @@ type KV = {
 };
 
 const form: DAO = reactive({
+  image: "",
   name: "",
   description: "",
   jsoninfo: ""
@@ -40,14 +46,14 @@ const handleSubmit = async () => {
   form.jsoninfo = window.btoa(JSON.stringify(map));
   loading.value = true;
 
-  debugger;
   const contract = await getDaoContract();
 
   try {
     const transaction = await contract.createDao(
       form.name,
       form.description,
-      form.jsoninfo
+      form.jsoninfo,
+      form.image
     );
     await transaction.wait();
     window.location.reload();
@@ -55,6 +61,30 @@ const handleSubmit = async () => {
     loading.value = false;
     window.alert(e.message);
   }
+};
+
+const imageData = ref("");
+const uploadingNTF = ref(false);
+const handleFileChange = async (e: Event) => {
+  // @ts-ignore
+  const file: File = e.target.files[0];
+
+  const reader = new FileReader();
+  reader.onload = function () {
+    imageData.value = reader.result as string;
+  };
+  reader.readAsDataURL(file);
+
+  uploadingNTF.value = true;
+  const time = new Date().getTime();
+  const metadata = await nftStorage.store({
+    image: file,
+    name: form.name || `name${time}`,
+    description: form.description || `description${time}`
+  });
+  uploadingNTF.value = false;
+
+  form.image = metadata.url;
 };
 </script>
 <template>
@@ -98,6 +128,28 @@ const handleSubmit = async () => {
           placeholder="Type here"
           class="input input-primary w-full"
         />
+
+        <label class="label">
+          <span class="label-text">Image</span>
+        </label>
+        <div class="flex">
+          <div class="avatar" v-if="imageData">
+            <div class="w-24 rounded-md mr-2">
+              <img :src="imageData" />
+            </div>
+          </div>
+          <div>
+            <input
+              type="file"
+              class="file-input file-input-bordered file-input-primary w-full flex-shrink"
+              @change="handleFileChange"
+            />
+            <progress v-if="uploadingNTF" class="progress progress-info" />
+            <p class="text-xs text-slate-500 break-all mt-2">
+              {{ form.image }}
+            </p>
+          </div>
+        </div>
 
         <label class="label mt-2">
           <span class="label-text">Configuration</span>

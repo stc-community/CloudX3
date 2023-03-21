@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-artifact-1",
   "contractName": "ERC721URIStorage",
-  "sourceName": "contracts/comman/FERC721URIStorage.sol",
+  "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
   "abi": [
     {
       "anonymous": false,

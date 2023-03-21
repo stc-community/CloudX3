@@ -22,7 +22,7 @@ specifiers:
   animate.css: ^4.1.1
   apexcharts: ^3.37.1
   autoprefixer: ^10.4.13
-  axios: ^1.2.0
+  axios: ^1.2.1
   cloc: ^2.10.0
   cssnano: ^5.1.14
   daisyui: ^2.50.2
@@ -34,6 +34,7 @@ specifiers:
   js-base64: ^3.7.5
   leaflet: ^1.9.3
   lint-staged: 11.1.2
+  loadsh: ^0.0.4
   mitt: ^3.0.0
   moment: ^2.29.4
   nft.storage: ^7.0.3
@@ -88,6 +89,7 @@ dependencies:
   ethers: 6.1.0
   js-base64: 3.7.5
   leaflet: 1.9.3
+  loadsh: 0.0.4
   mitt: 3.0.0
   moment: 2.29.4
   nft.storage: 7.0.3
@@ -3845,6 +3847,11 @@ packages:
       through: 2.3.8
       wrap-ansi: 7.0.0
     dev: true
+
+  /loadsh/0.0.4:
+    resolution: {integrity: sha512-U+wLL8InpfRalWrr+0SuhWgGt10M4OyAk6G8xCYo2rwpiHtxZkWiFpjei0vO463ghW8LPCdhqQxXlMy2qicAEw==}
+    deprecated: This is a typosquat on the popular Lodash package. This is not maintained nor is the original Lodash package.
+    dev: false
 
   /local-pkg/0.4.2:
     resolution: {integrity: sha512-mlERgSPrbxU3BP4qBqAvvwlgW4MTg78iwJdGGnv7kibKjWcJksrG3t6LB5lXI93wXRDvG4NpUgJFmTG4T6rdrg==}

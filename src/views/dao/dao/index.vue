@@ -2,27 +2,33 @@
 import { getReadonlyDaoContract } from "@/utils/contract/dao";
 import { onMounted, reactive, ref } from "vue";
 import type { DAO } from "@/utils/contract/dao";
-import { transMapToArr } from "@/utils/shared";
+import { transIpfsToHttp } from "@/utils/shared";
+import axios from "axios";
 
 const list: Array<DAO> = reactive([]);
+const imageUrls = reactive([]);
 const loading = ref(true);
 
 onMounted(async () => {
   loading.value = true;
   const contract = await getReadonlyDaoContract();
   const res = await contract.getAllDaos();
+
   list.push(...res);
 
   loading.value = false;
+  getImageSource();
 });
 
-const decodeJsonInfo = jsoninfo => {
-  const map = window.atob(jsoninfo);
-  try {
-    return transMapToArr(JSON.parse(map));
-  } catch (e) {
-    return [];
-  }
+const getImageSource = async () => {
+  list.forEach((d, k) => {
+    if (!d.image) return;
+
+    axios.get(transIpfsToHttp(d.image)).then(res => {
+      const imageUrl = res.data.image;
+      imageUrls[k] = transIpfsToHttp(imageUrl);
+    });
+  });
 };
 </script>
 <template>
@@ -37,28 +43,17 @@ const decodeJsonInfo = jsoninfo => {
     />Create DAO
   </label>
 
-  <div class="grid grid-cols-3 gap-4 mt-5">
+  <div class="grid grid-cols-4 gap-10 mt-5">
     <progress v-if="loading" class="progress" />
-    <div v-for="d in list" class="card shadow-md row-span-1 border">
+    <div v-for="(d, k) in list" class="card card-compact shadow-xl">
+      <figure class="bg-gradient-to-r from-violet-500 to-fuchsia-500 h-[200px]">
+        <img :src="imageUrls[k]" v-if="imageUrls[k]" />
+      </figure>
       <div class="card-body">
-        <h2 class="card-title text-primary">
-          <IconifyIconOnline
-            icon="eos-icons:organisms"
-            width="30px"
-            height="30px"
-          />
-          {{ d.name }}
-        </h2>
-        <div class="break-all mt-2 text-slate-600 font-bold">
-          {{ d.description }}
-        </div>
-        <div class="divider mt-0 mb-0" />
-        <div class="text-slate-500">
-          <div v-for="item in decodeJsonInfo(d.jsoninfo)">
-            <span>{{ item.k }}</span>
-            <span class="mx-1">=</span>
-            <span>{{ item.v }}</span>
-          </div>
+        <h2 class="card-title">{{ d.name }}</h2>
+        <p>{{ d.description }}</p>
+        <div class="card-actions justify-end">
+          <button class="btn btn-primary">Enter</button>
         </div>
       </div>
     </div>

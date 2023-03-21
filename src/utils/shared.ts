@@ -82,3 +82,12 @@ export function transMapToArr(obj: Object) {
     };
   });
 }
+
+const IPFS_GATEWAY = "https://ipfs.io/ipfs/";
+export function transIpfsToHttp(url: string) {
+  if (url.startsWith("ipfs://")) {
+    return IPFS_GATEWAY + url.substring(7);
+  }
+
+  return url;
+}

@@ -7,20 +7,26 @@ import {
 import ABI from "./dao-abi.json?raw";
 const ADDR = "0xA3A07c5fdd2b7cea1c7aD9d67292206dBf8832D8";
 
+let writeContract;
 export async function getDaoContract() {
-  const contract = await getWritebleContractInstance(ADDR, ABI);
+  if (!writeContract) {
+    writeContract = await getWritebleContractInstance(ADDR, ABI);
+  }
 
-  return contract;
+  return writeContract;
 }
 
+let readContract;
 export async function getReadonlyDaoContract() {
-  const contract = await getReadonlyConractInstance(ADDR, ABI);
+  if (!readContract) {
+    readContract = await getReadonlyConractInstance(ADDR, ABI);
+  }
 
-  return contract;
+  return readContract;
 }
 
 export type DAO = {
-  daoId: string;
+  // daoId: string;
   image: string;
   name: string;
   description: string;

@@ -10,6 +10,9 @@ const MAINNET_PRIVATE_KEY = process.env.MAINNET_PRIVATE_KEY;
 module.exports = {
   solidity: "0.8.17",
   defaultNetwork: "sepolia",
+  etherscan: {
+    apiKey: "R2EX7FUME887H41HNEAR91U5B551ZVBHCT"
+  },
   networks: {
     hyperspace: {
       chainId: 3141,

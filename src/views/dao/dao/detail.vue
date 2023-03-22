@@ -5,30 +5,22 @@ import { reactive, onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
 import { transIpfsToHttp } from "@/utils/shared";
-import { transMapToArrWithInput } from "@/utils/shared";
+import { transMapToArrWithInput, transMapToArr } from "@/utils/shared";
 
 type Data = {
   loading: boolean;
   dao: DAO;
-  userNFT: UserNFT;
 };
 
 const route = useRoute();
 const data: Data = reactive({
   loading: false,
-  dao: null,
-  userNFT: {
-    tokenId: 0,
-    daoId: 0,
-    user: "",
-    metadata: "",
-    image: ""
-  }
+  dao: null
 });
 
 const imageUrl = ref("");
 const fields = reactive([]);
-const showForm = ref(false);
+const userMetata = reactive([]);
 
 // load DAO information
 onMounted(async () => {
@@ -43,21 +35,28 @@ onMounted(async () => {
 
 // load user information in this DAO
 onMounted(() => {
-  loadUserNFT();
+  // FIXME 需要等待一段时间后才能正确获取 writeable 的示例，估计跟加载的生命周期有关，待优化
+  window.setTimeout(() => {
+    loadUserNFT();
+  }, 1000);
 });
-const loadingUserNFT = ref(false);
+const loadingUserNFT = ref(true);
 const loadUserNFT = async () => {
   loadingUserNFT.value = true;
-  const contract = await getReadonlyDaoContract();
-  const [soul, _f] = await contract.getUserNft(route.params.id);
-  const all = await contract.getUserAllNft();
+  const contract = await getDaoContract();
 
-  console.log("get userNFT", soul);
-  console.log("get getUserAllNft", all);
-  if (soul) {
-    Object.assign(data.userNFT, soul);
-  }
+  const [soul, _f] = await contract.getUserNft(route.params.id);
   loadingUserNFT.value = false;
+
+  const metadataStr = soul.metadata;
+
+  if (!metadataStr) {
+    return;
+  }
+
+  const metadataObj = JSON.parse(window.atob(metadataStr));
+  userMetata.length = 0;
+  userMetata.push(...transMapToArr(metadataObj));
 };
 
 const handleClickSubmit = async () => {
@@ -68,20 +67,17 @@ const handleClickSubmit = async () => {
 
   const metadata = window.btoa(JSON.stringify(inputMap));
 
-  console.log("params", data.dao.image, route.params.id, metadata, "");
-
   const contract = await getDaoContract();
   const transaction = await contract.createUserNft(
-    "data.dao.image",
-    0,
-    "metadata",
+    data.dao.image,
+    route.params.id,
+    metadata,
     ""
   );
 
   const res = await transaction.wait();
-  // window.location.reload();
-
   console.log("createUserNft", res);
+  window.location.reload();
 };
 
 const getImageSource = async metadata => {
@@ -121,68 +117,48 @@ const getJsonArr = base64str => {
   </div>
 
   <!-- user dao -->
-  <progress v-if="loadingUserNFT" class="progress max-w-md mt-5" />
+  <progress
+    v-if="loadingUserNFT && !data.loading"
+    class="progress max-w-md mt-5"
+  />
+  <div v-else class="border-t border-slate-200 pt-10">
+    <template v-if="userMetata.length">
+      <div
+        class="card w-96 bg-base-100 shadow-xl bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white"
+      >
+        <div class="card-body">
+          <h2 class="card-title">My NFT</h2>
+          <div class="divider" />
 
-  {{ fields }}
-
-  <div class="border-t border-slate-200 mt-10 mb-10" />
-  <template v-if="fields.length && !data.userNFT.metadata">
-    <h3 class="mt-10 text-3xl">Join {{ data.dao.name }} DAO</h3>
-    <div v-for="(i, k) in fields" class="form-control w-full max-w-md mt-2">
-      <label class="label">
-        <span class="text-xs font-normal">{{ i.k }}</span>
-        <span class="text-xs font-normal text-slate-500">{{ i.v }}</span>
-      </label>
-      <input
-        type="text"
-        placeholder="Type here"
-        v-model="fields[k]['input']"
-        class="input input-bordered w-full max-w-md"
-      />
-    </div>
-    <button
-      class="btn btn-primary w-full max-w-md mt-5"
-      @click="handleClickSubmit"
-    >
-      Submit
-    </button>
-  </template>
-
-  <template v-if="data.userNFT.metadata">
-    <div
-      class="card w-96 bg-base-100 shadow-xl bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white"
-    >
-      <div class="card-body">
-        <h2 class="card-title">My Information</h2>
-        <div class="leading-8">
-          <p>
-            <span class="font-bold">TokenID</span
-            ><span>{{ data.userNFT.tokenId }}</span>
-          </p>
-          <p>
-            <span class="font-bold">DaoID</span
-            ><span>{{ data.userNFT.daoId }}</span>
-          </p>
-          <p>
-            <span class="font-bold">User</span
-            ><span>{{ data.userNFT.user }}</span>
-          </p>
-          <p>
-            <span class="font-bold">Metadata</span
-            ><span>{{ data.userNFT.metadata }}</span>
-          </p>
-          <p>
-            <span class="font-bold">Image</span
-            ><span>{{ data.userNFT.image }}</span>
-          </p>
-        </div>
-        <p>If a dog chews shoes whose shoes does he choose?</p>
-        <div class="card-actions justify-end">
-          <button class="btn btn-primary">Buy Now</button>
+          <div v-for="v in userMetata" class="mb-2">
+            <p class="font-bold">{{ v.k }}</p>
+            <p class="text-slate-200">{{ v.v }}</p>
+          </div>
         </div>
       </div>
-    </div>
-  </template>
+    </template>
+    <template v-else-if="fields.length">
+      <h3 class="mt-10 text-3xl">Join {{ data.dao.name }} DAO</h3>
+      <div v-for="(i, k) in fields" class="form-control w-full max-w-md mt-2">
+        <label class="label">
+          <span class="text-xs font-normal">{{ i.k }}</span>
+          <span class="text-xs font-normal text-slate-500">{{ i.v }}</span>
+        </label>
+        <input
+          type="text"
+          placeholder="Type here"
+          v-model="fields[k]['input']"
+          class="input input-bordered w-full max-w-md"
+        />
+      </div>
+      <button
+        class="btn btn-primary w-full max-w-md mt-5"
+        @click="handleClickSubmit"
+      >
+        Submit
+      </button>
+    </template>
+  </div>
 </template>
 
 <style scoped></style>

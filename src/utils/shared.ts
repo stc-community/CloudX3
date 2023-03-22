@@ -83,6 +83,20 @@ export function transMapToArr(obj: Object) {
   });
 }
 
+export function transMapToArrWithInput(obj: Object) {
+  if (typeof obj !== "object") {
+    return [];
+  }
+
+  return Object.keys(obj).map(k => {
+    return {
+      k,
+      v: obj[k],
+      input: ""
+    };
+  });
+}
+
 const IPFS_GATEWAY = "https://ipfs.io/ipfs/";
 export function transIpfsToHttp(url: string) {
   if (url.startsWith("ipfs://")) {

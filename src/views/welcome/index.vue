@@ -16,7 +16,7 @@ const icons = [gaIcon, starterIcon, cbIcon, weechainIcon, wfIcon];
 const arr = [
   "Cloud Native Oracles",
   "Application Digital Identity",
-  "Computing Over Data",
+  "Computing Over Function",
   "Cloud Native Infrastructure Security"
 ];
 </script>

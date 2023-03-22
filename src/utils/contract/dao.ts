@@ -5,7 +5,7 @@ import {
 
 // @ts-ignore
 import ABI from "./dao-abi.json?raw";
-const ADDR = "0x5FeeBB15A0cdb30EFd286Dc1210f4aB3D239d1E3";
+const ADDR = "0xA3A07c5fdd2b7cea1c7aD9d67292206dBf8832D8";
 
 export async function getDaoContract() {
   const contract = await getWritebleContractInstance(ADDR, ABI);
@@ -25,4 +25,12 @@ export type DAO = {
   name: string;
   description: string;
   jsoninfo: string;
+};
+
+export type UserNFT = {
+  tokenId: number;
+  daoId: number;
+  user: string;
+  metadata: string;
+  image: string;
 };

@@ -31,8 +31,6 @@ contract STCDao is ERC721URIStorage {
     string image;
   }
 
-  Dao [] daoArr;
-
   mapping(uint256 => Dao) public idToDao;
 
   mapping(uint256 => Soul) private idToUserSoul;
@@ -44,14 +42,13 @@ contract STCDao is ERC721URIStorage {
   function createDao(string memory name, string memory description, string memory jsoninfo, string memory image) external {
     uint256 daoId = _daoIdCounter.current();
     _daoIdCounter.increment();
-    daoArr.push(Dao(daoId, name, description, jsoninfo, image));
     idToDao[daoId] = Dao(daoId, name, description, jsoninfo, image);
   }
 
   function getAllDaos() external view returns (Dao[] memory) {
     uint256 daoId = _daoIdCounter.current();
-    Dao[] memory daos = new Dao[](daoId+1);
-    for (uint256 i=0; i <= daoId; i++){
+    Dao[] memory daos = new Dao[](daoId);
+    for (uint256 i = 0; i < daoId; i++){
       daos[i] = idToDao[i];
     }
     return daos;

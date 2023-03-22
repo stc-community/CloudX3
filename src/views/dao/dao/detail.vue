@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { getDaoContract, getReadonlyDaoContract } from "@/utils/contract/dao";
-import type { DAO, UserNFT } from "@/utils/contract/dao";
+import type { DAO } from "@/utils/contract/dao";
 import { reactive, onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
@@ -59,6 +59,7 @@ const loadUserNFT = async () => {
   userMetata.push(...transMapToArr(metadataObj));
 };
 
+const submitting = ref(false);
 const handleClickSubmit = async () => {
   const inputMap = {};
   fields.forEach(f => {
@@ -67,6 +68,7 @@ const handleClickSubmit = async () => {
 
   const metadata = window.btoa(JSON.stringify(inputMap));
 
+  submitting.value = true;
   const contract = await getDaoContract();
   const transaction = await contract.createUserNft(
     data.dao.image,
@@ -76,6 +78,7 @@ const handleClickSubmit = async () => {
   );
 
   const res = await transaction.wait();
+  submitting.value = false;
   console.log("createUserNft", res);
   window.location.reload();
 };
@@ -121,13 +124,13 @@ const getJsonArr = base64str => {
     v-if="loadingUserNFT && !data.loading"
     class="progress max-w-md mt-5"
   />
-  <div v-else class="border-t border-slate-200 pt-10">
+  <div v-else class="border-t border-slate-200 pt-10 mt-10">
     <template v-if="userMetata.length">
       <div
         class="card w-96 bg-base-100 shadow-xl bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white"
       >
         <div class="card-body">
-          <h2 class="card-title">My NFT</h2>
+          <h2 class="card-title">My NFT in {{ data.dao.name }}</h2>
           <div class="divider" />
 
           <div v-for="v in userMetata" class="mb-2">
@@ -138,7 +141,7 @@ const getJsonArr = base64str => {
       </div>
     </template>
     <template v-else-if="fields.length">
-      <h3 class="mt-10 text-3xl">Join {{ data.dao.name }} DAO</h3>
+      <h3 class="mt-10 text-3xl">Join {{ data.dao.name }}</h3>
       <div v-for="(i, k) in fields" class="form-control w-full max-w-md mt-2">
         <label class="label">
           <span class="text-xs font-normal">{{ i.k }}</span>
@@ -151,7 +154,9 @@ const getJsonArr = base64str => {
           class="input input-bordered w-full max-w-md"
         />
       </div>
+      <progress v-if="submitting" class="progress max-w-md mt-5" />
       <button
+        v-else
         class="btn btn-primary w-full max-w-md mt-5"
         @click="handleClickSubmit"
       >

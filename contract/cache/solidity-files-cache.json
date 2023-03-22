@@ -566,8 +566,8 @@
       ]
     },
     "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/contracts/STCDao.sol": {
-      "lastModificationDate": 1679365532685,
-      "contentHash": "c072a2e061fba9c8a2b99f098172fff3",
+      "lastModificationDate": 1679387135214,
+      "contentHash": "4bfcf836e156804713e8231e99ff2a16",
       "sourceName": "contracts/STCDao.sol",
       "solcConfig": {
         "version": "0.8.17",

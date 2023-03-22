@@ -90,4 +90,14 @@ contract STCDao is ERC721URIStorage {
     return (userSoul, false);
   }
 
+  function getUserAllNft() external view returns (Soul[] memory) {
+    uint256 tokenCount = userSoulIds[msg.sender].length;
+    Soul[] memory souls = new Soul[](tokenCount);
+
+    for (uint i=0; i < tokenCount; i++){
+      souls[i] = idToUserSoul[userSoulIds[msg.sender][i]];
+    }
+
+    return souls;
+  }
 }

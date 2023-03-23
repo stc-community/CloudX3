@@ -30,9 +30,10 @@ onMounted(async () => {
       class="card shadow-md row-span-1 border border-primary"
       v-for="a in actors"
     >
-      <span class="badge badge-primary text-white absolute right-[-5px]">{{
-        a.count
-      }}</span>
+      <MessageVerified
+        :event="a.event"
+        class="absolute right-[-10px] top-[-10px]"
+      />
       <div class="card-body">
         <h2 class="card-title text-primary">
           <IconifyIconOnline
@@ -41,7 +42,7 @@ onMounted(async () => {
             height="30px"
           />
           {{ a.actor_name }}
-          <MessageVerified :event="a.event" />
+          <span class="badge badge-primary text-white">{{ a.count }}</span>
         </h2>
         <div class="tooltip text-left tooltip-left" data-tip="Actor ID">
           <span class="text-slate-600 text-sm break-all leading-3">{{

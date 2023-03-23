@@ -31,10 +31,11 @@ onMounted(async () => {
       class="card shadow-md relative border border-primary"
       v-for="p in providers"
     >
-      <span
-        class="badge badge-success text-white absolute right-[-5px] top-[-5px]"
-        >{{ p.status }}</span
-      >
+      <MessageVerified
+        :event="p.event"
+        class="absolute right-[-10px] top-[-10px]"
+      />
+
       <div class="card-body">
         <h2 class="card-title text-primary">
           <IconifyIconOnline
@@ -43,8 +44,6 @@ onMounted(async () => {
             height="30px"
           />
           {{ p.provider_name }}
-
-          <MessageVerified :event="p.event" />
         </h2>
         <div class="tooltip text-left tooltip-left" data-tip="provider id">
           <span class="text-slate-600 text-sm break-all leading-3">{{
@@ -56,6 +55,7 @@ onMounted(async () => {
             {{ p.contract_id }}
           </div>
         </div>
+        <div class="badge badge-success text-white">{{ p.status }}</div>
 
         <p class="text-sm font-semibold mt-5">More Information</p>
         <div>

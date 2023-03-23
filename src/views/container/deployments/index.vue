@@ -100,11 +100,10 @@ onBeforeUnmount(() => {
       class="card shadow-md row-span-1 border"
       :class="{ 'border-primary': isSOL(d) }"
     >
-      <span
-        v-if="isSOL(d)"
-        class="badge text-white badge-primary badge-lg absolute right-[-5px] top-[-10px]"
-        >Managed By Contracts</span
-      >
+      <MessageVerified
+        :event="d.event"
+        class="absolute right-[-10px] top-[-10px]"
+      />
       <div class="card-body">
         <h2 class="card-title text-primary">
           <IconifyIconOnline
@@ -113,13 +112,14 @@ onBeforeUnmount(() => {
             height="30px"
           />
           {{ d.metadata.name }}
-
-          <MessageVerified :event="d.event" />
         </h2>
         <div class="tooltip text-left tooltip-left" data-tip="Namespace">
           <div class="badge badge-primary badge-outline break-all">
             {{ d.metadata.namespace }}
           </div>
+        </div>
+        <div v-if="isSOL(d)" class="badge text-white badge-primary text-xs">
+          Managed By Contracts
         </div>
 
         <p class="text-sm font-semibold mt-5">Labels</p>

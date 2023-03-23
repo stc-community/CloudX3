@@ -55,7 +55,7 @@ const handleClickExposeHttp = (port: number, name: string) => {
 watch(submitting, v => {
   if (!v) {
     if (digHoleRes.code !== 1001) {
-      console.log("Dig hole error:", digHoleRes);
+      window.alert(JSON.stringify(digHoleRes));
       return;
     }
 
@@ -129,10 +129,6 @@ watch(submitting, v => {
             }}
           </div>
         </template>
-
-        <p class="text-error text-sm" v-if="digHoleRes.code">
-          {{ digHoleRes }}
-        </p>
 
         <label for="cod-call-modal" class="btn btn-primary mt-5">
           <IconifyIconOnline

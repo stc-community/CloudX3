@@ -29,8 +29,8 @@ onMounted(() => {
   loadingHoles.value = true;
   loadData(holes, "cod.hole.list", null, loadingHoles);
 });
-const getHole = name => {
-  return holes.find(i => i.metadata.name === name);
+const getHole = (name: string) => {
+  return holes.find(i => i.metadata.name === name.toLowerCase());
 };
 
 // 处理打洞
@@ -40,14 +40,14 @@ const digHoleRes = reactive({
   data: ""
 });
 const submitting = ref(false);
-const handleClickExposeHttp = (port, name) => {
+const handleClickExposeHttp = (port: number, name: string) => {
   submitting.value = true;
   loadData(
     digHoleRes,
     "cod.hole.add",
     {
       port,
-      name
+      name: name.toLowerCase()
     },
     submitting
   );

@@ -3,6 +3,7 @@ import type { Ref } from "vue";
 import { useNostrStore } from "@/store/modules/nostr";
 import { useModalStore } from "@/store/modules/modal";
 import moment from "moment";
+import container from "@/router/modules/container";
 
 export function formatTime(timeStr, formatStr = "YYYY/MM/DD HH:mm:ss") {
   if (!timeStr) {
@@ -65,6 +66,8 @@ export async function loadData(
           h.event = event;
           dataContainer.push(h);
         });
+      } else {
+        Object.assign(dataContainer, content);
       }
     }
   );

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref, onMounted } from "vue";
+import { reactive, ref, onMounted, watch } from "vue";
 import { loadData } from "@/utils/shared";
 import type { Event } from "nostr-tools";
 import MessageVerified from "@/components/MessageVerified.vue";
@@ -13,6 +13,7 @@ type ActorInfo = {
   host_id: string;
   id: string;
   is_hotwatched: boolean;
+  port: number;
 };
 
 const loading = ref(true);
@@ -20,6 +21,38 @@ const actors: Array<ActorInfo> = reactive([]);
 
 onMounted(async () => {
   loadData(actors, "cod.actor.list", null, loading);
+});
+
+const loadingHoles = ref(false);
+const holes = reactive([]);
+onMounted(() => {
+  loadingHoles.value = true;
+  loadData(holes, "cod.hole.list", null, loadingHoles);
+});
+const getHole = name => {
+  return holes.find(i => i.metadata.name === name);
+};
+
+// 处理打洞
+const digHoleRes = reactive({});
+const submitting = ref(false);
+const handleClickExposeHttp = (port, name) => {
+  submitting.value = true;
+  loadData(
+    digHoleRes,
+    "cod.hole.add",
+    {
+      port,
+      name
+    },
+    submitting
+  );
+};
+watch(submitting, v => {
+  if (!v) {
+    // 请求完成啦
+    window.location.reload();
+  }
 });
 </script>
 <template>
@@ -55,15 +88,39 @@ onMounted(async () => {
           </div>
         </div>
 
-        <button class="btn btn-primary mt-5">
-          <IconifyIconOnline
-            class="mr-2"
-            icon="material-symbols:step-out"
-            width="25px"
-            height="25px"
+        <progress
+          v-if="loadingHoles || submitting"
+          class="progress max-w-md mt-5"
+        />
+        <template v-else-if="!getHole(a.actor_name)">
+          <input
+            type="number"
+            v-model="a.port"
+            placeholder="Port"
+            class="input input-primary mt-5"
           />
-          Expose Http
-        </button>
+
+          <button
+            class="btn btn-primary"
+            @click="handleClickExposeHttp(a.port, a.actor_name)"
+          >
+            <IconifyIconOnline
+              class="mr-2"
+              icon="material-symbols:step-out"
+              width="25px"
+              height="25px"
+            />
+            Expose Http
+          </button>
+        </template>
+        <template v-else-if="getHole(a.actor_name)">
+          <div class="badge badge-primary text-xs">
+            {{ getHole(a.actor_name)?.metadata?.name }}.{{
+              getHole(a.actor_name)?.metadata?.namespace
+            }}
+          </div>
+        </template>
+
         <label for="cod-call-modal" class="btn btn-primary mt-5">
           <IconifyIconOnline
             class="mr-2"

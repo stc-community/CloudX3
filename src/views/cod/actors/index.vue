@@ -34,7 +34,11 @@ const getHole = name => {
 };
 
 // 处理打洞
-const digHoleRes = reactive({});
+const digHoleRes = reactive({
+  code: 0,
+  message: "",
+  data: ""
+});
 const submitting = ref(false);
 const handleClickExposeHttp = (port, name) => {
   submitting.value = true;
@@ -50,6 +54,11 @@ const handleClickExposeHttp = (port, name) => {
 };
 watch(submitting, v => {
   if (!v) {
+    if (digHoleRes.code !== 1001) {
+      console.log("Dig hole error:", digHoleRes);
+      return;
+    }
+
     // 请求完成啦
     window.location.reload();
   }
@@ -120,6 +129,10 @@ watch(submitting, v => {
             }}
           </div>
         </template>
+
+        <p class="text-error text-sm" v-if="digHoleRes.code">
+          {{ digHoleRes }}
+        </p>
 
         <label for="cod-call-modal" class="btn btn-primary mt-5">
           <IconifyIconOnline

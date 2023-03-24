@@ -1,20 +1,12 @@
 <script setup lang="ts">
 import { reactive, ref, onMounted, watch } from "vue";
 import { loadData } from "@/utils/shared";
-import type { Event } from "nostr-tools";
-import MessageVerified from "@/components/MessageVerified.vue";
 
-type ActorInfo = {
-  event: Event;
-  actor_id: string;
-  actor_name: string;
-  actor_ociref: string;
-  count: number;
-  host_id: string;
-  id: string;
-  is_hotwatched: boolean;
-  port: number;
-};
+import MessageVerified from "@/components/MessageVerified.vue";
+import { useModalStore } from "@/store/modules/modal";
+import type { ActorInfo, HoleInfo } from "./type";
+
+const modalStore = useModalStore();
 
 const loading = ref(true);
 const actors: Array<ActorInfo> = reactive([]);
@@ -63,6 +55,10 @@ watch(submitting, v => {
     window.location.reload();
   }
 });
+
+const onCallFunction = (h: HoleInfo) => {
+  modalStore.setHole(h);
+};
 </script>
 <template>
   <h2>{{ $route.meta.title }}</h2>
@@ -128,17 +124,21 @@ watch(submitting, v => {
               getHole(a.actor_name)?.metadata?.namespace
             }}
           </div>
-        </template>
 
-        <label for="cod-call-modal" class="btn btn-primary mt-5">
-          <IconifyIconOnline
-            class="mr-2"
-            icon="mdi:function"
-            width="25px"
-            height="25px"
-          />
-          Call Function
-        </label>
+          <label
+            for="cod-call-modal"
+            class="btn btn-primary mt-5"
+            @click="onCallFunction(getHole(a.actor_name))"
+          >
+            <IconifyIconOnline
+              class="mr-2"
+              icon="mdi:function"
+              width="25px"
+              height="25px"
+            />
+            Call Function
+          </label>
+        </template>
 
         <p class="text-sm font-semibold mt-5">More Information</p>
         <div>

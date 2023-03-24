@@ -2,7 +2,9 @@
 import { useModalStore } from "@/store/modules/modal";
 import { getCodConrtact } from "@/utils/contract/cod";
 import { getRequestID } from "@/utils/contract/web3";
-import { reactive, onBeforeUnmount } from "vue";
+import { reactive, onBeforeUnmount, computed } from "vue";
+import { getConfig } from "@/config";
+import { useNostrStore } from "@/store/modules/nostr";
 
 defineOptions({
   name: "cod-call"
@@ -17,6 +19,7 @@ const data = reactive({
   hash: "",
   requestID: "",
   requestData: "",
+  requestPath: "",
   resReady: false
 });
 
@@ -38,6 +41,24 @@ const listenIfNeeded = () => {
   });
 };
 
+const domain = computed(() => {
+  const hole = eventStore.getHole;
+  return `http://${hole?.metadata.name}.${hole?.metadata.namespace}/`;
+});
+
+const getCurrentSiteName = () => {
+  const relays = getConfig().Relay;
+  const url = useNostrStore().getUrl;
+  const relay = relays.find(i => i.url.includes(url));
+
+  if (!relay?.name) {
+    window.alert("No site selected!");
+    throw new Error("No site selected!");
+  }
+
+  return "s" + relay?.name.substring(2) || "";
+};
+
 const handleSubmit = async () => {
   data.loading = true;
 
@@ -49,8 +70,8 @@ const handleSubmit = async () => {
   try {
     const transaction = await contract.CallCOD(
       data.requestID,
-      "s105",
-      "https://wasmcloud-httpserver.gw105.oneitfarm.com/api/counter/zhangchao",
+      getCurrentSiteName(),
+      `${domain.value}${data.requestPath}`,
       "GET",
       window.btoa(data.requestData)
     );
@@ -89,9 +110,18 @@ const handleCheck = async () => {
         <h3>Call Function</h3>
       </div>
       <div class="form-control mt-8">
+        <input
+          type="text"
+          v-model="data.requestPath"
+          placeholder="Type your request path here"
+          class="input input-bordered input-primary w-full"
+        />
+        <p class="text-xs text-primary mt-1 mb-1">
+          {{ domain }}{{ data.requestPath }}
+        </p>
         <textarea
-          class="textarea textarea-primary h-[100px]"
-          placeholder="Input your request data"
+          class="textarea textarea-primary h-[100px] mt-2"
+          placeholder="Type your request data"
           v-model="data.requestData"
         />
         <div class="mt-2">

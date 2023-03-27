@@ -25,6 +25,15 @@ export default {
         title: "Pods",
         icon: "ion:cube"
       }
+    },
+    {
+      path: "nodes",
+      name: "container.nodes",
+      component: () => import("@/views/container/nodes/index.vue"),
+      meta: {
+        title: "Nodes",
+        icon: "tabler:server-2"
+      }
     }
   ]
 } as RouteConfigsTable;

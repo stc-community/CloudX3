@@ -113,9 +113,9 @@ const handleSubmit = async () => {
         <span class="text-xs text-primary break-all">{{ data.hash }}</span>
 
         <p class="uppercase mt-5">Waitting Deploy Status</p>
-        <pre v-if="data.resReady" class="text-xs text-primary break-all">
-Done</pre
-        >
+        <pre v-if="data.resReady" class="text-xs text-primary break-all">{{
+          data.res
+        }}</pre>
         <progress v-else class="progress progress-primary" />
       </div>
     </div>

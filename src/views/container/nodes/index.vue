@@ -97,7 +97,7 @@ const loadMore = () => {
               :class="parseFloat(d[v]) > 50 ? 'text-warning' : 'text-success'"
               :style="{ '--value': parseFloat(d[v]) }"
             >
-              {{ d.cpu }}
+              {{ parseFloat(d[v]) }}
             </div>
             <p class="text-slate-500 text-xs mt-2">
               {{ v.toUpperCase() }} Usage

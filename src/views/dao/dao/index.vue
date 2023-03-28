@@ -40,7 +40,7 @@ const getImageSource = async () => {
       icon="material-symbols:add-circle"
       width="30px"
       height="30px"
-    />Create DAO
+    />Create Market
   </label>
 
   <div class="grid grid-cols-4 gap-10 mt-5">

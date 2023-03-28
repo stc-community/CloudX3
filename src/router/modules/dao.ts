@@ -4,7 +4,7 @@ export default {
   redirect: "/dao/dao",
   component: () => import("@/views/dao/index.vue"),
   meta: {
-    title: "DAO",
+    title: "Market",
     rank: 2
   },
   children: [
@@ -13,7 +13,7 @@ export default {
       name: "dao.dao",
       component: () => import("@/views/dao/dao/index.vue"),
       meta: {
-        title: "DAOs",
+        title: "Market",
         icon: "eos-icons:organisms"
       }
     },
@@ -23,7 +23,7 @@ export default {
       component: () => import("@/views/dao/dao/detail.vue"),
       meta: {
         hiddenTag: true,
-        title: "DAO Detail"
+        title: "Market Detail"
       }
     }
   ]

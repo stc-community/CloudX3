@@ -105,7 +105,7 @@ const handleFileChange = async (e: Event) => {
           width="25px"
           height="25px"
         />
-        <h3>New Dao</h3>
+        <h3>New Market</h3>
       </div>
 
       <div class="form-control w-full mt-5">

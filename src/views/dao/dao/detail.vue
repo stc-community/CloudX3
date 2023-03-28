@@ -130,7 +130,7 @@ const getJsonArr = base64str => {
         class="card w-96 bg-base-100 shadow-xl bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white"
       >
         <div class="card-body">
-          <h2 class="card-title">My NFT in {{ data.dao.name }}</h2>
+          <h2 class="card-title">My Info in {{ data.dao.name }}</h2>
           <div class="divider" />
 
           <div v-for="v in userMetata" class="mb-2">

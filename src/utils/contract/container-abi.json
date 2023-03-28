@@ -97,7 +97,7 @@
         "type": "bytes32"
       },
       {
-        "indexed": true,
+        "indexed": false,
         "internalType": "string",
         "name": "deployStatus",
         "type": "string"

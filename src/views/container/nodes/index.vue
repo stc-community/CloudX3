@@ -1,41 +1,37 @@
 <script setup lang="ts">
 import { reactive, ref, onMounted } from "vue";
-import { loadData, transMapToArr } from "@/utils/shared";
+import { loadData } from "@/utils/shared";
 import MessageVerified from "@/components/MessageVerified.vue";
 import type { Event } from "nostr-tools";
-import Status from "./components/status.vue";
 
-interface Pod {
+interface Node {
   event: Event;
-  metadata: {
-    name: string; // 名称
-    namespace: string; // 命名空间
-    labels: {
-      // labels
-      [key: string]: string;
-    };
-  };
-  status: {
-    hostIP?: string;
-    podIP: string;
-  };
+  name: string;
+  ip: string;
+  status: string;
+  role: string;
+  cpu: string;
+  memory: string;
+  pod: string;
 }
 
 const loading = ref(true);
-const pods: Array<Pod> = reactive([]);
+const nodes: Array<Node> = reactive([]);
 let page = 1;
 const limit = 9;
 
 const loadOnePage = () => {
   loadData(
-    pods,
-    "cloud.pod.list",
+    nodes,
+    "cloud.node.list",
     {
       page,
       limit
     },
     loading
   );
+
+  console.log(nodes);
 };
 
 onMounted(async () => {
@@ -51,21 +47,24 @@ const loadMore = () => {
 </script>
 <template>
   <h2>{{ $route.meta.title }}</h2>
-  <Status class="mt-5" />
   <div class="grid grid-cols-3 gap-4 mt-5">
-    <div class="card shadow-md row-span-1 border" v-for="d in pods">
+    <div class="card shadow-md row-span-1 border relative" v-for="d in nodes">
       <MessageVerified
         :event="d.event"
         class="absolute right-[-10px] top-[-10px]"
       />
       <div class="card-body">
         <h2 class="card-title text-primary text-sm">
-          <IconifyIconOnline icon="ion:cube" width="30px" height="30px" />
-          {{ d.metadata.name }}
+          <IconifyIconOnline
+            icon="tabler:server-2"
+            width="30px"
+            height="30px"
+          />
+          {{ d.name }}
         </h2>
         <div class="tooltip text-left tooltip-left" data-tip="Namespace">
           <div class="badge badge-primary badge-outline break-all">
-            {{ d.metadata.namespace }}
+            {{ d.ip }}
           </div>
         </div>
 
@@ -73,42 +72,37 @@ const loadMore = () => {
         <div>
           <div
             class="tooltip tooltip-left text-left flex items-center"
-            data-tip="Host IP"
+            data-tip="Pod IP"
           >
-            <IconifyIconOnline
-              class="text-slate-500 flex-shrink-0"
-              icon="tabler:server-2"
-              width="28px"
-              height="28px"
-            />
-            <span class="break-all ml-3 font-bold text-slate-500 leading-3">{{
-              d.status.hostIP
+            <span>Role:</span>
+            <span class="break-all ml-3 text-slate-500 leading-3">{{
+              d.role
             }}</span>
           </div>
           <div
             class="tooltip tooltip-left text-left flex items-center"
-            data-tip="Pod IP"
+            data-tip="Host IP"
           >
-            <IconifyIconOnline
-              class="text-slate-500 flex-shrink-0 mt-2"
-              icon="ion:cube"
-              width="28px"
-              height="28px"
-            />
-            <span class="break-all ml-3 font-bold text-slate-500 leading-3">{{
-              d.status.podIP
+            <span>Status:</span>
+            <span class="break-all ml-3 text-slate-500 leading-3">{{
+              d.status
             }}</span>
           </div>
         </div>
 
-        <p class="text-sm font-semibold mt-5">Labels</p>
-        <div class="max-h-[200px] overflow-y-auto">
-          <p
-            v-for="label in transMapToArr(d.metadata.labels)"
-            class="mb-2 leading-3 break-all text-xs"
-          >
-            {{ label.k }} : {{ label.v }}
-          </p>
+        <div class="mt-3 grid grid-cols-3 text-center">
+          <div v-for="v in ['cpu', 'memory', 'pod']">
+            <div
+              class="radial-progress"
+              :class="parseFloat(d[v]) > 50 ? 'text-warning' : 'text-success'"
+              :style="{ '--value': parseFloat(d[v]) }"
+            >
+              {{ d.cpu }}
+            </div>
+            <p class="text-slate-500 text-xs mt-2">
+              {{ v.toUpperCase() }} Usage
+            </p>
+          </div>
         </div>
       </div>
     </div>

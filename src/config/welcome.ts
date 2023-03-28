@@ -6,5 +6,5 @@ type Welcome = {
 export const welcome: Welcome = {
   title: "STC GlobalDevMarket",
   description:
-    "STC-GlobalDevDao Build a hub platform from web2 to web3,help web2 applications quickly realize web3 transformation,STC-GlobalDevDao provides computing and service operation layer,and application Dao aggregation layer to help web2 applications quickly realize decentralization and web3ization."
+    "STC-GlobalDevDao Build a market platform from web2 to web3,help web2 applications quickly realize web3 transformation,STC-GlobalDevDao provides computing and service operation layer,and application Dao aggregation layer to help web2 applications quickly realize decentralization and web3ization."
 };

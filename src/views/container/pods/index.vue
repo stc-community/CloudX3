@@ -36,8 +36,6 @@ const loadOnePage = () => {
     },
     loading
   );
-
-  console.log(pods);
 };
 
 onMounted(async () => {
@@ -56,12 +54,14 @@ const loadMore = () => {
   <Status class="mt-5" />
   <div class="grid grid-cols-3 gap-4 mt-5">
     <div class="card shadow-md row-span-1 border" v-for="d in pods">
+      <MessageVerified
+        :event="d.event"
+        class="absolute right-[-10px] top-[-10px]"
+      />
       <div class="card-body">
         <h2 class="card-title text-primary text-sm">
           <IconifyIconOnline icon="ion:cube" width="30px" height="30px" />
           {{ d.metadata.name }}
-
-          <MessageVerified :event="d.event" />
         </h2>
         <div class="tooltip text-left tooltip-left" data-tip="Namespace">
           <div class="badge badge-primary badge-outline break-all">

@@ -3,6 +3,7 @@ import { reactive, ref, onMounted } from "vue";
 import { loadData, transMapToArr } from "@/utils/shared";
 import MessageVerified from "@/components/MessageVerified.vue";
 import type { Event } from "nostr-tools";
+import Status from "./components/status.vue";
 
 interface Pod {
   event: Event;
@@ -52,6 +53,7 @@ const loadMore = () => {
 </script>
 <template>
   <h2>{{ $route.meta.title }}</h2>
+  <Status class="mt-5" />
   <div class="grid grid-cols-3 gap-4 mt-5">
     <div class="card shadow-md row-span-1 border" v-for="d in pods">
       <div class="card-body">

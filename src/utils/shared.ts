@@ -68,6 +68,7 @@ export async function loadData(
         });
       } else {
         Object.assign(dataContainer, content);
+        dataContainer.event = event;
       }
     }
   );

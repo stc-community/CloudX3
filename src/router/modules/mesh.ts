@@ -34,6 +34,15 @@ export default {
         title: "Fuse",
         icon: "mdi:fuse-off"
       }
+    },
+    {
+      path: "rate",
+      name: "mesh.rate",
+      component: () => import("@/views/mesh/rate/index.vue"),
+      meta: {
+        title: "Rate Limit",
+        icon: "simple-icons:speedtest"
+      }
     }
   ]
 } as RouteConfigsTable;

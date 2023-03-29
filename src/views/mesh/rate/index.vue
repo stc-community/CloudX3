@@ -20,7 +20,7 @@ const loadService = async () => {
   loading.value = true;
   loadData(
     data.services,
-    "govern.fuse.list",
+    "govern.rate.list",
     {
       page: data.page,
       limit_num: data.limit_num
@@ -68,31 +68,37 @@ const getFuseTypeText = type => {
         <h2 class="card-title break-all text-primary text-md">
           {{ s.unique_id }}
         </h2>
-        <div
-          class="badge badge-primary text-xs"
-          :class="s.is_open === 1 ? 'badge-prmary' : 'badge-secondary'"
-        >
-          {{ s.is_open === 1 ? "Enabled" : "Disabled" }}
+        <div class="flex items-center">
+          <span class="text-xs text-slate-500">API Rate Limit:</span>
+          <div
+            class="badge badge-primary text-xs ml-2"
+            :class="
+              s.api_limiter_is_open === 1 ? 'badge-prmary' : 'badge-secondary'
+            "
+          >
+            {{ s.api_limiter_is_open === 1 ? "Enabled" : "Disabled" }}
+          </div>
+        </div>
+        <div class="flex items-center">
+          <span class="text-xs text-slate-500">Server Rate Limit:</span>
+          <div
+            class="badge badge-primary text-xs ml-2"
+            :class="
+              s.server_limiter_is_open === 1
+                ? 'badge-prmary'
+                : 'badge-secondary'
+            "
+          >
+            {{ s.server_limiter_is_open === 1 ? "Enabled" : "Disabled" }}
+          </div>
         </div>
 
         <p class="text-sm font-semibold mt-5">Rule</p>
         <div class="leading-5 text-xs">
-          <p class="mt-2 text-slate-500">Child Service:</p>
-          <p class="break-all">{{ s.child_unique_id }}</p>
-          <p class="mt-2 text-slate-500">Rule Type:</p>
-          <p class="break-all">{{ getFuseTypeText(s.rule_type) }}</p>
-          <p class="mt-2 text-slate-500">Target:</p>
-          <p class="break-all">{{ s.target }}</p>
-          <p class="mt-2 text-slate-500">Max Requests:</p>
-          <p class="break-all">{{ s.max_requests }}</p>
-          <p class="mt-2 text-slate-500">Interval:</p>
-          <p class="break-all">{{ s.interval }}s</p>
-          <p class="mt-2 text-slate-500">Error Percent:</p>
-          <p class="break-all">{{ s.error_percent }}%</p>
-          <p class="mt-2 text-slate-500">Serial Error Numbers:</p>
-          <p class="break-all">{{ s.serial_error_numbers }}</p>
-          <p class="mt-2 text-slate-500">Open Timeout:</p>
-          <p class="break-all">{{ s.open_timeout }}s</p>
+          <p class="mt-2 text-slate-500">Max Count in Duration:</p>
+          <p class="break-all">{{ s.server_config?.max || 0 }}</p>
+          <p class="mt-2 text-slate-500">Sample Duration:</p>
+          <p class="break-all">{{ s.server_config?.duration || 0 }}s</p>
         </div>
       </div>
     </div>

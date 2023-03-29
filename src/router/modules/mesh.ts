@@ -25,15 +25,24 @@ export default {
         title: "Services",
         icon: "healthicons:provider-fst"
       }
+    },
+    {
+      path: "fuse",
+      name: "mesh.fuse",
+      component: () => import("@/views/mesh/fuse/index.vue"),
+      meta: {
+        title: "Fuse",
+        icon: "mdi:fuse-off"
+      }
+    },
+    {
+      path: "rate",
+      name: "mesh.rate",
+      component: () => import("@/views/mesh/rate/index.vue"),
+      meta: {
+        title: "Rate Limit",
+        icon: "simple-icons:speedtest"
+      }
     }
-    // {
-    //   path: "certificate",
-    //   name: "mesh.certificate",
-    //   component: () => import("@/views/mesh/certificate/index.vue"),
-    //   meta: {
-    //     title: "Apps Identity",
-    //     icon: "mdi:certificate"
-    //   }
-    // }
   ]
 } as RouteConfigsTable;

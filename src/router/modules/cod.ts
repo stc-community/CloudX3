@@ -9,7 +9,7 @@ export default {
   },
   children: [
     {
-      path: "hosts",
+      path: "/cod/hosts",
       name: "cod.hosts",
       component: () => import("@/views/cod/hosts/index.vue"),
       meta: {
@@ -18,7 +18,7 @@ export default {
       }
     },
     {
-      path: "providers",
+      path: "/cod/providers",
       name: "cod.providers",
       component: () => import("@/views/cod/providers/index.vue"),
       meta: {
@@ -27,12 +27,30 @@ export default {
       }
     },
     {
-      path: "actors",
+      path: "/cod/actors",
       name: "cod.actors",
       component: () => import("@/views/cod/actors/index.vue"),
       meta: {
         title: "Actors",
         icon: "simple-icons:wasmer"
+      }
+    },
+    {
+      path: "/cod/providers/market",
+      name: "cod.providers.market",
+      component: () => import("@/views/cod/providers/market.vue"),
+      meta: {
+        title: "Providers Market",
+        icon: "mdi:marketplace"
+      }
+    },
+    {
+      path: "/cod/actors/market",
+      name: "cod.actors.market",
+      component: () => import("@/views/cod/actors/market.vue"),
+      meta: {
+        title: "Actors Market",
+        icon: "mdi:marketplace"
       }
     }
   ]

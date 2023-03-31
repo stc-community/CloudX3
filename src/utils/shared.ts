@@ -35,7 +35,8 @@ export async function loadData(
   dataContainer: object | Array<any>,
   action: string, // 请求方法 a.b.c
   params: object | null = null, // 请求参数
-  loading: Ref | null // loading 的控制参数
+  loading: Ref | null,
+  fn: Function = null // loading 的控制参数
 ) {
   const arr = action.split(".");
 
@@ -70,6 +71,8 @@ export async function loadData(
         Object.assign(dataContainer, content);
         dataContainer.event = event;
       }
+
+      fn && fn();
     }
   );
 }

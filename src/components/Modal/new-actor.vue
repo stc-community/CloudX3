@@ -7,31 +7,29 @@ type FormData = {
   version: string;
   oci: string;
   capabilities: string;
-  smithy: string; // provider only
 };
 
 const form: FormData = reactive({
   name: "",
   version: "",
   oci: "",
-  capabilities: "",
-  smithy: ""
+  capabilities: ""
 });
 const loading = ref(false);
 const result = reactive({});
 const handleSubmit = () => {
-  loadData(result, "cod.market.provideradd", form, loading, () => {
+  loadData(result, "cod.market.actoradd", form, loading, () => {
     window.location.reload();
   });
 };
 </script>
 <template>
   <!-- Put this part before </body> tag -->
-  <input type="checkbox" id="new-provider-modal" class="modal-toggle" />
+  <input type="checkbox" id="new-actor-modal" class="modal-toggle" />
   <div class="modal">
     <div class="modal-box">
       <label
-        for="new-provider-modal"
+        for="new-actor-modal"
         class="btn btn-sm btn-circle absolute right-2 top-2"
         >✕</label
       >
@@ -39,11 +37,11 @@ const handleSubmit = () => {
       <div class="flex items-center">
         <IconifyIconOnline
           class="mr-2"
-          icon="healthicons:provider-fst"
+          icon="simple-icons:wasmer"
           width="25px"
           height="25px"
         />
-        <h3>New Provider</h3>
+        <h3>New Actor</h3>
       </div>
 
       <div class="form-control w-full mt-5">
@@ -83,15 +81,6 @@ const handleSubmit = () => {
         <textarea
           v-model="form.capabilities"
           placeholder='["cap1", "cap2"]'
-          class="textarea textarea-primary w-full"
-        />
-
-        <label class="label mt-2">
-          <span class="label-text">Smithy</span>
-        </label>
-        <textarea
-          v-model="form.smithy"
-          placeholder="Type here"
           class="textarea textarea-primary w-full"
         />
       </div>

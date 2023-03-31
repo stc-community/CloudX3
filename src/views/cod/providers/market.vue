@@ -30,6 +30,14 @@ const decodeCaps = str => {
 </script>
 <template>
   <h2>{{ $route.meta.title }}</h2>
+  <label class="btn btn-primary mt-5" for="new-provider-modal">
+    <IconifyIconOnline
+      icon="healthicons:provider-fst"
+      width="20px"
+      height="20px"
+      class="mr-3"
+    />New Provider
+  </label>
   <div class="grid grid-cols-3 gap-4 mt-5">
     <progress v-if="loading" class="progress row-span-1" />
 
@@ -61,9 +69,9 @@ const decodeCaps = str => {
           {{ v }}
         </div>
 
-        <p class="text-sm font-semibold mt-5">Smithy</p>
-        <div class="max-h-[100px]">
-          <pre>{{ p.smithy }}</pre>
+        <p class="text-sm font-semibold mt-2">Smithy</p>
+        <div class="mockup-code h-[100px] overflow-y-auto">
+          <pre><code class="text-xs">{{ p.smithy }}</code></pre>
         </div>
       </div>
     </div>

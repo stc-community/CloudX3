@@ -78,13 +78,17 @@ const tableData = [
     name: "List my amount",
     method: "GET",
     url: "/my/account",
-    description: "List all accounts in your profile."
+    description: "List all accounts in your profile.",
+    price: 0.001,
+    balance: 0
   },
   {
     name: "Change Model",
     method: "PUT",
     url: "/ai/model",
-    description: "Change the model your ai using"
+    description: "Change the model your ai using",
+    price: 0.002,
+    balance: 0.1
   }
 ];
 </script>
@@ -132,6 +136,8 @@ const tableData = [
           <th class="w-[150px]">Name</th>
           <th>URL</th>
           <th>Description</th>
+          <th>Price(Per request)</th>
+          <th>Balance</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -142,25 +148,34 @@ const tableData = [
           <td>{{ v.name }}</td>
           <td>{{ v.method }} {{ v.url }}</td>
           <td>{{ v.description }}</td>
+          <td>{{ v.price }}</td>
           <td>
-            <button class="btn btn-primary btn-outline text-xs">
+            <span>{{ v.balance }}</span>
+          </td>
+          <td>
+            <button
+              class="btn btn-primary btn-outline text-xs"
+              v-if="v.balance"
+            >
               <IconifyIconOnline
                 icon="ph:copy-simple-fill"
                 width="20px"
                 height="20px"
-                class="mr-2"
               />
               Copy API Key
             </button>
-            <button class="btn btn-primary text-xs ml-5">
+            <label
+              class="btn btn-primary text-xs"
+              for="new-api-scribe-modal"
+              v-else
+            >
               <IconifyIconOnline
                 icon="material-symbols:add-shopping-cart"
                 width="20px"
                 height="20px"
-                class="mr-2"
               />
               Subscribe
-            </button>
+            </label>
           </td>
         </tr>
       </tbody>

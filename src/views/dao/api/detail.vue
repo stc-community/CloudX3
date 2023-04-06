@@ -59,30 +59,6 @@ const loadUserNFT = async () => {
   userMetata.push(...transMapToArr(metadataObj));
 };
 
-const submitting = ref(false);
-const handleClickSubmit = async () => {
-  const inputMap = {};
-  fields.forEach(f => {
-    inputMap[f.k] = f.input;
-  });
-
-  const metadata = window.btoa(JSON.stringify(inputMap));
-
-  submitting.value = true;
-  const contract = await getDaoContract();
-  const transaction = await contract.createUserNft(
-    data.dao.image,
-    route.params.id,
-    metadata,
-    ""
-  );
-
-  const res = await transaction.wait();
-  submitting.value = false;
-  console.log("createUserNft", res);
-  window.location.reload();
-};
-
 const getImageSource = async metadata => {
   if (!metadata) return;
 
@@ -96,6 +72,21 @@ const getJsonArr = base64str => {
   fields.length = 0;
   fields.push(...transMapToArrWithInput(json));
 };
+
+const tableData = [
+  {
+    name: "List my amount",
+    method: "GET",
+    url: "/my/account",
+    description: "List all accounts in your profile."
+  },
+  {
+    name: "Change Model",
+    method: "PUT",
+    url: "/ai/model",
+    description: "Change the model your ai using"
+  }
+];
 </script>
 
 <template>
@@ -129,50 +120,51 @@ const getJsonArr = base64str => {
     </div>
   </div>
 
-  <!-- user dao -->
-  <progress
-    v-if="loadingUserNFT && !data.loading"
-    class="progress max-w-md mt-5"
-  />
-  <div v-else class="border-t border-slate-200 pt-10 mt-10">
-    <template v-if="userMetata.length">
-      <div
-        class="card w-96 bg-base-100 shadow-xl bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white"
-      >
-        <div class="card-body">
-          <h2 class="card-title">My Info in {{ data.dao.name }}</h2>
-          <div class="divider" />
+  <div class="border-t border-slate-200 my-10" />
+  <h2 class="text-3xl">APIs providered</h2>
 
-          <div v-for="v in userMetata" class="mb-2">
-            <p class="font-bold">{{ v.k }}</p>
-            <p class="text-slate-200">{{ v.v }}</p>
-          </div>
-        </div>
-      </div>
-    </template>
-    <template v-else-if="fields.length">
-      <h3 class="mt-10 text-3xl">Join {{ data.dao.name }}</h3>
-      <div v-for="(i, k) in fields" class="form-control w-full max-w-md mt-2">
-        <label class="label">
-          <span class="text-xs font-normal">{{ i.k }}</span>
-          <span class="text-xs font-normal text-slate-500">{{ i.v }}</span>
-        </label>
-        <input
-          type="text"
-          placeholder="Type here"
-          v-model="fields[k]['input']"
-          class="input input-bordered w-full max-w-md"
-        />
-      </div>
-      <progress v-if="submitting" class="progress max-w-md mt-5" />
-      <button
-        v-else
-        class="btn btn-primary w-full max-w-md mt-5"
-        @click="handleClickSubmit"
-      >
-        Submit
-      </button>
-    </template>
+  <div class="overflow-x-auto mt-5">
+    <table class="table w-full">
+      <!-- head -->
+      <thead>
+        <tr>
+          <th class="w-[30px]" />
+          <th class="w-[150px]">Name</th>
+          <th>URL</th>
+          <th>Description</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- row 1 -->
+        <tr v-for="(v, k) in tableData">
+          <th>{{ k + 1 }}</th>
+          <td>{{ v.name }}</td>
+          <td>{{ v.method }} {{ v.url }}</td>
+          <td>{{ v.description }}</td>
+          <td>
+            <button class="btn btn-primary btn-outline text-xs">
+              <IconifyIconOnline
+                icon="ph:copy-simple-fill"
+                width="20px"
+                height="20px"
+                class="mr-2"
+              />
+              Copy API Key
+            </button>
+            <button class="btn btn-primary text-xs ml-5">
+              <IconifyIconOnline
+                icon="material-symbols:add-shopping-cart"
+                width="20px"
+                height="20px"
+                class="mr-2"
+              />
+              Subscribe
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 

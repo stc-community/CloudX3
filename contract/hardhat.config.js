@@ -9,7 +9,7 @@ const MAINNET_PRIVATE_KEY = process.env.MAINNET_PRIVATE_KEY;
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
   solidity: "0.8.17",
-  defaultNetwork: "sepolia",
+  defaultNetwork: "hyperspace",
   etherscan: {
     apiKey: "R2EX7FUME887H41HNEAR91U5B551ZVBHCT"
   },

@@ -15,4 +15,13 @@ module.exports = async ({ deployments }) => {
   } catch (error) {
     console.log(error);
   }
+
+  try {
+    await deploy("STCDaoToken", {
+      from: wallet.address,
+      log: true
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };

@@ -30,12 +30,14 @@ contract STCDao is ERC721URIStorage {
     address daoOwner;
   }
 
-  struct Market {
+  struct ApiMarket {
     uint256 marketId;
     uint256 daoId;
-    string  marketName;
-    string  marketInfo;
+    string  apiName;
+    string  apiMethod;
+    string  apiUrl;
     uint256 price;
+    string  description;
     address createUser;
   }
 
@@ -43,14 +45,15 @@ contract STCDao is ERC721URIStorage {
 
   mapping(uint256 => Soul) private _idToUserSoul;
 
-  mapping(uint256 => Market) private _idToMarket;
+  mapping(uint256 => ApiMarket) private _idToApiMarket;
 
   mapping(address => uint256[]) public _providerDaoIds;
 
   mapping(address => uint256[]) public _userSoulIds;
 
-  mapping(address => uint256[]) public _userMarketIds;
-  mapping(uint256 => uint256) public _daoMarketId;
+  mapping(address => uint256[]) public _userMarketApiIds;     // There is a list of marketplaces created by this user
+
+  mapping(uint256 => uint256[]) public _daoMarketApiIds;     // List of markets that currently exist in the dao
 
 
   event TokenMinted(address, uint256);
@@ -66,7 +69,7 @@ contract STCDao is ERC721URIStorage {
   function createDao(string memory name, string memory description, string memory jsoninfo, string memory image) external {
     uint256 latestDaoId = _daoIdCounter.current();
     _daoIdCounter.increment();
-    _idToDao[latestDaoId] = Dao(latestDaoId, name, description, jsoninfo, image);
+    _idToDao[latestDaoId] = Dao(latestDaoId, name, description, jsoninfo, image, msg.sender);
     _providerDaoIds[msg.sender].push(latestDaoId);
   }
 
@@ -99,8 +102,8 @@ contract STCDao is ERC721URIStorage {
     }
     uint256 tokenId = _tokenIdCounter.current();
     _tokenIdCounter.increment();
-    // _mint(msg.sender, tokenId);
-    // _setTokenURI(tokenId, tokenURI);
+    _mint(msg.sender, tokenId);
+    _setTokenURI(tokenId, tokenURI);
     _idToUserSoul[tokenId] = Soul(tokenId, daoId, msg.sender, metadata, image);
     _userSoulIds[msg.sender].push(tokenId);
 
@@ -134,26 +137,38 @@ contract STCDao is ERC721URIStorage {
     return souls;
   }
 
-  function createMarket(uint256 daoId, string memory marketName, string memory marketInfo, uint256 price) external {
+  function createMarketApi(
+    uint256 daoId,
+    string memory apiName,
+    string memory apiMethod,
+    string memory apiUrl,
+    uint256 price,
+    string memory description
+  ) external {
     require(_idToDao[daoId].daoOwner == msg.sender, "No permission to create a market");
-
     uint256 latestMarketId = _marketIdCounter.current();
+
     _marketIdCounter.increment();
-    _idToMarket[latestMarketId] = Market(latestMarketId, daoId, marketName, marketInfo, price, msg.sender);
-    _daoMarketId[daoId] = latestMarketId;
-    _userMarketIds[msg.sender].push(latestMarketId);
+    _idToApiMarket[latestMarketId] = ApiMarket(latestMarketId, daoId, apiName, apiMethod, apiUrl, price, description, msg.sender);
+    _daoMarketApiIds[daoId].push(latestMarketId);
+    _userMarketApiIds[msg.sender].push(latestMarketId);
   }
 
-  function getMarketByDao(uint256 daoId) view external returns (Market memory) {
-    Market memory market;
-    if (_daoMarketId[daoId] != 0) {
-      market = _idToMarket[_daoMarketId[daoId]];
+  function getMarketApiByDao(uint256 daoId) view external returns (ApiMarket[] memory) {
+    uint256 marketId;
+    uint256 marketApiCount = _daoMarketApiIds[daoId].length;
+    ApiMarket[] memory markets = new ApiMarket[](marketApiCount);
+
+    for (uint i=0; i < marketApiCount; i++){
+      marketId = _daoMarketApiIds[daoId][i];
+      markets[i] = _idToApiMarket[marketId];
     }
-    return market;
+
+    return markets;
   }
 
   function checkToCreateMarket(uint256 daoId) view external returns (bool) {
-    if (_daoMarketId[daoId] == 0 && _idToDao[daoId].daoOwner == msg.sender) {
+    if (_idToDao[daoId].daoOwner == msg.sender) {
       return true;
     }
     return false;

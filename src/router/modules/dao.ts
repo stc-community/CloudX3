@@ -8,30 +8,30 @@ export default {
     rank: 2
   },
   children: [
-    {
-      path: "/dao/dao",
-      name: "dao.dao",
-      component: () => import("@/views/dao/dao/index.vue"),
-      meta: {
-        title: "Market",
-        icon: "eos-icons:organisms"
-      }
-    },
-    {
-      path: "/dao/dao/:id",
-      name: "dao.dao.detail",
-      component: () => import("@/views/dao/dao/detail.vue"),
-      meta: {
-        hiddenTag: true,
-        title: "Market Detail"
-      }
-    },
+    // {
+    //   path: "/dao/dao",
+    //   name: "dao.dao",
+    //   component: () => import("@/views/dao/dao/index.vue"),
+    //   meta: {
+    //     title: "Market",
+    //     icon: "eos-icons:organisms"
+    //   }
+    // },
+    // {
+    //   path: "/dao/dao/:id",
+    //   name: "dao.dao.detail",
+    //   component: () => import("@/views/dao/dao/detail.vue"),
+    //   meta: {
+    //     hiddenTag: true,
+    //     title: "Market Detail"
+    //   }
+    // },
     {
       path: "/dao/api",
       name: "dao.api",
       component: () => import("@/views/dao/api/index.vue"),
       meta: {
-        title: "API Providers",
+        title: "API Market",
         icon: "tabler:api-app"
       }
     },

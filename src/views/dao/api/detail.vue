@@ -87,7 +87,7 @@ const tableData: Array<TableData> = computed(() => {
   <div class="text-sm breadcrumbs">
     <ul>
       <li>
-        <RouterLink :to="{ name: 'dao.api' }">API Provider</RouterLink>
+        <RouterLink :to="{ name: 'dao.api' }">API Market</RouterLink>
       </li>
       <li>Detail</li>
     </ul>

@@ -5,10 +5,10 @@ import {
 
 // @ts-ignore
 import ABI from "./dao-abi.json?raw";
-const ADDR = "0xac463983a9379e175d6117d2f961a8621037931c";
+const ADDR = "0xA3A07c5fdd2b7cea1c7aD9d67292206dBf8832D8";
 
 let writeContract;
-export async function getDaoContract() {
+export async function getTokenContract() {
   if (!writeContract) {
     writeContract = await getWritebleContractInstance(ADDR, ABI);
   }
@@ -17,7 +17,7 @@ export async function getDaoContract() {
 }
 
 let readContract;
-export async function getReadonlyDaoContract() {
+export async function getReadonlyTokenContract() {
   if (!readContract) {
     readContract = await getReadonlyConractInstance(ADDR, ABI);
   }

@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
 import { getDaoContract } from "@/utils/contract/dao";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
 
 type Method = "GET" | "POST" | "DELETE" | "PUT" | "PATCH";
 type Form = {
@@ -16,7 +19,7 @@ const form: Form = reactive({
   method: "POST",
   url: "/",
   description: "",
-  price: 0.1
+  price: 1
 });
 
 const loading = ref(false);
@@ -25,8 +28,24 @@ const handleSubmit = async () => {
 
   const contract = await getDaoContract();
 
+  console.log(
+    route.params.id,
+    form.name,
+    form.method,
+    form.url,
+    form.price,
+    form.description
+  );
+
   try {
-    const transaction = await contract.createDao(form.name, form.description);
+    const transaction = await contract.createMarketApi(
+      route.params.id,
+      form.name,
+      form.method,
+      form.url,
+      form.price,
+      form.description
+    );
     await transaction.wait();
     window.location.reload();
   } catch (e) {

@@ -8,6 +8,9 @@ import MeshModal from "@/components/Modal/mesh-modal.vue";
 import CreatDaoModal from "@/components/Modal/newDao.vue";
 import NewProviderModal from "@/components/Modal/new-provider.vue";
 import NewActorModal from "@/components/Modal/new-actor.vue";
+import newApiProvider from "./components/Modal/new-api-provider.vue";
+import NewApiModal from "./components/Modal/new-api.vue";
+import newApiScribe from "./components/Modal/new-api-scribe.vue";
 import { useNostrStore } from "./store/modules/nostr";
 
 defineOptions({
@@ -32,4 +35,7 @@ onBeforeMount(async () => {
   <CreatDaoModal />
   <NewProviderModal />
   <NewActorModal />
+  <newApiProvider />
+  <NewApiModal />
+  <newApiScribe />
 </template>

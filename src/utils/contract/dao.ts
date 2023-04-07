@@ -5,7 +5,7 @@ import {
 
 // @ts-ignore
 import ABI from "./dao-abi.json?raw";
-const ADDR = "0xed809AF6f37889c7914Bf9f10a210c49EFF9011F";
+const ADDR = "0xac463983a9379e175d6117d2f961a8621037931c";
 
 let writeContract;
 export async function getDaoContract() {

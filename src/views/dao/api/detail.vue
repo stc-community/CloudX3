@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { getReadonlyDaoContract } from "@/utils/contract/dao";
 import type { DAO } from "@/utils/contract/dao";
-import { reactive, onMounted, ref } from "vue";
+import { reactive, onMounted, ref, computed } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
 import { transIpfsToHttp } from "@/utils/shared";
 import { transMapToArrWithInput } from "@/utils/shared";
-import { useApiDetail } from "./use-api-detail.ts";
+import { useApiDetail, TableData } from "./use-api-detail";
+import { useOrder } from "./use-order";
+import type { Order } from "./use-order";
 
 type Data = {
   loading: boolean;
@@ -47,27 +49,38 @@ const getJsonArr = base64str => {
   fields.push(...transMapToArrWithInput(json));
 };
 
-// const tableData = [
-//   {
-//     name: "List my amount",
-//     method: "GET",
-//     url: "/my/account",
-//     description: "List all accounts in your profile.",
-//     price: 0.001,
-//     balance: 0
-//   },
-//   {
-//     name: "Change Model",
-//     method: "PUT",
-//     url: "/ai/model",
-//     description: "Change the model your ai using",
-//     price: 0.002,
-//     balance: 0.1
-//   }
-// ];
-
 // load publish status
-const { checkingPublish, canPublish, loadingApiList, apiList } = useApiDetail();
+const { checkingPublish, canPublish, loadingApiList, apiList, onSubscribe } =
+  useApiDetail();
+
+// load user orders in this provider
+const { loadingUserOrder, userOrders } = useOrder();
+
+// Calc user blance
+const tableData: Array<TableData> = computed(() => {
+  if (!apiList.length) return [];
+
+  const newArr = [];
+  apiList.forEach(api => {
+    const order: Order =
+      userOrders.find(o => o.marketId === api.marketId) || null;
+    newArr.push({
+      marketId: api.marketId,
+      apiName: api.apiName,
+      apiMethod: api.apiMethod,
+      apiUrl: api.apiUrl,
+      description: api.description,
+      price: api.price,
+      orderId: order?.orderId,
+      daoId: order?.daoId,
+      totalCalls: order?.totalCalls,
+      remainingCalls: order?.remainingCalls,
+      orderPrice: order?.orderPrice,
+      buyerAddress: order?.buyerAddress
+    });
+  });
+  return newArr;
+});
 </script>
 
 <template>
@@ -111,7 +124,8 @@ const { checkingPublish, canPublish, loadingApiList, apiList } = useApiDetail();
   <div class="border-t border-slate-200 my-10" />
   <h2 class="text-3xl">APIs providered</h2>
 
-  <div class="overflow-x-auto mt-5">
+  <progress v-if="loadingApiList" class="progress max-w-sm mt-5" />
+  <div class="overflow-x-auto mt-5" v-else>
     <table class="table w-full">
       <!-- head -->
       <thead>
@@ -127,36 +141,40 @@ const { checkingPublish, canPublish, loadingApiList, apiList } = useApiDetail();
       </thead>
       <tbody>
         <!-- row 1 -->
-        <tr v-for="v in apiList">
+        <tr v-for="v in tableData">
           <th>{{ v.marketId }}</th>
           <td>{{ v.apiName }}</td>
           <td>{{ v.apiMethod }} {{ v.apiUrl }}</td>
           <td>{{ v.description }}</td>
           <td>{{ v.price }}</td>
           <td>
-            <span>{{ v.balance }}</span>
+            <span class="text-sm font-bold">{{ v.remainingCalls }} </span>
+            <span class="text-xs text-slate-500 ml-1">/{{ v.totalCalls }}</span>
           </td>
           <td>
             <button
               class="btn btn-primary btn-outline text-xs"
-              v-if="v.balance"
+              v-if="v.remainingCalls"
             >
               <IconifyIconOnline
                 icon="ph:copy-simple-fill"
                 width="20px"
                 height="20px"
+                class="mr-2"
               />
               Copy API Key
             </button>
             <label
+              v-else
+              @click="onSubscribe(v)"
               class="btn btn-primary text-xs"
               for="new-api-scribe-modal"
-              v-else
             >
               <IconifyIconOnline
                 icon="material-symbols:add-shopping-cart"
                 width="20px"
                 height="20px"
+                class="mr-2"
               />
               Subscribe
             </label>

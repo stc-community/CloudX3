@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
-import { getDaoContract } from "@/utils/contract/dao";
+import { getTokenContract } from "@/utils/contract/token";
+import { useModalStore } from "@/store/modules/modal";
+
+const store = useModalStore();
 
 const form = reactive({
   times: 100
@@ -8,10 +11,24 @@ const form = reactive({
 
 const loading = ref(false);
 const handleSubmit = async () => {
-  const contract = await getDaoContract();
+  loading.value = true;
+  const contract = await getTokenContract();
 
   try {
-    const transaction = await contract.createDao(form.times);
+    // console.log(
+    //   store.getOrder.daoId,
+    //   store.getOrder.marketId,
+    //   form.times,
+    //   store.getOrder.orderPrice
+    // );
+
+    const transaction = await contract.createOrder(
+      store.getOrder.daoId,
+      store.getOrder.marketId,
+      form.times,
+      store.getOrder.orderPrice
+    );
+
     await transaction.wait();
     window.location.reload();
   } catch (e) {

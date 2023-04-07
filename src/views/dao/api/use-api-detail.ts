@@ -1,10 +1,32 @@
 import { getDaoContract } from "@/utils/contract/dao";
 import { ref, onMounted, reactive } from "vue";
 import { useRoute } from "vue-router";
+import { useModalStore } from "@/store/modules/modal";
+
+export interface Api {
+  // api info
+  marketId: number;
+  apiName: string;
+  apiMethod: string;
+  apiUrl: string;
+  description: string;
+  price: number;
+}
+
+export interface TableData extends Api {
+  // order info
+  orderId: number;
+  daoId: number;
+  totalCalls: number;
+  remainingCalls: number;
+  orderPrice: number;
+  buyerAddress: number;
+}
 
 export function useApiDetail() {
   const route = useRoute();
   const daoID = route.params.id;
+  const store = useModalStore();
 
   const checkingPublish = ref(false);
   const canPublish = ref(false);
@@ -16,7 +38,7 @@ export function useApiDetail() {
   };
 
   const loadingApiList = ref(false);
-  const apiList = reactive([]);
+  const apiList: Array<Api> = reactive([]);
   const getProviderApiList = async () => {
     loadingApiList.value = true;
     const contract = await getDaoContract();
@@ -34,10 +56,20 @@ export function useApiDetail() {
     }, 1000);
   });
 
+  const onSubscribe = v => {
+    store.setOrder({
+      daoId: +daoID,
+      marketId: v.marketId,
+      orderPrice: v.price,
+      totalCalls: 100
+    });
+  };
+
   return {
     checkingPublish,
     canPublish,
     loadingApiList,
-    apiList
+    apiList,
+    onSubscribe
   };
 }

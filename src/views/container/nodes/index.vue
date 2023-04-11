@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { reactive, ref, onMounted } from "vue";
+import { reactive, ref, onMounted, onBeforeUnmount } from "vue";
 import { loadData } from "@/utils/shared";
 import MessageVerified from "@/components/MessageVerified.vue";
 import type { Event } from "nostr-tools";
+import { getNodeContract, PARAM } from "@/utils/contract/node";
+import type { EventLog } from "ethers";
 
 interface Node {
   event: Event;
@@ -44,6 +46,61 @@ const loadMore = () => {
   page++;
   loadOnePage();
 };
+
+let contract;
+onBeforeUnmount(() => {
+  contract?.off("*");
+});
+const listenIfNeeded = () => {
+  if (!contract) return;
+
+  contract.on("*", (event: EventLog) => {
+    console.log("on chain event", event);
+    const name = event.fragment.name;
+    if (name !== "RequestMspContainerDeployFulfilled") return;
+  });
+};
+const submitting = ref(false);
+const onStart = async (node: Node) => {
+  submitting.value = true;
+  contract = await getNodeContract();
+  listenIfNeeded();
+  try {
+    const transaction = await contract.requestMspContainerNodeCordon(
+      PARAM.oracle,
+      PARAM.jobID,
+      `https://stc-test.gw105.oneitfarm.com/brige/providers/nodes/${node.name}/cordon`
+    );
+
+    await transaction.wait();
+    submitting.value = false;
+    window.setTimeout(() => {
+      window.location.reload();
+    }, 500);
+  } catch (e) {
+    submitting.value = false;
+  }
+};
+const onStop = async (node: Node) => {
+  submitting.value = true;
+  contract = await getNodeContract();
+  listenIfNeeded();
+  try {
+    const transaction = await contract.requestMspContainerNodeUncordon(
+      PARAM.oracle,
+      PARAM.jobID,
+      `https://stc-test.gw105.oneitfarm.com/brige/providers/nodes/${node.name}/uncordon`
+    );
+
+    await transaction.wait();
+    submitting.value = false;
+    window.setTimeout(() => {
+      window.location.reload();
+    }, 500);
+  } catch (e) {
+    submitting.value = false;
+  }
+};
 </script>
 <template>
   <h2>{{ $route.meta.title }}</h2>
@@ -66,6 +123,36 @@ const loadMore = () => {
           <div class="badge badge-primary badge-outline break-all">
             {{ d.ip }}
           </div>
+        </div>
+
+        <div class="mt-5">
+          <button
+            class="btn btn-primary"
+            @click="onStart(d)"
+            :class="{ 'btn-disabled': submitting }"
+          >
+            <IconifyIconOnline
+              icon="material-symbols:play-arrow-rounded"
+              width="25px"
+              height="25px"
+              class="mr-2"
+            />
+            Start
+          </button>
+
+          <button
+            class="btn btn-secondary ml-5"
+            @click="onStop(d)"
+            :class="{ 'btn-disabled': submitting }"
+          >
+            <IconifyIconOnline
+              icon="material-symbols:pause-rounded"
+              width="25px"
+              height="25px"
+              class="mr-2"
+            />
+            Stop
+          </button>
         </div>
 
         <p class="text-sm font-semibold mt-5">Information</p>

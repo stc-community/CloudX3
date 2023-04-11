@@ -2,6 +2,7 @@ import mitt from "mitt";
 
 type Events = {
   deploymentSuccess: boolean;
+  podSuccess: boolean;
   currentService: any;
   refreshServices: boolean;
 };

@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { reactive, ref, onMounted } from "vue";
+import { reactive, ref, onMounted, onBeforeUnmount } from "vue";
 import { loadData, transMapToArr } from "@/utils/shared";
 import MessageVerified from "@/components/MessageVerified.vue";
 import type { Event } from "nostr-tools";
 import Status from "./components/status.vue";
+import eventBus from "@/utils/event-bus";
 
 interface Pod {
   event: Event;
@@ -48,10 +49,31 @@ const loadMore = () => {
   page++;
   loadOnePage();
 };
+
+// 监听到事件刷新页面
+eventBus.on("podSuccess", _status => {
+  console.log("on event", _status);
+  pods.length = 0; // clear
+  page = 1;
+  loadOnePage();
+});
+onBeforeUnmount(() => {
+  eventBus.off("podSuccess");
+});
 </script>
 <template>
   <h2>{{ $route.meta.title }}</h2>
   <Status class="mt-5" />
+  <div>
+    <label for="pod-modal" class="btn btn-primary mt-5">
+      <IconifyIconOnline
+        class="mr-2"
+        icon="material-symbols:add-circle"
+        width="30px"
+        height="30px"
+      />New Pod
+    </label>
+  </div>
   <div class="grid grid-cols-3 gap-4 mt-5">
     <div class="card shadow-md row-span-1 border" v-for="d in pods">
       <MessageVerified

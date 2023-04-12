@@ -2,25 +2,9 @@
 import { reactive, ref, onMounted, onBeforeUnmount } from "vue";
 import { loadData, transMapToArr } from "@/utils/shared";
 import MessageVerified from "@/components/MessageVerified.vue";
-import type { Event } from "nostr-tools";
 import Status from "./components/status.vue";
 import eventBus from "@/utils/event-bus";
-
-interface Pod {
-  event: Event;
-  metadata: {
-    name: string; // 名称
-    namespace: string; // 命名空间
-    labels: {
-      // labels
-      [key: string]: string;
-    };
-  };
-  status: {
-    hostIP?: string;
-    podIP: string;
-  };
-}
+import { Pod } from "./type";
 
 const loading = ref(true);
 const pods: Array<Pod> = reactive([]);
@@ -60,6 +44,10 @@ eventBus.on("podSuccess", _status => {
 onBeforeUnmount(() => {
   eventBus.off("podSuccess");
 });
+
+const onMonitor = pod => {
+  eventBus.emit("showPodMonitor", pod);
+};
 </script>
 <template>
   <h2>{{ $route.meta.title }}</h2>
@@ -90,6 +78,20 @@ onBeforeUnmount(() => {
             {{ d.metadata.namespace }}
           </div>
         </div>
+
+        <label
+          for="monitor-modal"
+          class="btn btn-primary w-[150px] mt-2"
+          @click="onMonitor(d)"
+        >
+          <IconifyIconOnline
+            icon="ph:chart-line-bold"
+            class="mr-2"
+            width="25px"
+            height="25px"
+          />
+          Monitor</label
+        >
 
         <p class="text-sm font-semibold mt-5">Information</p>
         <div>

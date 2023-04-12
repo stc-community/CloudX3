@@ -13,6 +13,7 @@ import NewApiModal from "./components/Modal/new-api.vue";
 import newApiScribe from "./components/Modal/new-api-scribe.vue";
 import { useNostrStore } from "./store/modules/nostr";
 import NewPod from "./components/Modal/new-pod.vue";
+import MonitorModal from "./components/Modal/monitor-modal.vue";
 
 defineOptions({
   name: "app"
@@ -40,4 +41,5 @@ onBeforeMount(async () => {
   <NewApiModal />
   <newApiScribe />
   <NewPod />
+  <MonitorModal />
 </template>

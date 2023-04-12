@@ -10,6 +10,7 @@ onBeforeUnmount(() => {
 });
 
 EventBus.on("showPodMonitor", pod => {
+  console.log("on showPodMonitor");
   loading.value = true;
   loadData(
     data,
@@ -36,7 +37,7 @@ const makeChartData = () => {
     const _data = [];
     const _categories = [];
     obj.data.forEach(d => {
-      _categories.push(d[0]);
+      _categories.push(new Date(d[0] * 1000).toISOString());
       _data.push(d[1]);
     });
 

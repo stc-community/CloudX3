@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import { reactive, ref } from "vue";
+import { reactive, onBeforeUnmount } from "vue";
 import { getCurrentSiteName } from "@/utils/shared";
+import { getFuseLimitConrtact } from "@/utils/contract/fuse-limit-abi";
+import { getRequestID } from "@/utils/contract/web3";
+import eventBus from "@/utils/event-bus";
 
 const form = reactive({
   unique_id: "",
@@ -15,13 +18,58 @@ const form = reactive({
   target: "host",
   is_open: 1
 });
-const loading = ref(false);
-const result = reactive({});
-const handleSubmit = () => {
-  console.log(getCurrentSiteName("s"));
-  // loadData(result, "cod.market.actoradd", form, loading, () => {
-  //   window.location.reload();
-  // });
+
+const data = reactive({
+  res: "",
+  loading: false,
+  hash: "",
+  requestID: "",
+  requestData: "",
+  requestPath: "",
+  resReady: false
+});
+
+let contract;
+onBeforeUnmount(() => {
+  contract?.off("*");
+});
+
+const listenIfNeeded = () => {
+  if (!contract) return;
+
+  contract.on("*", event => {
+    const name = event.fragment.name;
+    if (name !== "RequestFulfilled") return;
+
+    data.resReady = true;
+    eventBus.emit("refreshServices", true);
+    const [_id, res] = event.args;
+    data.res = res;
+  });
+};
+
+// gw
+const handleSubmit = async () => {
+  data.loading = true;
+
+  data.requestID = getRequestID();
+  contract = await getFuseLimitConrtact();
+
+  listenIfNeeded();
+
+  try {
+    const transaction = await contract.fuseRule(
+      getCurrentSiteName("gw"),
+      window.btoa(JSON.stringify(form)),
+      data.requestID
+    );
+
+    await transaction.wait();
+    data.hash = transaction.hash;
+    data.loading = false;
+  } catch (e) {
+    data.loading = false;
+  }
 };
 </script>
 <template>
@@ -171,10 +219,23 @@ const handleSubmit = () => {
       </div>
 
       <div class="mt-5" />
-      <progress v-if="loading" class="progress progress-primary" />
+      <progress v-if="data.loading" class="progress progress-primary" />
       <button v-else class="btn btn-primary w-full" @click="handleSubmit">
         Submit
       </button>
+      <div
+        v-if="data.hash"
+        class="text-left mt-2 border border-primary rounded-md p-2 text-slate-500 text-sm"
+      >
+        <p class="uppercase">Transaction</p>
+        <span class="text-xs text-primary break-all">{{ data.hash }}</span>
+
+        <p class="uppercase mt-5">Waitting Submitting Status</p>
+        <pre v-if="data.resReady" class="text-xs text-primary break-all">{{
+          data.res
+        }}</pre>
+        <progress v-else class="progress progress-primary" />
+      </div>
     </div>
   </div>
 </template>

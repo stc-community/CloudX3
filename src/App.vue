@@ -14,6 +14,7 @@ import newApiScribe from "./components/Modal/new-api-scribe.vue";
 import { useNostrStore } from "./store/modules/nostr";
 import NewPod from "./components/Modal/new-pod.vue";
 import MonitorModal from "./components/Modal/monitor-modal.vue";
+import newFuseRule from "./components/Modal/new-fuse-rule.vue";
 
 defineOptions({
   name: "app"
@@ -42,4 +43,5 @@ onBeforeMount(async () => {
   <newApiScribe />
   <NewPod />
   <MonitorModal />
+  <newFuseRule />
 </template>

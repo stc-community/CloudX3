@@ -3,7 +3,7 @@ import type { Ref } from "vue";
 import { useNostrStore } from "@/store/modules/nostr";
 import { useModalStore } from "@/store/modules/modal";
 import moment from "moment";
-import container from "@/router/modules/container";
+import { getConfig } from "@/config";
 
 export function formatTime(timeStr, formatStr = "YYYY/MM/DD HH:mm:ss") {
   if (!timeStr) {
@@ -111,4 +111,18 @@ export function transIpfsToHttp(url: string) {
   }
 
   return url;
+}
+
+type _Prefix = "s" | "gw";
+export function getCurrentSiteName(prefix: _Prefix) {
+  const relays = getConfig().Relay;
+  const url = useNostrStore().getUrl;
+  const relay = relays.find(i => i.url.includes(url));
+
+  if (!relay?.name) {
+    window.alert("No site selected!");
+    throw new Error("No site selected!");
+  }
+
+  return prefix + relay?.name.substring(2) || "";
 }

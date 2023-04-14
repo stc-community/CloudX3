@@ -58,6 +58,15 @@ const getFuseTypeText = type => {
 </script>
 <template>
   <h2>{{ $route.meta.title }}</h2>
+  <label class="btn btn-primary mt-5" for="new-fuse-rule-modal">
+    <IconifyIconOnline
+      icon="material-symbols:add-circle"
+      width="25px"
+      height="25px"
+      class="mr-2"
+    />
+    New Rule
+  </label>
   <div class="grid grid-flow-row grid-cols-3 gap-4 mt-5">
     <div class="card col-span-1 shadow border" v-for="s in data.services">
       <MessageVerified

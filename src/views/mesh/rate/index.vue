@@ -31,7 +31,7 @@ const loadService = async () => {
 };
 
 bus.on("refreshServices", _ => {
-  console.log("handle refreshServices");
+  // console.log("handle refreshServices");
   data.page = 1;
   data.services.length = 0;
   loadService();
@@ -44,20 +44,18 @@ onMounted(async () => {
 onUnmounted(() => {
   bus.off("refreshServices");
 });
-
-const getFuseTypeText = type => {
-  const map = {
-    1: "Continuous error reaches threshold",
-    2: "Error rate reaches threshold",
-    3: "Continuous error or error rate reaches threshold",
-    4: "Continuous error and error rate reach the threshold at the same time"
-  };
-
-  return map[type] || "";
-};
 </script>
 <template>
   <h2>{{ $route.meta.title }}</h2>
+  <label class="btn btn-primary mt-5" for="new-rate-limit-rule-modal">
+    <IconifyIconOnline
+      icon="material-symbols:add-circle"
+      width="25px"
+      height="25px"
+      class="mr-2"
+    />
+    New Rule
+  </label>
   <div class="grid grid-flow-row grid-cols-3 gap-4 mt-5">
     <div class="card col-span-1 shadow border" v-for="s in data.services">
       <MessageVerified
@@ -68,7 +66,7 @@ const getFuseTypeText = type => {
         <h2 class="card-title break-all text-primary text-md">
           {{ s.unique_id }}
         </h2>
-        <div class="flex items-center">
+        <div class="flex items-center" v-if="0">
           <span class="text-xs text-slate-500">API Rate Limit:</span>
           <div
             class="badge badge-primary text-xs ml-2"

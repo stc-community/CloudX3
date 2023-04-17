@@ -116,6 +116,9 @@ export function transIpfsToHttp(url: string) {
 type _Prefix = "s" | "gw";
 export function getCurrentSiteName(prefix: _Prefix) {
   const relays = getConfig().Relay;
+
+  if (!relays) return "";
+
   const url = useNostrStore().getUrl;
   const relay = relays.find(i => i.url.includes(url));
 

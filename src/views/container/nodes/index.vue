@@ -5,6 +5,7 @@ import MessageVerified from "@/components/MessageVerified.vue";
 import type { Event } from "nostr-tools";
 import { getNodeContract, PARAM } from "@/utils/contract/node";
 import type { EventLog } from "ethers";
+import { getCurrentSiteName } from "@/utils/shared";
 
 interface Node {
   event: Event;
@@ -69,7 +70,9 @@ const onStart = async (node: Node) => {
     const transaction = await contract.requestMspContainerNodeCordon(
       PARAM.oracle,
       PARAM.jobID,
-      `https://stc-test.gw105.oneitfarm.com/brige/providers/nodes/${node.name}/cordon`
+      `https://stc-test.${getCurrentSiteName(
+        "gw"
+      )}.oneitfarm.com/brige/providers/nodes/${node.name}/cordon`
     );
 
     await transaction.wait();
@@ -89,7 +92,9 @@ const onStop = async (node: Node) => {
     const transaction = await contract.requestMspContainerNodeUncordon(
       PARAM.oracle,
       PARAM.jobID,
-      `https://stc-test.gw105.oneitfarm.com/brige/providers/nodes/${node.name}/uncordon`
+      `https://stc-test.${getCurrentSiteName(
+        "gw"
+      )}.oneitfarm.com/brige/providers/nodes/${node.name}/uncordon`
     );
 
     await transaction.wait();

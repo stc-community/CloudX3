@@ -3,6 +3,7 @@ import { getContainerContract } from "@/utils/contract/container";
 import { reactive, onBeforeUnmount } from "vue";
 import type { EventLog } from "ethers";
 import eventBus from "@/utils/event-bus";
+import { getCurrentSiteName } from "@/utils/shared";
 
 defineOptions({
   name: "deployment-modal"
@@ -11,7 +12,9 @@ defineOptions({
 const PARAM = {
   jobID: "273cd4ca220749c5831e598f718f11d6",
   oracle: "0x248E10ec1C54CB570F7A15933286BAa1D59B70c0",
-  request_url: "https://stc-test.gw105.oneitfarm.com/brige/providers/deployment"
+  request_url: `https://stc-test.${getCurrentSiteName(
+    "gw"
+  )}.oneitfarm.com/brige/providers/deployment`
 };
 
 const data = reactive({

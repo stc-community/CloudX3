@@ -4,6 +4,6 @@ type Site = {
 };
 
 export const site: Site = {
-  name: "STC - GlobalApiMarket",
+  name: "STC - GlobalAPIMarket",
   description: "A Market Platform From WEB2 to WEB3"
 };

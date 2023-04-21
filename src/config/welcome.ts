@@ -4,7 +4,7 @@ type Welcome = {
 };
 
 export const welcome: Welcome = {
-  title: "STC GlobalDevMarket",
+  title: "STC GlobalApiMarket",
   description:
-    "STC-GlobalDevMarket Build a market platform from web2 to web3,help web2 applications quickly realize web3 transformation,STC-GlobalDevMarket provides computing and service operation layer,and application Dao aggregation layer to help web2 applications quickly realize decentralization and web3ization."
+    "STC-GlobalApiMarket Build a market platform from web2 to web3,help web2 applications quickly realize web3 transformation,STC-GlobalApiMarket provides computing and service operation layer,and application Dao aggregation layer to help web2 applications quickly realize decentralization and web3ization."
 };

@@ -9,11 +9,20 @@ const data = reactive({
   services: [],
   disabled: true,
   page: 1,
-  limit_num: 3
+  limit_num: 3,
+  form: {
+    name: "" // 服务名称
+  }
 });
 const loading = ref(false);
 
 const loadMore = async () => {
+  loadService();
+};
+
+const onSearch = () => {
+  data.services.length = 0;
+  data.page = 1;
   loadService();
 };
 
@@ -25,6 +34,7 @@ const loadService = async () => {
     {
       // unique_ids: ["s10600uwnlo5s1l522042925juhp00q3"],
       // unique_ids: ["s10500uv1jxwb2602204291k5q3a0056"],
+      service_name: data.form.name,
       page: data.page,
       limit_num: data.limit_num
     },
@@ -56,14 +66,15 @@ onUnmounted(() => {
 </script>
 <template>
   <h2>{{ $route.meta.title }}</h2>
-  <div class="form-control w-1/3 mt-5" v-if="0">
+  <div class="form-control w-1/3 mt-5">
     <div class="input-group w-full">
       <input
         type="text"
+        v-model="data.form.name"
         placeholder="Search…"
         class="input input-bordered w-full"
       />
-      <button class="btn btn-square">
+      <button class="btn btn-square" @click="onSearch">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-6 w-6"

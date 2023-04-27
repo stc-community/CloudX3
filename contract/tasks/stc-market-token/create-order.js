@@ -20,12 +20,12 @@ task("create-order", "Calls an STCDao Contract to create dao")
 
     console.log("Contract:", contractAddr, "network:", network.name);
 
-    const STCDaoTokenContract = await ethers.getContractAt(
-      "STCDaoToken",
+    const STCMarketTokenContract = await ethers.getContractAt(
+      "STCMarketToken",
       contractAddr
     );
 
-    const result = await STCDaoTokenContract.createOrder(
+    const result = await STCMarketTokenContract.createOrder(
       daoId,
       description,
       jsoninfo,

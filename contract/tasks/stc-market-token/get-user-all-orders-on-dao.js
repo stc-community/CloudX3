@@ -1,11 +1,11 @@
 const { networkConfig } = require("../../helper-hardhat-config");
 task(
   "get-user-all-orders-on-dao",
-  "Calls an STCDaoToken Contract to getUserAllOrdersOnDao"
+  "Calls an STCMarketToken Contract to getUserAllOrdersOnDao"
 )
   .addOptionalParam(
     "contract",
-    "The address of the STCDaoToken contract that you want to call"
+    "The address of the STCMarketToken contract that you want to call"
   )
   .addParam("daoId", "daoId")
   .setAction(async taskArgs => {
@@ -16,17 +16,17 @@ task(
     const daoId = taskArgs.daoId;
 
     console.log(
-      "Reading data from STCDaoToken contract ",
+      "Reading data from STCMarketToken contract ",
       contractAddr,
       "on network",
       network.name
     );
-    const STCDaoTokenContract = await ethers.getContractAt(
-      "STCDaoToken",
+    const STCMarketTokenContract = await ethers.getContractAt(
+      "STCMarketToken",
       contractAddr
     );
 
-    const result = await STCDaoTokenContract.getUserAllOrdersOnDao(daoId);
+    const result = await STCMarketTokenContract.getUserAllOrdersOnDao(daoId);
     console.log("Data is:", result);
     if (
       result === "" &&

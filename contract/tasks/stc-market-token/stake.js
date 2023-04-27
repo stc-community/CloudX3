@@ -14,12 +14,12 @@ task("stake", "Calls an STCDao Contract to stake")
 
     console.log("Contract:", contractAddr, "network:", network.name);
 
-    const STCDaoTokenContract = await ethers.getContractAt(
-      "STCDaoToken",
+    const STCMarketTokenContract = await ethers.getContractAt(
+      "STCMarketToken",
       contractAddr
     );
 
-    const stakeResult = await STCDaoTokenContract.stake(amount);
+    const stakeResult = await STCMarketTokenContract.stake(amount);
     console.log(
       "Contract:",
       contractAddr,
@@ -28,7 +28,7 @@ task("stake", "Calls an STCDao Contract to stake")
     );
     await stakeResult.wait();
 
-    const stakerExists = await STCDaoTokenContract.stakerExists();
+    const stakerExists = await STCMarketTokenContract.stakerExists();
     console.log("User stake status is:", stakerExists);
   });
 module.exports = {};

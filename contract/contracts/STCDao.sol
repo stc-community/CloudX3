@@ -74,10 +74,10 @@ contract STCDao is ERC721URIStorage {
   }
 
   function getAllDaos() external view returns (Dao[] memory) {
-    uint256 latestDaoId = _daoIdCounter.current();
+    uint256 latestDaoId = _daoIdCounter.current() - 1;
     Dao[] memory daos = new Dao[](latestDaoId);
-    for (uint256 i = 1; i < latestDaoId; i++){
-      daos[i] = _idToDao[i];
+    for (uint256 i = 0; i < latestDaoId; i++){
+      daos[i] = _idToDao[i+1];
     }
     return daos;
   }
@@ -147,8 +147,8 @@ contract STCDao is ERC721URIStorage {
   ) external {
     require(_idToDao[daoId].daoOwner == msg.sender, "No permission to create a market");
     uint256 latestMarketId = _marketIdCounter.current();
-
     _marketIdCounter.increment();
+
     _idToApiMarket[latestMarketId] = ApiMarket(latestMarketId, daoId, apiName, apiMethod, apiUrl, price, description, msg.sender);
     _daoMarketApiIds[daoId].push(latestMarketId);
     _userMarketApiIds[msg.sender].push(latestMarketId);

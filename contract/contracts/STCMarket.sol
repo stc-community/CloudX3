@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 
 
-contract STCDao is ERC721URIStorage {
+contract STCMarket is ERC721URIStorage {
 
   using Counters for Counters.Counter;
   Counters.Counter private _daoIdCounter;
@@ -60,7 +60,7 @@ contract STCDao is ERC721URIStorage {
 
   event TokenTransfered(address, address, uint256);
 
-  constructor() ERC721("STCDao", "STCN") {
+  constructor() ERC721("STCMarket NFT", "STCN") {
     _daoIdCounter.increment();
     _tokenIdCounter.increment();
     _marketIdCounter.increment();

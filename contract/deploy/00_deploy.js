@@ -8,7 +8,7 @@ module.exports = async ({ deployments }) => {
   const { deploy } = deployments;
   console.log("Wallet Ethereum Address:", wallet.address);
   try {
-    await deploy("STCDao", {
+    await deploy("STCMarket", {
       from: wallet.address,
       log: true
     });
@@ -17,7 +17,7 @@ module.exports = async ({ deployments }) => {
   }
 
   try {
-    await deploy("STCDaoToken", {
+    await deploy("STCMarketToken", {
       from: wallet.address,
       log: true
     });

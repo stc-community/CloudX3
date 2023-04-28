@@ -11,7 +11,7 @@ task(
   .setAction(async taskArgs => {
     const networkId = network.config.chainId;
     const contractAddr =
-      taskArgs.contract || networkConfig[networkId]["stcToken"];
+      taskArgs.contract || networkConfig[networkId]["STCMarketToken"];
 
     const daoId = taskArgs.daoId;
 

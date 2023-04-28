@@ -1,2 +1,2 @@
-exports.stcDao = require("./stc-dao");
-exports.stcToken = require("./stc-market-token");
+exports.stcMarket = require("./stc-market");
+exports.stcMarketToken = require("./stc-market-token");

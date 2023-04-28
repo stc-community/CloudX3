@@ -1,15 +1,15 @@
 const { networkConfig } = require("../../helper-hardhat-config");
 
-task("stake", "Calls an STCDao Contract to stake")
+task("stake", "Calls an STCMarket Contract to stake")
   .addOptionalParam(
     "contract",
-    "The address of the STCDao contract that you want to call"
+    "The address of the STCMarket contract that you want to call"
   )
   .addParam("amount", "amount")
   .setAction(async taskArgs => {
     const networkId = network.config.chainId;
     const contractAddr =
-      taskArgs.contract || networkConfig[networkId]["stcToken"];
+      taskArgs.contract || networkConfig[networkId]["STCMarketToken"];
     const amount = taskArgs.amount;
 
     console.log("Contract:", contractAddr, "network:", network.name);

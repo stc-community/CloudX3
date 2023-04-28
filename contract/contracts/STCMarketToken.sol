@@ -33,7 +33,7 @@ contract STCMarketToken is ERC20, Ownable {
 
   mapping(address => uint256) public stakes;
 
-  constructor() ERC20("STCDao", "STCT") {
+  constructor() ERC20("STCAPIMarket Token", "STCT") {
     _mint(msg.sender, 100000000 * 10 ** decimals());
     _orderIdCounter.increment();
   }

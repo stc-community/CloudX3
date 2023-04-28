@@ -7,7 +7,7 @@ task(
   .addParam("account", "The address of the account you want the balance for")
   .setAction(async taskArgs => {
     const networkId = network.config.chainId;
-    const contractAddr = taskArgs.contract || networkConfig[networkId]["stcToken"];
+    const contractAddr = taskArgs.contract || networkConfig[networkId]["STCMarketToken"];
     const account = taskArgs.account;
 
     console.log("Reading STCMarketToken owned by", account, "on network", network.name)

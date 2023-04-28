@@ -1,9 +1,9 @@
 const { networkConfig } = require("../../helper-hardhat-config");
 
-task("create-dao", "Calls an STCDao Contract to create dao")
+task("create-dao", "Calls an STCMarket Contract to create dao")
   .addOptionalParam(
     "contract",
-    "The address of the STCDao contract that you want to call"
+    "The address of the STCMarket contract that you want to call"
   )
   .addParam("name", "name")
   .addParam("description", "description")
@@ -12,7 +12,7 @@ task("create-dao", "Calls an STCDao Contract to create dao")
   .setAction(async taskArgs => {
     const networkId = network.config.chainId;
     const contractAddr =
-      taskArgs.contract || networkConfig[networkId]["stcDao"];
+      taskArgs.contract || networkConfig[networkId]["STCMarket"];
     const name = taskArgs.name;
     const description = taskArgs.description;
     const jsoninfo = taskArgs.jsoninfo;
@@ -21,7 +21,7 @@ task("create-dao", "Calls an STCDao Contract to create dao")
     console.log("Contract:", contractAddr, "network:", network.name);
 
     const ztControlContract = await ethers.getContractAt(
-      "STCDao",
+      "STCMarket",
       contractAddr
     );
 

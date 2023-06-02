@@ -1,4 +1,4 @@
-# GlobalAPIMarket🌏
+# CloudX3🌏
 The web3 global API market stimulates global API economic capabilities.
 
 ## Our advantage

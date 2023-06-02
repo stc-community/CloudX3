@@ -1,17 +1,35 @@
 <script setup lang="ts">
+import { useRouter } from "vue-router";
 import { welcome } from "@/config/welcome";
 
-import gaIcon from "@/assets/welcome/ga.svg?url";
-import cbIcon from "@/assets/welcome/cb.svg?url";
+// import gaIcon from "@/assets/welcome/ga.svg?url";
+// import cbIcon from "@/assets/welcome/cb.svg?url";
 import wfIcon from "@/assets/welcome/wf.svg?url";
-import starterIcon from "@/assets/welcome/starter.svg?url";
-import weechainIcon from "@/assets/welcome/weechain.svg?url";
+// import starterIcon from "@/assets/welcome/starter.svg?url";
+// import weechainIcon from "@/assets/welcome/weechain.svg?url";
+// import fevmIcon from "@/assets/welcome/fevm-1.svg?url";
+import fvmPng from "@/assets/welcome/fvm.png";
+import chainlinkPng from "@/assets/welcome/chainlink.png";
+// import nostrPng from "@/assets/welcome/nostr.png";
+import nostrJpg from "@/assets/welcome/nostr.jpg";
 
 defineOptions({
   name: "Welcome"
 });
 
-const icons = [gaIcon, starterIcon, cbIcon, weechainIcon, wfIcon];
+const router = useRouter();
+
+const icons = [
+  fvmPng,
+  chainlinkPng,
+  nostrJpg,
+  // fevmIcon,
+  // gaIcon,
+  // starterIcon,
+  // cbIcon,
+  // weechainIcon,
+  wfIcon
+];
 
 const arr = [
   "Cloud Native Oracles",
@@ -44,7 +62,9 @@ const arr = [
       />
     </p>
 
-    <button class="btn btn-primary mt-10">Get Started</button>
+    <button class="btn btn-primary mt-10" @click="router.push('container')">
+      Get Started
+    </button>
 
     <div>
       <p

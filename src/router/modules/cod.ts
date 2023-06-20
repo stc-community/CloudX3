@@ -5,7 +5,7 @@ export default {
   component: () => import("@/views/cod/index.vue"),
   meta: {
     title: "Serverless",
-    rank: 30
+    rank: 50
   },
   children: [
     {

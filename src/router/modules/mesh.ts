@@ -4,8 +4,8 @@ export default {
   redirect: "/mesh/index",
   component: () => import("@/views/mesh/index.vue"),
   meta: {
-    title: "Mesh",
-    rank: 2
+    title: "Service Mesh",
+    rank: 40
   },
   children: [
     {

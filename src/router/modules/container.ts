@@ -5,7 +5,7 @@ export default {
   component: () => import("@/views/container/index.vue"),
   meta: {
     title: "Container",
-    rank: 3
+    rank: 20
   },
   children: [
     {

@@ -5,7 +5,7 @@ import {
 
 // @ts-ignore
 import ABI from "./token.json?raw";
-const ADDR = "0x955938AddCAA040f425e3c5615b36BF12856Cd56";
+const ADDR = "0x8b321Dde4CAe93848f756895fdb34E889A6c831b";
 
 let writeContract;
 export async function getTokenContract() {

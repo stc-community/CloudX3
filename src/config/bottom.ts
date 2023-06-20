@@ -5,9 +5,10 @@ export const BottomItems: BottomItems = {
     description:
       "The STC Council of the weelink web3 foundation, let us build global DPaaS open source infrastructure together.",
     github: "https://github.com/stc-community",
-    twitter: "https://twitter.com/WeelinkChain",
-    discord: "https://discord.com/",
-    youtube: "https://www.youtube.com/"
+    twitter: "https://twitter.com/stc_community",
+    // discord: "https://discord.com/",
+    youtube: "https://www.youtube.com/@stc-community",
+    linkedin: "https://www.linkedin.com/in/stc-community-519b4227b/"
   }
 };
 
@@ -19,5 +20,6 @@ interface BottomItems {
     twitter?: string;
     discord?: string;
     youtube?: string;
+    linkedin?: string;
   };
 }

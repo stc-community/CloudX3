@@ -4,7 +4,7 @@ export default {
   redirect: "/cod/providers",
   component: () => import("@/views/cod/index.vue"),
   meta: {
-    title: "COF",
+    title: "Serverless",
     rank: 3
   },
   children: [

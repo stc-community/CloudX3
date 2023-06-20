@@ -31,12 +31,12 @@ const org = ref(BottomItems.org);
           height="30px"
           class="hover:text-blue-500"
       /></a>
-      <a v-if="org.discord" :href="org.discord" target="_blank">
+      <a v-if="org.linkedin" :href="org.linkedin" target="_blank">
         <IconifyIconOnline
-          icon="ic:baseline-discord"
+          icon="mdi:linkedin"
           width="30px"
           height="30px"
-          class="hover:text-indigo-500"
+          class="hover:text-blue-600"
       /></a>
       <a v-if="org.youtube" :href="org.youtube" target="_blank">
         <IconifyIconOnline

@@ -2,6 +2,7 @@
 import { reactive, ref } from "vue";
 import { getTokenContract } from "@/utils/contract/token";
 import { useModalStore } from "@/store/modules/modal";
+import { handleEtherError } from "@/utils/shared";
 
 const store = useModalStore();
 
@@ -33,7 +34,8 @@ const handleSubmit = async () => {
     window.location.reload();
   } catch (e) {
     loading.value = false;
-    window.alert(e.message);
+    handleEtherError(e);
+    // window.alert(e.message);
   }
 };
 </script>

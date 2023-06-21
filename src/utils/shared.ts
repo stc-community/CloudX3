@@ -4,6 +4,7 @@ import { useNostrStore } from "@/store/modules/nostr";
 import { useModalStore } from "@/store/modules/modal";
 import moment from "moment";
 import { getConfig } from "@/config";
+import type { EthersError } from "ethers";
 
 export function formatTime(timeStr, formatStr = "YYYY/MM/DD HH:mm:ss") {
   if (!timeStr) {
@@ -128,4 +129,20 @@ export function getCurrentSiteName(prefix: _Prefix) {
   }
 
   return prefix + relay?.name.substring(2) || "";
+}
+
+export function handleEtherError(error: EthersError) {
+  console.warn("Ethers error: ", error);
+
+  const msg = codeStr => {
+    const words = codeStr.split("_");
+    const formattedWords = words.map(
+      word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+    );
+    const output = formattedWords.join(" ");
+
+    return output + " .";
+  };
+
+  window.alert(msg(error.code));
 }

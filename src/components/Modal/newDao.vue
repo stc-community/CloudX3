@@ -3,6 +3,7 @@ import { reactive, ref } from "vue";
 import { getDaoContract } from "@/utils/contract/dao";
 import type { DAO } from "@/utils/contract/dao";
 import { NFTStorage } from "nft.storage";
+import { handleEtherError } from "@/utils/shared";
 
 const NFT_STORAGE_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDBEOGQ3MEI2MGZmYjBDODcwRGFBZDA4MTU1QWIxNmRDYjBFNDA3NjgiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY3OTMwNDA0OTU3MiwibmFtZSI6InN0YyJ9.jQu1V6HT58PB1pipWj7FVEkk0y7g_Ey2iY87i80KMHU";
@@ -59,7 +60,8 @@ const handleSubmit = async () => {
     window.location.reload();
   } catch (e) {
     loading.value = false;
-    window.alert(e.message);
+    handleEtherError(e);
+    // window.alert(e.message);
   }
 };
 

@@ -2,6 +2,7 @@
 import { reactive, ref } from "vue";
 import { getDaoContract } from "@/utils/contract/dao";
 import { useRoute } from "vue-router";
+import { handleEtherError } from "@/utils/shared";
 
 const route = useRoute();
 
@@ -50,7 +51,8 @@ const handleSubmit = async () => {
     window.location.reload();
   } catch (e) {
     loading.value = false;
-    window.alert(e.message);
+    handleEtherError(e);
+    // window.alert(e.message);
   }
 };
 </script>

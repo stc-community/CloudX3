@@ -3,6 +3,7 @@ import { getPodContract, PARAM } from "@/utils/contract/pod";
 import { reactive, onBeforeUnmount } from "vue";
 import type { EventLog } from "ethers";
 import eventBus from "@/utils/event-bus";
+import { getCurrentSiteName } from "@/utils/shared";
 
 defineOptions({
   name: "pod-modal"
@@ -50,7 +51,9 @@ const handleSubmit = async () => {
       PARAM.oracle,
       PARAM.jobID,
       window.btoa(data.requestData),
-      PARAM.requestUrl
+      `https://stc-test.${getCurrentSiteName(
+        "gw"
+      )}.oneitfarm.com/brige/providers/pod`
     );
 
     await transaction.wait();

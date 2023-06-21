@@ -11,10 +11,7 @@ defineOptions({
 
 const PARAM = {
   jobID: "273cd4ca220749c5831e598f718f11d6",
-  oracle: "0x248E10ec1C54CB570F7A15933286BAa1D59B70c0",
-  request_url: `https://stc-test.${getCurrentSiteName(
-    "gw"
-  )}.oneitfarm.com/brige/providers/deployment`
+  oracle: "0x248E10ec1C54CB570F7A15933286BAa1D59B70c0"
 };
 
 const data = reactive({
@@ -57,7 +54,9 @@ const handleSubmit = async () => {
       PARAM.oracle,
       PARAM.jobID,
       window.btoa(data.requestData),
-      PARAM.request_url
+      `https://stc-test.${getCurrentSiteName(
+        "gw"
+      )}.oneitfarm.com/brige/providers/deployment`
     );
 
     await transaction.wait();

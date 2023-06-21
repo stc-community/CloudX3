@@ -132,7 +132,9 @@ export function getCurrentSiteName(prefix: _Prefix) {
 }
 
 export function handleEtherError(error: EthersError) {
-  console.warn("Ethers error: ", error);
+  // console.warn("Ethers error: ", error);
+
+  console.log(error.info);
 
   const msg = codeStr => {
     const words = codeStr.split("_");
@@ -144,5 +146,5 @@ export function handleEtherError(error: EthersError) {
     return output + " .";
   };
 
-  window.alert(msg(error.code));
+  window.alert(error.info?.error?.message || msg(error.code));
 }

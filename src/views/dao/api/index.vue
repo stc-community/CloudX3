@@ -4,6 +4,9 @@ import { onMounted, reactive, ref } from "vue";
 import type { DAO } from "@/utils/contract/dao";
 import { transIpfsToHttp } from "@/utils/shared";
 import axios from "axios";
+import { useLang } from "@/hooks/useLang";
+
+const { t } = useLang();
 
 const list: Array<DAO> = reactive([]);
 const imageUrls = reactive([]);
@@ -32,7 +35,7 @@ const getImageSource = async () => {
 };
 </script>
 <template>
-  <h2>{{ $route.meta.title }}</h2>
+  <h2>{{ t("market." + $route.meta.title.toLowerCase()) }}</h2>
 
   <label for="new-api-provider-modal" class="btn btn-primary mt-5">
     <IconifyIconOnline
@@ -40,7 +43,7 @@ const getImageSource = async () => {
       icon="material-symbols:add-circle"
       width="30px"
       height="30px"
-    />Become an API Provider
+    />{{ t("market.new-provider") }}
   </label>
 
   <div class="grid grid-cols-4 gap-10 mt-5">
@@ -56,7 +59,7 @@ const getImageSource = async () => {
           <RouterLink
             class="btn btn-primary hover:text-white"
             :to="{ name: 'dao.api.detail', params: { id: d.daoId } }"
-            >Enter</RouterLink
+            >{{ $t("common.enter") }}</RouterLink
           >
         </div>
       </div>

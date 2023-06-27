@@ -5,6 +5,9 @@ import type { DAO } from "@/utils/contract/dao";
 import { NFTStorage } from "nft.storage";
 import { handleEtherError } from "@/utils/shared";
 
+import { useLang } from "@/hooks/useLang";
+const { t } = useLang();
+
 const NFT_STORAGE_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDBEOGQ3MEI2MGZmYjBDODcwRGFBZDA4MTU1QWIxNmRDYjBFNDA3NjgiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY3OTMwNDA0OTU3MiwibmFtZSI6InN0YyJ9.jQu1V6HT58PB1pipWj7FVEkk0y7g_Ey2iY87i80KMHU";
 const nftStorage = new NFTStorage({ token: NFT_STORAGE_KEY });
@@ -98,12 +101,12 @@ const handleFileChange = async (e: Event) => {
           width="25px"
           height="25px"
         />
-        <h3>New API Provider</h3>
+        <h3>{{ t("market.new-provider") }}</h3>
       </div>
 
       <div class="form-control w-full mt-5">
         <label class="label">
-          <span class="label-text">Name</span>
+          <span class="label-text">{{ t("common.name") }}</span>
         </label>
         <input
           type="text"
@@ -113,7 +116,7 @@ const handleFileChange = async (e: Event) => {
         />
 
         <label class="label mt-2">
-          <span class="label-text">Description</span>
+          <span class="label-text">{{ t("common.description") }}</span>
         </label>
         <input
           type="text"
@@ -123,7 +126,7 @@ const handleFileChange = async (e: Event) => {
         />
 
         <label class="label">
-          <span class="label-text">Cover</span>
+          <span class="label-text">{{ t("common.cover") }}</span>
         </label>
         <div class="flex">
           <div class="avatar" v-if="imageData">
@@ -148,7 +151,7 @@ const handleFileChange = async (e: Event) => {
       <div class="mt-5" />
       <progress v-if="loading" class="progress progress-primary" />
       <button v-else class="btn btn-primary w-full" @click="handleSubmit">
-        Submit
+        {{ t("common.submit") }}
       </button>
     </div>
   </div>

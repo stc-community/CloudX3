@@ -9,6 +9,9 @@ import { transMapToArrWithInput } from "@/utils/shared";
 import { useApiDetail, TableData } from "./use-api-detail";
 import { useOrder } from "./use-order";
 import type { Order } from "./use-order";
+import { useLang } from "@/hooks/useLang";
+
+const { t } = useLang();
 
 type Data = {
   loading: boolean;
@@ -87,9 +90,11 @@ const tableData: Array<TableData> = computed(() => {
   <div class="text-sm breadcrumbs">
     <ul>
       <li>
-        <RouterLink :to="{ name: 'dao.api' }">API Market</RouterLink>
+        <RouterLink :to="{ name: 'dao.api' }">{{
+          t("market.api market")
+        }}</RouterLink>
       </li>
-      <li>Detail</li>
+      <li>{{ t("common.detail") }}</li>
     </ul>
   </div>
 
@@ -114,15 +119,14 @@ const tableData: Array<TableData> = computed(() => {
             width="24px"
             height="24px"
             class="mr-3"
-          />
-          Publish new API</label
+          />{{ t("market.new api") }}</label
         >
       </template>
     </div>
   </div>
 
   <div class="border-t border-slate-200 my-10" />
-  <h2 class="text-3xl">APIs providered</h2>
+  <h2 class="text-3xl">{{ t("market.apis providered") }}</h2>
 
   <progress v-if="loadingApiList" class="progress max-w-sm mt-5" />
   <div class="overflow-x-auto mt-5" v-else>
@@ -131,12 +135,12 @@ const tableData: Array<TableData> = computed(() => {
       <thead>
         <tr>
           <th class="w-[30px]" />
-          <th class="w-[150px]">Name</th>
+          <th class="w-[150px]">{{ t("common.name") }}</th>
           <th>URL</th>
-          <th>Description</th>
-          <th>Price(Token/Per Request)</th>
-          <th>Balance</th>
-          <th>Action</th>
+          <th>{{ t("common.description") }}</th>
+          <th>{{ t("common.price") }}(Token/{{ t("market.per request") }})</th>
+          <th>{{ t("common.balance") }}</th>
+          <th>{{ t("common.action") }}</th>
         </tr>
       </thead>
       <tbody>
@@ -162,7 +166,7 @@ const tableData: Array<TableData> = computed(() => {
                 height="20px"
                 class="mr-2"
               />
-              Copy API Key
+              {{ t("market.copy api key") }}
             </button>
             <label
               v-else
@@ -176,7 +180,7 @@ const tableData: Array<TableData> = computed(() => {
                 height="20px"
                 class="mr-2"
               />
-              Subscribe
+              {{ t("common.subscribe") }}
             </label>
           </td>
         </tr>

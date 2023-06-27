@@ -4,6 +4,8 @@ import { reactive, onBeforeUnmount } from "vue";
 import type { EventLog } from "ethers";
 import eventBus from "@/utils/event-bus";
 import { getCurrentSiteName } from "@/utils/shared";
+import { useLang } from "@/hooks/useLang";
+const { t } = useLang();
 
 defineOptions({
   name: "deployment-modal"
@@ -85,12 +87,12 @@ const handleSubmit = async () => {
           width="25px"
           height="25px"
         />
-        <h3>New Deployment</h3>
+        <h3>{{ t("container.new deployment") }}</h3>
       </div>
       <div class="form-control mt-8">
         <textarea
           class="textarea textarea-primary h-[100px]"
-          placeholder="Paste Deployment YAML here."
+          :placeholder="t('container.paste yaml')"
           v-model="data.requestData"
         />
         <div class="mt-2">
@@ -103,7 +105,7 @@ const handleSubmit = async () => {
             class="btn btn-primary w-full mt-5"
             @click="handleSubmit"
           >
-            Submit
+            {{ t("common.submit") }}
           </button>
         </div>
       </div>
@@ -111,10 +113,10 @@ const handleSubmit = async () => {
         v-if="data.hash"
         class="text-left mt-2 border border-primary rounded-md p-2 text-slate-500 text-sm"
       >
-        <p class="uppercase">Transaction</p>
+        <p class="uppercase">{{ t("common.transaction") }}</p>
         <span class="text-xs text-primary break-all">{{ data.hash }}</span>
 
-        <p class="uppercase mt-5">Waitting Deploy Status</p>
+        <p class="uppercase mt-5">{{ t("common.wait deploy status") }}</p>
         <pre v-if="data.resReady" class="text-xs text-primary break-all">{{
           data.res
         }}</pre>

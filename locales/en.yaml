@@ -1,9 +1,42 @@
+common:
+  enter: Enter
+  detail: Detail
+  name: Name
+  description: Description
+  price: Price
+  balance: Balance
+  action: Action
+  subscribe: Subscribe
+  cover: Cover
+  submit: Submit
+
+  verified: Verified
+  status: Status
+  "message verified": Message verified
+  yay: Yay
+  "pub key": Pub Key
+  sig: Sig
+
+  loadmore: Load More
+
+  transaction: Transaction
+  "wait deploy status": Waitting deploy status
+
+  "pick a site": Pick a site
+  "need key tips": Please provider your private key to get message safety.
+  connect: Connect
+  update: Update
+  "public key": Public Key
+  "input private key": Input your Private Key
+  "input private key here": Type your key here
+
 nav:
   welcome: Welcome
   market: Market
   container: Container
   "service mesh": Service Mesh
   serverless: Serverless
+  "api market": API Market
 
 welcome:
   description: CloudX3 Build a cloud DePIN system for web2 to web3,help web2 applications quickly realize web3 transformation,CloudX3 provides computing and service operation layer,and application Dao aggregation layer to help web2 applications quickly realize decentralization and web3ization.
@@ -17,3 +50,38 @@ welcome:
 
   subtitle: Cloud Native Oracle Trusted Control System
   subdesc: This is a decentralized and trusted contract control system with a zero-trust security structure for cloud-native applications. It incorporates both on-chain and off-chain oracles to ensure the security of digital identities.
+
+market:
+  "api market": API Market
+  "new-provider": Become API Provider
+  "apis providered": APIs provided
+  "per request": Per request
+  "new api": Publish New API
+  "copy api key": Copy API Key
+
+container:
+  "new deployment": New Deployment
+  "by contract": Managed by Smart Contracts
+  ready: Ready
+  total: Total
+  labels: Labels
+  "paste yaml": Paste Deployment YAML here.
+
+  "new pod": New Pod
+  monitor: Monitor
+  information: information
+  "loading pod status": Loading Pod Status
+  running: Running
+  pending: Pending
+  failed: Failed
+  succeeded: Succeeded
+  unknown: Unknown
+  "pod monitor": Pod Monitor
+  usage: Usage
+  memory: Memory
+  "Pod Net Bytes Transmitted": Pod Net Bytes Transmitted
+  "Pod Net Bytes Received": Pod Net Bytes Received
+
+  start: Start
+  stop: Stop
+  role: Role

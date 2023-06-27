@@ -6,6 +6,8 @@ import type { Event } from "nostr-tools";
 import { getNodeContract, PARAM } from "@/utils/contract/node";
 import type { EventLog } from "ethers";
 import { getCurrentSiteName } from "@/utils/shared";
+import { useLang } from "@/hooks/useLang";
+const { t } = useLang();
 
 interface Node {
   event: Event;
@@ -142,7 +144,7 @@ const onStop = async (node: Node) => {
               height="25px"
               class="mr-2"
             />
-            Start
+            {{ t("container.start") }}
           </button>
 
           <button
@@ -156,17 +158,19 @@ const onStop = async (node: Node) => {
               height="25px"
               class="mr-2"
             />
-            Stop
+            {{ t("container.stop") }}
           </button>
         </div>
 
-        <p class="text-sm font-semibold mt-5">Information</p>
+        <p class="text-sm font-semibold mt-5">
+          {{ t("container.information") }}
+        </p>
         <div>
           <div
             class="tooltip tooltip-left text-left flex items-center"
             data-tip="Pod IP"
           >
-            <span>Role:</span>
+            <span>{{ t("container.role") }}:</span>
             <span class="break-all ml-3 text-slate-500 leading-3">{{
               d.role
             }}</span>
@@ -175,7 +179,7 @@ const onStop = async (node: Node) => {
             class="tooltip tooltip-left text-left flex items-center"
             data-tip="Host IP"
           >
-            <span>Status:</span>
+            <span>{{ t("common.status") }}:</span>
             <span class="break-all ml-3 text-slate-500 leading-3">{{
               d.status
             }}</span>
@@ -192,7 +196,7 @@ const onStop = async (node: Node) => {
               {{ parseFloat(d[v]) }}
             </div>
             <p class="text-slate-500 text-xs mt-2">
-              {{ v.toUpperCase() }} Usage
+              {{ v.toUpperCase() }} {{ t("container.usage") }}
             </p>
           </div>
         </div>
@@ -209,7 +213,7 @@ const onStop = async (node: Node) => {
             icon="material-symbols:add-circle"
             width="30px"
             height="30px"
-          />Load More
+          />{{ t("common.loadmore") }}
         </button>
       </div>
     </div>

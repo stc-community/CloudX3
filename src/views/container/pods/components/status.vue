@@ -3,6 +3,8 @@ import { reactive, ref, onMounted } from "vue";
 import { loadData } from "@/utils/shared";
 import type { Event } from "nostr-tools";
 import MessageVerified from "@/components/MessageVerified.vue";
+import { useLang } from "@/hooks/useLang";
+const { t } = useLang();
 
 interface Status {
   value: {
@@ -32,7 +34,7 @@ onMounted(async () => {
 
 <template>
   <div v-if="loading" class="text-slate-500">
-    <p>Loading Pod Status</p>
+    <p>{{ t("container.loading pod status") }}</p>
     <progress class="progress max-w-md mt-5" />
   </div>
   <div v-else class="stats shadow">
@@ -44,9 +46,9 @@ onMounted(async () => {
           height="30px"
         />
       </div>
-      <div class="stat-title">Running</div>
+      <div class="stat-title">{{ t("container.running") }}</div>
       <div class="stat-value text-primary">{{ status.value.data.running }}</div>
-      <div class="stat-desc">Running pods</div>
+      <div class="stat-desc">{{ t("container.running") }} pods</div>
     </div>
 
     <div class="stat">
@@ -57,11 +59,11 @@ onMounted(async () => {
           height="30px"
         />
       </div>
-      <div class="stat-title">Pending</div>
+      <div class="stat-title">{{ t("container.pending") }}</div>
       <div class="stat-value text-secondary">
         {{ status.value.data.pending }}
       </div>
-      <div class="stat-desc">Pending pods</div>
+      <div class="stat-desc">{{ t("container.pending") }} pods</div>
     </div>
 
     <div class="stat">
@@ -72,9 +74,9 @@ onMounted(async () => {
           height="30px"
         />
       </div>
-      <div class="stat-title">Failed</div>
+      <div class="stat-title">{{ t("container.failed") }}</div>
       <div class="stat-value text-error">{{ status.value.data.failed }}</div>
-      <div class="stat-desc">Failed pods</div>
+      <div class="stat-desc">{{ t("container.failed") }} pods</div>
     </div>
 
     <div class="stat">
@@ -85,11 +87,11 @@ onMounted(async () => {
           height="30px"
         />
       </div>
-      <div class="stat-title">Succeeded</div>
+      <div class="stat-title">{{ t("container.succeeded") }}</div>
       <div class="stat-value text-slate-500">
         {{ status.value.data.succeeded }}
       </div>
-      <div class="stat-desc">Succeeded pods</div>
+      <div class="stat-desc">{{ t("container.succeeded") }} pods</div>
     </div>
 
     <div class="stat">
@@ -100,11 +102,11 @@ onMounted(async () => {
           height="30px"
         />
       </div>
-      <div class="stat-title">Unknown</div>
+      <div class="stat-title">{{ t("container.unknown") }}</div>
       <div class="stat-value text-pink-400">
         {{ status.value.data.unknown }}
       </div>
-      <div class="stat-desc">Unknown pods</div>
+      <div class="stat-desc">{{ t("container.unknown") }} pods</div>
     </div>
     <MessageVerified
       v-if="status.value.event"

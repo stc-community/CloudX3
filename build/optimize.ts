@@ -4,13 +4,10 @@ const include = [
   "dayjs",
   "axios",
   "pinia",
-  "echarts",
   "vue-i18n",
-  "js-cookie",
   "@vueuse/core",
   "@pureadmin/utils",
-  "responsive-storage",
-  "element-resize-detector"
+  "responsive-storage"
 ];
 
 const exclude = [

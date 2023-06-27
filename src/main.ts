@@ -6,6 +6,7 @@ import { useNostrStore } from "@/store/modules/nostr";
 import { getServerConfig } from "./config";
 import { createApp } from "vue";
 import { injectResponsiveStorage } from "@/utils/responsive";
+import { useI18n } from "@/plugins/i18n";
 
 import "./style/reset.scss";
 import "./style/index.scss";
@@ -40,6 +41,8 @@ getServerConfig(app).then(async config => {
   await router.isReady();
   injectResponsiveStorage(app, config);
   setupStore(app);
+
+  app.use(useI18n);
   app.mount("#app");
 
   // init store if needed

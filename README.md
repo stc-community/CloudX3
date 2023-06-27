@@ -1,6 +1,6 @@
 <p align="center" >
 <img 
-    src="https://github.com/stc-community/CloudX3/assets/34047788/85ae7385-44ca-4a08-b61c-1d13dd4e9f2b" 
+    src="https://github.com/stc-community/CloudX3/assets/34047788/8c74ba5f-6623-42ce-bde0-3f9feec35bc3" 
     height="200" border-radius="10px" alt="CloudX3 DePIN" >
 </p>
 

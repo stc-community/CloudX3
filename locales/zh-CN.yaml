@@ -38,6 +38,11 @@ nav:
   serverless: 函数计算
   "api market": API 市场
 
+  dashboard: 看板
+  services: 服务列表
+  fuse: 服务熔断
+  "rate limit": 服务限流
+
 welcome:
   description: CloudX3构建web2到web3的云计算DePIN系统，帮助Web2应用快速实现Web3转型。CloudX3提供计算和服务操作层，以及应用DAO聚合层，帮助Web2应用快速实现去中心化和Web3化。
   build: 我们构建了
@@ -85,3 +90,13 @@ container:
   start: 开始
   stop: 停止
   role: 角色
+
+mesh:
+  "current site": 当前 Site
+  location: 位置
+  "services this site has": 该 Site 拥有的服务数
+  total: 总计
+  current: 当前
+  reachable: 可访问
+  unreachable: 失联
+  servicesCount: 服务数

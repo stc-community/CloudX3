@@ -66,3 +66,18 @@ container:
   total: Total
   labels: Labels
   "paste yaml": Paste Deployment YAML here.
+
+  "new pod": New Pod
+  monitor: Monitor
+  information: information
+  "loading pod status": Loading Pod Status
+  running: Running
+  pending: Pending
+  failed: Failed
+  succeeded: Succeeded
+  unknown: Unknown
+  "pod monitor": Pod Monitor
+  usage: Usage
+  memory: Memory
+  "Pod Net Bytes Transmitted": Pod Net Bytes Transmitted
+  "Pod Net Bytes Received": Pod Net Bytes Received

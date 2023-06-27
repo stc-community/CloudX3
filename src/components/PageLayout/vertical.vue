@@ -2,6 +2,9 @@
 // vertical layout
 import { useRoute } from "vue-router";
 import { loadModuleRoutes } from "@/router/utils";
+import { useLang } from "@/hooks/useLang";
+
+const { t } = useLang();
 
 const route = useRoute();
 
@@ -20,7 +23,7 @@ const children: Array<RouteConfigsTable> = loadModuleRoutes()
         <li>
           <router-link v-for="(m, k) in children" :key="k" :to="m.path">
             <IconifyIconOnline :icon="m.meta.icon" width="20px" height="20px" />
-            {{ m.meta.title }}
+            {{ t("nav." + m.meta.title.toLowerCase()) }}
           </router-link>
         </li>
       </ul>

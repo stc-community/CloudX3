@@ -6,6 +6,8 @@ import { loadModuleRoutes } from "@/router/utils";
 import { getConfig } from "@/config";
 import { useNostrStore } from "@/store/modules/nostr";
 import { useAccountStore } from "@/store/modules/account";
+import { useLang } from "@/hooks/useLang";
+const { t } = useLang();
 
 const nostrStore = useNostrStore();
 const relay = getConfig()?.Relay || [];
@@ -42,7 +44,7 @@ const accountStore = useAccountStore();
           class="select select-primary w-52 ml-2"
           v-model="nostrStore.url"
         >
-          <option disabled>Pick a site</option>
+          <option disabled>{{ t("common.pick a site") }}</option>
           <option v-for="r in relay" :value="r.url">{{ r.name }}</option>
         </select>
         <ul class="menu bg-base-100 w-56 p-2 rounded-box">
@@ -79,9 +81,11 @@ const accountStore = useAccountStore();
                 d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
               />
             </svg>
-            <span>Please provider your private key to get message safety.</span>
+            <span>{{ t("common.need key tips") }}</span>
 
-            <label for="key-modal" class="btn btn-primary">Connect</label>
+            <label for="key-modal" class="btn btn-primary">{{
+              t("common.connect")
+            }}</label>
             <button />
           </div>
         </div>

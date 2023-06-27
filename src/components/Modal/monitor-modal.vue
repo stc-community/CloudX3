@@ -2,6 +2,8 @@
 import { loadData } from "@/utils/shared";
 import EventBus from "@/utils/event-bus";
 import { reactive, onBeforeUnmount, ref } from "vue";
+import { useLang } from "@/hooks/useLang";
+const { t } = useLang();
 
 const loading = ref(false);
 const data = reactive({});
@@ -96,13 +98,13 @@ defineOptions({
           width="25px"
           height="25px"
         />
-        <h3>Pod Monitor</h3>
+        <h3>{{ t("container.pod monitor") }}</h3>
       </div>
 
       <progress v-if="loading" class="progress max-w-md mt-5" />
       <div class="grid grid-cols-2 text-xs mt-5 gap-5" v-else>
         <div>
-          <p>Pod CPU Usage</p>
+          <p>Pod CPU {{ t("container.usage") }}</p>
           <apexchart
             type="area"
             height="250"
@@ -111,7 +113,7 @@ defineOptions({
           />
         </div>
         <div>
-          <p>Pod Memory Usage</p>
+          <p>Pod {{ t("container.memory") }} {{ t("container.usage") }}</p>
           <apexchart
             type="area"
             height="250"
@@ -120,7 +122,7 @@ defineOptions({
           />
         </div>
         <div>
-          <p>Pod Net Bytes Transmitted</p>
+          <p>{{ t("container.Pod Net Bytes Transmitted") }}</p>
           <apexchart
             type="area"
             height="250"
@@ -129,7 +131,7 @@ defineOptions({
           />
         </div>
         <div>
-          <p>Pod Net Bytes Received</p>
+          <p>{{ t("container.Pod Net Bytes Received") }}</p>
           <apexchart
             type="area"
             height="250"

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useAccountStore } from "@/store/modules/account";
 import { ref } from "vue";
+import { useLang } from "@/hooks/useLang";
+const { t } = useLang();
 
 defineOptions({
   name: "account"
@@ -29,18 +31,18 @@ const handleSubmit = () => {
         >✕</label
       >
 
-      <h3 class="font-bold text-lg">Input your Private Key</h3>
+      <h3 class="font-bold text-lg">{{ t("common.input private key") }}</h3>
       <p class="py-4">
         <input
           v-model="privateKey"
           type="text"
-          placeholder="Type your key here"
+          :placeholder="t('common.input private key here')"
           class="input input-bordered input-primary w-full"
         />
       </p>
       <div class="modal-action">
         <label for="key-modal" class="btn btn-primary" @click="handleSubmit"
-          >Yay!</label
+          >{{ t("common.yay") }}!</label
         >
       </div>
     </div>

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { showEventModal } from "@/utils/shared";
 import type { Event } from "nostr-tools";
+import { useLang } from "@/hooks/useLang";
+const { t } = useLang();
 
 defineProps<{
   event?: Event;
@@ -19,6 +21,6 @@ defineProps<{
       width="25px"
       height="25px"
     />
-    Verified
+    {{ t("common.verified") }}
   </label>
 </template>

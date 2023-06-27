@@ -5,6 +5,8 @@ import MessageVerified from "@/components/MessageVerified.vue";
 import Status from "./components/status.vue";
 import eventBus from "@/utils/event-bus";
 import { Pod } from "./type";
+import { useLang } from "@/hooks/useLang";
+const { t } = useLang();
 
 const loading = ref(true);
 const pods: Array<Pod> = reactive([]);
@@ -59,7 +61,7 @@ const onMonitor = pod => {
         icon="material-symbols:add-circle"
         width="30px"
         height="30px"
-      />New Pod
+      />{{ t("container.new pod") }}
     </label>
   </div>
   <div class="grid grid-cols-3 gap-4 mt-5">
@@ -90,10 +92,12 @@ const onMonitor = pod => {
             width="25px"
             height="25px"
           />
-          Monitor</label
+          {{ t("container.monitor") }}</label
         >
 
-        <p class="text-sm font-semibold mt-5">Information</p>
+        <p class="text-sm font-semibold mt-5">
+          {{ t("container.information") }}
+        </p>
         <div>
           <div
             class="tooltip tooltip-left text-left flex items-center"
@@ -125,7 +129,7 @@ const onMonitor = pod => {
           </div>
         </div>
 
-        <p class="text-sm font-semibold mt-5">Labels</p>
+        <p class="text-sm font-semibold mt-5">{{ t("container.labels") }}</p>
         <div class="max-h-[200px] overflow-y-auto">
           <p
             v-for="label in transMapToArr(d.metadata.labels)"
@@ -147,7 +151,7 @@ const onMonitor = pod => {
             icon="material-symbols:add-circle"
             width="30px"
             height="30px"
-          />Load More
+          />{{ t("common.loadmore") }}
         </button>
       </div>
     </div>

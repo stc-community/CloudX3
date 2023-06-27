@@ -1,9 +1,42 @@
+common:
+  enter: 进入
+  detail: 详情
+  name: 名称
+  description: 描述
+  price: 价格
+  balance: 账户余额
+  action: 操作
+  subscribe: 订阅
+  cover: 封面
+  submit: 提交
+
+  verified: 已验证
+  status: 状态
+  "message verified": 消息已验证
+  yay: 好
+  "pub key": 公钥
+  sig: 签名
+
+  loadmore: 加载更多
+
+  transaction: 交易
+  "wait deploy status": 等待部署结果
+
+  "pick a site": 选择一个 Site
+  "need key tips": 请提供你的私钥，用以建立安全通信
+  connect: 连接
+  update: 更新
+  "public key": 公钥
+  "input private key": 请输入私钥
+  "input private key here": 在此处输入私钥
+
 nav:
   welcome: 首页
   market: 市场
   container: 容器
   "service mesh": 服务网格
   serverless: 函数计算
+  "api market": API 市场
 
 welcome:
   description: CloudX3构建web2到web3的云计算DePIN系统，帮助Web2应用快速实现Web3转型。CloudX3提供计算和服务操作层，以及应用DAO聚合层，帮助Web2应用快速实现去中心化和Web3化。
@@ -17,3 +50,38 @@ welcome:
 
   subtitle: 云原生预言机可信控制系统
   subdesc: 这是一个针对云原生应用的去中心化和可信合约控制系统，采用了零信任安全结构。它结合了链上和链下预言机，以确保数字身份的安全性。
+
+market:
+  "api market": API 市场
+  "new-provider": 成为 API 供应商
+  "apis providered": 提供的 API
+  "per request": 每次请求
+  "new api": 发布新的 API
+  "copy api key": 赋值 API 密钥
+
+container:
+  "new deployment": 创建 Deployment
+  "by contract": 由智能合约驱动
+  ready: 已就绪
+  total: 总计
+  labels: 标签
+  "paste yaml": 在此处填写 YAML
+
+  "new pod": 新的 Pod
+  monitor: 监控
+  information: 信息
+  "loading pod status": 加载 Pod 状态
+  running: 运行中
+  pending: 等待中
+  failed: 已失败
+  succeeded: 已成功
+  unknown: 未知
+  "pod monitor": Pod 监控
+  usage: 使用量
+  memory: 内存
+  "Pod Net Bytes Transmitted": Pod 网络字节传输
+  "Pod Net Bytes Received": Pod 网络字节接收
+
+  start: 开始
+  stop: 停止
+  role: 角色

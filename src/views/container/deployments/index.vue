@@ -5,6 +5,9 @@ import MessageVerified from "@/components/MessageVerified.vue";
 import type { Event } from "nostr-tools";
 import eventBus from "@/utils/event-bus";
 
+import { useLang } from "@/hooks/useLang";
+const { t } = useLang();
+
 interface Deployment {
   event: Event;
   metadata: {
@@ -92,7 +95,7 @@ onBeforeUnmount(() => {
       icon="material-symbols:add-circle"
       width="30px"
       height="30px"
-    />New Deployment
+    />{{ t("container.new deployment") }}
   </label>
   <div class="grid grid-cols-3 gap-4 mt-5">
     <div
@@ -119,10 +122,10 @@ onBeforeUnmount(() => {
           </div>
         </div>
         <div v-if="isSOL(d)" class="badge text-white badge-primary text-xs">
-          Managed By Contracts
+          {{ t("container.by contract") }}
         </div>
 
-        <p class="text-sm font-semibold mt-5">Labels</p>
+        <p class="text-sm font-semibold mt-5">{{ t("container.labels") }}</p>
         <div class="max-h-[100px] overflow-y-auto">
           <p
             v-for="label in transMapToArr(d?.metadata?.labels)"
@@ -132,7 +135,7 @@ onBeforeUnmount(() => {
           </p>
         </div>
 
-        <p class="text-sm font-semibold mt-5">Status</p>
+        <p class="text-sm font-semibold mt-5">{{ t("common.status") }}</p>
         <div>
           <div
             class="radial-progress"
@@ -141,7 +144,9 @@ onBeforeUnmount(() => {
           >
             {{ d.status?.readyReplicas || 0 }} / {{ d.status.replicas }}
           </div>
-          <p class="mt-2 text-slate-500 text-xs">Ready/Total</p>
+          <p class="mt-2 text-slate-500 text-xs">
+            {{ t("container.ready") }}/{{ t("container.total") }}
+          </p>
         </div>
       </div>
     </div>
@@ -155,7 +160,7 @@ onBeforeUnmount(() => {
             icon="material-symbols:add-circle"
             width="30px"
             height="30px"
-          />Load More
+          />{{ t("common.loadmore") }}
         </button>
       </div>
     </div>

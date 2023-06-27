@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
 import { RouterLink } from "vue-router";
-import img from "@/assets/logo.png";
+import img from "@/assets/logo.jpg";
 import { isUrl } from "@pureadmin/utils";
 import { changeTheme, getCurrentTheme } from "@/utils/theme";
 import type { Theme } from "@/utils/theme";

@@ -1,2 +1,19 @@
-test:
-  hello: Hello
+nav:
+  welcome: Welcome
+  market: Market
+  container: Container
+  "service mesh": Service Mesh
+  serverless: Serverless
+
+welcome:
+  description: WelCloudX3 Build a market platform from web2 to web3,help web2 applications quickly realize web3 transformation,CloudX3 provides computing and service operation layer,and application Dao aggregation layer to help web2 applications quickly realize decentralization and web3ization.
+  build: Things we build, including
+  build1: Cloud Native Oracles
+  build2: Application Digital Identity
+  build3: Computing Over Function
+  build4: Cloud Native Infrastructure Security
+  start: Get Started
+  thanks: Thanks to
+
+  subtitle: Cloud Native Oracle Trusted Control System
+  subdesc: This is a decentralized and trusted contract control system with a zero-trust security structure for cloud-native applications. It incorporates both on-chain and off-chain oracles to ensure the security of digital identities.

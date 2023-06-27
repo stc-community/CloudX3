@@ -10,6 +10,10 @@ import { loadModuleRoutes } from "@/router/utils";
 import { HeaderItems } from "@/config/header";
 import ThemeComponent from "./theme.vue";
 import AvatarComponent from "./avatar.vue";
+import LangComponent from "./lang.vue";
+
+import { useLang } from "@/hooks/useLang";
+const { t } = useLang();
 
 const moduleMenus = loadModuleRoutes().map((route: RouteConfigsTable) => {
   return {
@@ -42,7 +46,7 @@ onMounted(() => {
           :href="v.to"
           target="_blank"
           class="hover:text-primary"
-          >{{ v.title }}</a
+          >{{ t(v.title) }}</a
         >
         <router-link
           v-else
@@ -50,13 +54,14 @@ onMounted(() => {
           :to="v.to"
           class="hover:text-primary"
         >
-          {{ v.title }}
+          {{ t("nav." + v.title.toLowerCase()) }}
         </router-link>
       </template>
     </div>
     <!-- right -->
     <div class="flex items-center">
-      <ThemeComponent />
+      <LangComponent />
+      <ThemeComponent class="ml-5" />
       <AvatarComponent class="ml-5" />
     </div>
   </div>

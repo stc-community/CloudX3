@@ -1,2 +1,19 @@
-test:
-  hello: 你好
+nav:
+  welcome: 首页
+  market: 市场
+  container: 容器
+  "service mesh": 服务网格
+  serverless: 函数计算
+
+welcome:
+  description: WelCloudX3致力于构建一个从Web2到Web3的市场平台，帮助Web2应用快速实现Web3转型。CloudX3提供计算和服务操作层，以及应用DAO聚合层，帮助Web2应用快速实现去中心化和Web3化。
+  build: 我们构建了
+  build1: 云原生预言机
+  build2: 应用数字身份
+  build3: 函数计算
+  build4: 云原生基础设施安全
+  start: 现在开始
+  thanks: 特别感谢
+
+  subtitle: 云原生预言机可信控制系统
+  subdesc: 这是一个针对云原生应用的去中心化和可信合约控制系统，采用了零信任安全结构。它结合了链上和链下预言机，以确保数字身份的安全性。

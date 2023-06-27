@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
-import { welcome } from "@/config/welcome";
 
 // import gaIcon from "@/assets/welcome/ga.svg?url";
 // import cbIcon from "@/assets/welcome/cb.svg?url";
@@ -12,6 +12,9 @@ import fvmPng from "@/assets/welcome/fvm.png";
 import chainlinkPng from "@/assets/welcome/chainlink.png";
 // import nostrPng from "@/assets/welcome/nostr.png";
 import nostrJpg from "@/assets/welcome/nostr.jpg";
+
+import { useLang } from "@/hooks/useLang";
+const { t, locale } = useLang();
 
 defineOptions({
   name: "Welcome"
@@ -31,29 +34,35 @@ const icons = [
   wfIcon
 ];
 
-const arr = [
-  "Cloud Native Oracles",
-  "Application Digital Identity",
-  "Computing Over Function",
-  "Cloud Native Infrastructure Security"
-];
+const arr = ref([]);
+const setArr = () => {
+  arr.value = [
+    t("welcome.build1"),
+    t("welcome.build2"),
+    t("welcome.build3"),
+    t("welcome.build4")
+  ];
+};
+setArr();
+watch(
+  () => locale.value,
+  () => setArr()
+);
 </script>
 
 <template>
   <div class="text-center">
-    <h1 class="text-5xl font-bold mt-[120px] dark:text-slate-200">
-      {{ welcome.title }}
-    </h1>
+    <h1 class="text-5xl font-bold mt-[120px] dark:text-slate-200">CloudX3</h1>
     <p
       class="py-6 text-xl max-w-[700px] mx-auto text-slate-500 dark:text-slate-400"
     >
-      {{ welcome.description }}
+      {{ t("welcome.description") }}
     </p>
 
     <p
       class="text-xl max-w-[700px] mx-auto text-slate-500 dark:text-slate-400 flex items-center"
     >
-      <span class="ml-10">Things we build, including </span>
+      <span class="ml-10">{{ t("welcome.build") }} </span>
       <VueWriter
         class="font-bold text-primary ml-1"
         :array="arr"
@@ -63,14 +72,14 @@ const arr = [
     </p>
 
     <button class="btn btn-primary mt-10" @click="router.push('container')">
-      Get Started
+      {{ t("welcome.start") }}
     </button>
 
     <div>
       <p
         class="text-center text-slate-700 dark:text-slate-400 text-xs mt-14 uppercase"
       >
-        Thanks for these techs, including
+        {{ t("welcome.thanks") }}
       </p>
       <div class="flex items-center justify-between max-w-4xl mx-auto mt-10">
         <img v-for="icon in icons" :src="icon" class="h-[35px]" />
@@ -80,15 +89,12 @@ const arr = [
   <!-- section2 -->
   <div class="bg-base-200 mt-10 text-center py-20">
     <h1 class="text-2xl font-bold dark:text-slate-200">
-      Cloud Native Oracle Trusted Control System
+      {{ t("welcome.subtitle") }}
     </h1>
     <p
       class="py-6 text-lg max-w-[700px] mx-auto text-slate-500 dark:text-slate-400"
     >
-      This is a decentralized and trusted contract control system with a
-      zero-trust security structure for cloud-native applications. It
-      incorporates both on-chain and off-chain oracles to ensure the security of
-      digital identities.
+      {{ t("welcome.subdesc") }}
     </p>
 
     <div>

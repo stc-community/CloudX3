@@ -1,7 +1,7 @@
 <p align="center" >
 <img 
     src="https://github.com/stc-community/CloudX3/assets/34047788/85ae7385-44ca-4a08-b61c-1d13dd4e9f2b" 
-    height="200" border="0" alt="CloudX3" style="border-radius: 5px;">
+    height="200" border-radius="10px" alt="CloudX3 DePIN" >
 </p>
 
 

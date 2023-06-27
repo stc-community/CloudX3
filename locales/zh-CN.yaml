@@ -6,7 +6,7 @@ nav:
   serverless: 函数计算
 
 welcome:
-  description: WelCloudX3致力于构建一个从Web2到Web3的市场平台，帮助Web2应用快速实现Web3转型。CloudX3提供计算和服务操作层，以及应用DAO聚合层，帮助Web2应用快速实现去中心化和Web3化。
+  description: CloudX3构建web2到web3的云计算DePIN系统，帮助Web2应用快速实现Web3转型。CloudX3提供计算和服务操作层，以及应用DAO聚合层，帮助Web2应用快速实现去中心化和Web3化。
   build: 我们构建了
   build1: 云原生预言机
   build2: 应用数字身份

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo.jpg";
 import { BottomItems } from "@/config/bottom";
 import { ref } from "vue";
 import { site } from "@/config/site";

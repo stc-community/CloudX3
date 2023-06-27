@@ -5,5 +5,5 @@ type Site = {
 
 export const site: Site = {
   name: "CloudX3",
-  description: "A cloud DePIN system for web2 to web3"
+  description: "Cloud DePIN system for web2 to web3"
 };

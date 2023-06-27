@@ -10,6 +10,26 @@ common:
   cover: Cover
   submit: Submit
 
+  verified: Verified
+  status: Status
+  "message verified": Message verified
+  yay: Yay
+  "pub key": Pub Key
+  sig: Sig
+
+  loadmore: Load More
+
+  transaction: Transaction
+  "wait deploy status": Waitting deploy status
+
+  "pick a site": Pick a site
+  "need key tips": Please provider your private key to get message safety.
+  connect: Connect
+  update: Update
+  "public key": Public Key
+  "input private key": Input your Private Key
+  "input private key here": Type your key here
+
 nav:
   welcome: Welcome
   market: Market
@@ -38,3 +58,11 @@ market:
   "per request": Per request
   "new api": Publish New API
   "copy api key": Copy API Key
+
+container:
+  "new deployment": New Deployment
+  "by contract": Managed by Smart Contracts
+  ready: Ready
+  total: Total
+  labels: Labels
+  "paste yaml": Paste Deployment YAML here.

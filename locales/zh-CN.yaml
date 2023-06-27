@@ -10,6 +10,26 @@ common:
   cover: 封面
   submit: 提交
 
+  verified: 已验证
+  status: 状态
+  "message verified": 消息已验证
+  yay: 好
+  "pub key": 公钥
+  sig: 签名
+
+  loadmore: 加载更多
+
+  transaction: 交易
+  "wait deploy status": 等待部署结果
+
+  "pick a site": 选择一个 Site
+  "need key tips": 请提供你的私钥，用以建立安全通信
+  connect: 连接
+  update: 更新
+  "public key": 公钥
+  "input private key": 请输入私钥
+  "input private key here": 在此处输入私钥
+
 nav:
   welcome: 首页
   market: 市场
@@ -38,3 +58,11 @@ market:
   "per request": 每次请求
   "new api": 发布新的 API
   "copy api key": 赋值 API 密钥
+
+container:
+  "new deployment": 创建 Deployment
+  "by contract": 由智能合约驱动
+  ready: 已就绪
+  total: 总计
+  labels: 标签
+  "paste yaml": 在此处填写 YAML

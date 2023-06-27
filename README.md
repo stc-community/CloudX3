@@ -9,8 +9,6 @@
 # CloudX3
 The CloudX DePIN system provides a brand-new cloud computing platform that can help Web2 applications quickly realize decentralization and Web3ization, and provide higher security, credibility and scalability. It is an ideal Web3 transformation solution.
 
-Its features and advantages are as follows:
-
 ###  Rapid realization of Web3 transformation
 The CloudX3 DePIN system provides a computing and service operation layer, as well as an application Dao aggregation layer, which can help Web2 applications quickly realize decentralization and Web3ization. By using the CloudX3 DePIN system, Web2 applications can be easily migrated to the Web3 platform to enjoy higher security, transparency and decentralization.
 

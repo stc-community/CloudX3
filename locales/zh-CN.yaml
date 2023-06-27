@@ -100,3 +100,12 @@ mesh:
   reachable: 可访问
   unreachable: 失联
   servicesCount: 服务数
+
+  metadata: 元数据
+  security: 安全控制
+  manage: 管理
+  "security control": 安全控制状态
+  "listen mode": 监听模式
+  enabled: 已启用
+  disabled: 已禁用
+  searchName: 输入服务名称搜索

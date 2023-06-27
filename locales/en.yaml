@@ -100,3 +100,12 @@ mesh:
   reachable: Reachable
   unreachable: Unreachable
   servicesCount: Services
+
+  metadata: Metadata
+  security: Security
+  manage: Manage
+  "security control": Security Control
+  "listen mode": Listen Mode
+  enabled: Enabled
+  disabled: Disabled
+  searchName: Search by Service Name

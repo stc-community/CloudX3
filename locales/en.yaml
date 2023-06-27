@@ -81,3 +81,7 @@ container:
   memory: Memory
   "Pod Net Bytes Transmitted": Pod Net Bytes Transmitted
   "Pod Net Bytes Received": Pod Net Bytes Received
+
+  start: Start
+  stop: Stop
+  role: Role

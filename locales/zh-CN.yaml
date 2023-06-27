@@ -81,3 +81,7 @@ container:
   memory: 内存
   "Pod Net Bytes Transmitted": Pod 网络字节传输
   "Pod Net Bytes Received": Pod 网络字节接收
+
+  start: 开始
+  stop: 停止
+  role: 角色

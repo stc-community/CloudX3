@@ -21,6 +21,7 @@ common:
 
   transaction: Transaction
   "wait deploy status": Waitting deploy status
+  "wait submit status": Waitting submit status
 
   "pick a site": Pick a site
   "need key tips": Please provider your private key to get message safety.
@@ -29,6 +30,9 @@ common:
   "public key": Public Key
   "input private key": Input your Private Key
   "input private key here": Type your key here
+
+  on: ON
+  off: OFF
 
 nav:
   welcome: Welcome
@@ -109,3 +113,30 @@ mesh:
   enabled: Enabled
   disabled: Disabled
   searchName: Search by Service Name
+
+  service: Service
+  fuse: Fuse
+  "new fuse rule": New Fuse Rule
+  rule: Rule
+  "child service": Child Service
+  "rule type": Rule Type
+  target: Target
+  "max requests": Max Requests
+  interval: Interval
+  "error percent": Error Percent
+  "serial error numbers": Serial Error Numbers
+  "open timeout": Open Timeout
+  "Pick your fuse type": Pick your fuse type
+  "Consecutive Error Fuse": Consecutive Error Fuse
+  "Error Rate Fuse": Error Rate Fuse
+  "Consecutive Error or Error Rate Fuse": Consecutive Error or Error Rate Fuse
+  "Consecutive Error and Error Rate Fuse": Consecutive Error and Error Rate Fuse
+  "Error Percent Threshold": Error Percent Threshold
+  "Constant Error Times Threshold": Constant Error Times Threshold
+  "The number of requests allowed to run when the fuse is half open": The number of requests allowed to run when the fuse is half open
+  "Clear cycle when the fuse is in the closed state": Clear cycle when the fuse is in the closed state (Seconds)
+  "Fuse half-open trigger time": Fuse half-open trigger time (Seconds)
+  "Request timeout period": Request timeout period (Seconds)
+  "Fuse granularity": Fuse granularity
+  "Pick your fuse granularity": Pick your fuse granularity
+  "Pick your fuse status": Pick your fuse status

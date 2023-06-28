@@ -21,6 +21,7 @@ common:
 
   transaction: 交易
   "wait deploy status": 等待部署结果
+  "wait submit status": 等待提交结果
 
   "pick a site": 选择一个 Site
   "need key tips": 请提供你的私钥，用以建立安全通信
@@ -29,6 +30,9 @@ common:
   "public key": 公钥
   "input private key": 请输入私钥
   "input private key here": 在此处输入私钥
+
+  on: 开启
+  off: 关闭
 
 nav:
   welcome: 首页
@@ -109,3 +113,30 @@ mesh:
   enabled: 已启用
   disabled: 已禁用
   searchName: 输入服务名称搜索
+
+  service: 服务
+  fuse: 服务熔断
+  "new fuse rule": 新的熔断规则
+  rule: 规则
+  "child service": 下游服务
+  "rule type": 规则类型
+  target: 目标
+  "max requests": 最大请求数
+  interval: 间隔
+  "error percent": 错误率阈值
+  "serial error numbers": 连续错误次数阈值
+  "open timeout": 请求超时
+  "Pick your fuse type": 选择熔断类型
+  "Consecutive Error Fuse": 连续错误次数达到阈值熔断
+  "Error Rate Fuse": 错误率达到固定百分比熔断
+  "Consecutive Error or Error Rate Fuse": 连续错误次数或错误率达到阈值熔断
+  "Consecutive Error and Error Rate Fuse": 连续错误次数和错误率同时达到阈值熔断
+  "Error Percent Threshold": 错误率阈值
+  "Constant Error Times Threshold": 连续错误次数阈值
+  "The number of requests allowed to run when the fuse is half open": 熔断器半开时允许运行的请求数量
+  "Clear cycle when the fuse is in the closed state": 熔断器处于关闭状态时的清除周期 (秒)
+  "Fuse half-open trigger time": 熔断器半开触发时间 (秒)
+  "Request timeout period": 请求超时时间 (秒)
+  "Fuse granularity": 熔断粒度
+  "Pick your fuse granularity": 选择熔断粒度
+  "Pick your fuse status": 选择熔断状态

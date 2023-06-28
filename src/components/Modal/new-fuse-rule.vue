@@ -4,6 +4,8 @@ import { getCurrentSiteName } from "@/utils/shared";
 import { getFuseLimitConrtact } from "@/utils/contract/fuse-limit-abi";
 import { getRequestID } from "@/utils/contract/web3";
 import eventBus from "@/utils/event-bus";
+import { useLang } from "@/hooks/useLang";
+const { t } = useLang();
 
 const form = reactive({
   unique_id: "",
@@ -90,12 +92,12 @@ const handleSubmit = async () => {
           width="25px"
           height="25px"
         />
-        <h3>New Fuse Rule</h3>
+        <h3>{{ t("mesh.new fuse rule") }}</h3>
       </div>
 
       <div class="form-control w-full mt-5">
         <label class="label">
-          <span class="label-text">Service</span>
+          <span class="label-text">{{ t("mesh.service") }}</span>
         </label>
         <input
           type="text"
@@ -105,7 +107,7 @@ const handleSubmit = async () => {
         />
 
         <label class="label mt-2">
-          <span class="label-text">Child Service</span>
+          <span class="label-text">{{ t("mesh.child service") }}</span>
         </label>
         <input
           type="text"
@@ -115,21 +117,29 @@ const handleSubmit = async () => {
         />
 
         <label class="label mt-2">
-          <span class="label-text">Rule Type</span>
+          <span class="label-text">{{ t("mesh.rule type") }}</span>
         </label>
         <select
           class="select w-full max-w-xs select-primary"
           v-model="form.rule_type"
         >
-          <option disabled>Pick your fuse type</option>
-          <option :value="1" selected>Consecutive Error Fuse</option>
-          <option :value="2">Error Rate Fuse</option>
-          <option :value="3">Consecutive Error or Error Rate Fuse</option>
-          <option :value="4">Consecutive Error and Error Rate Fuse</option>
+          <option disabled>{{ t("mesh.Pick your fuse type") }}</option>
+          <option :value="1" selected>
+            {{ t("mesh.Consecutive Error Fuse") }}
+          </option>
+          <option :value="2">{{ t("mesh.Error Rate Fuse") }}</option>
+          <option :value="3">
+            {{ t("mesh.Consecutive Error or Error Rate Fuse") }}
+          </option>
+          <option :value="4">
+            {{ t("mesh.Consecutive Error and Error Rate Fuse") }}
+          </option>
         </select>
 
         <label class="label mt-2">
-          <span class="label-text">Error Percent Threshold. (%)</span>
+          <span class="label-text"
+            >{{ t("mesh.Error Percent Threshold") }} (%)</span
+          >
         </label>
         <input
           type="text"
@@ -139,7 +149,9 @@ const handleSubmit = async () => {
         />
 
         <label class="label mt-2">
-          <span class="label-text">Constant Error Times Threshold</span>
+          <span class="label-text">{{
+            t("mesh.Constant Error Times Threshold")
+          }}</span>
         </label>
         <input
           type="text"
@@ -149,10 +161,11 @@ const handleSubmit = async () => {
         />
 
         <label class="label mt-2">
-          <span class="label-text"
-            >The number of requests allowed to run when the fuse is half
-            open</span
-          >
+          <span class="label-text">{{
+            t(
+              "mesh.The number of requests allowed to run when the fuse is half open"
+            )
+          }}</span>
         </label>
         <input
           type="number"
@@ -162,9 +175,9 @@ const handleSubmit = async () => {
         />
 
         <label class="label mt-2">
-          <span class="label-text"
-            >Clear cycle when the fuse is in the closed state (Seconds)</span
-          >
+          <span class="label-text">{{
+            t("mesh.Clear cycle when the fuse is in the closed state")
+          }}</span>
         </label>
         <input
           type="number"
@@ -174,7 +187,9 @@ const handleSubmit = async () => {
         />
 
         <label class="label mt-2">
-          <span class="label-text">Fuse half-open trigger time (Seconds)</span>
+          <span class="label-text">{{
+            t("mesh.Fuse half-open trigger time")
+          }}</span>
         </label>
         <input
           type="number"
@@ -184,7 +199,7 @@ const handleSubmit = async () => {
         />
 
         <label class="label mt-2">
-          <span class="label-text">Request timeout period. (Seconds)</span>
+          <span class="label-text">{{ t("mesh.Request timeout period") }}</span>
         </label>
         <input
           type="number"
@@ -194,43 +209,43 @@ const handleSubmit = async () => {
         />
 
         <label class="label mt-2">
-          <span class="label-text">Fuse granularity</span>
+          <span class="label-text">{{ t("mesh.Fuse granularity") }}</span>
         </label>
         <select
           class="select w-full max-w-xs select-primary"
           v-model="form.target"
         >
-          <option disabled>Pick your fuse granularity</option>
+          <option disabled>{{ t("mesh.Pick your fuse granularity") }}</option>
           <option selected>host</option>
           <option>path</option>
         </select>
 
         <label class="label mt-2">
-          <span class="label-text">Enabled</span>
+          <span class="label-text">{{ t("mesh.enabled") }}</span>
         </label>
         <select
           class="select w-full max-w-xs select-primary"
           v-model="form.is_open"
         >
-          <option disabled>Pick your fuse status</option>
-          <option :value="1" selected>On</option>
-          <option :value="2">Off</option>
+          <option disabled>{{ t("mesh.Pick your fuse status") }}</option>
+          <option :value="1" selected>{{ t("common.on") }}</option>
+          <option :value="2">{{ t("common.off") }}</option>
         </select>
       </div>
 
       <div class="mt-5" />
       <progress v-if="data.loading" class="progress progress-primary" />
       <button v-else class="btn btn-primary w-full" @click="handleSubmit">
-        Submit
+        {{ t("common.submit") }}
       </button>
       <div
         v-if="data.hash"
         class="text-left mt-2 border border-primary rounded-md p-2 text-slate-500 text-sm"
       >
-        <p class="uppercase">Transaction</p>
+        <p class="uppercase">{{ t("common.transaction") }}</p>
         <span class="text-xs text-primary break-all">{{ data.hash }}</span>
 
-        <p class="uppercase mt-5">Waitting Submitting Status</p>
+        <p class="uppercase mt-5">{{ t("common.wait submit status") }}</p>
         <pre v-if="data.resReady" class="text-xs text-primary break-all">{{
           data.res
         }}</pre>

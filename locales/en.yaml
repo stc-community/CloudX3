@@ -33,6 +33,7 @@ common:
 
   on: ON
   off: OFF
+  "type here": Type here
 
 nav:
   welcome: Welcome
@@ -140,3 +141,10 @@ mesh:
   "Fuse granularity": Fuse granularity
   "Pick your fuse granularity": Pick your fuse granularity
   "Pick your fuse status": Pick your fuse status
+
+  "new rate limit rule": New Rate Limit Rule
+  "Server Rate Limit": Server Rate Limit
+  "Max Count in Duration": Max Count in Duration
+  "Sample Duration": Sample Duration
+  "Enabled this rule": Enabled this rule
+  "Pick your rate limit status": Pick your rate limit status

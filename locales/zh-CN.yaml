@@ -33,6 +33,7 @@ common:
 
   on: 开启
   off: 关闭
+  "type here": 在此输入
 
 nav:
   welcome: 首页
@@ -140,3 +141,10 @@ mesh:
   "Fuse granularity": 熔断粒度
   "Pick your fuse granularity": 选择熔断粒度
   "Pick your fuse status": 选择熔断状态
+
+  "new rate limit rule": 新的限流规则
+  "Server Rate Limit": 服务器限流
+  "Max Count in Duration": 周期内限流次数
+  "Sample Duration": 采样周期（秒）
+  "Enabled this rule": 启用这个规则
+  "Pick your rate limit status": 选择限流状态

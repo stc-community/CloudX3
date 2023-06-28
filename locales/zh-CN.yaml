@@ -48,6 +48,16 @@ nav:
   fuse: 服务熔断
   "rate limit": 服务限流
 
+  deployments: Deployments
+  pods: Pods
+  nodes: Nodes
+
+  hosts: Hosts
+  providers: Providers
+  actors: Actors
+  "providers market": Provider 市场
+  "actors market": Actor 市场
+
 welcome:
   description: CloudX3构建web2到web3的云计算DePIN系统，帮助Web2应用快速实现Web3转型。CloudX3提供计算和服务操作层，以及应用DAO聚合层，帮助Web2应用快速实现去中心化和Web3化。
   build: 我们构建了

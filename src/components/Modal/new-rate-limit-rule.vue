@@ -4,6 +4,8 @@ import { getCurrentSiteName } from "@/utils/shared";
 import { getFuseLimitConrtact } from "@/utils/contract/fuse-limit-abi";
 import { getRequestID } from "@/utils/contract/web3";
 import eventBus from "@/utils/event-bus";
+import { useLang } from "@/hooks/useLang";
+const { t } = useLang();
 
 const form = reactive({
   unique_id: "",
@@ -88,66 +90,66 @@ const handleSubmit = async () => {
           width="25px"
           height="25px"
         />
-        <h3>New Rate Limit Rule</h3>
+        <h3>{{ t("mesh.new rate limit rule") }}</h3>
       </div>
 
       <div class="form-control w-full mt-5">
         <label class="label">
-          <span class="label-text">Service</span>
+          <span class="label-text">{{ t("mesh.service") }}</span>
         </label>
         <input
           type="text"
-          placeholder="Type here"
+          :placeholder="t('common.type here')"
           v-model="form.unique_id"
           class="input input-primary w-full"
         />
 
         <label class="label mt-2">
-          <span class="label-text">Max Count in Duration</span>
+          <span class="label-text">{{ t("mesh.Max Count in Duration") }}</span>
         </label>
         <input
           type="number"
           v-model="form.server_config.max"
-          placeholder="Type here"
+          :placeholder="t('common.type here')"
           class="input input-primary w-full"
         />
 
         <label class="label mt-2">
-          <span class="label-text">Sample Duration (Seconds)</span>
+          <span class="label-text">{{ t("mesh.Sample Duration") }}</span>
         </label>
         <input
           type="number"
           v-model="form.server_config.duration"
-          placeholder="Type here"
+          :placeholder="t('common.type here')"
           class="input input-primary w-full"
         />
 
         <label class="label mt-2">
-          <span class="label-text">Enabled this rule</span>
+          <span class="label-text">{{ t("mesh.Enabled this rule") }}</span>
         </label>
         <select
           class="select w-full max-w-xs select-primary"
           v-model="form.server_limiter_is_open"
         >
-          <option disabled>Pick your rate limit status</option>
-          <option :value="1" selected>On</option>
-          <option :value="2">Off</option>
+          <option disabled>{{ t("mesh.Pick your rate limit status") }}</option>
+          <option :value="1" selected>{{ t("common.on") }}</option>
+          <option :value="2">{{ t("common.off") }}</option>
         </select>
       </div>
 
       <div class="mt-5" />
       <progress v-if="data.loading" class="progress progress-primary" />
       <button v-else class="btn btn-primary w-full" @click="handleSubmit">
-        Submit
+        {{ t("common.submit") }}
       </button>
       <div
         v-if="data.hash"
         class="text-left mt-2 border border-primary rounded-md p-2 text-slate-500 text-sm"
       >
-        <p class="uppercase">Transaction</p>
+        <p class="uppercase">{{ t("common.transaction") }}</p>
         <span class="text-xs text-primary break-all">{{ data.hash }}</span>
 
-        <p class="uppercase mt-5">Waitting Submitting Status</p>
+        <p class="uppercase mt-5">{{ t("common.wait submit status") }}</p>
         <pre v-if="data.resReady" class="text-xs text-primary break-all">{{
           data.res
         }}</pre>

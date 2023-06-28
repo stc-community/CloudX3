@@ -55,7 +55,7 @@ const accountStore = useAccountStore();
                 width="20px"
                 height="20px"
               />
-              {{ m.meta.title }}
+              {{ t("nav." + m.meta.title.toLowerCase()) }}
             </router-link>
           </li>
         </ul>

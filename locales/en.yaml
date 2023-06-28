@@ -21,6 +21,7 @@ common:
 
   transaction: Transaction
   "wait deploy status": Waitting deploy status
+  "wait submit status": Waitting submit status
 
   "pick a site": Pick a site
   "need key tips": Please provider your private key to get message safety.
@@ -30,6 +31,10 @@ common:
   "input private key": Input your Private Key
   "input private key here": Type your key here
 
+  on: ON
+  off: OFF
+  "type here": Type here
+
 nav:
   welcome: Welcome
   market: Market
@@ -37,6 +42,11 @@ nav:
   "service mesh": Service Mesh
   serverless: Serverless
   "api market": API Market
+
+  dashboard: Dashboard
+  services: Services
+  fuse: Fuse
+  "rate limit": Rate Limit
 
 welcome:
   description: CloudX3 Build a cloud DePIN system for web2 to web3,help web2 applications quickly realize web3 transformation,CloudX3 provides computing and service operation layer,and application Dao aggregation layer to help web2 applications quickly realize decentralization and web3ization.
@@ -85,3 +95,56 @@ container:
   start: Start
   stop: Stop
   role: Role
+
+mesh:
+  "current site": Current Site
+  location: Location
+  "services this site has": Services this site has
+  total: Total
+  current: Current
+  reachable: Reachable
+  unreachable: Unreachable
+  servicesCount: Services
+
+  metadata: Metadata
+  security: Security
+  manage: Manage
+  "security control": Security Control
+  "listen mode": Listen Mode
+  enabled: Enabled
+  disabled: Disabled
+  searchName: Search by Service Name
+
+  service: Service
+  fuse: Fuse
+  "new fuse rule": New Fuse Rule
+  rule: Rule
+  "child service": Child Service
+  "rule type": Rule Type
+  target: Target
+  "max requests": Max Requests
+  interval: Interval
+  "error percent": Error Percent
+  "serial error numbers": Serial Error Numbers
+  "open timeout": Open Timeout
+  "Pick your fuse type": Pick your fuse type
+  "Consecutive Error Fuse": Consecutive Error Fuse
+  "Error Rate Fuse": Error Rate Fuse
+  "Consecutive Error or Error Rate Fuse": Consecutive Error or Error Rate Fuse
+  "Consecutive Error and Error Rate Fuse": Consecutive Error and Error Rate Fuse
+  "Error Percent Threshold": Error Percent Threshold
+  "Constant Error Times Threshold": Constant Error Times Threshold
+  "The number of requests allowed to run when the fuse is half open": The number of requests allowed to run when the fuse is half open
+  "Clear cycle when the fuse is in the closed state": Clear cycle when the fuse is in the closed state (Seconds)
+  "Fuse half-open trigger time": Fuse half-open trigger time (Seconds)
+  "Request timeout period": Request timeout period (Seconds)
+  "Fuse granularity": Fuse granularity
+  "Pick your fuse granularity": Pick your fuse granularity
+  "Pick your fuse status": Pick your fuse status
+
+  "new rate limit rule": New Rate Limit Rule
+  "Server Rate Limit": Server Rate Limit
+  "Max Count in Duration": Max Count in Duration
+  "Sample Duration": Sample Duration
+  "Enabled this rule": Enabled this rule
+  "Pick your rate limit status": Pick your rate limit status

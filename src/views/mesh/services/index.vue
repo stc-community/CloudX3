@@ -4,6 +4,8 @@ import { formatTime } from "@/utils/shared";
 import { showEventModal } from "@/utils/shared";
 import { loadData } from "@/utils/shared";
 import bus from "@/utils/event-bus";
+import { useLang } from "@/hooks/useLang";
+const { t } = useLang();
 
 const data = reactive({
   services: [],
@@ -65,13 +67,13 @@ onUnmounted(() => {
 });
 </script>
 <template>
-  <h2>{{ $route.meta.title }}</h2>
+  <h2>{{ t("nav." + $route.meta.title.toLowerCase()) }}</h2>
   <div class="form-control w-1/3 mt-5">
     <div class="input-group w-full">
       <input
         type="text"
         v-model="data.form.name"
-        placeholder="Search…"
+        :placeholder="t('mesh.searchName') + '...'"
         class="input input-bordered w-full"
       />
       <button class="btn btn-square" @click="onSearch">
@@ -108,12 +110,12 @@ onUnmounted(() => {
               width="25px"
               height="25px"
             />
-            Verified
+            {{ t("common.verified") }}
           </label>
         </h2>
         <p class="text-sm text-slate-400">{{ s.unique_id }}</p>
 
-        <p class="text-sm font-semibold mt-5">Metadata</p>
+        <p class="text-sm font-semibold mt-5">{{ t("mesh.metadata") }}</p>
         <div class="leading-5 text-xs">
           <p class="text-slate-500">Version:</p>
           <p>{{ s.info[0].metadata?.version }}</p>
@@ -131,27 +133,27 @@ onUnmounted(() => {
           <p class="break-all">{{ formatTime(s.info[0].renew_timestamp) }}</p>
         </div>
 
-        <p class="text-sm font-semibold mt-5">Security</p>
+        <p class="text-sm font-semibold mt-5">{{ t("mesh.security") }}</p>
         <label
           for="mesh-modal"
           class="btn btn-primary btn-outline"
           @click="handleManage(s)"
-          >Manage</label
+          >{{ t("mesh.manage") }}</label
         >
         <div
           class="grid grid-cols-2 text-slate-500 text-xs border border-slate-300 rounded-md p-5"
         >
           <div>
-            <p>Security Control</p>
+            <p>{{ t("mesh.security control") }}</p>
             <div
               class="mt-2 inline-block text-sm uppercase"
               :class="s.ca_active ? ['text-primary'] : ['']"
             >
-              {{ s.ca_active ? "enabled" : "disabled" }}
+              {{ s.ca_active ? t("mesh.enabled") : t("mesh.disabled") }}
             </div>
           </div>
           <div>
-            <p>Listen Mode</p>
+            <p>{{ t("mesh.listen mode") }}</p>
             <div class="mt-2 inline-block text-primary text-sm uppercase">
               {{ s?.info[0].metadata.mode }}
             </div>
@@ -170,7 +172,7 @@ onUnmounted(() => {
             icon="material-symbols:add-circle"
             width="30px"
             height="30px"
-          />Load More
+          />{{ t("common.loadmore") }}
         </button>
       </div>
     </div>

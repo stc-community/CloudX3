@@ -7,6 +7,8 @@ import errorIcon from "@/assets/marker/error.png";
 import primaryIcon from "@/assets/marker/primary.png";
 import { getConfig } from "@/config";
 import { useNostrStore } from "@/store/modules/nostr";
+import { useLang } from "@/hooks/useLang";
+const { t } = useLang();
 
 const relays = getConfig().Relay;
 const url = useNostrStore().getUrl;
@@ -69,13 +71,13 @@ onMounted(() => {
       class="flex items-center text-sm text-slate-500 absolute bottom-0 z-[401] p-2"
     >
       <img :src="successIcon" alt="current" width="20" />
-      <span>Current</span>
+      <span>{{ t("mesh.current") }}</span>
 
       <img :src="primaryIcon" alt="current" width="20" class="ml-20" />
-      <span>Reachable</span>
+      <span>{{ t("mesh.reachable") }}</span>
 
       <img :src="errorIcon" alt="current" width="20" class="ml-20" />
-      <span>Unreachable</span>
+      <span>{{ t("mesh.unreachable") }}</span>
     </div>
   </div>
 </template>

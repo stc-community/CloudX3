@@ -6,6 +6,8 @@ import { useRoute } from "vue-router";
 import axios from "axios";
 import { transIpfsToHttp } from "@/utils/shared";
 import { transMapToArrWithInput, transMapToArr } from "@/utils/shared";
+import { useLang } from "@/hooks/useLang";
+const { t } = useLang();
 
 type Data = {
   loading: boolean;
@@ -130,7 +132,9 @@ const getJsonArr = base64str => {
         class="card w-96 bg-base-100 shadow-xl bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white"
       >
         <div class="card-body">
-          <h2 class="card-title">My Info in {{ data.dao.name }}</h2>
+          <h2 class="card-title">
+            {{ t("market.My Info in") }} {{ data.dao.name }}
+          </h2>
           <div class="divider" />
 
           <div v-for="v in userMetata" class="mb-2">
@@ -149,7 +153,7 @@ const getJsonArr = base64str => {
         </label>
         <input
           type="text"
-          placeholder="Type here"
+          :placeholder="t('common.type here')"
           v-model="fields[k]['input']"
           class="input input-bordered w-full max-w-md"
         />
@@ -160,7 +164,7 @@ const getJsonArr = base64str => {
         class="btn btn-primary w-full max-w-md mt-5"
         @click="handleClickSubmit"
       >
-        Submit
+        {{ t("common.submit") }}
       </button>
     </template>
   </div>

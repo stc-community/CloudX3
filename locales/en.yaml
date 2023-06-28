@@ -35,6 +35,8 @@ common:
   off: OFF
   "type here": Type here
 
+  port: Port
+
 nav:
   welcome: Welcome
   market: Market
@@ -78,6 +80,15 @@ market:
   "per request": Per request
   "new api": Publish New API
   "copy api key": Copy API Key
+
+  method: Method
+  time: Time
+  "New Market": New Market
+  image: Image
+  "User Join Fields Configuration": User Join Fields Configuration
+  add: Add
+  remove: Remove
+  "My Info in": My Info in
 
 container:
   "new deployment": New Deployment

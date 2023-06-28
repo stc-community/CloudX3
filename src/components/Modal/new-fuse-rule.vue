@@ -101,7 +101,7 @@ const handleSubmit = async () => {
         </label>
         <input
           type="text"
-          placeholder="Type here"
+          :placeholder="t('common.type here')"
           v-model="form.unique_id"
           class="input input-primary w-full"
         />
@@ -112,7 +112,7 @@ const handleSubmit = async () => {
         <input
           type="text"
           v-model="form.child_unique_id"
-          placeholder="Type here"
+          :placeholder="t('common.type here')"
           class="input input-primary w-full"
         />
 
@@ -144,7 +144,7 @@ const handleSubmit = async () => {
         <input
           type="text"
           v-model="form.error_percent"
-          placeholder="Type here"
+          :placeholder="t('common.type here')"
           class="input input-primary w-full"
         />
 
@@ -156,7 +156,7 @@ const handleSubmit = async () => {
         <input
           type="text"
           v-model="form.serial_error_numbers"
-          placeholder="Type here"
+          :placeholder="t('common.type here')"
           class="input input-primary w-full"
         />
 
@@ -170,7 +170,7 @@ const handleSubmit = async () => {
         <input
           type="number"
           v-model="form.max_requests"
-          placeholder="Type here"
+          :placeholder="t('common.type here')"
           class="input input-primary w-full"
         />
 
@@ -182,7 +182,7 @@ const handleSubmit = async () => {
         <input
           type="number"
           v-model="form.interval"
-          placeholder="Type here"
+          :placeholder="t('common.type here')"
           class="input input-primary w-full"
         />
 
@@ -194,7 +194,7 @@ const handleSubmit = async () => {
         <input
           type="number"
           v-model="form.open_timeout"
-          placeholder="Type here"
+          :placeholder="t('common.type here')"
           class="input input-primary w-full"
         />
 
@@ -204,7 +204,7 @@ const handleSubmit = async () => {
         <input
           type="number"
           v-model="form.request_timeout"
-          placeholder="Type here"
+          :placeholder="t('common.type here')"
           class="input input-primary w-full"
         />
 

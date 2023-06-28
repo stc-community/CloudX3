@@ -110,7 +110,7 @@ const handleFileChange = async (e: Event) => {
         </label>
         <input
           type="text"
-          placeholder="Type here"
+          :placeholder="t('common.type here')"
           v-model="form.name"
           class="input input-primary w-full"
         />
@@ -121,7 +121,7 @@ const handleFileChange = async (e: Event) => {
         <input
           type="text"
           v-model="form.description"
-          placeholder="Type here"
+          :placeholder="t('common.type here')"
           class="input input-primary w-full"
         />
 

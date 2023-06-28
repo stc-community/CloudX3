@@ -103,7 +103,7 @@ const onCallFunction = (h: HoleInfo) => {
           <input
             type="number"
             v-model="a.port"
-            placeholder="Port"
+            :placeholder="t('common.port')"
             class="input input-primary mt-5"
           />
 

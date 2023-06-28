@@ -35,6 +35,8 @@ common:
   off: 关闭
   "type here": 在此输入
 
+  port: 端口
+
 nav:
   welcome: 首页
   market: 市场
@@ -78,6 +80,15 @@ market:
   "per request": 每次请求
   "new api": 发布新的 API
   "copy api key": 赋值 API 密钥
+
+  method: 方法
+  time: 次数
+  "New Market": 创建新市场
+  image: 图片
+  "User Join Fields Configuration": 用户自定义字段配置
+  add: 添加
+  remove: 删除
+  "My Info in": 我的信息
 
 container:
   "new deployment": 创建 Deployment

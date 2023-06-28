@@ -3,6 +3,8 @@ import { reactive, ref, onMounted } from "vue";
 import { loadData } from "@/utils/shared";
 import MessageVerified from "@/components/MessageVerified.vue";
 import type { Event } from "nostr-tools";
+import { useLang } from "@/hooks/useLang";
+const { t } = useLang();
 
 type ProviderInfo = {
   event: Event;
@@ -23,7 +25,7 @@ onMounted(async () => {
 });
 </script>
 <template>
-  <h2>{{ $route.meta.title }}</h2>
+  <h2>{{ t("nav." + $route.meta.title.toLowerCase()) }}</h2>
   <div class="grid grid-cols-3 gap-4 mt-5">
     <progress v-if="loading" class="progress row-span-1" />
 
@@ -57,7 +59,9 @@ onMounted(async () => {
         </div>
         <div class="badge badge-success text-white">{{ p.status }}</div>
 
-        <p class="text-sm font-semibold mt-5">More Information</p>
+        <p class="text-sm font-semibold mt-5">
+          {{ t("wasm.More Information") }}
+        </p>
         <div>
           <div
             class="tooltip tooltip-left text-left flex items-center"

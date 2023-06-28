@@ -52,11 +52,11 @@ nav:
   pods: Pods
   nodes: Nodes
 
-  hosts: Hosts
-  providers: Providers
-  actors: Actors
-  "providers market": Provider 市场
-  "actors market": Actor 市场
+  hosts: 主机列表
+  providers: Provider列表
+  actors: Actor列表
+  "providers market": Provider市场
+  "actors market": Actor市场
 
 welcome:
   description: CloudX3构建web2到web3的云计算DePIN系统，帮助Web2应用快速实现Web3转型。CloudX3提供计算和服务操作层，以及应用DAO聚合层，帮助Web2应用快速实现去中心化和Web3化。
@@ -158,3 +158,24 @@ mesh:
   "Sample Duration": 采样周期（秒）
   "Enabled this rule": 启用这个规则
   "Pick your rate limit status": 选择限流状态
+
+wasm:
+  Information: 信息
+  arch: 架构
+  os: 操作系统
+  os-family: 操作系统族
+  "More Information": 更多信息
+
+  "Expose Http": 暴露HTTP
+  "Call Function": 调用函数
+  "Type your request path here": 在此处输入请求路径
+  "Type your request data": 在此处输入请求数据
+  "Request ID": 请求ID
+  Result: 结果
+
+  "New Provider": 创建Provider
+  Smithy: Smithy接口定义
+  Version: 版本
+  Capabilities: 能力声明
+
+  "New Actor": 创建Actor

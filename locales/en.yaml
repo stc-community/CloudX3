@@ -158,3 +158,24 @@ mesh:
   "Sample Duration": Sample Duration
   "Enabled this rule": Enabled this rule
   "Pick your rate limit status": Pick your rate limit status
+
+wasm:
+  "Information": Information
+  arch: ARCH
+  os: OS
+  os-family: OS Family
+  "More Information": More Information
+
+  "Expose Http": Expose Http
+  "Call Function": Call Function
+  "Type your request path here": Type your request path
+  "Type your request data": Type your request data
+  "Request ID": Request ID
+  Result: Result
+
+  "New Provider": New Provider
+  Smithy: Smithy
+  Version: Version
+  Capabilities: Capabilities
+
+  "New Actor": New Actor

@@ -177,3 +177,5 @@ wasm:
   Smithy: Smithy
   Version: Version
   Capabilities: Capabilities
+
+  "New Actor": New Actor

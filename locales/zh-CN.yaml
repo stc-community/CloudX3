@@ -177,3 +177,5 @@ wasm:
   Smithy: Smithy接口定义
   Version: 版本
   Capabilities: 能力声明
+
+  "New Actor": 创建Actor

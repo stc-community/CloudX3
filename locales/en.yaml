@@ -172,3 +172,8 @@ wasm:
   "Type your request data": Type your request data
   "Request ID": Request ID
   Result: Result
+
+  "New Provider": New Provider
+  Smithy: Smithy
+  Version: Version
+  Capabilities: Capabilities

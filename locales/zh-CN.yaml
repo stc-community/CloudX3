@@ -172,3 +172,8 @@ wasm:
   "Type your request data": 在此处输入请求数据
   "Request ID": 请求ID
   Result: 结果
+
+  "New Provider": 创建Provider
+  Smithy: Smithy接口定义
+  Version: 版本
+  Capabilities: 能力声明

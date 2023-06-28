@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
 import { loadData } from "@/utils/shared";
+import { useLang } from "@/hooks/useLang";
+const { t } = useLang();
 
 type FormData = {
   name: string;
@@ -43,27 +45,27 @@ const handleSubmit = () => {
           width="25px"
           height="25px"
         />
-        <h3>New Provider</h3>
+        <h3>{{ t("wasm.New Provider") }}</h3>
       </div>
 
       <div class="form-control w-full mt-5">
         <label class="label">
-          <span class="label-text">Name</span>
+          <span class="label-text">{{ t("common.name") }}</span>
         </label>
         <input
           type="text"
-          placeholder="Type here"
+          :placeholder="t('common.type here')"
           v-model="form.name"
           class="input input-primary w-full"
         />
 
         <label class="label mt-2">
-          <span class="label-text">Version</span>
+          <span class="label-text">{{ t("wasm.Version") }}</span>
         </label>
         <input
           type="text"
           v-model="form.version"
-          placeholder="Type here"
+          :placeholder="t('common.type here')"
           class="input input-primary w-full"
         />
 
@@ -73,12 +75,12 @@ const handleSubmit = () => {
         <input
           type="text"
           v-model="form.oci"
-          placeholder="Type here"
+          :placeholder="t('common.type here')"
           class="input input-primary w-full"
         />
 
         <label class="label mt-2">
-          <span class="label-text">Capabilities</span>
+          <span class="label-text">{{ t("wasm.Capabilities") }}</span>
         </label>
         <textarea
           v-model="form.capabilities"
@@ -87,11 +89,11 @@ const handleSubmit = () => {
         />
 
         <label class="label mt-2">
-          <span class="label-text">Smithy</span>
+          <span class="label-text">{{ t("wasm.Smithy") }}</span>
         </label>
         <textarea
           v-model="form.smithy"
-          placeholder="Type here"
+          :placeholder="t('common.type here')"
           class="textarea textarea-primary w-full"
         />
       </div>
@@ -99,7 +101,7 @@ const handleSubmit = () => {
       <div class="mt-5" />
       <progress v-if="loading" class="progress progress-primary" />
       <button v-else class="btn btn-primary w-full" @click="handleSubmit">
-        Submit
+        {{ t("common.submit") }}
       </button>
     </div>
   </div>

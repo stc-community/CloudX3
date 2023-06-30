@@ -3,6 +3,8 @@ import { onMounted, reactive, ref, onUnmounted } from "vue";
 import { loadData } from "@/utils/shared";
 import bus from "@/utils/event-bus";
 import MessageVerified from "@/components/MessageVerified.vue";
+import { useLang } from "@/hooks/useLang";
+const { t } = useLang();
 
 const data = reactive({
   services: [],
@@ -46,15 +48,14 @@ onUnmounted(() => {
 });
 </script>
 <template>
-  <h2>{{ $route.meta.title }}</h2>
+  <h2>{{ t("nav." + $route.meta.title.toLowerCase()) }}</h2>
   <label class="btn btn-primary mt-5" for="new-rate-limit-rule-modal">
     <IconifyIconOnline
       icon="material-symbols:add-circle"
       width="25px"
       height="25px"
       class="mr-2"
-    />
-    New Rule
+    />{{ t("mesh.new rate limit rule") }}
   </label>
   <div class="grid grid-flow-row grid-cols-3 gap-4 mt-5">
     <div class="card col-span-1 shadow border" v-for="s in data.services">
@@ -66,19 +67,10 @@ onUnmounted(() => {
         <h2 class="card-title break-all text-primary text-md">
           {{ s.unique_id }}
         </h2>
-        <div class="flex items-center" v-if="0">
-          <span class="text-xs text-slate-500">API Rate Limit:</span>
-          <div
-            class="badge badge-primary text-xs ml-2"
-            :class="
-              s.api_limiter_is_open === 1 ? 'badge-prmary' : 'badge-secondary'
-            "
-          >
-            {{ s.api_limiter_is_open === 1 ? "Enabled" : "Disabled" }}
-          </div>
-        </div>
         <div class="flex items-center">
-          <span class="text-xs text-slate-500">Server Rate Limit:</span>
+          <span class="text-xs text-slate-500"
+            >{{ t("mesh.Server Rate Limit") }}:</span
+          >
           <div
             class="badge badge-primary text-xs ml-2"
             :class="
@@ -87,15 +79,21 @@ onUnmounted(() => {
                 : 'badge-secondary'
             "
           >
-            {{ s.server_limiter_is_open === 1 ? "Enabled" : "Disabled" }}
+            {{
+              s.server_limiter_is_open === 1
+                ? t("mesh.enabled")
+                : t("mesh.disabled")
+            }}
           </div>
         </div>
 
-        <p class="text-sm font-semibold mt-5">Rule</p>
+        <p class="text-sm font-semibold mt-5">{{ t("mesh.rule") }}</p>
         <div class="leading-5 text-xs">
-          <p class="mt-2 text-slate-500">Max Count in Duration:</p>
+          <p class="mt-2 text-slate-500">
+            {{ t("mesh.Max Count in Duration") }}:
+          </p>
           <p class="break-all">{{ s.server_config?.max || 0 }}</p>
-          <p class="mt-2 text-slate-500">Sample Duration:</p>
+          <p class="mt-2 text-slate-500">{{ t("mesh.Sample Duration") }}:</p>
           <p class="break-all">{{ s.server_config?.duration || 0 }}s</p>
         </div>
       </div>
@@ -111,7 +109,7 @@ onUnmounted(() => {
             icon="material-symbols:add-circle"
             width="30px"
             height="30px"
-          />Load More
+          />{{ t("common.loadmore") }}
         </button>
       </div>
     </div>

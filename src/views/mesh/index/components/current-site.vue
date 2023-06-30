@@ -4,6 +4,8 @@ import { getConfig } from "@/config";
 import { useNostrStore } from "@/store/modules/nostr";
 import { useModalStore } from "@/store/modules/modal";
 import type { Event } from "nostr-tools";
+import { useLang } from "@/hooks/useLang";
+const { t } = useLang();
 
 interface DataType {
   site: {
@@ -51,7 +53,7 @@ const relay = relays.find(i => i.url.includes(url));
           height="40px"
         />
       </div>
-      <div class="stat-title">Current Site</div>
+      <div class="stat-title">{{ t("mesh.current site") }}</div>
       <div class="stat-value text-primary">
         {{ data.site?.cluster || "" }}
       </div>
@@ -66,11 +68,11 @@ const relay = relays.find(i => i.url.includes(url));
           height="40px"
         />
       </div>
-      <div class="stat-title">Services</div>
+      <div class="stat-title">{{ t("mesh.servicesCount") }}</div>
       <div class="stat-value text-secondary">
         {{ data.site?.s_count }}
       </div>
-      <div class="stat-desc">Services this site has</div>
+      <div class="stat-desc">{{ t("mesh.services this site has") }}</div>
     </div>
 
     <div class="stat">
@@ -78,7 +80,7 @@ const relay = relays.find(i => i.url.includes(url));
         <IconifyIconOnline :icon="relay?.flag" width="40px" height="40px" />
       </div>
       <div class="stat-value">{{ relay?.city }}</div>
-      <div class="stat-title">Location</div>
+      <div class="stat-title">{{ t("mesh.location") }}</div>
       <div class="stat-desc text-success">{{ relay?.url }}</div>
     </div>
   </div>
@@ -93,10 +95,12 @@ const relay = relays.find(i => i.url.includes(url));
         width="25px"
         height="25px"
       />
-      <span>Message verified</span>
+      <span>{{ t("common.message verified") }}</span>
     </div>
     <div class="flex-none">
-      <label for="event-modal" class="btn btn-sm btn-ghost">detail</label>
+      <label for="event-modal" class="btn btn-sm btn-ghost">{{
+        t("common.detail")
+      }}</label>
     </div>
   </div>
 </template>

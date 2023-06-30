@@ -5,6 +5,8 @@ import { loadData } from "@/utils/shared";
 import MessageVerified from "@/components/MessageVerified.vue";
 import { useModalStore } from "@/store/modules/modal";
 import type { ActorInfo, HoleInfo } from "./type";
+import { useLang } from "@/hooks/useLang";
+const { t } = useLang();
 
 const modalStore = useModalStore();
 
@@ -61,7 +63,7 @@ const onCallFunction = (h: HoleInfo) => {
 };
 </script>
 <template>
-  <h2>{{ $route.meta.title }}</h2>
+  <h2>{{ t("nav." + $route.meta.title.toLowerCase()) }}</h2>
   <div class="grid grid-cols-3 gap-4 mt-5">
     <progress v-if="loading" class="progress row-span-1" />
     <div
@@ -101,7 +103,7 @@ const onCallFunction = (h: HoleInfo) => {
           <input
             type="number"
             v-model="a.port"
-            placeholder="Port"
+            :placeholder="t('common.port')"
             class="input input-primary mt-5"
           />
 
@@ -115,7 +117,7 @@ const onCallFunction = (h: HoleInfo) => {
               width="25px"
               height="25px"
             />
-            Expose Http
+            {{ t("wasm.Expose Http") }}
           </button>
         </template>
         <template v-else-if="getHole(a.actor_name)">
@@ -136,11 +138,13 @@ const onCallFunction = (h: HoleInfo) => {
               width="25px"
               height="25px"
             />
-            Call Function
+            {{ t("wasm.Call Function") }}
           </label>
         </template>
 
-        <p class="text-sm font-semibold mt-5">More Information</p>
+        <p class="text-sm font-semibold mt-5">
+          {{ t("wasm.More Information") }}
+        </p>
         <div>
           <div
             class="tooltip tooltip-left text-left flex items-center"

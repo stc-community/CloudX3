@@ -3,6 +3,8 @@ import { reactive, ref } from "vue";
 import { getDaoContract } from "@/utils/contract/dao";
 import { useRoute } from "vue-router";
 import { handleEtherError } from "@/utils/shared";
+import { useLang } from "@/hooks/useLang";
+const { t } = useLang();
 
 const route = useRoute();
 
@@ -74,22 +76,22 @@ const handleSubmit = async () => {
           width="25px"
           height="25px"
         />
-        <h3>Publish New API</h3>
+        <h3>{{ t("market.new api") }}</h3>
       </div>
 
       <div class="form-control w-full mt-5">
         <label class="label">
-          <span class="label-text">Name</span>
+          <span class="label-text">{{ t("common.name") }}</span>
         </label>
         <input
           type="text"
-          placeholder="Type here"
+          :placeholder="t('common.type here')"
           v-model="form.name"
           class="input input-primary w-full"
         />
 
         <label class="label">
-          <span class="label-text">Method</span>
+          <span class="label-text">{{ t("market.method") }}</span>
         </label>
         <select class="select select-bordered w-full" v-model="form.method">
           <option v-for="v in ['GET', 'POST', 'DELETE', 'PUT', 'PATCH']">
@@ -102,31 +104,33 @@ const handleSubmit = async () => {
         </label>
         <input
           type="text"
-          placeholder="Type here"
+          :placeholder="t('common.type here')"
           v-model="form.url"
           class="input input-primary w-full"
         />
 
         <label class="label">
-          <span class="label-text">Price</span>
+          <span class="label-text">{{ t("common.price") }}</span>
         </label>
         <div class="w-full flex items-center">
           <input
             type="number"
-            placeholder="Type here"
+            :placeholder="t('common.type here')"
             v-model="form.price"
             class="input input-primary w-[200px]"
           />
-          <span class="text-slate-500 ml-2">Token / Time</span>
+          <span class="text-slate-500 ml-2"
+            >Token / {{ t("market.time") }}</span
+          >
         </div>
 
         <label class="label mt-2">
-          <span class="label-text">Description</span>
+          <span class="label-text">{{ t("common.description") }}</span>
         </label>
         <input
           type="text"
           v-model="form.description"
-          placeholder="Type here"
+          :placeholder="t('common.type here')"
           class="input input-primary w-full"
         />
       </div>
@@ -134,7 +138,7 @@ const handleSubmit = async () => {
       <div class="mt-5" />
       <progress v-if="loading" class="progress progress-primary" />
       <button v-else class="btn btn-primary w-full" @click="handleSubmit">
-        Submit
+        {{ t("common.submit") }}
       </button>
     </div>
   </div>

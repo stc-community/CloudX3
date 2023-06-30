@@ -3,6 +3,8 @@ import { reactive, ref, onMounted } from "vue";
 import { loadData } from "@/utils/shared";
 import MessageVerified from "@/components/MessageVerified.vue";
 import type { Event } from "nostr-tools";
+import { useLang } from "@/hooks/useLang";
+const { t } = useLang();
 
 type ActorMarket = {
   event: Event;
@@ -28,14 +30,14 @@ const decodeCaps = str => {
 };
 </script>
 <template>
-  <h2>{{ $route.meta.title }}</h2>
+  <h2>{{ t("nav." + $route.meta.title.toLowerCase()) }}</h2>
   <label class="btn btn-primary mt-5" for="new-actor-modal">
     <IconifyIconOnline
       icon="simple-icons:wasmer"
       width="20px"
       height="20px"
       class="mr-3"
-    />New Actor
+    />{{ t("wasm.New Actor") }}
   </label>
   <div class="grid grid-cols-3 gap-4 mt-5">
     <progress v-if="loading" class="progress row-span-1" />

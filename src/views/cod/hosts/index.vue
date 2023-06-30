@@ -3,6 +3,8 @@ import { reactive, onMounted, ref } from "vue";
 import type { Event } from "nostr-tools";
 import { loadData } from "@/utils/shared";
 import MessageVerified from "@/components/MessageVerified.vue";
+import { useLang } from "@/hooks/useLang";
+const { t } = useLang();
 
 type HostInfo = {
   event: Event;
@@ -23,7 +25,7 @@ onMounted(async () => {
 });
 </script>
 <template>
-  <h2>{{ $route.meta.title }}</h2>
+  <h2>{{ t("nav." + $route.meta.title.toLowerCase()) }}</h2>
   <div class="grid grid-cols-3 gap-4 mt-5">
     <progress v-if="loading" class="progress row-span-1" />
 
@@ -44,20 +46,20 @@ onMounted(async () => {
         </h2>
         <p class="text-sm break-all text-slate-600">{{ h.host_id }}</p>
 
-        <p class="text-sm font-semibold mt-5">Information</p>
+        <p class="text-sm font-semibold mt-5">{{ t("wasm.Information") }}</p>
         <div class="leading-6 text-slate-500">
           <p>
-            ARCH:
+            {{ t("wasm.arch") }}:
             <span class="text-base-content">{{
               h.labels["hostcore.arch"]
             }}</span>
           </p>
           <p>
-            OS:
+            {{ t("wasm.os") }}:
             <span class="text-base-content">{{ h.labels["hostcore.os"] }}</span>
           </p>
           <p>
-            OS Famliy:
+            {{ t("wasm.os-family") }}:
             <span class="text-base-content">{{
               h.labels["hostcore.osfamily"]
             }}</span>

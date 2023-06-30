@@ -5,6 +5,8 @@ import { getRequestID } from "@/utils/contract/web3";
 import { reactive, onBeforeUnmount, computed } from "vue";
 import { getConfig } from "@/config";
 import { useNostrStore } from "@/store/modules/nostr";
+import { useLang } from "@/hooks/useLang";
+const { t } = useLang();
 
 defineOptions({
   name: "cod-call"
@@ -107,13 +109,13 @@ const handleCheck = async () => {
           width="25px"
           height="25px"
         />
-        <h3>Call Function</h3>
+        <h3>{{ t("wasm.Call Function") }}</h3>
       </div>
       <div class="form-control mt-8">
         <input
           type="text"
           v-model="data.requestPath"
-          placeholder="Type your request path here"
+          :placeholder="t('wasm.Type your request path here')"
           class="input input-bordered input-primary w-full"
         />
         <p class="text-xs text-primary mt-1 mb-1">
@@ -121,7 +123,7 @@ const handleCheck = async () => {
         </p>
         <textarea
           class="textarea textarea-primary h-[100px] mt-2"
-          placeholder="Type your request data"
+          :placeholder="t('wasm.Type your request data')"
           v-model="data.requestData"
         />
         <div class="mt-2">
@@ -134,7 +136,7 @@ const handleCheck = async () => {
             class="btn btn-primary w-full mt-5"
             @click="handleSubmit"
           >
-            Submit
+            {{ t("common.submit") }}
           </button>
         </div>
       </div>
@@ -142,7 +144,7 @@ const handleCheck = async () => {
         v-if="data.hash"
         class="text-left mt-2 border border-primary rounded-md p-2 text-slate-500 text-sm"
       >
-        <p class="uppercase">Transaction</p>
+        <p class="uppercase">{{ t("common.transaction") }}</p>
         <a
           class="link link-primary text-xs break-all leading-3"
           target="_blank"
@@ -150,10 +152,10 @@ const handleCheck = async () => {
           >{{ data.hash }}</a
         >
 
-        <p class="uppercase mt-5">Request ID</p>
+        <p class="uppercase mt-5">{{ t("wasm.Request ID") }}</p>
         <p class="text-xs text-primary break-all">{{ data.requestID }}</p>
 
-        <p class="uppercase mt-5">Result</p>
+        <p class="uppercase mt-5">{{ t("wasm.Result") }}</p>
         <pre v-if="data.resReady" class="text-xs text-primary break-all">{{
           data.res
         }}</pre>

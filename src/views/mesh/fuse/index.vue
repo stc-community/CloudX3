@@ -3,6 +3,8 @@ import { onMounted, reactive, ref, onUnmounted } from "vue";
 import { loadData } from "@/utils/shared";
 import bus from "@/utils/event-bus";
 import MessageVerified from "@/components/MessageVerified.vue";
+import { useLang } from "@/hooks/useLang";
+const { t } = useLang();
 
 const data = reactive({
   services: [],
@@ -57,7 +59,7 @@ const getFuseTypeText = type => {
 };
 </script>
 <template>
-  <h2>{{ $route.meta.title }}</h2>
+  <h2>{{ t("nav." + $route.meta.title.toLowerCase()) }}</h2>
   <label class="btn btn-primary mt-5" for="new-fuse-rule-modal">
     <IconifyIconOnline
       icon="material-symbols:add-circle"
@@ -65,7 +67,7 @@ const getFuseTypeText = type => {
       height="25px"
       class="mr-2"
     />
-    New Rule
+    {{ t("mesh.new fuse rule") }}
   </label>
   <div class="grid grid-flow-row grid-cols-3 gap-4 mt-5">
     <div class="card col-span-1 shadow border" v-for="s in data.services">
@@ -81,26 +83,28 @@ const getFuseTypeText = type => {
           class="badge badge-primary text-xs"
           :class="s.is_open === 1 ? 'badge-prmary' : 'badge-secondary'"
         >
-          {{ s.is_open === 1 ? "Enabled" : "Disabled" }}
+          {{ s.is_open === 1 ? t("mesh.enabled") : t("mesh.disabled") }}
         </div>
 
-        <p class="text-sm font-semibold mt-5">Rule</p>
+        <p class="text-sm font-semibold mt-5">{{ t("mesh.rule") }}</p>
         <div class="leading-5 text-xs">
-          <p class="mt-2 text-slate-500">Child Service:</p>
+          <p class="mt-2 text-slate-500">{{ t("mesh.child service") }}:</p>
           <p class="break-all">{{ s.child_unique_id }}</p>
-          <p class="mt-2 text-slate-500">Rule Type:</p>
+          <p class="mt-2 text-slate-500">{{ t("mesh.rule type") }}:</p>
           <p class="break-all">{{ getFuseTypeText(s.rule_type) }}</p>
-          <p class="mt-2 text-slate-500">Target:</p>
+          <p class="mt-2 text-slate-500">{{ t("mesh.target") }}:</p>
           <p class="break-all">{{ s.target }}</p>
-          <p class="mt-2 text-slate-500">Max Requests:</p>
+          <p class="mt-2 text-slate-500">{{ t("mesh.max requests") }}:</p>
           <p class="break-all">{{ s.max_requests }}</p>
-          <p class="mt-2 text-slate-500">Interval:</p>
+          <p class="mt-2 text-slate-500">{{ t("mesh.interval") }}:</p>
           <p class="break-all">{{ s.interval }}s</p>
-          <p class="mt-2 text-slate-500">Error Percent:</p>
+          <p class="mt-2 text-slate-500">{{ t("mesh.error percent") }}:</p>
           <p class="break-all">{{ s.error_percent }}%</p>
-          <p class="mt-2 text-slate-500">Serial Error Numbers:</p>
+          <p class="mt-2 text-slate-500">
+            {{ t("mesh.serial error numbers") }}:
+          </p>
           <p class="break-all">{{ s.serial_error_numbers }}</p>
-          <p class="mt-2 text-slate-500">Open Timeout:</p>
+          <p class="mt-2 text-slate-500">{{ t("mesh.open timeout") }}:</p>
           <p class="break-all">{{ s.open_timeout }}s</p>
         </div>
       </div>
@@ -116,7 +120,7 @@ const getFuseTypeText = type => {
             icon="material-symbols:add-circle"
             width="30px"
             height="30px"
-          />Load More
+          />{{ t("common.loadmore") }}
         </button>
       </div>
     </div>

@@ -4,6 +4,8 @@ import { getDaoContract } from "@/utils/contract/dao";
 import type { DAO } from "@/utils/contract/dao";
 import { NFTStorage } from "nft.storage";
 import { handleEtherError } from "@/utils/shared";
+import { useLang } from "@/hooks/useLang";
+const { t } = useLang();
 
 const NFT_STORAGE_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDBEOGQ3MEI2MGZmYjBDODcwRGFBZDA4MTU1QWIxNmRDYjBFNDA3NjgiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY3OTMwNDA0OTU3MiwibmFtZSI6InN0YyJ9.jQu1V6HT58PB1pipWj7FVEkk0y7g_Ey2iY87i80KMHU";
@@ -107,32 +109,32 @@ const handleFileChange = async (e: Event) => {
           width="25px"
           height="25px"
         />
-        <h3>New Market</h3>
+        <h3>{{ t("market.New Market") }}</h3>
       </div>
 
       <div class="form-control w-full mt-5">
         <label class="label">
-          <span class="label-text">Name</span>
+          <span class="label-text">{{ t("common.name") }}</span>
         </label>
         <input
           type="text"
-          placeholder="Type here"
+          :placeholder="t('common.type here')"
           v-model="form.name"
           class="input input-primary w-full"
         />
 
         <label class="label mt-2">
-          <span class="label-text">Description</span>
+          <span class="label-text">{{ t("common.description") }}</span>
         </label>
         <input
           type="text"
           v-model="form.description"
-          placeholder="Type here"
+          :placeholder="t('common.type here')"
           class="input input-primary w-full"
         />
 
         <label class="label">
-          <span class="label-text">Image</span>
+          <span class="label-text">{{ t("market.image") }}</span>
         </label>
         <div class="flex">
           <div class="avatar" v-if="imageData">
@@ -154,7 +156,9 @@ const handleFileChange = async (e: Event) => {
         </div>
 
         <label class="label mt-2">
-          <span class="label-text">User Join Fields Configuration</span>
+          <span class="label-text">{{
+            t("market.User Join Fields Configuration")
+          }}</span>
         </label>
         <div
           class="grid grid-cols-5 gap-3 mb-2"
@@ -177,14 +181,14 @@ const handleFileChange = async (e: Event) => {
             @click="handleClickAdd"
             v-if="k === configuration.length - 1"
           >
-            Add
+            {{ t("market.add") }}
           </button>
           <button
             class="btn btn-error col-span-1 text-white"
             @click="handleClickRemove(k)"
             v-else
           >
-            Remove
+            {{ t("market.remove") }}
           </button>
         </div>
       </div>
@@ -192,7 +196,7 @@ const handleFileChange = async (e: Event) => {
       <div class="mt-5" />
       <progress v-if="loading" class="progress progress-primary" />
       <button v-else class="btn btn-primary w-full" @click="handleSubmit">
-        Submit
+        {{ t("common.submit") }}
       </button>
     </div>
   </div>

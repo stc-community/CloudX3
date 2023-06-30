@@ -1,45 +1,19 @@
 <script setup lang="ts">
 import { getConfig } from "@/config";
+import { useLang } from "@/hooks/useLang";
+const { t } = useLang();
 
 const relays = getConfig().Relay;
 </script>
 
 <template>
-  <div class="stats shadow" v-if="0">
-    <div class="stat">
-      <div class="stat-figure text-secondary">
-        <IconifyIconOnline
-          icon="carbon:assembly-cluster"
-          width="40px"
-          height="40px"
-        />
-      </div>
-      <div class="stat-title">Sites</div>
-      <div class="stat-value">2</div>
-      <div class="stat-desc" />
-    </div>
-
-    <div class="stat">
-      <div class="stat-figure text-secondary">
-        <IconifyIconOnline
-          icon="healthicons:provider-fst"
-          width="40px"
-          height="40px"
-        />
-      </div>
-      <div class="stat-title">Services</div>
-      <div class="stat-value">4,200</div>
-      <div class="stat-desc">↗︎ 400 (22%)</div>
-    </div>
-  </div>
-
   <table class="table w-full">
     <!-- head -->
     <thead>
       <tr>
         <th />
-        <th>Name</th>
-        <th>Location</th>
+        <th>{{ t("common.name") }}</th>
+        <th>{{ t("mesh.location") }}</th>
         <th>URL</th>
       </tr>
     </thead>

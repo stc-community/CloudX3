@@ -6,9 +6,9 @@ import { useLang } from "@/hooks/useLang";
 const { t } = useLang();
 import dayjs from "dayjs";
 
-const loading = ref(false);
+const loading = ref(true);
 const data = reactive({});
-const loadingMem = ref(false);
+const loadingMem = ref(true);
 const memData = reactive({});
 onBeforeUnmount(() => {
   EventBus.off("showServiceMonitor");
@@ -108,7 +108,7 @@ const makeData = arr => {
       },
       tooltip: {
         x: {
-          format: "yy-MM-dd HH:mm"
+          format: "yyyy-MM-dd HH:mm:ss"
         }
       }
     }

@@ -16,6 +16,7 @@ import NewPod from "./components/Modal/new-pod.vue";
 import MonitorModal from "./components/Modal/monitor-modal.vue";
 import newFuseRule from "./components/Modal/new-fuse-rule.vue";
 import newRateLimitRule from "./components/Modal/new-rate-limit-rule.vue";
+import ServiceMonitorModal from "./components/Modal/service-monitor-modal.vue";
 
 defineOptions({
   name: "app"
@@ -46,4 +47,5 @@ onBeforeMount(async () => {
   <MonitorModal />
   <newFuseRule />
   <newRateLimitRule />
+  <ServiceMonitorModal />
 </template>

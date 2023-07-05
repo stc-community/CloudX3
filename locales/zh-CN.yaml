@@ -170,6 +170,8 @@ mesh:
   "Enabled this rule": 启用这个规则
   "Pick your rate limit status": 选择限流状态
 
+  "service monitor": 服务监控
+
 wasm:
   Information: 信息
   arch: 架构

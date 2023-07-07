@@ -170,6 +170,8 @@ mesh:
   "Enabled this rule": Enabled this rule
   "Pick your rate limit status": Pick your rate limit status
 
+  "service monitor": Service Monitor
+
 wasm:
   "Information": Information
   arch: ARCH

@@ -65,6 +65,11 @@ onMounted(async () => {
 onUnmounted(() => {
   bus.off("refreshServices");
 });
+
+// 监控相关
+const onMonitor = service => {
+  bus.emit("showServiceMonitor", service);
+};
 </script>
 <template>
   <h2>{{ t("nav." + $route.meta.title.toLowerCase()) }}</h2>
@@ -114,6 +119,20 @@ onUnmounted(() => {
           </label>
         </h2>
         <p class="text-sm text-slate-400">{{ s.unique_id }}</p>
+
+        <label
+          for="service-monitor-modal"
+          class="btn btn-primary w-[150px]"
+          @click="onMonitor(s)"
+        >
+          <IconifyIconOnline
+            icon="ph:chart-line-bold"
+            class="mr-2"
+            width="25px"
+            height="25px"
+          />
+          {{ t("container.monitor") }}</label
+        >
 
         <p class="text-sm font-semibold mt-5">{{ t("mesh.metadata") }}</p>
         <div class="leading-5 text-xs">

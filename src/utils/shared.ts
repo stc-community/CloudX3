@@ -1,4 +1,5 @@
 import type { Event } from "nostr-tools";
+import { generatePrivateKey } from "nostr-tools";
 import type { Ref } from "vue";
 import { useNostrStore } from "@/store/modules/nostr";
 import { useModalStore } from "@/store/modules/modal";
@@ -152,4 +153,18 @@ export function handleEtherError(error: EthersError) {
 
 export function md5(str: string) {
   return CryptoJS.MD5(str).toString();
+}
+
+export function getNewNostrPrivateKey() {
+  const id64 = generatePrivateKey();
+
+  return "0x" + id64;
+}
+
+export function encrypt(text: string, key = "STC") {
+  return CryptoJS.AES.encrypt(text, key).toString();
+}
+
+export function decrypt(text: string, key = "STC") {
+  return CryptoJS.AES.decrypt(text, key).toString(CryptoJS.enc.Utf8);
 }

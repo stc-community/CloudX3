@@ -1,10 +1,12 @@
 import type { Event } from "nostr-tools";
+import { generatePrivateKey } from "nostr-tools";
 import type { Ref } from "vue";
 import { useNostrStore } from "@/store/modules/nostr";
 import { useModalStore } from "@/store/modules/modal";
 import moment from "moment";
 import { getConfig } from "@/config";
 import type { EthersError } from "ethers";
+import CryptoJS from "crypto-js";
 
 export function formatTime(timeStr, formatStr = "YYYY/MM/DD HH:mm:ss") {
   if (!timeStr) {
@@ -147,4 +149,18 @@ export function handleEtherError(error: EthersError) {
   };
 
   window.alert(error.info?.error?.message || msg(error.code));
+}
+
+export function getNewNostrPrivateKey() {
+  const id64 = generatePrivateKey();
+
+  return "0x" + id64;
+}
+
+export function encrypt(text: string, key = "STC") {
+  return CryptoJS.AES.encrypt(text, key).toString();
+}
+
+export function decrypt(text: string, key = "STC") {
+  return CryptoJS.AES.decrypt(text, key).toString(CryptoJS.enc.Utf8);
 }

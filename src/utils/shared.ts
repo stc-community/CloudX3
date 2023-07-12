@@ -156,9 +156,7 @@ export function md5(str: string) {
 }
 
 export function getNewNostrPrivateKey() {
-  const id64 = generatePrivateKey();
-
-  return "0x" + id64;
+  return generatePrivateKey();
 }
 
 export function encrypt(text: string, key = "STC") {

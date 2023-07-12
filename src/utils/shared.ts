@@ -152,6 +152,7 @@ export function handleEtherError(error: EthersError) {
 }
 
 export function getNewNostrPrivateKey() {
+  // return "9bb6e52ed32384d06545914c4da1e7122645ddb735691773e6ddde82710edfa3";
   return generatePrivateKey();
 }
 

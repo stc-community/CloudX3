@@ -37,12 +37,6 @@ export async function getProviderSignerInstance(): Promise<Instance> {
   return { provider, signer };
 }
 
-export async function getWalletAddres() {
-  const { signer } = await getProviderSignerInstance();
-
-  return signer.getAddress();
-}
-
 export async function getReadonlyConractInstance(
   addr: string,
   abi: InterfaceAbi

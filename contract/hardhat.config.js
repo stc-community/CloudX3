@@ -58,7 +58,7 @@ module.exports = {
       chainId: 11155111
     }
   },
-  defaultNetwork: "calibration",
+  defaultNetwork: "sepolia",
   gasReporter: {
     enabled: REPORT_GAS,
     currency: "USD",

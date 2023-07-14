@@ -103,7 +103,26 @@
         "type": "string"
       }
     ],
-    "name": "RequestMspContainerDeployFulfilled",
+    "name": "RequestContainerDeployFulfilled",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "requestId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "deleteStatus",
+        "type": "string"
+      }
+    ],
+    "name": "RequestDeleteDeployFulfilled",
     "type": "event"
   },
   {
@@ -111,6 +130,66 @@
     "name": "acceptOwnership",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_addr",
+        "type": "address"
+      }
+    ],
+    "name": "addressToString",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "_requestId",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_payment",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes4",
+        "name": "_callbackFunctionId",
+        "type": "bytes4"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_expiration",
+        "type": "uint256"
+      }
+    ],
+    "name": "cancelRequest",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "currentDeleteStatus",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -127,55 +206,19 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "owner",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "to",
-        "type": "address"
-      }
-    ],
-    "name": "transferOwnership",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_oracle",
-        "type": "address"
+        "internalType": "bytes32",
+        "name": "_requestId",
+        "type": "bytes32"
       },
       {
         "internalType": "string",
-        "name": "_jobId",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "_deploy_code",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "_request_url",
+        "name": "_deploy_status",
         "type": "string"
       }
     ],
-    "name": "requestMspContainerDeploy",
+    "name": "fulfillDeleteStatus",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -213,35 +256,46 @@
   },
   {
     "inputs": [],
-    "name": "withdrawLink",
-    "outputs": [],
-    "stateMutability": "nonpayable",
+    "name": "owner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
       {
-        "internalType": "bytes32",
-        "name": "_requestId",
-        "type": "bytes32"
+        "internalType": "address",
+        "name": "_oracle",
+        "type": "address"
       },
       {
-        "internalType": "uint256",
-        "name": "_payment",
-        "type": "uint256"
+        "internalType": "string",
+        "name": "_jobId",
+        "type": "string"
       },
       {
-        "internalType": "bytes4",
-        "name": "_callbackFunctionId",
-        "type": "bytes4"
+        "internalType": "string",
+        "name": "_deploy_code",
+        "type": "string"
       },
       {
-        "internalType": "uint256",
-        "name": "_expiration",
-        "type": "uint256"
+        "internalType": "string",
+        "name": "_request_url",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_public_key",
+        "type": "string"
       }
     ],
-    "name": "cancelRequest",
+    "name": "requestContainerDeploy",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -250,19 +304,48 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_addr",
+        "name": "_oracle",
         "type": "address"
-      }
-    ],
-    "name": "addressToString",
-    "outputs": [
+      },
       {
         "internalType": "string",
-        "name": "",
+        "name": "_jobId",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_request_url",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_public_key",
         "type": "string"
       }
     ],
-    "stateMutability": "pure",
+    "name": "requestDeleteDeploy",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "to",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "withdrawLink",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   }
 ]

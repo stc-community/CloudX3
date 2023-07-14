@@ -21,7 +21,7 @@ export async function getProviderSignerInstance(): Promise<Instance> {
       // only have read-only access
       // @ts-ignore
       provider = ethers.getDefaultProvider();
-      window.alert("MetaMask not installed; using read-only defaults");
+      window.metamask_required.showModal();
     } else {
       // Connect to the MetaMask EIP-1193 object. This is a standard
       // protocol that allows Ethers access to make all read-only
@@ -29,6 +29,8 @@ export async function getProviderSignerInstance(): Promise<Instance> {
       provider = new ethers.BrowserProvider(window.ethereum);
       signer = await provider.getSigner();
     }
+
+    switchNetworkIfNeed();
   }
 
   // console.log("provider", provider);
@@ -65,4 +67,23 @@ export function getRequestID(len = 0) {
   }
 
   return "0x" + id64;
+}
+
+function switchNetworkIfNeed() {
+  const targetChainId = "0xaa36a7"; // 目标网络的 chainId
+
+  window.ethereum.on("chainChanged", chainId => {
+    // 刷新页面
+    window.location.reload();
+  });
+
+  // 获取当前所连接的网络的 chainId
+  window.ethereum.request({ method: "eth_chainId" }).then(currentChainId => {
+    if (currentChainId === targetChainId) return;
+
+    window.ethereum.request({
+      method: "wallet_switchEthereumChain",
+      params: [{ chainId: targetChainId }]
+    });
+  });
 }

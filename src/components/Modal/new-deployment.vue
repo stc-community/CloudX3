@@ -6,14 +6,16 @@ import eventBus from "@/utils/event-bus";
 import { getCurrentSiteName } from "@/utils/shared";
 import { useLang } from "@/hooks/useLang";
 const { t } = useLang();
+import { useAccountStore } from "@/store/modules/account";
+const accountStore = useAccountStore();
 
 defineOptions({
   name: "deployment-modal"
 });
 
 const PARAM = {
-  jobID: "273cd4ca220749c5831e598f718f11d6",
-  oracle: "0x248E10ec1C54CB570F7A15933286BAa1D59B70c0"
+  jobID: "68c1dc5cd63841459ff2395a931f042c",
+  oracle: "0xC1A56c1c85a4D957a513719FdB30eac50a861433"
 };
 
 const data = reactive({
@@ -36,7 +38,7 @@ const listenIfNeeded = () => {
   contract.on("*", (event: EventLog) => {
     const name = event.fragment.name;
 
-    if (name !== "RequestMspContainerDeployFulfilled") return;
+    if (name !== "requestContainerDeployFulfilled") return;
 
     data.resReady = true;
     eventBus.emit("deploymentSuccess", true);
@@ -52,13 +54,14 @@ const handleSubmit = async () => {
   listenIfNeeded();
 
   try {
-    const transaction = await contract.requestMspContainerDeploy(
+    const transaction = await contract.requestContainerDeploy(
       PARAM.oracle,
       PARAM.jobID,
       window.btoa(data.requestData),
       `https://stc-test.${getCurrentSiteName(
         "gw"
-      )}.oneitfarm.com/brige/providers/deployment`
+      )}.oneitfarm.com/brige/providers/deployment`,
+      accountStore.publicKey
     );
 
     await transaction.wait();

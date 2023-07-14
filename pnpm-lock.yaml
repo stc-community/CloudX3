@@ -16,6 +16,9 @@ dependencies:
   axios:
     specifier: ^1.2.1
     version: 1.2.1
+  crypto-js:
+    specifier: ^4.1.1
+    version: 4.1.1
   daisyui:
     specifier: ^3.2.1
     version: 3.2.1
@@ -2281,6 +2284,10 @@ packages:
       shebang-command: 2.0.0
       which: 2.0.2
     dev: true
+
+  /crypto-js@4.1.1:
+    resolution: {integrity: sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==}
+    dev: false
 
   /css-declaration-sorter@6.3.1(postcss@8.4.20):
     resolution: {integrity: sha512-fBffmak0bPAnyqc/HO8C3n2sHrp9wcqQz6ES9koRF2/mLOVAx9zIQ3Y7R29sYCteTPqMCwns4WYQoCX91Xl3+w==}

@@ -3,13 +3,9 @@ import { getPodContract, PARAM } from "@/utils/contract/pod";
 import { reactive, onBeforeUnmount } from "vue";
 import type { EventLog } from "ethers";
 import eventBus from "@/utils/event-bus";
-import { getCurrentSiteName } from "@/utils/shared";
+import { getCurrentSiteName, md5 } from "@/utils/shared";
 import { useAccountStore } from "@/store/modules/account";
 const accountStore = useAccountStore();
-
-defineOptions({
-  name: "pod-modal"
-});
 
 const data = reactive({
   res: "",
@@ -56,7 +52,7 @@ const handleSubmit = async () => {
       `https://stc-test.${getCurrentSiteName(
         "gw"
       )}.oneitfarm.com/brige/providers/pod`,
-      accountStore.publicKey
+      md5(accountStore.publicKey)
     );
 
     await transaction.wait();

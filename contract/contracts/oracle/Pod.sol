@@ -3,6 +3,7 @@ pragma solidity ^0.7.6;
 
 import "@chainlink/contracts/src/v0.7/ChainlinkClient.sol";
 import "@chainlink/contracts/src/v0.7/ConfirmedOwner.sol";
+import "../Config.sol";
 
 
 /**
@@ -10,11 +11,11 @@ import "@chainlink/contracts/src/v0.7/ConfirmedOwner.sol";
  * DO NOT USE THIS CODE IN PRODUCTION.
  */
 
-contract ContainerPod is ChainlinkClient, ConfirmedOwner {
+contract ContainerPod is ChainlinkClient, ConfirmedOwner, Config {
   using Chainlink for Chainlink.Request;
 
   uint256 private constant ORACLE_PAYMENT = (1 * LINK_DIVISIBILITY) / 10; // 0.1 * 10**18
-  string public currentPodStatus;
+  string public currentDeployStatus;
   string public currentDeleteStatus;
 
   event RequestContainerPodFulfilled(
@@ -43,8 +44,8 @@ contract ContainerPod is ChainlinkClient, ConfirmedOwner {
     string memory _jobId,
     string memory _pod_code,
     string memory _request_url,
-    string memory _userId
-  ) public {
+    address _userAddress
+  ) public onlyBeGrant(_userAddress) {
     Chainlink.Request memory req = buildChainlinkRequest(
       stringToBytes32(_jobId),
       address(this),
@@ -52,7 +53,7 @@ contract ContainerPod is ChainlinkClient, ConfirmedOwner {
     );
     req.add("post",_request_url);
     req.add("yaml", _pod_code);
-    req.add("userid", _userId);
+    req.add("userid", addressToString(_userAddress));
     address from = msg.sender;
     req.add("sender",addressToString(from));
     sendChainlinkRequestTo(_oracle, req, ORACLE_PAYMENT);
@@ -72,14 +73,16 @@ contract ContainerPod is ChainlinkClient, ConfirmedOwner {
   function requestDeletePod(
     address _oracle,
     string memory _jobId,
-    string memory _request_url
-  ) public {
+    string memory _request_url,
+    address _userAddress
+  ) public onlyBeGrant(_userAddress) {
     Chainlink.Request memory req = buildChainlinkRequest(
       stringToBytes32(_jobId),
       address(this),
       this.fulfillDeleteStatus.selector
     );
     req.add("delete",_request_url);
+    req.add("userid", addressToString(_userAddress));
     sendChainlinkRequestTo(_oracle, req, ORACLE_PAYMENT);
   }
 

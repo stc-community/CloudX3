@@ -192,3 +192,9 @@ wasm:
   Capabilities: Capabilities
 
   "New Actor": New Actor
+
+tips:
+  title: Hey
+  description: We use MetaMask to connect blockchain, please install it first
+  btn1: Go and Install
+  btn2: Close Modal

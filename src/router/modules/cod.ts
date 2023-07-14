@@ -54,9 +54,9 @@ export default {
       }
     },
     {
-      path: "/cod/actors/editor",
-      name: "cod.actors.editor",
-      component: () => import("@/views/cod/actors/editor.vue"),
+      path: "/cod/editor",
+      name: "cod.editor",
+      component: () => import("@/views/cod/editor/index.vue"),
       meta: {
         title: "Editor",
         icon: "mdi:pencil-ruler-outline"

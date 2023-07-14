@@ -60,7 +60,7 @@ const listenIfNeeded = () => {
   contract.on("*", (event: EventLog) => {
     console.log("on chain event", event);
     const name = event.fragment.name;
-    if (name !== "RequestMspContainerDeployFulfilled") return;
+    if (name !== "requestContainerDeployFulfilled") return;
   });
 };
 const submitting = ref(false);

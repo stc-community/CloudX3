@@ -4,6 +4,8 @@ import { reactive, onBeforeUnmount } from "vue";
 import type { EventLog } from "ethers";
 import eventBus from "@/utils/event-bus";
 import { getCurrentSiteName } from "@/utils/shared";
+import { useAccountStore } from "@/store/modules/account";
+const accountStore = useAccountStore();
 
 defineOptions({
   name: "pod-modal"
@@ -31,7 +33,7 @@ const listenIfNeeded = () => {
 
     // console.log("On chain event", event);
 
-    if (name !== "RequestMspContainerPodFulfilled") return;
+    if (name !== "RequestContainerPodFulfilled") return;
 
     data.resReady = true;
     eventBus.emit("podSuccess", true);
@@ -47,13 +49,14 @@ const handleSubmit = async () => {
   listenIfNeeded();
 
   try {
-    const transaction = await contract.requestMspContainerPod(
+    const transaction = await contract.requestContainerPod(
       PARAM.oracle,
       PARAM.jobID,
       window.btoa(data.requestData),
       `https://stc-test.${getCurrentSiteName(
         "gw"
-      )}.oneitfarm.com/brige/providers/pod`
+      )}.oneitfarm.com/brige/providers/pod`,
+      accountStore.publicKey
     );
 
     await transaction.wait();

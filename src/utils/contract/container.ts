@@ -2,7 +2,7 @@ import { getWritebleContractInstance } from "./web3";
 
 // @ts-ignore
 import ABI from "./container-abi.json?raw";
-const ADDR = "0xb24d97a542aF908248163bB76c006e099877a1e6";
+const ADDR = "0x70F4C5425bf1eAcd1fcfdaC5BfF5393EF45cA53E";
 
 export async function getContainerContract() {
   const contract = await getWritebleContractInstance(ADDR, ABI);

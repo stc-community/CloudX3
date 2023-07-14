@@ -5,6 +5,7 @@ import { useModalStore } from "@/store/modules/modal";
 import moment from "moment";
 import { getConfig } from "@/config";
 import type { EthersError } from "ethers";
+import CryptoJS from "crypto-js";
 
 export function formatTime(timeStr, formatStr = "YYYY/MM/DD HH:mm:ss") {
   if (!timeStr) {
@@ -147,4 +148,8 @@ export function handleEtherError(error: EthersError) {
   };
 
   window.alert(error.info?.error?.message || msg(error.code));
+}
+
+export function md5(str: string) {
+  return CryptoJS.MD5(str).toString();
 }

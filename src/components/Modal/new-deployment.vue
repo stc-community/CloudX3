@@ -3,7 +3,7 @@ import { getContainerContract } from "@/utils/contract/container";
 import { reactive, onBeforeUnmount } from "vue";
 import type { EventLog } from "ethers";
 import eventBus from "@/utils/event-bus";
-import { getCurrentSiteName } from "@/utils/shared";
+import { getCurrentSiteName, md5 } from "@/utils/shared";
 import { useLang } from "@/hooks/useLang";
 const { t } = useLang();
 import { useAccountStore } from "@/store/modules/account";
@@ -38,7 +38,10 @@ const listenIfNeeded = () => {
   contract.on("*", (event: EventLog) => {
     const name = event.fragment.name;
 
-    if (name !== "requestContainerDeployFulfilled") return;
+    // console.log("event listened", name);
+    // console.log("event", event);
+
+    if (name !== "RequestContainerDeployFulfilled") return;
 
     data.resReady = true;
     eventBus.emit("deploymentSuccess", true);
@@ -61,7 +64,7 @@ const handleSubmit = async () => {
       `https://stc-test.${getCurrentSiteName(
         "gw"
       )}.oneitfarm.com/brige/providers/deployment`,
-      accountStore.publicKey
+      md5(accountStore.publicKey)
     );
 
     await transaction.wait();

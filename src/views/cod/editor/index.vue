@@ -13,81 +13,57 @@ const nodeTypes: NodeComponent = {
 };
 
 const elements = ref<Element[]>([
-  // Nodes
-  // An input node, specified by using `type: 'input'`
-  { id: "1", type: "input", label: "Node 1", position: { x: 250, y: 5 } },
-
   {
-    id: "actor1",
+    id: "a1",
     type: "actor",
     label: "Actor Node 1",
     width: 350,
     height: 100,
-    position: { x: 100, y: 300 },
+    position: { x: 100, y: 50 },
     data: {
-      title: "actor title",
-      caps: ["cap1", "cap2", "cap3"]
+      title: "Echo",
+      caps: ["wasmcloud:httpserver", "wasmcloud:keyvalue"]
     }
   },
 
   {
-    id: "provider1",
+    id: "p1",
     type: "provider",
     label: "provider Node 1",
     width: 350,
     height: 100,
-    position: { x: 500, y: 300 },
+    position: { x: 500, y: 50 },
     data: {
-      title: "provider title",
-      cap: "cap1"
+      title: "HTTP Server(default)",
+      cap: "wasmcloud:httpserver"
+    }
+  },
+
+  {
+    id: "p2",
+    type: "provider",
+    width: 350,
+    height: 100,
+    position: { x: 500, y: 200 },
+    data: {
+      title: "Redis Keyvalue Store(default)",
+      cap: "wasmcloud:keyvalue"
     }
   },
 
   {
     id: "link1",
-    source: "actor1",
-    target: "provider1",
+    source: "a1",
+    target: "p1",
     animated: true
   },
   {
     id: "link2",
-    source: "actor1",
+    source: "a1",
     sourceHandle: "a-1",
-    target: "provider1",
+    target: "p2",
     animated: true
-  },
-
-  // {
-  //   id: "cap1",
-  //   type: "cap",
-  //   label: "Cap Node 1",
-  //   parentNode: "actor1",
-  //   draggable: true,
-  //   position: { x: 10, y: 30 }
-  // },
-
-  // {
-  //   id: "cap2",
-  //   type: "cap",
-  //   label: "Cap Node 2",
-  //   parentNode: "actor1",
-  //   draggable: false,
-  //   position: { x: 10, y: 70 }
-  // },
-
-  // Default nodes, you can omit `type: 'default'`
-  { id: "2", label: "Node 2", position: { x: 100, y: 100 } },
-  { id: "3", label: "Node 3", position: { x: 400, y: 100 } },
-
-  // An output node, specified by using `type: 'output'`
-  { id: "4", type: "output", label: "Node 4", position: { x: 400, y: 200 } },
-
-  // Edges
-  // Most basic edge, only consists of an id, source-id and target-id
-  { id: "e1-3", source: "1", target: "3" },
-
-  // An animated edge
-  { id: "e1-2", source: "1", target: "2", animated: true }
+  }
 ]);
 </script>
 <template>

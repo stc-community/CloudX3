@@ -10,7 +10,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="border-2 border-primary rounded-lg px-4 py-3">
+  <div class="border-2 border-primary rounded-lg px-4 py-3 active:shadow-2xl">
     <div class="font-bold text-sm mb-3 flex items-center">
       <IconifyIconOnline
         class="text-primary mr-2"

@@ -83,5 +83,23 @@
       <div class="loader"></div>
     </div>
     <script type="module" src="/src/main.ts"></script>
+    <dialog id="metamask_required" class="modal">
+      <form method="dialog" class="modal-box">
+        <h3 class="font-bold text-lg">Hey,</h3>
+        <p class="py-4">
+          We use MetaMask to connect blockchain, please install it first
+        </p>
+        <div class="modal-action">
+          <!-- if there is a button in form, it will close the modal -->
+          <a
+            class="btn btn-outline btn-primary"
+            href="https://metamask.io/"
+            target="__blank"
+            >Go and Install</a
+          >
+          <button class="btn">Close</button>
+        </div>
+      </form>
+    </dialog>
   </body>
 </html>

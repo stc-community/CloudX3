@@ -139,6 +139,8 @@ export function handleEtherError(error: EthersError) {
   console.log(error.info);
 
   const msg = codeStr => {
+    if (!codeStr) return "";
+
     const words = codeStr.split("_");
     const formattedWords = words.map(
       word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
@@ -148,7 +150,11 @@ export function handleEtherError(error: EthersError) {
     return output + " .";
   };
 
-  window.alert(error.info?.error?.message || msg(error.code));
+  if (!error.info || !error.code) return "";
+
+  if (error.info.error) {
+    window.alert(error.info?.error?.message || msg(error.code));
+  }
 }
 
 export function md5(str: string) {

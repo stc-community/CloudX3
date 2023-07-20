@@ -5,7 +5,7 @@ import { getPublicKey } from "nostr-tools";
 // import { storageLocal } from "@pureadmin/utils";
 import { getUserHubContract } from "@/utils/contract/user-hub";
 import { handleEtherError, decrypt } from "@/utils/shared";
-import { getWalletAddres } from "@/utils/contract/web3";
+import { getWalletAddres, signMessage } from "@/utils/contract/web3";
 
 export const useAccountStore = defineStore({
   id: "account-settings",
@@ -40,9 +40,16 @@ export const useAccountStore = defineStore({
         if (!data[0]) return;
 
         const { privateKey } = data[1];
-        const truePrivateKey = decrypt(privateKey);
-        this.savePrivateKey(truePrivateKey);
-        console.log("2")
+        try {
+          const signKey = await signMessage("CloudX3");
+          const truePrivateKey = decrypt(privateKey, signKey);
+          this.savePrivateKey(truePrivateKey);
+        } catch (e) {
+          window.alert(
+            "Please sign the message for build security tunnel with server"
+          );
+          // handleEtherError(e);
+        }
       } catch (e) {
         handleEtherError(e);
       }

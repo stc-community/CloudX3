@@ -31,12 +31,16 @@ export async function getProviderSignerInstance(): Promise<Instance> {
     }
 
     switchNetworkIfNeed();
+    reloadPageIfWalletChanged();
   }
 
-  // console.log("provider", provider);
-  // console.log("signer", signer);
-
   return { provider, signer };
+}
+
+export async function signMessage(msg) {
+  const { signer } = await getProviderSignerInstance();
+
+  return signer.signMessage(msg);
 }
 
 export async function getWalletAddres() {
@@ -91,5 +95,11 @@ function switchNetworkIfNeed() {
       method: "wallet_switchEthereumChain",
       params: [{ chainId: targetChainId }]
     });
+  });
+}
+
+function reloadPageIfWalletChanged() {
+  window.ethereum.on("accountsChanged", () => {
+    window.location.reload();
   });
 }

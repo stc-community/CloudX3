@@ -6,6 +6,8 @@ import { getNewNostrPrivateKey } from "@/utils/shared";
 import { getPublicKey } from "nostr-tools";
 import { getUserHubContract } from "@/utils/contract/user-hub";
 import { handleEtherError, encrypt } from "@/utils/shared";
+import { signMessage, getWalletAddres } from "@/utils/contract/web3";
+import { decrypt } from "@/utils/shared";
 
 const privateKey = ref("");
 const loading = ref(false);
@@ -16,13 +18,29 @@ const handleSubmit = async () => {
 
   const contract = await getUserHubContract();
 
+  let encryptKey;
   try {
     loading.value = true;
-    console.log("contract.registerUser", publicKey, encrypt(privateKey.value));
-    const transaction = await contract.registerUser(
+    encryptKey = await signMessage("CloudX3");
+  } catch (e) {
+    window.alert(t("user.cancelSign"));
+    loading.value = false;
+    return;
+  }
+
+  try {
+    loading.value = true;
+    const nostrEncryptKey = encrypt(privateKey.value, encryptKey);
+    console.log(decrypt(nostrEncryptKey, encryptKey));
+    console.log(
+      "用户信息\r\n钱包地址:%s\r\n签名结果:%s\r\nNostr公钥:%s\r\nNostr明文私钥:%s\r\nNostr加密私钥:%s",
+      await getWalletAddres(),
+      encryptKey,
       publicKey,
-      encrypt(privateKey.value)
+      privateKey.value,
+      nostrEncryptKey
     );
+    const transaction = await contract.registerUser(publicKey, nostrEncryptKey);
 
     await transaction.wait();
     window.location.reload();

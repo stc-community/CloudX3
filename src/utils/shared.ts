@@ -150,6 +150,7 @@ export function handleEtherError(error: EthersError) {
     return output + " .";
   };
 
+  // ignore metamask not installed error
   if (!error.info || !error.code) return "";
 
   if (error.info.error) {
@@ -166,10 +167,10 @@ export function getNewNostrPrivateKey() {
   return generatePrivateKey();
 }
 
-export function encrypt(text: string, key = "STC") {
+export function encrypt(text: string, key = "CloudX3") {
   return CryptoJS.AES.encrypt(text, key).toString();
 }
 
-export function decrypt(text: string, key = "STC") {
+export function decrypt(text: string, key = "CloudX3") {
   return CryptoJS.AES.decrypt(text, key).toString(CryptoJS.enc.Utf8);
 }

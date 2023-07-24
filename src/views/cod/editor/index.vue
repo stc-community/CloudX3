@@ -28,7 +28,7 @@ const elements = ref<Element[]>([
     position: { x: 100, y: 50 },
     data: {
       title: "Echo",
-      caps: ["wasmcloud:httpserver"]
+      caps: ["cloudx3:httpserver"]
     }
   },
   {
@@ -40,7 +40,7 @@ const elements = ref<Element[]>([
     position: { x: 100, y: 250 },
     data: {
       title: "kvcounter",
-      caps: ["wasmcloud:httpserver", "wasmcloud:keyvalue"]
+      caps: ["cloudx3:httpserver", "cloudx3:keyvalue"]
     }
   },
   {
@@ -52,7 +52,7 @@ const elements = ref<Element[]>([
     position: { x: 500, y: 50 },
     data: {
       title: "HTTP Server(default)",
-      cap: "wasmcloud:httpserver"
+      cap: "cloudx3:httpserver"
     }
   },
   {
@@ -63,7 +63,7 @@ const elements = ref<Element[]>([
     position: { x: 500, y: 200 },
     data: {
       title: "Redis Keyvalue Store(default)",
-      cap: "wasmcloud:keyvalue"
+      cap: "cloudx3:keyvalue"
     }
   },
   {
@@ -111,6 +111,34 @@ const elements = ref<Element[]>([
     v-model="elements"
     :node-types="nodeTypes"
   >
+    <div class="join join-vertical absolute ml-2 mt-2 z-10 text-xs">
+      <button
+        class="btn join-item tooltip tooltip-right normal-case"
+        data-tip="Add a new actor"
+      >
+        <IconifyIconOnline
+          icon="simple-icons:wasmer"
+          width="20px"
+          height="20px"
+        />
+      </button>
+      <button
+        class="btn join-item tooltip tooltip-right normal-case"
+        data-tip="Add a new provider"
+      >
+        <IconifyIconOnline
+          icon="healthicons:provider-fst"
+          width="20px"
+          height="20px"
+        />
+      </button>
+      <button
+        class="btn join-item tooltip tooltip-right normal-case"
+        data-tip="Add a new network"
+      >
+        <IconifyIconOnline icon="ri:earth-line" width="20px" height="20px" />
+      </button>
+    </div>
     <Background />
     <Controls />
     <MiniMap />

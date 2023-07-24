@@ -2,19 +2,25 @@
 import { markRaw, ref } from "vue";
 import { VueFlow } from "@vue-flow/core";
 import type { NodeComponent, Element } from "@vue-flow/core";
+import { Controls } from "@vue-flow/controls";
+import { Background } from "@vue-flow/background";
+import { MiniMap } from "@vue-flow/minimap";
+import "@vue-flow/controls/dist/style.css";
+import "@vue-flow/minimap/dist/style.css";
+
 import ActorNode from "./components/actor-node.vue";
 import ProviderNode from "./components/provider-node.vue";
-import CapNode from "./components/cap-node.vue";
+import NetworkNode from "./components/network-node.vue";
 
 const nodeTypes: NodeComponent = {
   actor: markRaw(ActorNode),
   provider: markRaw(ProviderNode),
-  cap: markRaw(CapNode)
+  network: markRaw(NetworkNode)
 };
 
 const elements = ref<Element[]>([
   {
-    id: "a1",
+    id: "a2",
     type: "actor",
     label: "Actor Node 1",
     width: 350,
@@ -22,10 +28,21 @@ const elements = ref<Element[]>([
     position: { x: 100, y: 50 },
     data: {
       title: "Echo",
+      caps: ["wasmcloud:httpserver"]
+    }
+  },
+  {
+    id: "a1",
+    type: "actor",
+    label: "Actor Node 1",
+    width: 350,
+    height: 100,
+    position: { x: 100, y: 250 },
+    data: {
+      title: "kvcounter",
       caps: ["wasmcloud:httpserver", "wasmcloud:keyvalue"]
     }
   },
-
   {
     id: "p1",
     type: "provider",
@@ -38,7 +55,6 @@ const elements = ref<Element[]>([
       cap: "wasmcloud:httpserver"
     }
   },
-
   {
     id: "p2",
     type: "provider",
@@ -48,6 +64,16 @@ const elements = ref<Element[]>([
     data: {
       title: "Redis Keyvalue Store(default)",
       cap: "wasmcloud:keyvalue"
+    }
+  },
+  {
+    id: "n1",
+    type: "network",
+    width: 250,
+    height: 50,
+    position: { x: 900, y: 80 },
+    data: {
+      title: "network"
     }
   },
 
@@ -63,6 +89,19 @@ const elements = ref<Element[]>([
     sourceHandle: "a-1",
     target: "p2",
     animated: true
+  },
+  {
+    id: "link3",
+    source: "a2",
+    target: "p1",
+    animated: true
+  },
+  {
+    id: "link4",
+    source: "p1",
+    sourceHandle: "cap2",
+    target: "n1",
+    animated: true
   }
 ]);
 </script>
@@ -71,5 +110,9 @@ const elements = ref<Element[]>([
     class="border border-slate-100 h-[calc(100vh-120px)]"
     v-model="elements"
     :node-types="nodeTypes"
-  />
+  >
+    <Background />
+    <Controls />
+    <MiniMap />
+  </VueFlow>
 </template>

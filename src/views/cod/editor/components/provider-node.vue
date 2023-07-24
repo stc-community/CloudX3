@@ -35,6 +35,12 @@ defineProps<{
         :position="Position.Left"
         class="h-3 w-3 bg-secondary"
       />
+      <Handle
+        id="cap2"
+        type="source"
+        :position="Position.Right"
+        class="h-3 w-3 bg-secondary"
+      />
     </div>
   </div>
 </template>

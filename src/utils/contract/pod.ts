@@ -2,11 +2,11 @@ import { getWritebleContractInstance } from "./web3";
 
 // @ts-ignore
 import ABI from "./pod-abi.json?raw";
-const ADDR = "0x923e23099d0Ea52717a493c31720Aba13E2a98Ec";
+const ADDR = "0xC033615137D482f51718106489035bE6CCDcE0DD";
 
 export const PARAM = {
-  jobID: "a72692a03b654762a11857c7e186d990",
-  oracle: "0x248E10ec1C54CB570F7A15933286BAa1D59B70c0"
+  jobID: "780d3dd1933a4a9d839f4c78d92ab595",
+  oracle: "0xC1A56c1c85a4D957a513719FdB30eac50a861433"
 };
 
 export async function getPodContract() {

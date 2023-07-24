@@ -193,3 +193,9 @@ wasm:
   Capabilities: 能力声明
 
   "New Actor": 创建Actor
+
+tips:
+  title: 你好
+  description: 我们使用 MetaMask 来链接区块链，请先安装 MetaMask
+  btn1: 去安装
+  btn2: 关闭弹窗

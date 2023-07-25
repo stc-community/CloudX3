@@ -2,6 +2,8 @@ import { Contract, ethers } from "ethers";
 import { BrowserProvider, JsonRpcSigner } from "ethers";
 import type { InterfaceAbi } from "ethers";
 import { generatePrivateKey } from "nostr-tools";
+import { storageSession } from "@pureadmin/utils";
+import { md5 } from "../shared";
 
 type Instance = {
   provider: BrowserProvider;
@@ -31,12 +33,34 @@ export async function getProviderSignerInstance(): Promise<Instance> {
     }
 
     switchNetworkIfNeed();
+    reloadPageIfWalletChanged();
   }
 
-  // console.log("provider", provider);
-  // console.log("signer", signer);
-
   return { provider, signer };
+}
+
+export async function signMessage(msg, cached = true): Promise<string> {
+  const { signer } = await getProviderSignerInstance();
+
+  if (!cached) {
+    return signer.signMessage(msg);
+  }
+
+  const address = await signer.getAddress();
+  const cacheKey = await md5(address);
+  let message = storageSession().getItem(cacheKey) as string;
+  if (!message) {
+    message = await signer.signMessage(msg);
+    storageSession().setItem(cacheKey, message);
+  }
+
+  return message;
+}
+
+export async function getWalletAddres() {
+  const { signer } = await getProviderSignerInstance();
+
+  return signer.getAddress();
 }
 
 export async function getReadonlyConractInstance(
@@ -85,5 +109,11 @@ function switchNetworkIfNeed() {
       method: "wallet_switchEthereumChain",
       params: [{ chainId: targetChainId }]
     });
+  });
+}
+
+function reloadPageIfWalletChanged() {
+  window.ethereum.on("accountsChanged", () => {
+    window.location.reload();
   });
 }

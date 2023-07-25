@@ -17,7 +17,7 @@ import MonitorModal from "./components/Modal/monitor-modal.vue";
 import newFuseRule from "./components/Modal/new-fuse-rule.vue";
 import newRateLimitRule from "./components/Modal/new-rate-limit-rule.vue";
 import ServiceMonitorModal from "./components/Modal/service-monitor-modal.vue";
-import MetamaskModal from "./components/Modal/metamask-modal.vue";
+// import MetamaskModal from "./components/Modal/metamask-modal.vue";
 
 defineOptions({
   name: "app"
@@ -49,5 +49,4 @@ onBeforeMount(async () => {
   <newFuseRule />
   <newRateLimitRule />
   <ServiceMonitorModal />
-  <MetamaskModal />
 </template>

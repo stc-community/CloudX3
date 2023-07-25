@@ -1,4 +1,5 @@
 import type { Event } from "nostr-tools";
+import { generatePrivateKey } from "nostr-tools";
 import type { Ref } from "vue";
 import { useNostrStore } from "@/store/modules/nostr";
 import { useModalStore } from "@/store/modules/modal";
@@ -138,6 +139,8 @@ export function handleEtherError(error: EthersError) {
   console.log(error.info);
 
   const msg = codeStr => {
+    if (!codeStr) return "";
+
     const words = codeStr.split("_");
     const formattedWords = words.map(
       word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
@@ -147,9 +150,27 @@ export function handleEtherError(error: EthersError) {
     return output + " .";
   };
 
-  window.alert(error.info?.error?.message || msg(error.code));
+  // ignore metamask not installed error
+  if (!error.info || !error.code) return "";
+
+  if (error.info.error) {
+    window.alert(error.info?.error?.message || msg(error.code));
+  }
 }
 
 export function md5(str: string) {
   return CryptoJS.MD5(str).toString();
+}
+
+export function getNewNostrPrivateKey() {
+  // return "9bb6e52ed32384d06545914c4da1e7122645ddb735691773e6ddde82710edfa3";
+  return generatePrivateKey();
+}
+
+export function encrypt(text: string, key = "CloudX3") {
+  return CryptoJS.AES.encrypt(text, key).toString();
+}
+
+export function decrypt(text: string, key = "CloudX3") {
+  return CryptoJS.AES.decrypt(text, key).toString(CryptoJS.enc.Utf8);
 }

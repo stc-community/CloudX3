@@ -198,3 +198,8 @@ tips:
   description: 我们使用 MetaMask 来链接区块链，请先安装 MetaMask
   btn1: 去安装
   btn2: 关闭弹窗
+user:
+  "modal title": 加入 CloudX3
+  "modal description": 点击加入 CloudX3 后，首先您需要进行签名用于和服务器建立安全通信通道，其次平台会为你生成用户信息，用于后续的资源创建和管理
+  "join now": 现在加入
+  cancelSign: 请完成签名，用于和服务器建立安全通信通道

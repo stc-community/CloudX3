@@ -67,7 +67,7 @@ const accountStore = useAccountStore();
           class="alert alert-warning shadow-lg mb-10"
           v-if="!accountStore.getPrivateKey"
         >
-          <div>
+          <div class="flex items-center space-x-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="stroke-current flex-shrink-0 h-6 w-6"

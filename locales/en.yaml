@@ -198,3 +198,8 @@ tips:
   description: We use MetaMask to connect blockchain, please install it first
   btn1: Go and Install
   btn2: Close Modal
+user:
+  "modal title": Join CloudX3
+  "modal description": Once you click on "Join". Firstly you need to sign a message for securiting messages with server. Then the platform will generate user information for you, which will be used for subsequent resource creation and management.
+  "join now": Join Now
+  cancelSign: Please sign the message for securiting messages between your client and server

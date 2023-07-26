@@ -7,7 +7,7 @@ task("recover-tls", "Calls an ZtControl Contract to request external data")
     .addParam("reqid", "reqid")
     .setAction(async (taskArgs) => {
         const networkId = network.config.chainId
-        const contractAddr = taskArgs.contract || networkConfig[networkId]["apiAddress"];
+        const contractAddr = taskArgs.contract || networkConfig[networkId]["ZtControl"];
         const requestdata = taskArgs.requestdata;
         const site = taskArgs.site;
         const reqid = taskArgs.reqid;

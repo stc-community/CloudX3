@@ -7,7 +7,7 @@ const {
 const LINK_TOKEN_ABI = require("@chainlink/contracts/abi/v0.4/LinkToken.json")
 
 async function main() {
-  await run("compile")
+    await run("compile")
     console.log("deployZtControl start")
     //set log level to ignore non errors
     ethers.utils.Logger.setLogLevel(ethers.utils.Logger.levels.ERROR)
@@ -30,15 +30,10 @@ async function main() {
     }
 
     const fee = networkConfig[chainId]["fee"]
-
     const ztControlFactory = await ethers.getContractFactory("ZtControl")
     // const ztControl = await ztControlFactory.deploy(fee, linkTokenAddress)
     const ztControl = await ztControlFactory.deploy(fee, linkTokenAddress)
-
-    const waitBlockConfirmations = developmentChains.includes(network.name)
-        ? 1
-        : VERIFICATION_BLOCK_CONFIRMATIONS
-    await ztControl.deployTransaction.wait(waitBlockConfirmations)
+    await ztControl.deployed()
 
     console.log(`ZtControl deployed on ${network.name}, contract address is ${ztControl.address} `)
 
@@ -46,7 +41,7 @@ async function main() {
     const fundAmount = networkConfig[chainId]["fundAmount"]
     await linkToken.transfer(ztControl.address, fundAmount)
 
-    console.log(`transfer ZtControl with ${fundAmount/1000000000000000000} Link`)
+    console.log(`transfer ZtControl with ${fundAmount / 1000000000000000000} Link`)
 }
 
 // We recommend this pattern to be able to use async/await everywhere

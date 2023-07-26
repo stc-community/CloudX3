@@ -49,6 +49,7 @@ nav:
   services: 服务列表
   fuse: 服务熔断
   "rate limit": 服务限流
+  logs: 服务日志
 
   deployments: Deployments
   pods: Pods

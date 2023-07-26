@@ -49,6 +49,7 @@ nav:
   services: Services
   fuse: Fuse
   "rate limit": Rate Limit
+  logs: Logs
 
   deployments: Deployments
   pods: Pods

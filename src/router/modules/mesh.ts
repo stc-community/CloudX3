@@ -43,6 +43,15 @@ export default {
         title: "Rate Limit",
         icon: "simple-icons:speedtest"
       }
+    },
+    {
+      path: "logs",
+      name: "mesh.logs",
+      component: () => import("@/views/mesh/logs/index.vue"),
+      meta: {
+        title: "Logs",
+        icon: "ep:document"
+      }
     }
   ]
 } as RouteConfigsTable;

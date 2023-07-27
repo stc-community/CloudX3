@@ -49,6 +49,7 @@ nav:
   services: Services
   fuse: Fuse
   "rate limit": Rate Limit
+  logs: Logs
 
   deployments: Deployments
   pods: Pods
@@ -171,6 +172,15 @@ mesh:
   "Pick your rate limit status": Pick your rate limit status
 
   "service monitor": Service Monitor
+
+  # mesh logs section
+  "Type your service id here": Type your service id here
+  "Last 5 minutes": Last 5 minutes
+  "Last 30 minutes": Last 30 minutes
+  "Last 1 hour": Last 1 hour
+  Service: Service
+  Message: Message
+  Time: Time
 
 wasm:
   "Information": Information

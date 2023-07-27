@@ -52,6 +52,7 @@ const onSearch = () => {
 const onChangeTimerange = e => {
   const value = e.target.value;
   form.start_time = dayjs().subtract(value, "minutes").unix();
+  form.end_time = dayjs().unix();
 };
 </script>
 

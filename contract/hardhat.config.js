@@ -56,9 +56,19 @@ module.exports = {
       url: SEPOLIA_RPC_URL,
       accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
       chainId: 11155111
+    },
+    goerli: {
+      url: "https://eth-goerli.g.alchemy.com/v2/yPSGjNO2CkqUYvy5NFoi7DhzHBl7w6Q2",
+      accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
+      chainId: 5
+    },
+    opgoerli: {
+      url: "https://opt-goerli.g.alchemy.com/v2/sLXvpp5EpjWcd7fUTcz8h18rcgpSdm-o",
+      accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
+      chainId: 420
     }
   },
-  defaultNetwork: "sepolia",
+  defaultNetwork: "opgoerli",
   gasReporter: {
     enabled: REPORT_GAS,
     currency: "USD",

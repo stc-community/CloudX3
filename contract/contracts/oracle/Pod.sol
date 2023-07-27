@@ -44,8 +44,8 @@ contract ContainerPod is ChainlinkClient, ConfirmedOwner, Config {
     string memory _jobId,
     string memory _pod_code,
     string memory _request_url,
-    address _userAddress
-  ) public onlyBeGrant(_userAddress) {
+    string memory _public_key
+  ) public {
     Chainlink.Request memory req = buildChainlinkRequest(
       stringToBytes32(_jobId),
       address(this),
@@ -53,7 +53,7 @@ contract ContainerPod is ChainlinkClient, ConfirmedOwner, Config {
     );
     req.add("post",_request_url);
     req.add("yaml", _pod_code);
-    req.add("userid", addressToString(_userAddress));
+    req.add("userid", _public_key);
     address from = msg.sender;
     req.add("sender",addressToString(from));
     sendChainlinkRequestTo(_oracle, req, ORACLE_PAYMENT);
@@ -64,25 +64,25 @@ contract ContainerPod is ChainlinkClient, ConfirmedOwner, Config {
     string calldata _pod_status
   ) public recordChainlinkFulfillment(_requestId) {
     emit RequestContainerPodFulfilled(_requestId, _pod_status);
-    currentPodStatus = _pod_status;
+    currentDeployStatus = _pod_status;
   }
 
   /**
-     * Request msp container cloud api to delete.
+     * Request container cloud api to delete.
      */
   function requestDeletePod(
     address _oracle,
     string memory _jobId,
     string memory _request_url,
-    address _userAddress
-  ) public onlyBeGrant(_userAddress) {
+    string memory _public_key
+  ) public {
     Chainlink.Request memory req = buildChainlinkRequest(
       stringToBytes32(_jobId),
       address(this),
       this.fulfillDeleteStatus.selector
     );
     req.add("delete",_request_url);
-    req.add("userid", addressToString(_userAddress));
+    req.add("userid", _public_key);
     sendChainlinkRequestTo(_oracle, req, ORACLE_PAYMENT);
   }
 

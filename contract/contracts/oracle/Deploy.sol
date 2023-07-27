@@ -44,8 +44,8 @@ contract ContainerDeploy is ChainlinkClient, ConfirmedOwner {
     string memory _jobId,
     string memory _deploy_code,
     string memory _request_url,
-    address _userAddress
-  ) public onlyBeGrant(_userAddress){
+    string memory _public_key
+  ) public {
     Chainlink.Request memory req = buildChainlinkRequest(
       stringToBytes32(_jobId),
       address(this),
@@ -53,7 +53,7 @@ contract ContainerDeploy is ChainlinkClient, ConfirmedOwner {
     );
     req.add("post",_request_url);
     req.add("yaml", _deploy_code);
-    req.add("userid", addressToString(_userAddress));
+    req.add("userid", _public_key);
     address from = msg.sender;
     req.add("sender",addressToString(from));
     sendChainlinkRequestTo(_oracle, req, ORACLE_PAYMENT);
@@ -68,21 +68,21 @@ contract ContainerDeploy is ChainlinkClient, ConfirmedOwner {
   }
 
   /**
-     * Request msp container cloud api to delete.
+     * Request container cloud api to delete.
      */
   function requestDeleteDeploy(
     address _oracle,
     string memory _jobId,
     string memory _request_url,
-    address _userAddress
-  ) public onlyBeGrant(_userAddress) {
+    string memory _public_key
+  ) public {
     Chainlink.Request memory req = buildChainlinkRequest(
       stringToBytes32(_jobId),
       address(this),
       this.fulfillDeleteStatus.selector
     );
     req.add("delete",_request_url);
-    req.add("userid", addressToString(_userAddress));
+    req.add("userid", _public_key);
     sendChainlinkRequestTo(_oracle, req, ORACLE_PAYMENT);
   }
 

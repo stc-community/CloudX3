@@ -2,11 +2,11 @@
 pragma solidity ^0.7.6;
 
 interface IAccessControl {
-    function hasRole(address granter, address account) external view returns (bool);
+  function hasRole(string memory publicKeyHash, address account) external view returns (bool);
 
-    function grantRole(address grantee, uint256 expireTime) external;
+  function grantRole(string memory publicKeyHash, address account, uint256 expireTime) external;
 
-    function revokeRole(address account) external;
+  function revokeRole(string memory publicKeyHash, address account) external;
 
-    function renounceRole(address granter) external;
+  function renounceRole(string memory publicKeyHash) external;
 }

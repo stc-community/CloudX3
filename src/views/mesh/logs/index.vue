@@ -60,7 +60,7 @@ const onChangeTimerange = e => {
   <div class="flex items-end space-x-5 mt-10 mb-10">
     <input
       type="text"
-      placeholder="Type your service id here"
+      :placeholder="t('mesh.Type your service id here')"
       class="input input-bordered w-[300px]"
       v-model="form.unique_id"
     />
@@ -69,9 +69,9 @@ const onChangeTimerange = e => {
       class="select select-bordered w-full max-w-xs"
       @change="onChangeTimerange"
     >
-      <option value="5" selected>Last 5 minutes</option>
-      <option value="30">Last 30 minutes</option>
-      <option value="60">Last 1 hour</option>
+      <option value="5" selected>{{ t("mesh.Last 5 minutes") }}</option>
+      <option value="30">{{ t("mesh.Last 30 minutes") }}</option>
+      <option value="60">{{ t("mesh.Last 1 hour") }}</option>
     </select>
 
     <button class="btn btn-square btn-primary" @click="onSearch">
@@ -96,9 +96,9 @@ const onChangeTimerange = e => {
       <thead>
         <tr>
           <th class="w-[50px]" />
-          <th>Service</th>
-          <th>Message</th>
-          <th>Time</th>
+          <th>{{ t("mesh.Service") }}</th>
+          <th>{{ t("mesh.Message") }}</th>
+          <th>{{ t("mesh.Time") }}</th>
         </tr>
       </thead>
       <tbody class="text-xs">
@@ -116,7 +116,7 @@ const onChangeTimerange = e => {
     </table>
     <button class="btn btn-primary mt-10" :disabled="loading" @click="loadMore">
       <span v-if="loading" class="loading loading-spinner" />
-      Load More
+      {{ t("common.loadmore") }}
     </button>
   </div>
 </template>

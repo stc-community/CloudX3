@@ -173,6 +173,15 @@ mesh:
 
   "service monitor": 服务监控
 
+  # mesh logs section
+  "Type your service id here": 输入服务识别号
+  "Last 5 minutes": 过去 5 分钟
+  "Last 30 minutes": 过去 30 分钟
+  "Last 1 hour": 过去 1 小时
+  Service: 服务
+  Message: 日志内容
+  Time: 时间
+
 wasm:
   Information: 信息
   arch: 架构

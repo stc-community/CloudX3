@@ -2,6 +2,8 @@ import { Contract, ethers } from "ethers";
 import { BrowserProvider, JsonRpcSigner } from "ethers";
 import type { InterfaceAbi } from "ethers";
 import { generatePrivateKey } from "nostr-tools";
+import { storageSession } from "@pureadmin/utils";
+import { md5 } from "../shared";
 
 type Instance = {
   provider: BrowserProvider;
@@ -21,7 +23,7 @@ export async function getProviderSignerInstance(): Promise<Instance> {
       // only have read-only access
       // @ts-ignore
       provider = ethers.getDefaultProvider();
-      window.alert("MetaMask not installed; using read-only defaults");
+      window.metamask_required.showModal();
     } else {
       // Connect to the MetaMask EIP-1193 object. This is a standard
       // protocol that allows Ethers access to make all read-only
@@ -29,12 +31,36 @@ export async function getProviderSignerInstance(): Promise<Instance> {
       provider = new ethers.BrowserProvider(window.ethereum);
       signer = await provider.getSigner();
     }
+
+    switchNetworkIfNeed();
+    reloadPageIfWalletChanged();
   }
 
-  // console.log("provider", provider);
-  // console.log("signer", signer);
-
   return { provider, signer };
+}
+
+export async function signMessage(msg, cached = true): Promise<string> {
+  const { signer } = await getProviderSignerInstance();
+
+  if (!cached) {
+    return signer.signMessage(msg);
+  }
+
+  const address = await signer.getAddress();
+  const cacheKey = await md5(address);
+  let message = storageSession().getItem(cacheKey) as string;
+  if (!message) {
+    message = await signer.signMessage(msg);
+    storageSession().setItem(cacheKey, message);
+  }
+
+  return message;
+}
+
+export async function getWalletAddres() {
+  const { signer } = await getProviderSignerInstance();
+
+  return signer.getAddress();
 }
 
 export async function getReadonlyConractInstance(
@@ -65,4 +91,29 @@ export function getRequestID(len = 0) {
   }
 
   return "0x" + id64;
+}
+
+function switchNetworkIfNeed() {
+  const targetChainId = "0xaa36a7"; // 目标网络的 chainId
+
+  window.ethereum.on("chainChanged", chainId => {
+    // 刷新页面
+    window.location.reload();
+  });
+
+  // 获取当前所连接的网络的 chainId
+  window.ethereum.request({ method: "eth_chainId" }).then(currentChainId => {
+    if (currentChainId === targetChainId) return;
+
+    window.ethereum.request({
+      method: "wallet_switchEthereumChain",
+      params: [{ chainId: targetChainId }]
+    });
+  });
+}
+
+function reloadPageIfWalletChanged() {
+  window.ethereum.on("accountsChanged", () => {
+    window.location.reload();
+  });
 }

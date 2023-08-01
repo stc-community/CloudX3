@@ -1,9 +1,9 @@
-const {networkConfig} = require("../../helper-hardhat-config");
+const { networkConfig } = require("../../helper-hardhat-config");
 task("get-result-data", "Calls an ZtControl Contract to read data obtained from an external API")
     .addOptionalParam("contract", "The address of the ZtControl contract that you want to call")
     .addParam("reqid", "reqid")
     .setAction(async (taskArgs) => {
-        const contractAddr = taskArgs.contract || networkConfig[networkId]["apiAddress"];
+        const contractAddr = taskArgs.contract || networkConfig[networkId]["ZtControl"];
         const reqid = taskArgs.reqid;
 
         console.log(

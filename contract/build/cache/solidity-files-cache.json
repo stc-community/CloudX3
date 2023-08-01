@@ -1,8 +1,8 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/contracts/STCMarket.sol": {
-      "lastModificationDate": 1684819231823,
+    "/Users/zhangshuai/stc/CloudX3/contract/contracts/STCMarket.sol": {
+      "lastModificationDate": 1690357517065,
       "contentHash": "b328c1762e2ee698fc2d21de57a89d3a",
       "sourceName": "contracts/STCMarket.sol",
       "solcConfig": {
@@ -40,80 +40,8 @@
         "STCMarket"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@openzeppelin/contracts/utils/Counters.sol": {
-      "lastModificationDate": 1679020798253,
-      "contentHash": "74654e3ae5d7f39555055dfe244dab7a",
-      "sourceName": "@openzeppelin/contracts/utils/Counters.sol",
-      "solcConfig": {
-        "version": "0.8.13",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "Counters"
-      ]
-    },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol": {
-      "lastModificationDate": 1679020800565,
-      "contentHash": "8af32effd0536e2971ff8496812a5016",
-      "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
-      "solcConfig": {
-        "version": "0.8.13",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../ERC721.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "ERC721URIStorage"
-      ]
-    },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol": {
-      "lastModificationDate": 1679020799683,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol": {
+      "lastModificationDate": 1690357972322,
       "contentHash": "f7f4f78c31f28534852e5c56000a25af",
       "sourceName": "@openzeppelin/contracts/token/ERC721/ERC721.sol",
       "solcConfig": {
@@ -155,10 +83,10 @@
         "ERC721"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@openzeppelin/contracts/utils/Address.sol": {
-      "lastModificationDate": 1679020798253,
-      "contentHash": "f31ad6fc4bbf9c06203987220156a6ba",
-      "sourceName": "@openzeppelin/contracts/utils/Address.sol",
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@openzeppelin/contracts/utils/Counters.sol": {
+      "lastModificationDate": 1690357970872,
+      "contentHash": "74654e3ae5d7f39555055dfe244dab7a",
+      "sourceName": "@openzeppelin/contracts/utils/Counters.sol",
       "solcConfig": {
         "version": "0.8.13",
         "settings": {
@@ -184,14 +112,51 @@
       },
       "imports": [],
       "versionPragmas": [
-        "^0.8.1"
+        "^0.8.0"
       ],
       "artifacts": [
-        "Address"
+        "Counters"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@openzeppelin/contracts/utils/Context.sol": {
-      "lastModificationDate": 1679020798253,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol": {
+      "lastModificationDate": 1690357973217,
+      "contentHash": "8af32effd0536e2971ff8496812a5016",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+      "solcConfig": {
+        "version": "0.8.13",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../ERC721.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ERC721URIStorage"
+      ]
+    },
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@openzeppelin/contracts/utils/Context.sol": {
+      "lastModificationDate": 1690357970874,
       "contentHash": "5f2c5c4b6af2dd4551027144797bc8be",
       "sourceName": "@openzeppelin/contracts/utils/Context.sol",
       "solcConfig": {
@@ -225,8 +190,43 @@
         "Context"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@openzeppelin/contracts/utils/Strings.sol": {
-      "lastModificationDate": 1679020798253,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@openzeppelin/contracts/utils/Address.sol": {
+      "lastModificationDate": 1690357970872,
+      "contentHash": "f31ad6fc4bbf9c06203987220156a6ba",
+      "sourceName": "@openzeppelin/contracts/utils/Address.sol",
+      "solcConfig": {
+        "version": "0.8.13",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.1"
+      ],
+      "artifacts": [
+        "Address"
+      ]
+    },
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@openzeppelin/contracts/utils/Strings.sol": {
+      "lastModificationDate": 1690357970874,
       "contentHash": "396031251978f8febfd90cb62cb240ec",
       "sourceName": "@openzeppelin/contracts/utils/Strings.sol",
       "solcConfig": {
@@ -262,8 +262,8 @@
         "Strings"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol": {
-      "lastModificationDate": 1679020799703,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol": {
+      "lastModificationDate": 1690357972324,
       "contentHash": "0e7db055ce108f9da7bb6686a00287c0",
       "sourceName": "@openzeppelin/contracts/utils/introspection/ERC165.sol",
       "solcConfig": {
@@ -299,8 +299,43 @@
         "ERC165"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol": {
-      "lastModificationDate": 1679020799682,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol": {
+      "lastModificationDate": 1690357972323,
+      "contentHash": "c22d4395e33763de693fd440c6fd10e1",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
+      "solcConfig": {
+        "version": "0.8.13",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IERC721Receiver"
+      ]
+    },
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol": {
+      "lastModificationDate": 1690357972322,
       "contentHash": "eb7e61db29f31d88b3c1cef1b063d338",
       "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721.sol",
       "solcConfig": {
@@ -336,43 +371,8 @@
         "IERC721"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol": {
-      "lastModificationDate": 1679020799682,
-      "contentHash": "c22d4395e33763de693fd440c6fd10e1",
-      "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
-      "solcConfig": {
-        "version": "0.8.13",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC721Receiver"
-      ]
-    },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol": {
-      "lastModificationDate": 1679020800565,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol": {
+      "lastModificationDate": 1690357973217,
       "contentHash": "efbc0d15b80a74e34dbe8da0f3e879bb",
       "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol",
       "solcConfig": {
@@ -408,8 +408,8 @@
         "IERC721Metadata"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@openzeppelin/contracts/utils/math/Math.sol": {
-      "lastModificationDate": 1679020799702,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@openzeppelin/contracts/utils/math/Math.sol": {
+      "lastModificationDate": 1690357972323,
       "contentHash": "b9c58920ce74d6dc819161786112e7ee",
       "sourceName": "@openzeppelin/contracts/utils/math/Math.sol",
       "solcConfig": {
@@ -443,8 +443,8 @@
         "Math"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
-      "lastModificationDate": 1679020799705,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
+      "lastModificationDate": 1690357972325,
       "contentHash": "03e6768535ac4da0e9756f1d8a4a018a",
       "sourceName": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
       "solcConfig": {
@@ -478,10 +478,10 @@
         "IERC165"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol": {
-      "lastModificationDate": 1688698725092,
-      "contentHash": "834a0dde221759af42b030253315b086",
-      "sourceName": "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
+      "lastModificationDate": 1690357970875,
+      "contentHash": "e436cea06129be2c73cda4b1acc848b5",
+      "sourceName": "@openzeppelin/contracts/access/Ownable.sol",
       "solcConfig": {
         "version": "0.8.13",
         "settings": {
@@ -506,91 +506,17 @@
         }
       },
       "imports": [
-        "./IERC20.sol",
-        "./extensions/IERC20Metadata.sol",
-        "../../utils/Context.sol"
+        "../utils/Context.sol"
       ],
       "versionPragmas": [
         "^0.8.0"
       ],
       "artifacts": [
-        "ERC20"
+        "Ownable"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
-      "lastModificationDate": 1679020799682,
-      "contentHash": "ad7c2d0af148c8f9f097d65deeb4da6b",
-      "sourceName": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
-      "solcConfig": {
-        "version": "0.8.13",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC20"
-      ]
-    },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
-      "lastModificationDate": 1679020800565,
-      "contentHash": "909ab67fc5c25033fe6cd364f8c056f9",
-      "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
-      "solcConfig": {
-        "version": "0.8.13",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../IERC20.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC20Metadata"
-      ]
-    },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/contracts/STCMarketToken.sol": {
-      "lastModificationDate": 1684762097147,
+    "/Users/zhangshuai/stc/CloudX3/contract/contracts/STCMarketToken.sol": {
+      "lastModificationDate": 1690357517065,
       "contentHash": "9a4ae215654383f6ed2acb0a83e2b033",
       "sourceName": "contracts/STCMarketToken.sol",
       "solcConfig": {
@@ -628,10 +554,10 @@
         "STCMarketToken"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
-      "lastModificationDate": 1679020798250,
-      "contentHash": "e436cea06129be2c73cda4b1acc848b5",
-      "sourceName": "@openzeppelin/contracts/access/Ownable.sol",
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol": {
+      "lastModificationDate": 1690357972319,
+      "contentHash": "834a0dde221759af42b030253315b086",
+      "sourceName": "@openzeppelin/contracts/token/ERC20/ERC20.sol",
       "solcConfig": {
         "version": "0.8.13",
         "settings": {
@@ -656,18 +582,92 @@
         }
       },
       "imports": [
-        "../utils/Context.sol"
+        "./IERC20.sol",
+        "./extensions/IERC20Metadata.sol",
+        "../../utils/Context.sol"
       ],
       "versionPragmas": [
         "^0.8.0"
       ],
       "artifacts": [
-        "Ownable"
+        "ERC20"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/contracts/oracle/MeshControl.sol": {
-      "lastModificationDate": 1688700735847,
-      "contentHash": "f3fc70b5c789479a62fdf18633df4e42",
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+      "lastModificationDate": 1690357972319,
+      "contentHash": "ad7c2d0af148c8f9f097d65deeb4da6b",
+      "sourceName": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+      "solcConfig": {
+        "version": "0.8.13",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IERC20"
+      ]
+    },
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
+      "lastModificationDate": 1690357973215,
+      "contentHash": "909ab67fc5c25033fe6cd364f8c056f9",
+      "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
+      "solcConfig": {
+        "version": "0.8.13",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../IERC20.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IERC20Metadata"
+      ]
+    },
+    "/Users/zhangshuai/stc/CloudX3/contract/contracts/oracle/MeshControl.sol": {
+      "lastModificationDate": 1690357517065,
+      "contentHash": "0c3364fc83ddb019d053b3dee4640b9c",
       "sourceName": "contracts/oracle/MeshControl.sol",
       "solcConfig": {
         "version": "0.8.13",
@@ -703,8 +703,8 @@
         "MeshControl"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.8/ChainlinkClient.sol": {
-      "lastModificationDate": 1688698725080,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.8/ChainlinkClient.sol": {
+      "lastModificationDate": 1690357972232,
       "contentHash": "6af479cbde42f1a7225c9cebc6e32239",
       "sourceName": "@chainlink/contracts/src/v0.8/ChainlinkClient.sol",
       "solcConfig": {
@@ -746,8 +746,8 @@
         "ChainlinkClient"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.8/ConfirmedOwner.sol": {
-      "lastModificationDate": 1688698725080,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.8/ConfirmedOwner.sol": {
+      "lastModificationDate": 1690357972232,
       "contentHash": "16d64572b0310127fc8a771e63be6d20",
       "sourceName": "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol",
       "solcConfig": {
@@ -783,8 +783,8 @@
         "ConfirmedOwner"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.8/Chainlink.sol": {
-      "lastModificationDate": 1688698725080,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.8/Chainlink.sol": {
+      "lastModificationDate": 1690357972232,
       "contentHash": "9dc050539cdf1579d5650d41d0df9ec2",
       "sourceName": "@chainlink/contracts/src/v0.8/Chainlink.sol",
       "solcConfig": {
@@ -821,43 +821,8 @@
         "Chainlink"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol": {
-      "lastModificationDate": 1688698725138,
-      "contentHash": "da5a0c3bd86c896f6a407f909c57edf3",
-      "sourceName": "@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol",
-      "solcConfig": {
-        "version": "0.8.13",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "LinkTokenInterface"
-      ]
-    },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.8/interfaces/ENSInterface.sol": {
-      "lastModificationDate": 1688698725137,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.8/interfaces/ENSInterface.sol": {
+      "lastModificationDate": 1690357973177,
       "contentHash": "06b6aefcae95de6d1597ad8e1d73a08b",
       "sourceName": "@chainlink/contracts/src/v0.8/interfaces/ENSInterface.sol",
       "solcConfig": {
@@ -891,8 +856,113 @@
         "ENSInterface"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.8/interfaces/ChainlinkRequestInterface.sol": {
-      "lastModificationDate": 1688698725137,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.8/vendor/ENSResolver.sol": {
+      "lastModificationDate": 1690357973183,
+      "contentHash": "24a98b0606654e662097eed9ffa91a11",
+      "sourceName": "@chainlink/contracts/src/v0.8/vendor/ENSResolver.sol",
+      "solcConfig": {
+        "version": "0.8.13",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ENSResolver"
+      ]
+    },
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.8/interfaces/PointerInterface.sol": {
+      "lastModificationDate": 1690357973178,
+      "contentHash": "27da4b2007d200dd5afff31dbf31ac99",
+      "sourceName": "@chainlink/contracts/src/v0.8/interfaces/PointerInterface.sol",
+      "solcConfig": {
+        "version": "0.8.13",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "PointerInterface"
+      ]
+    },
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol": {
+      "lastModificationDate": 1690357973178,
+      "contentHash": "da5a0c3bd86c896f6a407f909c57edf3",
+      "sourceName": "@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol",
+      "solcConfig": {
+        "version": "0.8.13",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "LinkTokenInterface"
+      ]
+    },
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.8/interfaces/ChainlinkRequestInterface.sol": {
+      "lastModificationDate": 1690357973177,
       "contentHash": "14407a6ead15cff8a0e0a7f8037c68f5",
       "sourceName": "@chainlink/contracts/src/v0.8/interfaces/ChainlinkRequestInterface.sol",
       "solcConfig": {
@@ -926,8 +996,8 @@
         "ChainlinkRequestInterface"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.8/interfaces/OperatorInterface.sol": {
-      "lastModificationDate": 1688698725137,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.8/interfaces/OperatorInterface.sol": {
+      "lastModificationDate": 1690357973178,
       "contentHash": "e1822c36361fc3a26b5a68df3ddab15d",
       "sourceName": "@chainlink/contracts/src/v0.8/interfaces/OperatorInterface.sol",
       "solcConfig": {
@@ -964,113 +1034,8 @@
         "OperatorInterface"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.8/interfaces/PointerInterface.sol": {
-      "lastModificationDate": 1688698725138,
-      "contentHash": "27da4b2007d200dd5afff31dbf31ac99",
-      "sourceName": "@chainlink/contracts/src/v0.8/interfaces/PointerInterface.sol",
-      "solcConfig": {
-        "version": "0.8.13",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "PointerInterface"
-      ]
-    },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.8/vendor/ENSResolver.sol": {
-      "lastModificationDate": 1688698725138,
-      "contentHash": "24a98b0606654e662097eed9ffa91a11",
-      "sourceName": "@chainlink/contracts/src/v0.8/vendor/ENSResolver.sol",
-      "solcConfig": {
-        "version": "0.8.13",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "ENSResolver"
-      ]
-    },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.8/vendor/BufferChainlink.sol": {
-      "lastModificationDate": 1688698725138,
-      "contentHash": "52ac6f99fb0635751ae4ed11139878fd",
-      "sourceName": "@chainlink/contracts/src/v0.8/vendor/BufferChainlink.sol",
-      "solcConfig": {
-        "version": "0.8.13",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "BufferChainlink"
-      ]
-    },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.8/vendor/CBORChainlink.sol": {
-      "lastModificationDate": 1688698725138,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.8/vendor/CBORChainlink.sol": {
+      "lastModificationDate": 1690357973183,
       "contentHash": "99b3ee2c29bc0d1a5cba583d9e8d835e",
       "sourceName": "@chainlink/contracts/src/v0.8/vendor/CBORChainlink.sol",
       "solcConfig": {
@@ -1106,8 +1071,43 @@
         "CBORChainlink"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.8/interfaces/OracleInterface.sol": {
-      "lastModificationDate": 1688698725138,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.8/vendor/BufferChainlink.sol": {
+      "lastModificationDate": 1690357973183,
+      "contentHash": "52ac6f99fb0635751ae4ed11139878fd",
+      "sourceName": "@chainlink/contracts/src/v0.8/vendor/BufferChainlink.sol",
+      "solcConfig": {
+        "version": "0.8.13",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "BufferChainlink"
+      ]
+    },
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.8/interfaces/OracleInterface.sol": {
+      "lastModificationDate": 1690357973178,
       "contentHash": "6283e42024961596926c2b5015eef8e0",
       "sourceName": "@chainlink/contracts/src/v0.8/interfaces/OracleInterface.sol",
       "solcConfig": {
@@ -1141,8 +1141,8 @@
         "OracleInterface"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol": {
-      "lastModificationDate": 1688698725080,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol": {
+      "lastModificationDate": 1690357972232,
       "contentHash": "8b1c5f02622cd87472493bda6595d1be",
       "sourceName": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol",
       "solcConfig": {
@@ -1178,8 +1178,8 @@
         "ConfirmedOwnerWithProposal"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol": {
-      "lastModificationDate": 1688698725138,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol": {
+      "lastModificationDate": 1690357973178,
       "contentHash": "2e814c8a9f77897f6995436d97c23d99",
       "sourceName": "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol",
       "solcConfig": {
@@ -1213,9 +1213,9 @@
         "OwnableInterface"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/contracts/oracle/ZtControl.sol": {
-      "lastModificationDate": 1688700678239,
-      "contentHash": "1b28bf7d59ae1f6b56ea9ff4012538de",
+    "/Users/zhangshuai/stc/CloudX3/contract/contracts/oracle/ZtControl.sol": {
+      "lastModificationDate": 1690357517066,
+      "contentHash": "364001cc8278c8fdb20b3611ca084281",
       "sourceName": "contracts/oracle/ZtControl.sol",
       "solcConfig": {
         "version": "0.8.13",
@@ -1251,8 +1251,8 @@
         "ZtControl"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/contracts/oracle/Cluster.sol": {
-      "lastModificationDate": 1688698513098,
+    "/Users/zhangshuai/stc/CloudX3/contract/contracts/oracle/Cluster.sol": {
+      "lastModificationDate": 1690357517065,
       "contentHash": "6b005c5d8e747a1d0057a49f1cd6b4e8",
       "sourceName": "contracts/oracle/Cluster.sol",
       "solcConfig": {
@@ -1289,45 +1289,8 @@
         "ContainerCluster"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.7/ConfirmedOwner.sol": {
-      "lastModificationDate": 1688698725090,
-      "contentHash": "6ee86593912606278101e946c6735e2b",
-      "sourceName": "@chainlink/contracts/src/v0.7/ConfirmedOwner.sol",
-      "solcConfig": {
-        "version": "0.7.6",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./ConfirmedOwnerWithProposal.sol"
-      ],
-      "versionPragmas": [
-        "^0.7.0"
-      ],
-      "artifacts": [
-        "ConfirmedOwner"
-      ]
-    },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.7/ChainlinkClient.sol": {
-      "lastModificationDate": 1688698725090,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.7/ChainlinkClient.sol": {
+      "lastModificationDate": 1690357972231,
       "contentHash": "77acb40926a81caf27842c1c24774009",
       "sourceName": "@chainlink/contracts/src/v0.7/ChainlinkClient.sol",
       "solcConfig": {
@@ -1369,10 +1332,10 @@
         "ChainlinkClient"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.7/ConfirmedOwnerWithProposal.sol": {
-      "lastModificationDate": 1688698725090,
-      "contentHash": "4d69ebed49e37ce59d2f229a5d3002a8",
-      "sourceName": "@chainlink/contracts/src/v0.7/ConfirmedOwnerWithProposal.sol",
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.7/ConfirmedOwner.sol": {
+      "lastModificationDate": 1690357972231,
+      "contentHash": "6ee86593912606278101e946c6735e2b",
+      "sourceName": "@chainlink/contracts/src/v0.7/ConfirmedOwner.sol",
       "solcConfig": {
         "version": "0.7.6",
         "settings": {
@@ -1397,52 +1360,17 @@
         }
       },
       "imports": [
-        "./interfaces/OwnableInterface.sol"
+        "./ConfirmedOwnerWithProposal.sol"
       ],
       "versionPragmas": [
         "^0.7.0"
       ],
       "artifacts": [
-        "ConfirmedOwnerWithProposal"
+        "ConfirmedOwner"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.7/interfaces/OwnableInterface.sol": {
-      "lastModificationDate": 1688698725141,
-      "contentHash": "d4e459b2caed6333f7fe4108b23e3aa4",
-      "sourceName": "@chainlink/contracts/src/v0.7/interfaces/OwnableInterface.sol",
-      "solcConfig": {
-        "version": "0.7.6",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.7.0"
-      ],
-      "artifacts": [
-        "OwnableInterface"
-      ]
-    },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.7/Chainlink.sol": {
-      "lastModificationDate": 1688698725090,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.7/Chainlink.sol": {
+      "lastModificationDate": 1690357972231,
       "contentHash": "ed2eb0d4242fbb2bdedc0406684191ad",
       "sourceName": "@chainlink/contracts/src/v0.7/Chainlink.sol",
       "solcConfig": {
@@ -1479,43 +1407,8 @@
         "Chainlink"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.7/interfaces/ChainlinkRequestInterface.sol": {
-      "lastModificationDate": 1688698725140,
-      "contentHash": "0b9fd1c50ed63bcd20401b64b5f64ebe",
-      "sourceName": "@chainlink/contracts/src/v0.7/interfaces/ChainlinkRequestInterface.sol",
-      "solcConfig": {
-        "version": "0.7.6",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.7.0"
-      ],
-      "artifacts": [
-        "ChainlinkRequestInterface"
-      ]
-    },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.7/interfaces/ENSInterface.sol": {
-      "lastModificationDate": 1688698725140,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.7/interfaces/ENSInterface.sol": {
+      "lastModificationDate": 1690357973173,
       "contentHash": "350e5ffffff68a8970229061ee990ed8",
       "sourceName": "@chainlink/contracts/src/v0.7/interfaces/ENSInterface.sol",
       "solcConfig": {
@@ -1549,8 +1442,43 @@
         "ENSInterface"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.7/interfaces/OperatorInterface.sol": {
-      "lastModificationDate": 1688698725141,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.7/interfaces/LinkTokenInterface.sol": {
+      "lastModificationDate": 1690357973173,
+      "contentHash": "8d4c3f9f70b972c2adeee5c08ab4ecf5",
+      "sourceName": "@chainlink/contracts/src/v0.7/interfaces/LinkTokenInterface.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.7.0"
+      ],
+      "artifacts": [
+        "LinkTokenInterface"
+      ]
+    },
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.7/interfaces/OperatorInterface.sol": {
+      "lastModificationDate": 1690357973173,
       "contentHash": "ed6e6f4e52390ec314195464d2c0aa9c",
       "sourceName": "@chainlink/contracts/src/v0.7/interfaces/OperatorInterface.sol",
       "solcConfig": {
@@ -1587,10 +1515,10 @@
         "OperatorInterface"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.7/interfaces/LinkTokenInterface.sol": {
-      "lastModificationDate": 1688698725140,
-      "contentHash": "8d4c3f9f70b972c2adeee5c08ab4ecf5",
-      "sourceName": "@chainlink/contracts/src/v0.7/interfaces/LinkTokenInterface.sol",
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.7/interfaces/ChainlinkRequestInterface.sol": {
+      "lastModificationDate": 1690357973173,
+      "contentHash": "0b9fd1c50ed63bcd20401b64b5f64ebe",
+      "sourceName": "@chainlink/contracts/src/v0.7/interfaces/ChainlinkRequestInterface.sol",
       "solcConfig": {
         "version": "0.7.6",
         "settings": {
@@ -1619,11 +1547,11 @@
         "^0.7.0"
       ],
       "artifacts": [
-        "LinkTokenInterface"
+        "ChainlinkRequestInterface"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.7/interfaces/PointerInterface.sol": {
-      "lastModificationDate": 1688698725141,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.7/interfaces/PointerInterface.sol": {
+      "lastModificationDate": 1690357973173,
       "contentHash": "907813904293a93f943d60e0957331a5",
       "sourceName": "@chainlink/contracts/src/v0.7/interfaces/PointerInterface.sol",
       "solcConfig": {
@@ -1657,8 +1585,8 @@
         "PointerInterface"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.7/vendor/ENSResolver.sol": {
-      "lastModificationDate": 1688698725141,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.7/vendor/ENSResolver.sol": {
+      "lastModificationDate": 1690357973171,
       "contentHash": "d47ec3d8b277ea19895967424a82e553",
       "sourceName": "@chainlink/contracts/src/v0.7/vendor/ENSResolver.sol",
       "solcConfig": {
@@ -1692,8 +1620,8 @@
         "ENSResolver"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.7/vendor/CBORChainlink.sol": {
-      "lastModificationDate": 1688698725141,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.7/vendor/CBORChainlink.sol": {
+      "lastModificationDate": 1690357973172,
       "contentHash": "99b3ee2c29bc0d1a5cba583d9e8d835e",
       "sourceName": "@chainlink/contracts/src/v0.7/vendor/CBORChainlink.sol",
       "solcConfig": {
@@ -1729,8 +1657,8 @@
         "CBORChainlink"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.7/vendor/BufferChainlink.sol": {
-      "lastModificationDate": 1688698725141,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.7/vendor/BufferChainlink.sol": {
+      "lastModificationDate": 1690357973171,
       "contentHash": "cb70ca7c18fbd8ca2e109aa9883f98c1",
       "sourceName": "@chainlink/contracts/src/v0.7/vendor/BufferChainlink.sol",
       "solcConfig": {
@@ -1764,8 +1692,8 @@
         "BufferChainlink"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.7/interfaces/OracleInterface.sol": {
-      "lastModificationDate": 1688698725140,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.7/interfaces/OracleInterface.sol": {
+      "lastModificationDate": 1690357973173,
       "contentHash": "03d147e14e340ec9b29bd8e301647535",
       "sourceName": "@chainlink/contracts/src/v0.7/interfaces/OracleInterface.sol",
       "solcConfig": {
@@ -1799,8 +1727,80 @@
         "OracleInterface"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.7/Operator.sol": {
-      "lastModificationDate": 1688698725090,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.7/ConfirmedOwnerWithProposal.sol": {
+      "lastModificationDate": 1690357972231,
+      "contentHash": "4d69ebed49e37ce59d2f229a5d3002a8",
+      "sourceName": "@chainlink/contracts/src/v0.7/ConfirmedOwnerWithProposal.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./interfaces/OwnableInterface.sol"
+      ],
+      "versionPragmas": [
+        "^0.7.0"
+      ],
+      "artifacts": [
+        "ConfirmedOwnerWithProposal"
+      ]
+    },
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.7/interfaces/OwnableInterface.sol": {
+      "lastModificationDate": 1690357973173,
+      "contentHash": "d4e459b2caed6333f7fe4108b23e3aa4",
+      "sourceName": "@chainlink/contracts/src/v0.7/interfaces/OwnableInterface.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.7.0"
+      ],
+      "artifacts": [
+        "OwnableInterface"
+      ]
+    },
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.7/Operator.sol": {
+      "lastModificationDate": 1690357972232,
       "contentHash": "f090fed16ca6b2764ae432564e0c98bd",
       "sourceName": "@chainlink/contracts/src/v0.7/Operator.sol",
       "solcConfig": {
@@ -1844,8 +1844,43 @@
         "Operator"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.7/AuthorizedReceiver.sol": {
-      "lastModificationDate": 1688698725090,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.7/LinkTokenReceiver.sol": {
+      "lastModificationDate": 1690357972231,
+      "contentHash": "aba713d4600e4ada064b857969610a5d",
+      "sourceName": "@chainlink/contracts/src/v0.7/LinkTokenReceiver.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.7.0"
+      ],
+      "artifacts": [
+        "LinkTokenReceiver"
+      ]
+    },
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.7/AuthorizedReceiver.sol": {
+      "lastModificationDate": 1690357972231,
       "contentHash": "fa6ee2bc975b9ba42240684f300952d8",
       "sourceName": "@chainlink/contracts/src/v0.7/AuthorizedReceiver.sol",
       "solcConfig": {
@@ -1881,43 +1916,8 @@
         "AuthorizedReceiver"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.7/LinkTokenReceiver.sol": {
-      "lastModificationDate": 1688698725090,
-      "contentHash": "aba713d4600e4ada064b857969610a5d",
-      "sourceName": "@chainlink/contracts/src/v0.7/LinkTokenReceiver.sol",
-      "solcConfig": {
-        "version": "0.7.6",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.7.0"
-      ],
-      "artifacts": [
-        "LinkTokenReceiver"
-      ]
-    },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.7/interfaces/WithdrawalInterface.sol": {
-      "lastModificationDate": 1688698725141,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.7/interfaces/WithdrawalInterface.sol": {
+      "lastModificationDate": 1690357973173,
       "contentHash": "73c5a62d32b01b152afda5049a8664c6",
       "sourceName": "@chainlink/contracts/src/v0.7/interfaces/WithdrawalInterface.sol",
       "solcConfig": {
@@ -1951,43 +1951,8 @@
         "WithdrawalInterface"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.7/vendor/SafeMathChainlink.sol": {
-      "lastModificationDate": 1688698725141,
-      "contentHash": "4cdb5f55f96858ceebb87459c627917b",
-      "sourceName": "@chainlink/contracts/src/v0.7/vendor/SafeMathChainlink.sol",
-      "solcConfig": {
-        "version": "0.7.6",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.7.0"
-      ],
-      "artifacts": [
-        "SafeMathChainlink"
-      ]
-    },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.7/vendor/Address.sol": {
-      "lastModificationDate": 1688698725141,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.7/vendor/Address.sol": {
+      "lastModificationDate": 1690357973171,
       "contentHash": "d70dc9be8409f9ac4309aaa48d1e0463",
       "sourceName": "@chainlink/contracts/src/v0.7/vendor/Address.sol",
       "solcConfig": {
@@ -2021,8 +1986,43 @@
         "Address"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/node_modules/@chainlink/contracts/src/v0.7/interfaces/AuthorizedReceiverInterface.sol": {
-      "lastModificationDate": 1688698725140,
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.7/vendor/SafeMathChainlink.sol": {
+      "lastModificationDate": 1690357973171,
+      "contentHash": "4cdb5f55f96858ceebb87459c627917b",
+      "sourceName": "@chainlink/contracts/src/v0.7/vendor/SafeMathChainlink.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.7.0"
+      ],
+      "artifacts": [
+        "SafeMathChainlink"
+      ]
+    },
+    "/Users/zhangshuai/stc/CloudX3/contract/node_modules/@chainlink/contracts/src/v0.7/interfaces/AuthorizedReceiverInterface.sol": {
+      "lastModificationDate": 1690357973172,
       "contentHash": "6da580f87be1d3723b833f7166cab884",
       "sourceName": "@chainlink/contracts/src/v0.7/interfaces/AuthorizedReceiverInterface.sol",
       "solcConfig": {
@@ -2056,9 +2056,9 @@
         "AuthorizedReceiverInterface"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/contracts/oracle/Pod.sol": {
-      "lastModificationDate": 1688698513085,
-      "contentHash": "487ab419468508021fe595584c253fca",
+    "/Users/zhangshuai/stc/CloudX3/contract/contracts/oracle/Pod.sol": {
+      "lastModificationDate": 1690357517066,
+      "contentHash": "ae61dc7f659d5f780d32b9accff4e407",
       "sourceName": "contracts/oracle/Pod.sol",
       "solcConfig": {
         "version": "0.7.6",
@@ -2094,9 +2094,9 @@
         "ContainerPod"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/contracts/oracle/Node.sol": {
-      "lastModificationDate": 1688698513091,
-      "contentHash": "1e58d6617fd8cf4e33a9a909b8885ae8",
+    "/Users/zhangshuai/stc/CloudX3/contract/contracts/oracle/Node.sol": {
+      "lastModificationDate": 1690357517065,
+      "contentHash": "2b0487069114fb33199d0dcf84c8a95b",
       "sourceName": "contracts/oracle/Node.sol",
       "solcConfig": {
         "version": "0.7.6",
@@ -2132,9 +2132,9 @@
         "ContainerNode"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/contracts/oracle/Deploy.sol": {
-      "lastModificationDate": 1688698513096,
-      "contentHash": "a1f9fc745a3e82ddc90ffb54a2fd9527",
+    "/Users/zhangshuai/stc/CloudX3/contract/contracts/oracle/Deploy.sol": {
+      "lastModificationDate": 1690357517065,
+      "contentHash": "988c06e539467e895c20ec31932c47d8",
       "sourceName": "contracts/oracle/Deploy.sol",
       "solcConfig": {
         "version": "0.7.6",
@@ -2170,8 +2170,8 @@
         "ContainerDeploy"
       ]
     },
-    "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/contracts/oracle/Operator.sol": {
-      "lastModificationDate": 1688698513088,
+    "/Users/zhangshuai/stc/CloudX3/contract/contracts/oracle/Operator.sol": {
+      "lastModificationDate": 1690357517065,
       "contentHash": "d44f229b32d2bd8a4c311e5b4e4471bf",
       "sourceName": "contracts/oracle/Operator.sol",
       "solcConfig": {

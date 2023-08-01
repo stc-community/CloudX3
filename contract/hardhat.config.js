@@ -56,6 +56,11 @@ module.exports = {
       url: SEPOLIA_RPC_URL,
       accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
       chainId: 11155111
+    },
+    opgoerli: {
+      url: process.env.OPGOERLI_RPC_URL,
+      accounts: [PRIVATE_KEY],
+      chainId: 420
     }
   },
   defaultNetwork: "sepolia",

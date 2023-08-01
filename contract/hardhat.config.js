@@ -59,11 +59,11 @@ module.exports = {
     },
     opgoerli: {
       url: process.env.OPGOERLI_RPC_URL,
-      accounts: [PRIVATE_KEY],
+      accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
       chainId: 420
     }
   },
-  defaultNetwork: "sepolia",
+  defaultNetwork: "opgoerli",
   gasReporter: {
     enabled: REPORT_GAS,
     currency: "USD",

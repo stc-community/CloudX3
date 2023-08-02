@@ -115,6 +115,7 @@ const elements = ref<Element[]>([
       <button
         class="btn join-item tooltip tooltip-right normal-case"
         data-tip="Add a new actor"
+        onclick="select_actor_modal.showModal()"
       >
         <IconifyIconOnline
           icon="simple-icons:wasmer"
@@ -143,4 +144,40 @@ const elements = ref<Element[]>([
     <Controls />
     <MiniMap />
   </VueFlow>
+  <dialog id="select_actor_modal" class="modal">
+    <form method="dialog" class="modal-box">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+        ✕
+      </button>
+      <h3 class="font-bold text-lg">Select an actor from market</h3>
+      <div class="py-4 grid grid-cols-2 gap-4">
+        <button
+          v-for="i in 8"
+          class="border border-primary rounded-md px-2 py-3 bg-white hover:shadow-2xl"
+        >
+          <div class="flex items-center">
+            <IconifyIconOnline
+              class="text-primary mr-2"
+              icon="simple-icons:wasmer"
+              width="20px"
+              height="20px"
+            />
+            <span class="text-sm">Echo</span>
+          </div>
+          <div
+            v-for="j in 2"
+            class="bg-slate-100 py-2 mt-1 rounded-md flex items-center relative"
+          >
+            <IconifyIconOnline
+              class="ml-2 mr-2 text-primary"
+              icon="mdi:code-tags"
+              width="14px"
+              height="14px"
+            />
+            <div class="text-xs">HI</div>
+          </div>
+        </button>
+      </div>
+    </form>
+  </dialog>
 </template>

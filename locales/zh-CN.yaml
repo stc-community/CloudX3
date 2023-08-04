@@ -63,6 +63,10 @@ nav:
 
   iot: 物联网DePIN
   mqtt: MQTT
+  metrics: 指标
+  devices: 设备
+  triggers: 触发器
+  data: 数据
 
 welcome:
   description: CloudX3构建web2到web3的云计算DePIN系统，帮助Web2应用快速实现Web3转型。CloudX3提供计算和服务操作层，以及应用DAO聚合层，帮助Web2应用快速实现去中心化和Web3化。

@@ -1,7 +1,7 @@
 export default {
   path: "/iot",
   name: "iot",
-  redirect: "/iot/mqtt/service",
+  redirect: "/iot/mqtt?tab=service",
   component: () => import("@/views/iot/index.vue"),
   meta: {
     title: "iot",
@@ -9,7 +9,7 @@ export default {
   },
   children: [
     {
-      path: "metrics",
+      path: "/iot/metrics",
       name: "iot.metrics",
       component: () => import("@/views/iot/mqtt/index.vue"),
       meta: {
@@ -18,7 +18,7 @@ export default {
       }
     },
     {
-      path: "devices",
+      path: "/iot/devices",
       name: "iot.devices",
       component: () => import("@/views/iot/mqtt/index.vue"),
       meta: {
@@ -27,7 +27,7 @@ export default {
       }
     },
     {
-      path: "triggers",
+      path: "/iot/triggers",
       name: "iot.triggers",
       component: () => import("@/views/iot/mqtt/index.vue"),
       meta: {
@@ -36,7 +36,7 @@ export default {
       }
     },
     {
-      path: "data",
+      path: "/iot/data",
       name: "iot.data",
       component: () => import("@/views/iot/mqtt/index.vue"),
       meta: {
@@ -45,7 +45,7 @@ export default {
       }
     },
     {
-      path: "logs",
+      path: "/iot/logs",
       name: "iot.logs",
       component: () => import("@/views/iot/mqtt/index.vue"),
       meta: {
@@ -55,7 +55,7 @@ export default {
     },
 
     {
-      path: "mqtt/:tab",
+      path: "/iot/mqtt",
       name: "iot.mqtt",
       component: () => import("@/views/iot/mqtt/index.vue"),
       meta: {

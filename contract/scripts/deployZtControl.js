@@ -29,7 +29,7 @@ async function main() {
         linkToken = new ethers.Contract(linkTokenAddress, LINK_TOKEN_ABI, deployer)
     }
 
-    const fee = networkConfig[chainId]["fee"]
+    const fee = ethers.utils.parseUnits(networkConfig[chainId]["fee"])
     const ztControlFactory = await ethers.getContractFactory("ZtControl")
     // const ztControl = await ztControlFactory.deploy(fee, linkTokenAddress)
     const ztControl = await ztControlFactory.deploy(fee, linkTokenAddress)
@@ -38,7 +38,7 @@ async function main() {
     console.log(`ZtControl deployed on ${network.name}, contract address is ${ztControl.address} `)
 
     // auto-funding
-    const fundAmount = networkConfig[chainId]["fundAmount"]
+    const fundAmount = ethers.utils.parseUnits(networkConfig[chainId]["fundAmount"])
     await linkToken.transfer(ztControl.address, fundAmount)
 
     console.log(`transfer ZtControl with ${fundAmount / 1000000000000000000} Link`)

@@ -60,7 +60,7 @@ module.exports = {
     opgoerli: {
       url: process.env.OPGOERLI_RPC_URL,
       accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
-      chainId: 420
+      chainId: 420,
     }
   },
   defaultNetwork: "opgoerli",

@@ -53,13 +53,13 @@ const networkConfig = {
     STCMarketToken: "",
 
     // Deploy Operator contract parameters
-    owner: "0x7b716A9755c662765a6e279e0c6A91008eF593F9",
+    owner: "0x72Cd49C4434b583a5f09d10FCe91443554706316",
 
     // linkToken address
     linkToken: "0x8670a92eE8677892E3aa390f92d10Bf83FfF710c",
 
     // Oracle contract address
-    oracle: "0x1A58f2bbCc16f03AA2a4FEA7451c8a22448E2395",
+    oracle: "0xac463983a9379e175D6117d2F961a8621037931c",
 
     // ZtControl Oracle contract address
     ZtControl: "0x68f79DbDBb231BCAA1BcB0e8ff370d99fdBde0bf",
@@ -67,12 +67,16 @@ const networkConfig = {
     // Parameters for calling the setAuthorizedSenders method in the Operator contract
     authorizedSenders: "0xBde01D181dfb7b7786A0cbEE5Cf65879505Aa35a,0x9485dAdE7fD5aB17625a302948850445d9B0b2b6",
 
-    fee: 0.1 * 10 ** 18,
-    fundAmount: 100 * 10 ** 18, // 100
+    fee: "0.1",
+    fundAmount: "100", // 100
     automationUpdateInterval: "30"
   }
 };
+const developmentChains = ["hardhat", "localhost"]
+const VERIFICATION_BLOCK_CONFIRMATIONS = 6
 
 module.exports = {
-  networkConfig
+  networkConfig,
+  developmentChains,
+  VERIFICATION_BLOCK_CONFIRMATIONS
 };

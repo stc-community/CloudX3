@@ -24,10 +24,11 @@ async function main() {
     deployer
   );
 
+  const fee = ethers.utils.parseUnits(networkConfig[chainId]["fee"])
   const meshControlFactory = await ethers.getContractFactory(
     "MeshControl"
   );
-  const meshControl = await meshControlFactory.deploy(linkTokenAddress);
+  const meshControl = await meshControlFactory.deploy(fee, linkTokenAddress);
 
   const waitBlockConfirmations = developmentChains.includes(network.name)
     ? 1
@@ -39,7 +40,7 @@ async function main() {
   );
 
   // auto-funding
-  const fundAmount = networkConfig[chainId]["fundAmount"];
+  const fundAmount = ethers.utils.parseUnits(networkConfig[chainId]["fundAmount"]);
   await linkToken.transfer(meshControl.address, fundAmount);
 
   console.log(

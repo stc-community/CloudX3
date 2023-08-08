@@ -2,9 +2,7 @@ const hre = require("hardhat");
 
 async function main() {
   const STCMarket = await hre.ethers.getContractFactory("STCMarket");
-  const lock = await STCMarket.deploy({
-    log: true
-  });
+  const lock = await STCMarket.deploy();
 
   await lock.deployed();
 

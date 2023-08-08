@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.7.6;
+pragma solidity ^0.8.7;
 
-import "@chainlink/contracts/src/v0.7/ChainlinkClient.sol";
-import "@chainlink/contracts/src/v0.7/ConfirmedOwner.sol";
+import "@chainlink/contracts/src/v0.8/ChainlinkClient.sol";
+import "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 import "../Config.sol";
 
 
@@ -11,7 +12,7 @@ import "../Config.sol";
  * DO NOT USE THIS CODE IN PRODUCTION.
  */
 
-contract ContainerDeploy is ChainlinkClient, ConfirmedOwner {
+contract ContainerDeploy is ChainlinkClient, ConfirmedOwner, Config {
   using Chainlink for Chainlink.Request;
 
   uint256 private constant ORACLE_PAYMENT = (1 * LINK_DIVISIBILITY) / 10; // 0.1 * 10**18
@@ -45,7 +46,7 @@ contract ContainerDeploy is ChainlinkClient, ConfirmedOwner {
     string memory _deploy_code,
     string memory _request_url,
     string memory _public_key
-  ) public {
+  ) public onlyBeGrant(_public_key) {
     Chainlink.Request memory req = buildChainlinkRequest(
       stringToBytes32(_jobId),
       address(this),
@@ -55,7 +56,7 @@ contract ContainerDeploy is ChainlinkClient, ConfirmedOwner {
     req.add("yaml", _deploy_code);
     req.add("userid", _public_key);
     address from = msg.sender;
-    req.add("sender",addressToString(from));
+    req.add("sender",Strings.toHexString(from));
     sendChainlinkRequestTo(_oracle, req, ORACLE_PAYMENT);
   }
 
@@ -75,7 +76,7 @@ contract ContainerDeploy is ChainlinkClient, ConfirmedOwner {
     string memory _jobId,
     string memory _request_url,
     string memory _public_key
-  ) public {
+  ) public onlyBeGrant(_public_key) {
     Chainlink.Request memory req = buildChainlinkRequest(
       stringToBytes32(_jobId),
       address(this),
@@ -134,19 +135,4 @@ contract ContainerDeploy is ChainlinkClient, ConfirmedOwner {
     }
   }
 
-  function addressToString(address _addr) public pure returns (string memory) {
-    bytes32 value = bytes32(uint256(_addr));
-    bytes memory alphabet = "0123456789abcdef";
-    bytes memory str = new bytes(42);
-
-    str[0] = "0";
-    str[1] = "x";
-
-    for (uint256 i = 0; i < 20; i++) {
-      str[2 + i * 2] = alphabet[uint8(value[i + 12] >> 4)];
-      str[3 + i * 2] = alphabet[uint8(value[i + 12] & 0x0f)];
-    }
-
-    return string(str);
-  }
 }

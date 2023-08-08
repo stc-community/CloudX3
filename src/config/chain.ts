@@ -89,7 +89,7 @@ const chains: Chain[] = [
   }
 ];
 
-let currentChain: ChainName = "Sepolia";
+let currentChain: ChainName = "Optimism Goerli Testnet";
 export function setCurrentChain(name: ChainName) {
   currentChain = name;
 }

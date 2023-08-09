@@ -52,7 +52,7 @@ const chains: Chain[] = [
 
     meshContract: "0x7A338445C1eAE2f13E294C28050541686187Cd5F",
 
-    codContract: "0x98e7f2Bc989Bd181a009DA780C83A78e00AD9549",
+    codContract: "0x0F5F6485F20E41325ce4feBBFCE92DCd47aF08Ea",
 
     stcMarketContract: "0xE972F4bB8313102bFEF7Fe1F7adfC6Ae2Bc0f933",
     stcMarketTokenContract: "0xc07f40758d3bb0f8B8E4C4d146f79265484ba6Fe",

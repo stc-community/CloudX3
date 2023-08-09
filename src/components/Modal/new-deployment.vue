@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { getContainerContract } from "@/utils/contract/container";
+import { getCurrentChain } from "@/config/chain";
 import { reactive, onBeforeUnmount } from "vue";
 import type { EventLog } from "ethers";
 import eventBus from "@/utils/event-bus";
@@ -12,11 +13,6 @@ const accountStore = useAccountStore();
 defineOptions({
   name: "deployment-modal"
 });
-
-const PARAM = {
-  jobID: "68c1dc5cd63841459ff2395a931f042c",
-  oracle: "0xC1A56c1c85a4D957a513719FdB30eac50a861433"
-};
 
 const data = reactive({
   res: "",
@@ -58,8 +54,8 @@ const handleSubmit = async () => {
 
   try {
     const transaction = await contract.requestContainerDeploy(
-      PARAM.oracle,
-      PARAM.jobID,
+      getCurrentChain().oracle,
+      getCurrentChain().deploymentJobId,
       window.btoa(data.requestData),
       `https://stc-test.${getCurrentSiteName(
         "gw"

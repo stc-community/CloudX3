@@ -3,7 +3,8 @@ import { reactive, ref, onMounted, onBeforeUnmount } from "vue";
 import { loadData } from "@/utils/shared";
 import MessageVerified from "@/components/MessageVerified.vue";
 import type { Event } from "nostr-tools";
-import { getNodeContract, PARAM } from "@/utils/contract/node";
+import { getNodeContract } from "@/utils/contract/node";
+import { getCurrentChain } from "@/config/chain";
 import type { EventLog } from "ethers";
 import { getCurrentSiteName } from "@/utils/shared";
 import { useLang } from "@/hooks/useLang";
@@ -70,8 +71,8 @@ const onStart = async (node: Node) => {
   listenIfNeeded();
   try {
     const transaction = await contract.requestMspContainerNodeCordon(
-      PARAM.oracle,
-      PARAM.jobID,
+      getCurrentChain().nodeOracle,
+      getCurrentChain().nodeJobId,
       `https://stc-test.${getCurrentSiteName(
         "gw"
       )}.oneitfarm.com/brige/providers/nodes/${node.name}/cordon`
@@ -92,8 +93,8 @@ const onStop = async (node: Node) => {
   listenIfNeeded();
   try {
     const transaction = await contract.requestMspContainerNodeUncordon(
-      PARAM.oracle,
-      PARAM.jobID,
+      getCurrentChain().nodeOracle,
+      getCurrentChain().nodeJobId,
       `https://stc-test.${getCurrentSiteName(
         "gw"
       )}.oneitfarm.com/brige/providers/nodes/${node.name}/uncordon`

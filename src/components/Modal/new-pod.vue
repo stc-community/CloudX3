@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { getPodContract, PARAM } from "@/utils/contract/pod";
 import { reactive, onBeforeUnmount } from "vue";
+import { getPodContract } from "@/utils/contract/pod";
+import { getCurrentChain } from "@/config/chain";
 import type { EventLog } from "ethers";
 import eventBus from "@/utils/event-bus";
 import { getCurrentSiteName, md5 } from "@/utils/shared";
@@ -46,8 +47,8 @@ const handleSubmit = async () => {
 
   try {
     const transaction = await contract.requestContainerPod(
-      PARAM.oracle,
-      PARAM.jobID,
+      getCurrentChain().oracle,
+      getCurrentChain().podJobId,
       window.btoa(data.requestData),
       `https://stc-test.${getCurrentSiteName(
         "gw"

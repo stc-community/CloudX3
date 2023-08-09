@@ -20,7 +20,7 @@ export default {
     {
       path: "/iot/devices",
       name: "iot.devices",
-      component: () => import("@/views/iot/mqtt/index.vue"),
+      component: () => import("@/views/iot/device/index.vue"),
       meta: {
         title: "Devices",
         icon: "mingcute:device-line"

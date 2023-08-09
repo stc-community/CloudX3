@@ -10,6 +10,11 @@
         "internalType": "string",
         "name": "privateKey",
         "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "publicKeyHash",
+        "type": "string"
       }
     ],
     "stateMutability": "nonpayable",
@@ -57,13 +62,19 @@
     "anonymous": false,
     "inputs": [
       {
+        "indexed": false,
+        "internalType": "string",
+        "name": "publicKeyHash",
+        "type": "string"
+      },
+      {
         "indexed": true,
         "internalType": "address",
         "name": "account",
         "type": "address"
       },
       {
-        "indexed": true,
+        "indexed": false,
         "internalType": "address",
         "name": "granter",
         "type": "address"
@@ -82,13 +93,19 @@
     "anonymous": false,
     "inputs": [
       {
+        "indexed": false,
+        "internalType": "string",
+        "name": "publicKeyHash",
+        "type": "string"
+      },
+      {
         "indexed": true,
         "internalType": "address",
         "name": "account",
         "type": "address"
       },
       {
-        "indexed": true,
+        "indexed": false,
         "internalType": "address",
         "name": "granter",
         "type": "address"
@@ -111,8 +128,51 @@
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "granter",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "getExpireTime",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "getOwnerPublicKey",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "getPublicKeyHash",
     "outputs": [
       {
         "internalType": "string",
@@ -239,6 +299,30 @@
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "publicKeyHash",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "hasRole",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "owner",
     "outputs": [
@@ -261,6 +345,11 @@
       {
         "internalType": "string",
         "name": "privateKey",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "publicKeyHash",
         "type": "string"
       }
     ],

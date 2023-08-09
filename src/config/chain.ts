@@ -85,7 +85,7 @@ const chains: Chain[] = [
     stcMarketContract: "0x6051273DB68F2af68617589f30F8a91f859e5b82",
     stcMarketTokenContract: "0x8b321Dde4CAe93848f756895fdb34E889A6c831b",
 
-    userHubContract: "0x0B6900b5306b49F6B32113BeeB9BA6c43982ce10"
+    userHubContract: "0xE87a986fDc35170c66C3a2449bC4Aee6350cc1F6"
   }
 ];
 

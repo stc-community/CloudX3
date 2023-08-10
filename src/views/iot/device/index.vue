@@ -7,6 +7,14 @@ import eventBus from "@/utils/event-bus";
 import { useLang } from "@/hooks/useLang";
 const { t } = useLang();
 
+type Row = {
+  name: string;
+  health: object;
+  res: object;
+  path: string;
+  loading: boolean;
+};
+
 const data = reactive({
   devices: [],
   disabled: true,
@@ -46,6 +54,24 @@ eventBus.on("refreshDevices", _status => {
 onBeforeUnmount(() => {
   eventBus.off("refreshDevices");
 });
+
+const onSub = (row: Row) => {
+  const loading = ref();
+  row.loading = true;
+  row.res = {};
+  loadData(
+    row.res,
+    "iot.device.sub",
+    {
+      name: row.name,
+      path: row.path
+    },
+    loading,
+    () => {
+      row.loading = false;
+    }
+  );
+};
 </script>
 <template>
   <h2>{{ t("nav." + $route.meta.title.toLowerCase()) }}</h2>
@@ -58,7 +84,10 @@ onBeforeUnmount(() => {
     />{{ t("iot.new device") }}
   </label>
   <div class="grid grid-cols-3 gap-4 mt-5">
-    <div v-for="d in data.devices" class="card shadow-md row-span-1 border">
+    <div
+      v-for="(d, k) in data.devices"
+      class="card shadow-md row-span-1 border"
+    >
       <MessageVerified
         :event="d.event"
         class="absolute right-[-10px] top-[-10px]"
@@ -80,6 +109,34 @@ onBeforeUnmount(() => {
           >
             {{ label.k }} : {{ label.v }}
           </p>
+        </div>
+        <div class="collapse bg-base-200 rounded-md">
+          <input type="checkbox" class="peer" />
+          <div
+            class="collapse-title bg-slate-200 peer-checked:bg-slate-600 peer-checked:text-white flex items-center"
+          >
+            Sub Message
+          </div>
+          <div class="collapse-content">
+            <div class="mt-5 flex items-center justify-between">
+              <input
+                type="text"
+                class="input input-primary"
+                v-model="data.devices[k].path"
+                placeholder="Path, eg: read_value"
+              />
+              <button class="btn btn-primary ml-1" @click="onSub(d)">
+                <span class="loading loading-spinner" v-if="d?.loading" />
+                Send
+              </button>
+            </div>
+            <div
+              v-if="d.res"
+              class="rounded-md mt-2 p-2 bg-slate-800 text-green-400 font-mono"
+            >
+              {{ d.res?.data }}
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { reactive, ref, onMounted } from "vue";
+import { reactive, ref, onMounted, onBeforeUnmount } from "vue";
 import { loadData, transMapToArr } from "@/utils/shared";
 import MessageVerified from "@/components/MessageVerified.vue";
+import eventBus from "@/utils/event-bus";
 
 import { useLang } from "@/hooks/useLang";
 const { t } = useLang();
@@ -14,7 +15,7 @@ const data = reactive({
 });
 const loading = ref(false);
 
-const loadService = async () => {
+const loadDevices = async () => {
   loading.value = true;
   loadData(
     data.configmaps,
@@ -29,15 +30,31 @@ const loadService = async () => {
 };
 
 onMounted(async () => {
-  loadService();
+  loadDevices();
 });
 
 const loadMore = async () => {
-  loadService();
+  loadDevices();
 };
+
+// 监听到事件刷新页面
+eventBus.on("refreshDevices", _status => {
+  loadDevices();
+});
+onBeforeUnmount(() => {
+  eventBus.off("refreshDevices");
+});
 </script>
 <template>
   <h2>{{ t("nav." + $route.meta.title.toLowerCase()) }}</h2>
+  <label for="device-modal" class="btn btn-primary mt-5">
+    <IconifyIconOnline
+      class="mr-2"
+      icon="mingcute:plugin-fill"
+      width="20px"
+      height="20px"
+    />{{ t("iot.new device") }}
+  </label>
   <div class="grid grid-cols-3 gap-4 mt-5">
     <div v-for="d in data.configmaps" class="card shadow-md row-span-1 border">
       <MessageVerified

@@ -220,3 +220,13 @@ user:
   "modal description": Once you click on "Join". Firstly you need to sign a message for securiting messages with server. Then the platform will generate user information for you, which will be used for subsequent resource creation and management.
   "join now": Join Now
   cancelSign: Please sign the message for securiting messages between your client and server
+
+iot:
+  "new device": New Device
+  name: Name
+  protocol: Protocol
+  address: Address
+  driver_sku: Driver SKU
+  driver_image: Driver Image
+  instructions: Instructions
+  telemetries: Telemetries

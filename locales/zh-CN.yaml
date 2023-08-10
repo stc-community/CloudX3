@@ -220,3 +220,13 @@ user:
   "modal description": 点击加入 CloudX3 后，首先您需要进行签名用于和服务器建立安全通信通道，其次平台会为你生成用户信息，用于后续的资源创建和管理
   "join now": 现在加入
   cancelSign: 请完成签名，用于和服务器建立安全通信通道
+
+iot:
+  "new device": 接入新设备
+  name: 设备名称
+  protocol: 通讯协议
+  address: 链接地址
+  driver_sku: 设备驱动SKU
+  driver_image: 设备驱动镜像
+  instructions: 设备指令
+  telemetries: 设备遥测

@@ -8,7 +8,7 @@ import { useLang } from "@/hooks/useLang";
 const { t } = useLang();
 
 const data = reactive({
-  configmaps: [],
+  devices: [],
   disabled: true,
   page: 1,
   limit_num: 30
@@ -16,9 +16,11 @@ const data = reactive({
 const loading = ref(false);
 
 const loadDevices = async () => {
+  data.devices = [];
+
   loading.value = true;
   loadData(
-    data.configmaps,
+    data.devices,
     "iot.device.list",
     {
       page: data.page,
@@ -56,7 +58,7 @@ onBeforeUnmount(() => {
     />{{ t("iot.new device") }}
   </label>
   <div class="grid grid-cols-3 gap-4 mt-5">
-    <div v-for="d in data.configmaps" class="card shadow-md row-span-1 border">
+    <div v-for="d in data.devices" class="card shadow-md row-span-1 border">
       <MessageVerified
         :event="d.event"
         class="absolute right-[-10px] top-[-10px]"

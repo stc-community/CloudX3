@@ -8,21 +8,30 @@ import emitter from "@/utils/event-bus";
 
 const loading = ref(false);
 const form = reactive({
-  // name: "",
-  // protocol: "HTTP",
-  // address: "",
-  // driver_sku: "",
-  // driver_image: "",
-  // instructions: "",
-  // telemetries: ""
-
-  name: "test-thermometer",
+  name: "",
   protocol: "HTTP",
-  address: "thermometer.devices:11111",
-  driver_sku: "thermometer",
-  driver_image: "edgenesis/thermometer:v0.0.1",
+  address: "",
+  driver_sku: "",
+  driver_image: "",
   instructions: "",
   telemetries: ""
+
+  // name: "test-thermometer",
+  // protocol: "HTTP",
+  // address: "thermometer.devices:11111",
+  // driver_sku: "thermometer",
+  // driver_image: "edgenesis/thermometer:v0.0.1",
+  // instructions: `instructionSettings:
+  // defaultTimeoutSeconds: 8
+  // instructions:
+  //   get_status:
+  //   read_value:`,
+  // telemetries: `telemetries:
+  // device_health:
+  //   properties:
+  //     instruction: get_status
+  //     initialDelayMs: 1000
+  //     intervalMs: 1000`
 });
 
 const res = ref({
@@ -36,10 +45,7 @@ const handleSubmit = () => {
   loading.value = true;
   loadData(res, "iot.device.add", formData, loading, () => {
     loading.value = false;
-    // 请求成功，刷新页面
-    if (res.value?.code === 200) {
-      emitter.emit("refreshDevices");
-    }
+    emitter.emit("refreshDevices");
   });
 };
 </script>
@@ -53,7 +59,6 @@ const handleSubmit = () => {
         class="btn btn-sm btn-circle absolute right-2 top-2"
         >✕</label
       >
-
       <div class="flex items-center">
         <IconifyIconOnline
           class="mr-2"
@@ -64,7 +69,7 @@ const handleSubmit = () => {
         <h3>{{ t("iot.new device") }}</h3>
       </div>
       <div class="form-control mt-8">
-        <div v-for="(i, k) in Object.keys(form)" :key="k">
+        <div v-for="(i, k) in Object.keys(form)" :key="k" class="mb-2">
           <label class="label">
             <span class="label-text">{{ t("iot." + i) }}</span>
           </label>
@@ -75,6 +80,14 @@ const handleSubmit = () => {
             :placeholder="t('container.paste yaml')"
             v-model="form[i]"
           />
+          <select
+            v-else-if="i === 'protocol'"
+            v-model="form[i]"
+            class="select select-primary w-full"
+          >
+            <option value="HTTP">HTTP</option>
+            <option value="MQTT">MQTT</option>
+          </select>
           <input
             v-else
             type="text"

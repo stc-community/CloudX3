@@ -1,16 +1,17 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.7.6;
+pragma solidity ^0.8.7;
 // pragma abicoder v2; //启用 ABI Coder v2
 
-import "@chainlink/contracts/src/v0.7/ChainlinkClient.sol";
-import "@chainlink/contracts/src/v0.7/ConfirmedOwner.sol";
+import "@chainlink/contracts/src/v0.8/ChainlinkClient.sol";
+import "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol";
+import "../Config.sol";
 
 /**
  * THIS IS AN EXAMPLE CONTRACT THAT USES UN-AUDITED CODE.
  * DO NOT USE THIS CODE IN PRODUCTION.
  */
 
-contract ContainerNode is ChainlinkClient, ConfirmedOwner {
+contract ContainerNode is ChainlinkClient, ConfirmedOwner, Config {
   using Chainlink for Chainlink.Request;
 
   uint256 private constant ORACLE_PAYMENT = (1 * LINK_DIVISIBILITY) / 10; // 0.1 * 10**18

@@ -33,7 +33,7 @@ async function main() {
   console.log(`ContainerNode deployed on ${network.name}, contract address is ${containerNode.address} `)
 
   // auto-funding
-  const fundAmount = networkConfig[chainId]["fundAmount"]
+  const fundAmount = ethers.utils.parseUnits(networkConfig[chainId]["fundAmount"])
   await linkToken.transfer(containerNode.address, fundAmount)
 
   console.log(`transfer ContainerNode with ${fundAmount/1000000000000000000} Link`)

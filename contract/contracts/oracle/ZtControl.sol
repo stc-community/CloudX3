@@ -3,12 +3,13 @@ pragma solidity ^0.8.7;
 
 import "@chainlink/contracts/src/v0.8/ChainlinkClient.sol";
 import "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol";
+import "../Config.sol";
 
 /**
  * Zero Trust Oracle Control
  */
 
-contract ZtControl is ChainlinkClient, ConfirmedOwner {
+contract ZtControl is ChainlinkClient, ConfirmedOwner, Config {
   using Chainlink for Chainlink.Request;
 
   // Result data map: requestId => result

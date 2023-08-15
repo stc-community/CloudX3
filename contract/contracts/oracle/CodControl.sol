@@ -19,13 +19,13 @@ contract CodControl is ChainlinkClient, ConfirmedOwner {
   bytes32 public currentKey;
   string public currentData;
 
-  mapping(string => site) private _siteControl;
+  mapping(string => site) public _siteControl;
   struct site {
     string jobId;
     address oracle;
   }
 
-  function registerSite(string memory name, string memory job, address oracle) public onlyOwner {
+  function setSites(string memory name, string memory job, address oracle, string memory host) public onlyOwner {
     require(bytes(name).length > 0);
     require(bytes(job).length > 0);
     require(oracle != address(0));

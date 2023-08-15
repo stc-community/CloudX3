@@ -17,23 +17,16 @@ async function main() {
   const accounts = await ethers.getSigners();
   const deployer = accounts[0];
 
-  const linkTokenAddress = networkConfig[chainId]["linkToken"];
-  const linkToken = new ethers.Contract(
-    linkTokenAddress,
-    LINK_TOKEN_ABI,
-    deployer
-  );
+  let linkToken
+  let linkTokenAddress
+
+  linkTokenAddress = networkConfig[chainId]["linkToken"]
+  linkToken = new ethers.Contract(linkTokenAddress, LINK_TOKEN_ABI, deployer)
 
   const fee = ethers.utils.parseUnits(networkConfig[chainId]["fee"])
-  const meshControlFactory = await ethers.getContractFactory(
-    "MeshControl"
-  );
+  const meshControlFactory = await ethers.getContractFactory("MeshControl");
   const meshControl = await meshControlFactory.deploy(fee, linkTokenAddress);
-
-  const waitBlockConfirmations = developmentChains.includes(network.name)
-    ? 1
-    : VERIFICATION_BLOCK_CONFIRMATIONS;
-  await meshControl.deployTransaction.wait(waitBlockConfirmations);
+  await meshControl.deployed()
 
   console.log(
     `MeshControl deployed on ${network.name}, contract address is ${meshControl.address} `
@@ -46,6 +39,12 @@ async function main() {
   console.log(
     `transfer MeshControl with ${fundAmount / 1000000000000000000} Link`
   );
+
+
+  var set = await meshControl.setSites(networkConfig[chainId]["sitename"], networkConfig[chainId]["ztMeshJob"],
+    networkConfig[chainId]["oracle"], networkConfig[chainId]["sitehost"])
+
+  console.log("Contract MeshControl setSites success, hash: ", set.hash)
 }
 
 // We recommend this pattern to be able to use async/await everywhere

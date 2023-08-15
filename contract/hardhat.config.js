@@ -61,9 +61,14 @@ module.exports = {
       url: process.env.OPGOERLI_RPC_URL,
       accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
       chainId: 420,
+    },
+    opbnb: {
+      url: "https://opbnb-testnet.nodereal.io/v1/57ac598465ef4545a95c2ee3d376cd57",
+      accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
+      chainId: 5611,
     }
   },
-  defaultNetwork: "opgoerli",
+  defaultNetwork: "opbnb",
   gasReporter: {
     enabled: REPORT_GAS,
     currency: "USD",

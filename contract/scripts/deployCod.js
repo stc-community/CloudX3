@@ -20,14 +20,9 @@ async function main() {
   let linkToken
   let linkTokenAddress
 
-  if (chainId == 31337) {
-    const linkTokenFactory = await ethers.getContractFactory("LinkToken")
-    linkToken = await linkTokenFactory.connect(deployer).deploy()
-    linkTokenAddress = linkToken.address
-  } else {
-    linkTokenAddress = networkConfig[chainId]["linkToken"]
-    linkToken = new ethers.Contract(linkTokenAddress, LINK_TOKEN_ABI, deployer)
-  }
+  linkTokenAddress = networkConfig[chainId]["linkToken"]
+  linkToken = new ethers.Contract(linkTokenAddress, LINK_TOKEN_ABI, deployer)
+
 
   const fee = ethers.utils.parseUnits(networkConfig[chainId]["fee"])
   const codControlFactory = await ethers.getContractFactory("CodControl")
@@ -42,6 +37,11 @@ async function main() {
   await linkToken.transfer(codControl.address, fundAmount)
 
   console.log(`transfer CodControl with ${fundAmount / 1000000000000000000} Link`)
+
+  var set = await codControl.setSites(networkConfig[chainId]["sitename"], networkConfig[chainId]["codjob"],
+    networkConfig[chainId]["oracle"], networkConfig[chainId]["sitehost"])
+
+  console.log("Contract CodControl setSites success, hash: ", set.hash)
 }
 
 // We recommend this pattern to be able to use async/await everywhere

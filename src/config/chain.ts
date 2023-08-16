@@ -110,10 +110,10 @@ const chains: Chain[] = [
 
     oracle: "0x141Ee019dE7bBd96441a6287C506B35C9718094f", //
 
-    podContract: "0xed809AF6f37889c7914Bf9f10a210c49EFF9011F", //
+    podContract: "0xc07f40758d3bb0f8B8E4C4d146f79265484ba6Fe", //
     podJobId: "780d3dd1933a4a9d839f4c78d92ab595", //
 
-    deploymentContract: "0xCe76ab89Cac76d67Bd43Ed901AE6544b03103a63", //
+    deploymentContract: "0x67F47fC6cdCcD13bbe6ee88B3E7eb71726225e97", //
     deploymentJobId: "68c1dc5cd63841459ff2395a931f042c", //
 
     nodeContract: "0x962E121f6067B0dA6F90D07d565ba21004922B9d", //
@@ -129,7 +129,7 @@ const chains: Chain[] = [
     stcMarketContract: "0xBd0F68775aA77288Ea2083D7d7776D2D0C3bf0Ee", //
     stcMarketTokenContract: "0x5d3c43875589f4881E769f4b46cFf6257dC5Ad1C", //
 
-    userHubContract: "0xE87a986fDc35170c66C3a2449bC4Aee6350cc1F6"
+    userHubContract: "0xD436429Cf172a79A5E4D8F672c698A2E98315dc0" //
   }
 ];
 

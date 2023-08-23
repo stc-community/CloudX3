@@ -66,6 +66,7 @@ nav:
   metrics: Metrics
   devices: Devices
   triggers: Triggers
+  events: Events
   data: Data
 
 welcome:

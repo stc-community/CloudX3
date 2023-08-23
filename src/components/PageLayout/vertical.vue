@@ -21,7 +21,12 @@ const children: Array<RouteConfigsTable> = loadModuleRoutes()
     <div class="flex">
       <ul class="menu bg-base-100 w-56 p-2 rounded-box">
         <li>
-          <router-link v-for="(m, k) in children" :key="k" :to="m.path">
+          <router-link
+            v-for="(m, k) in children"
+            :key="k"
+            :to="m.path"
+            class="my-2"
+          >
             <IconifyIconOnline :icon="m.meta.icon" width="20px" height="20px" />
             {{ t("nav." + m.meta.title.toLowerCase()) }}
           </router-link>

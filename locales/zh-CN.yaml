@@ -66,6 +66,7 @@ nav:
   metrics: 指标
   devices: 设备
   triggers: 触发器
+  events: 事件
   data: 数据
 
 welcome:

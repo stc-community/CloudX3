@@ -1,12 +1,17 @@
 <script setup lang="ts">
 // vertical layout, and with site switch function
-import { watch } from "vue";
+import { watch, computed } from "vue";
 import { useRoute } from "vue-router";
 import { loadModuleRoutes } from "@/router/utils";
 import { getConfig } from "@/config";
 import { useNostrStore } from "@/store/modules/nostr";
 import { useAccountStore } from "@/store/modules/account";
 import { useLang } from "@/hooks/useLang";
+
+const props = defineProps<{
+  menus?: RouteChildrenConfigsTable[];
+}>();
+
 const { t } = useLang();
 
 const nostrStore = useNostrStore();
@@ -18,13 +23,21 @@ if (!nostrStore.getUrl) {
 
 const route = useRoute();
 
-const parentRoute = name => {
-  return name.split(".")[0];
-};
+const children = computed(() => {
+  if (props.menus) {
+    return props.menus;
+  }
 
-const children: Array<RouteConfigsTable> = loadModuleRoutes().find(
-  i => i.name === parentRoute(route.name)
-)?.children;
+  const parentRoute = name => {
+    return name.split(".")[0];
+  };
+
+  const children: Array<RouteConfigsTable> = loadModuleRoutes().find(
+    i => i.name === parentRoute(route.name)
+  )?.children;
+
+  return children;
+});
 
 watch(
   () => nostrStore.getUrl,
@@ -49,7 +62,12 @@ const accountStore = useAccountStore();
         </select>
         <ul class="menu bg-base-100 w-56 p-2 rounded-box">
           <li>
-            <router-link v-for="(m, k) in children" :key="k" :to="m.path">
+            <router-link
+              v-for="(m, k) in children"
+              :key="k"
+              :to="{ name: m.name, params: route.params }"
+              class="my-2"
+            >
               <IconifyIconOnline
                 :icon="m.meta.icon"
                 width="20px"

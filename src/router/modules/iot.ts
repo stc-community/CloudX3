@@ -1,22 +1,13 @@
 export default {
   path: "/iot",
   name: "iot",
-  redirect: "/iot/mqtt?tab=service",
+  redirect: "/iot/devices",
   component: () => import("@/views/iot/index.vue"),
   meta: {
     title: "iot",
     rank: 20
   },
   children: [
-    {
-      path: "/iot/metrics",
-      name: "iot.metrics",
-      component: () => import("@/views/iot/mqtt/index.vue"),
-      meta: {
-        title: "Metrics",
-        icon: "uil:chart"
-      }
-    },
     {
       path: "/iot/devices",
       name: "iot.devices",
@@ -27,41 +18,48 @@ export default {
       }
     },
     {
-      path: "/iot/triggers",
-      name: "iot.triggers",
-      component: () => import("@/views/iot/mqtt/index.vue"),
-      meta: {
-        title: "Triggers",
-        icon: "fluent-mdl2:trigger-auto"
-      }
-    },
-    {
-      path: "/iot/data",
-      name: "iot.data",
-      component: () => import("@/views/iot/mqtt/index.vue"),
-      meta: {
-        title: "Data",
-        icon: "majesticons:data-line"
-      }
-    },
-    {
-      path: "/iot/logs",
-      name: "iot.logs",
-      component: () => import("@/views/iot/mqtt/index.vue"),
-      meta: {
-        title: "Logs",
-        icon: "octicon:log-16"
-      }
-    },
+      path: "/iot/devices/detail",
+      name: "iot.devices.detail",
+      component: () => import("@/views/iot/device/detail/index.vue"),
+      children: [
+        {
+          path: "/iot/device/:id/metrics",
+          name: "iot.device.metrics",
+          component: () => import("@/views/iot/device/detail/metrics.vue"),
+          meta: {
+            title: "Metrics",
+            icon: "uil:chart"
+          }
+        },
 
-    {
-      path: "/iot/mqtt",
-      name: "iot.mqtt",
-      component: () => import("@/views/iot/mqtt/index.vue"),
-      meta: {
-        title: "MQTT",
-        icon: "simple-icons:mqtt"
-      }
+        {
+          path: "/iot/device/:id/events",
+          name: "iot.device.events",
+          component: () => import("@/views/iot/device/detail/events.vue"),
+          meta: {
+            title: "Events",
+            icon: "fluent-mdl2:trigger-auto"
+          }
+        },
+        {
+          path: "/iot/device/:id/data",
+          name: "iot.device.data",
+          component: () => import("@/views/iot/device/detail/data.vue"),
+          meta: {
+            title: "Data",
+            icon: "majesticons:data-line"
+          }
+        },
+        {
+          path: "/iot/device/:id/logs",
+          name: "iot.device.logs",
+          component: () => import("@/views/iot/device/detail/logs.vue"),
+          meta: {
+            title: "Logs",
+            icon: "octicon:log-16"
+          }
+        }
+      ]
     }
   ]
 } as RouteConfigsTable;

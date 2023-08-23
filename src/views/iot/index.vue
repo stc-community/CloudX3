@@ -1,6 +1,5 @@
-<script setup lang="ts">
-import VerticalLayout from "@/components/PageLayout/vertical-with-site.vue";
-</script>
 <template>
-  <VerticalLayout />
+  <div class="container mx-auto py-10">
+    <RouterView />
+  </div>
 </template>

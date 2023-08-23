@@ -83,27 +83,24 @@ const onSub = (row: Row) => {
       height="20px"
     />{{ t("iot.new device") }}
   </label>
-  <div class="grid grid-cols-2 gap-4 mt-5">
+  <div class="grid grid-cols-3 gap-4 mt-5">
     <div
       v-for="(d, k) in data.devices"
-      class="card shadow-md row-span-1 border hover:shadow-2xl"
+      class="card shadow-md row-span-1 border"
     >
       <MessageVerified
         :event="d.event"
         class="absolute right-[-10px] top-[-10px]"
       />
       <div class="card-body">
-        <router-link
-          class="card-title text-primary hover:cursor-pointer hover:text-primary-focus"
-          :to="{ name: 'iot.device.metrics', params: { id: 1 } }"
-        >
+        <h2 class="card-title text-primary">
           <IconifyIconOnline
             icon="mingcute:device-line"
             width="30px"
             height="30px"
           />
           {{ d.name }}
-        </router-link>
+        </h2>
         <p class="text-sm font-semibold mt-5">Health</p>
         <div class="max-h-[100px] overflow-y-auto">
           <p

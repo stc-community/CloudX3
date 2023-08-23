@@ -19,6 +19,7 @@ import newRateLimitRule from "./components/Modal/new-rate-limit-rule.vue";
 import ServiceMonitorModal from "./components/Modal/service-monitor-modal.vue";
 import NewDeviceModal from "@/components/Modal/new-device.vue";
 // import MetamaskModal from "./components/Modal/metamask-modal.vue";
+import DeviceWalletModal from "@/components/Modal/device-wallet-modal.vue";
 
 defineOptions({
   name: "app"
@@ -51,4 +52,5 @@ onBeforeMount(async () => {
   <newRateLimitRule />
   <ServiceMonitorModal />
   <NewDeviceModal />
+  <DeviceWalletModal />
 </template>

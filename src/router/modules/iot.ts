@@ -31,7 +31,15 @@ export default {
             icon: "uil:chart"
           }
         },
-
+        {
+          path: "/iot/device/:id/devices",
+          name: "iot.device.devices",
+          component: () => import("@/views/iot/device/detail/devices.vue"),
+          meta: {
+            title: "Devices",
+            icon: "ri:device-line"
+          }
+        },
         {
           path: "/iot/device/:id/events",
           name: "iot.device.events",

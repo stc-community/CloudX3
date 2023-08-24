@@ -43,6 +43,11 @@ const chains: Chain[] = [
     chainId: "0x1a4",
     chainName: "Optimism Goerli Testnet",
     chainlistUrl: "https://chainlist.org/chain/420",
+    rpcUrls: [
+      "https://endpoints.omniatech.io/v1/op/goerli/public",
+      "https://optimism-goerli.publicnode.com"
+    ],
+    blockExplorerUrls: ["https://optimism-goerli.blockscout.com"],
 
     oracle: "0xac463983a9379e175D6117d2F961a8621037931c",
 
@@ -71,6 +76,11 @@ const chains: Chain[] = [
     chainId: "0xaa36a7",
     chainName: "Sepolia",
     chainlistUrl: "https://chainlist.org/chain/11155111",
+    rpcUrls: [
+      "https://eth-sepolia.g.alchemy.com/v2/demo",
+      "https://eth-sepolia.g.alchemy.com/v2/demo"
+    ],
+    blockExplorerUrls: ["https://sepolia.etherscan.io"],
 
     oracle: "0xC1A56c1c85a4D957a513719FdB30eac50a861433",
 
@@ -133,7 +143,7 @@ const chains: Chain[] = [
   }
 ];
 
-let currentChain: ChainName = "opBNB Testnet";
+let currentChain: ChainName = "Optimism Goerli Testnet";
 export function setCurrentChain(name: ChainName) {
   currentChain = name;
 }

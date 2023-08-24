@@ -48,6 +48,12 @@ const chains: Chain[] = [
       "https://optimism-goerli.publicnode.com"
     ],
     blockExplorerUrls: ["https://optimism-goerli.blockscout.com"],
+    nativeCurrency: {
+      name: "ETH",
+      symbol: "ETH",
+      decimals: 18
+    },
+    iconUrls: ["https://chainlist.org/unknown-logo.png"],
 
     oracle: "0xac463983a9379e175D6117d2F961a8621037931c",
 
@@ -81,6 +87,12 @@ const chains: Chain[] = [
       "https://rpc.sepolia.org"
     ],
     blockExplorerUrls: ["https://sepolia.etherscan.io"],
+    nativeCurrency: {
+      name: "ETH",
+      symbol: "ETH",
+      decimals: 18
+    },
+    iconUrls: ["https://chainlist.org/unknown-logo.png"],
 
     oracle: "0xC1A56c1c85a4D957a513719FdB30eac50a861433",
 

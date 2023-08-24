@@ -78,7 +78,7 @@ const chains: Chain[] = [
     chainlistUrl: "https://chainlist.org/chain/11155111",
     rpcUrls: [
       "https://eth-sepolia.g.alchemy.com/v2/demo",
-      "https://eth-sepolia.g.alchemy.com/v2/demo"
+      "https://rpc.sepolia.org"
     ],
     blockExplorerUrls: ["https://sepolia.etherscan.io"],
 

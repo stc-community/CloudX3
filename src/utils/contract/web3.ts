@@ -5,6 +5,7 @@ import { generatePrivateKey } from "nostr-tools";
 import { storageSession } from "@pureadmin/utils";
 import { md5 } from "../shared";
 import { getCurrentChain } from "@/config/chain";
+import { switchToChain } from "../switch-chain";
 
 type Instance = {
   provider: BrowserProvider;
@@ -106,10 +107,12 @@ function switchNetworkIfNeed() {
   window.ethereum.request({ method: "eth_chainId" }).then(currentChainId => {
     if (currentChainId === targetChainId) return;
 
-    window.ethereum.request({
-      method: "wallet_switchEthereumChain",
-      params: [{ chainId: targetChainId }]
-    });
+    switchToChain(getCurrentChain());
+
+    // window.ethereum.request({
+    //   method: "wallet_switchEthereumChain",
+    //   params: [{ chainId: targetChainId }]
+    // });
   });
 }
 

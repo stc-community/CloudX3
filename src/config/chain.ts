@@ -1,12 +1,20 @@
 // 合约相关的配置
 
-type ChainName = "Optimism Goerli Testnet" | "Sepolia";
+type ChainName = "Optimism Goerli Testnet" | "Sepolia" | "opBNB Testnet";
 
-type Chain = {
+export type Chain = {
   chainId: string;
   chainName: ChainName;
 
-  chainlistUrl: string;
+  chainlistUrl?: string;
+  nativeCurrency?: {
+    name: string;
+    symbol: string;
+    decimals: number;
+  };
+  rpcUrls?: string[];
+  blockExplorerUrls?: string[];
+  iconUrls?: string[];
 
   oracle: string;
 
@@ -86,10 +94,46 @@ const chains: Chain[] = [
     stcMarketTokenContract: "0x8b321Dde4CAe93848f756895fdb34E889A6c831b",
 
     userHubContract: "0xE87a986fDc35170c66C3a2449bC4Aee6350cc1F6"
+  },
+  {
+    chainId: "0x15eb",
+    chainName: "opBNB Testnet",
+    // chainlistUrl: "https://chainlist.org/chain/420",
+    nativeCurrency: {
+      name: "tBNB",
+      symbol: "tBNB",
+      decimals: 18
+    },
+    rpcUrls: ["https://opbnb-testnet-rpc.bnbchain.org/"],
+    blockExplorerUrls: ["https://mainnet.opbnbscan.com/"],
+    iconUrls: ["https://docs.bnbchain.org/opbnb-docs/img/logo.svg"],
+
+    oracle: "0x141Ee019dE7bBd96441a6287C506B35C9718094f", //
+
+    podContract: "0xc07f40758d3bb0f8B8E4C4d146f79265484ba6Fe", //
+    podJobId: "780d3dd1933a4a9d839f4c78d92ab595", //
+
+    deploymentContract: "0x67F47fC6cdCcD13bbe6ee88B3E7eb71726225e97", //
+    deploymentJobId: "68c1dc5cd63841459ff2395a931f042c", //
+
+    nodeContract: "0x962E121f6067B0dA6F90D07d565ba21004922B9d", //
+    nodeJobId: "aa7198c0190f4cc29d4e4470c08f6391",
+    nodeOracle: "0x248E10ec1C54CB570F7A15933286BAa1D59B70c0",
+
+    zeroTrustContract: "0xd72E21A51594f1Cacf5F1231bA432c392323Fd8c", //
+
+    meshContract: "0x73Cb12189FCAcDE3d742E2ad0ABD2068011F56Ac", //
+
+    codContract: "0x0A873038d29bf16871232f59D589deA2B849C846", //
+
+    stcMarketContract: "0xBd0F68775aA77288Ea2083D7d7776D2D0C3bf0Ee", //
+    stcMarketTokenContract: "0x5d3c43875589f4881E769f4b46cFf6257dC5Ad1C", //
+
+    userHubContract: "0xD436429Cf172a79A5E4D8F672c698A2E98315dc0" //
   }
 ];
 
-let currentChain: ChainName = "Optimism Goerli Testnet";
+let currentChain: ChainName = "opBNB Testnet";
 export function setCurrentChain(name: ChainName) {
   currentChain = name;
 }

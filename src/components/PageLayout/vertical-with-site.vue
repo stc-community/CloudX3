@@ -3,24 +3,16 @@
 import { watch, computed } from "vue";
 import { useRoute } from "vue-router";
 import { loadModuleRoutes } from "@/router/utils";
-import { getConfig } from "@/config";
-import { useNostrStore } from "@/store/modules/nostr";
 import { useAccountStore } from "@/store/modules/account";
 import { useLang } from "@/hooks/useLang";
+import { useNostr } from "@/hooks/useNostr";
 
 const props = defineProps<{
   menus?: RouteChildrenConfigsTable[];
 }>();
 
 const { t } = useLang();
-
-const nostrStore = useNostrStore();
-const relay = getConfig()?.Relay || [];
-
-if (!nostrStore.getUrl) {
-  nostrStore.saveUrl(relay[0].url);
-}
-
+const { nostrStore, relay } = useNostr();
 const route = useRoute();
 
 const children = computed(() => {

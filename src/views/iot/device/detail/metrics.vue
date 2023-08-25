@@ -1,25 +1,58 @@
+<script setup lang="ts">
+import { useLang } from "@/hooks/useLang";
+import { usePod } from "@/hooks/usePod";
+
+const { t } = useLang();
+const { loading, charts, getPodMonitorChartData } = usePod();
+
+getPodMonitorChartData({
+  metadata: {
+    name: "nginx-demo1",
+    namespace: "stc"
+  }
+});
+</script>
 <template>
-  <h2>Summary</h2>
-  <p class="text-slate-500 mt-2">Metrics aggregated from this device</p>
+  <h2>{{ t("iot.summary") }}</h2>
+  <p class="text-slate-500 mt-2">{{ t("iot.summaryTips") }}</p>
 
-  <div class="grid grid-cols-2 gap-5 mt-10">
-    <div
-      v-for="i in 10"
-      class="border border-slate-200 rounded-md p-5 shadow-sm hover:shadow-lg"
-    >
-      <p class="text-slate-800">Metric {{ i }}</p>
-      <p class="text-slate-500 mt-2 text-xs">
-        Metrics aggregated from this device
-      </p>
-
-      <div class="flex justify-center items-center text-slate-400 my-5">
-        <IconifyIconOnline
-          icon="ri:bar-chart-line"
-          width="20px"
-          height="20px"
-        />
-        <p class="ml-2">No data to show</p>
-      </div>
+  <progress v-if="loading" class="progress max-w-md mt-5" />
+  <div class="grid grid-cols-2 text-xs gap-5 mt-10" v-else>
+    <div>
+      <p>Pod CPU {{ t("container.usage") }}</p>
+      <apexchart
+        type="area"
+        height="250"
+        :options="charts.cpu.options"
+        :series="charts.cpu.series"
+      />
+    </div>
+    <div>
+      <p>Pod {{ t("container.memory") }} {{ t("container.usage") }}</p>
+      <apexchart
+        type="area"
+        height="250"
+        :options="charts.memory.options"
+        :series="charts.memory.series"
+      />
+    </div>
+    <div>
+      <p>{{ t("container.Pod Net Bytes Transmitted") }}</p>
+      <apexchart
+        type="area"
+        height="250"
+        :options="charts.net_transmit.options"
+        :series="charts.net_transmit.series"
+      />
+    </div>
+    <div>
+      <p>{{ t("container.Pod Net Bytes Received") }}</p>
+      <apexchart
+        type="area"
+        height="250"
+        :options="charts.net_receive.options"
+        :series="charts.net_receive.series"
+      />
     </div>
   </div>
 </template>

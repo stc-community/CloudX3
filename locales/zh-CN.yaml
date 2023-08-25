@@ -231,3 +231,6 @@ iot:
   driver_image: 设备驱动镜像
   instructions: 设备指令
   telemetries: 设备遥测
+  summary: 概览
+  summaryTips: 该设备相关的指标信息
+  noData: 暂无需要展示的数据

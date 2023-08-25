@@ -231,3 +231,6 @@ iot:
   driver_image: Driver Image
   instructions: Instructions
   telemetries: Telemetries
+  summary: Summary
+  summaryTips: Metrics aggregated by this device
+  noData: No data to show

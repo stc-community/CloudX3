@@ -58,7 +58,7 @@ const getCurrentSiteName = () => {
     throw new Error("No site selected!");
   }
 
-  return "s" + relay?.name.substring(2) || "";
+  return "gw" + relay?.name.substring(2) || "";
 };
 
 const handleSubmit = async () => {
@@ -70,6 +70,14 @@ const handleSubmit = async () => {
   listenIfNeeded();
 
   try {
+    // console.log(
+    //   data.requestID,
+    //   getCurrentSiteName(),
+    //   `${domain.value}${data.requestPath}`,
+    //   "GET",
+    //   window.btoa(data.requestData)
+    // );
+
     const transaction = await contract.CallCOD(
       data.requestID,
       getCurrentSiteName(),

@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { useLang } from "@/hooks/useLang";
 const { t } = useLang();
-import { getNewNostrPrivateKey } from "@/utils/shared";
+import { getNewNostrPrivateKey, md5 } from "@/utils/shared";
 import { getPublicKey } from "nostr-tools";
 import { getUserHubContract } from "@/utils/contract/user-hub";
 import { handleEtherError, encrypt } from "@/utils/shared";
@@ -40,7 +40,11 @@ const handleSubmit = async () => {
       privateKey.value,
       nostrEncryptKey
     );
-    const transaction = await contract.registerUser(publicKey, nostrEncryptKey);
+    const transaction = await contract.registerUser(
+      publicKey,
+      nostrEncryptKey,
+      md5(publicKey)
+    );
 
     await transaction.wait();
     window.location.reload();

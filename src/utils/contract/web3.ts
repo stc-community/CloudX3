@@ -4,6 +4,8 @@ import type { InterfaceAbi } from "ethers";
 import { generatePrivateKey } from "nostr-tools";
 import { storageSession } from "@pureadmin/utils";
 import { md5 } from "../shared";
+import { getCurrentChain } from "@/config/chain";
+import { switchToChain } from "../switch-chain";
 
 type Instance = {
   provider: BrowserProvider;
@@ -94,7 +96,7 @@ export function getRequestID(len = 0) {
 }
 
 function switchNetworkIfNeed() {
-  const targetChainId = "0xaa36a7"; // 目标网络的 chainId
+  const targetChainId = getCurrentChain().chainId;
 
   window.ethereum.on("chainChanged", chainId => {
     // 刷新页面
@@ -105,10 +107,12 @@ function switchNetworkIfNeed() {
   window.ethereum.request({ method: "eth_chainId" }).then(currentChainId => {
     if (currentChainId === targetChainId) return;
 
-    window.ethereum.request({
-      method: "wallet_switchEthereumChain",
-      params: [{ chainId: targetChainId }]
-    });
+    switchToChain(getCurrentChain());
+
+    // window.ethereum.request({
+    //   method: "wallet_switchEthereumChain",
+    //   params: [{ chainId: targetChainId }]
+    // });
   });
 }
 

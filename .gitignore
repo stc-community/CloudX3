@@ -106,6 +106,6 @@ dist
 
 .idea
 
-contract/build/artifacts
+contract/build/artifacts/
 
-contract/build/cache
+contract/build/cache/

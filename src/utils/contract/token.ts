@@ -2,15 +2,18 @@ import {
   getReadonlyConractInstance,
   getWritebleContractInstance
 } from "./web3";
+import { getCurrentChain } from "@/config/chain";
 
 // @ts-ignore
 import ABI from "./token.json?raw";
-const ADDR = "0x8b321Dde4CAe93848f756895fdb34E889A6c831b";
 
 let writeContract;
 export async function getTokenContract() {
   if (!writeContract) {
-    writeContract = await getWritebleContractInstance(ADDR, ABI);
+    writeContract = await getWritebleContractInstance(
+      getCurrentChain().stcMarketTokenContract,
+      ABI
+    );
   }
 
   return writeContract;
@@ -19,7 +22,10 @@ export async function getTokenContract() {
 let readContract;
 export async function getReadonlyTokenContract() {
   if (!readContract) {
-    readContract = await getReadonlyConractInstance(ADDR, ABI);
+    readContract = await getReadonlyConractInstance(
+      getCurrentChain().stcMarketTokenContract,
+      ABI
+    );
   }
 
   return readContract;

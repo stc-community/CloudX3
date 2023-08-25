@@ -6,9 +6,11 @@ import { loadModuleRoutes } from "@/router/utils";
 import { useAccountStore } from "@/store/modules/account";
 import { useLang } from "@/hooks/useLang";
 import { useNostr } from "@/hooks/useNostr";
+import KeplrWallet from "./keplr-wallet.vue";
 
 const props = defineProps<{
   menus?: RouteChildrenConfigsTable[];
+  from?: "iot";
 }>();
 
 const { t } = useLang();
@@ -99,7 +101,13 @@ const accountStore = useAccountStore();
             <button />
           </div>
         </div>
-        <RouterView />
+        <div class="relative">
+          <KeplrWallet
+            v-if="from === 'iot'"
+            class="absolute top-[-50px] right-0"
+          />
+          <RouterView />
+        </div>
       </div>
     </div>
   </div>

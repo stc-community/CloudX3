@@ -5,5 +5,5 @@ import iotRoutes from "@/router/modules/iot";
 const menus = iotRoutes.children.find(i => i.name === "iot.devices.detail");
 </script>
 <template>
-  <VerticalLayout :menus="menus.children" />
+  <VerticalLayout :menus="menus.children" from="iot" />
 </template>

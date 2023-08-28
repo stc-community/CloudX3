@@ -1,6 +1,7 @@
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
 import { Device } from "./device";
+import { EventPb } from "./event_pb";
 import { Kv } from "./kv";
 import { Params } from "./params";
 
@@ -11,10 +12,11 @@ export interface GenesisState {
   params: Params | undefined;
   kvList: Kv[];
   deviceList: Device[];
+  eventPbList: EventPb[];
 }
 
 function createBaseGenesisState(): GenesisState {
-  return { params: undefined, kvList: [], deviceList: [] };
+  return { params: undefined, kvList: [], deviceList: [], eventPbList: [] };
 }
 
 export const GenesisState = {
@@ -27,6 +29,9 @@ export const GenesisState = {
     }
     for (const v of message.deviceList) {
       Device.encode(v!, writer.uint32(26).fork()).ldelim();
+    }
+    for (const v of message.eventPbList) {
+      EventPb.encode(v!, writer.uint32(34).fork()).ldelim();
     }
     return writer;
   },
@@ -47,6 +52,9 @@ export const GenesisState = {
         case 3:
           message.deviceList.push(Device.decode(reader, reader.uint32()));
           break;
+        case 4:
+          message.eventPbList.push(EventPb.decode(reader, reader.uint32()));
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -60,6 +68,7 @@ export const GenesisState = {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
       kvList: Array.isArray(object?.kvList) ? object.kvList.map((e: any) => Kv.fromJSON(e)) : [],
       deviceList: Array.isArray(object?.deviceList) ? object.deviceList.map((e: any) => Device.fromJSON(e)) : [],
+      eventPbList: Array.isArray(object?.eventPbList) ? object.eventPbList.map((e: any) => EventPb.fromJSON(e)) : [],
     };
   },
 
@@ -76,6 +85,11 @@ export const GenesisState = {
     } else {
       obj.deviceList = [];
     }
+    if (message.eventPbList) {
+      obj.eventPbList = message.eventPbList.map((e) => e ? EventPb.toJSON(e) : undefined);
+    } else {
+      obj.eventPbList = [];
+    }
     return obj;
   },
 
@@ -86,6 +100,7 @@ export const GenesisState = {
       : undefined;
     message.kvList = object.kvList?.map((e) => Kv.fromPartial(e)) || [];
     message.deviceList = object.deviceList?.map((e) => Device.fromPartial(e)) || [];
+    message.eventPbList = object.eventPbList?.map((e) => EventPb.fromPartial(e)) || [];
     return message;
   },
 };

@@ -71,26 +71,26 @@ import { useAddress } from "@/def-composables/useAddress";
 const props = defineProps({
   storeName: {
     type: String,
-    required: true,
+    required: true
   },
 
   itemName: {
     type: String,
-    required: true,
+    required: true
   },
 
   commandName: {
     type: String,
-    required: true,
-  },
+    required: true
+  }
 });
-const emit = defineEmits(["editItem", "deleteItem"]);
+const emit = defineEmits(["editItem", "deleteItem", "getItems"]);
 const client = useClient();
 const { address } = useAddress();
 const loggedIn = computed(() => {
   return address.value != "";
 });
-let itemFields = (
+const itemFields = (
   client[
     props.storeName as keyof Omit<
       typeof client,
@@ -128,6 +128,8 @@ const fetch = async () => {
 };
 const refetch = async () => {
   items.value = await fetch();
+
+  emit("getItems", items.value);
 };
 defineExpose({ refetch });
 await refetch();

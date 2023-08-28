@@ -15,6 +15,17 @@ export interface IotdepinprotocolDevice {
   creator?: string;
 }
 
+export interface IotdepinprotocolEventPb {
+  pubId?: string;
+  topic?: string;
+  pubType?: string;
+  payload?: string;
+
+  /** @format int64 */
+  pubTime?: string;
+  creator?: string;
+}
+
 export interface IotdepinprotocolKv {
   index?: string;
   value?: string;
@@ -23,15 +34,19 @@ export interface IotdepinprotocolKv {
 
 export type IotdepinprotocolMsgCreateDeviceResponse = object;
 
+export type IotdepinprotocolMsgCreateEventPbResponse = object;
+
 export type IotdepinprotocolMsgCreateKvResponse = object;
 
 export type IotdepinprotocolMsgDeleteDeviceResponse = object;
 
+export type IotdepinprotocolMsgDeleteEventPbResponse = object;
+
 export type IotdepinprotocolMsgDeleteKvResponse = object;
 
-export type IotdepinprotocolMsgOracleOperatorResponse = object;
-
 export type IotdepinprotocolMsgUpdateDeviceResponse = object;
+
+export type IotdepinprotocolMsgUpdateEventPbResponse = object;
 
 export type IotdepinprotocolMsgUpdateKvResponse = object;
 
@@ -42,6 +57,21 @@ export type IotdepinprotocolParams = object;
 
 export interface IotdepinprotocolQueryAllDeviceResponse {
   device?: IotdepinprotocolDevice[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
+export interface IotdepinprotocolQueryAllEventPbResponse {
+  eventPb?: IotdepinprotocolEventPb[];
 
   /**
    * PageResponse is to be embedded in gRPC response messages where the
@@ -72,6 +102,10 @@ export interface IotdepinprotocolQueryAllKvResponse {
 
 export interface IotdepinprotocolQueryGetDeviceResponse {
   device?: IotdepinprotocolDevice;
+}
+
+export interface IotdepinprotocolQueryGetEventPbResponse {
+  eventPb?: IotdepinprotocolEventPb;
 }
 
 export interface IotdepinprotocolQueryGetKvResponse {
@@ -333,6 +367,49 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       path: `/stc-community/iot-depin-protocol/iotdepinprotocol/device/${address}`,
       method: "GET",
       query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryEventPbAll
+   * @request GET:/stc-community/iot-depin-protocol/iotdepinprotocol/event_pb
+   */
+  queryEventPbAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+      pubId?: string;
+      topic?: string;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<IotdepinprotocolQueryAllEventPbResponse, RpcStatus>({
+      path: `/stc-community/iot-depin-protocol/iotdepinprotocol/event_pb`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryEventPb
+   * @summary Queries a list of EventPb items.
+   * @request GET:/stc-community/iot-depin-protocol/iotdepinprotocol/event_pb/{pubId}
+   */
+  queryEventPb = (pubId: string, params: RequestParams = {}) =>
+    this.request<IotdepinprotocolQueryGetEventPbResponse, RpcStatus>({
+      path: `/stc-community/iot-depin-protocol/iotdepinprotocol/event_pb/${pubId}`,
+      method: "GET",
       format: "json",
       ...params,
     });

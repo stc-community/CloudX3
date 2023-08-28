@@ -2,6 +2,7 @@
 import _m0 from "protobufjs/minimal";
 import { PageRequest, PageResponse } from "../../cosmos/base/query/v1beta1/pagination";
 import { Device } from "./device";
+import { EventPb } from "./event_pb";
 import { Kv } from "./kv";
 import { Params } from "./params";
 
@@ -52,6 +53,25 @@ export interface QueryAllDeviceRequest {
 
 export interface QueryAllDeviceResponse {
   device: Device[];
+  pagination: PageResponse | undefined;
+}
+
+export interface QueryGetEventPbRequest {
+  pubId: string;
+}
+
+export interface QueryGetEventPbResponse {
+  eventPb: EventPb | undefined;
+}
+
+export interface QueryAllEventPbRequest {
+  pagination: PageRequest | undefined;
+  pubId: string;
+  topic: string;
+}
+
+export interface QueryAllEventPbResponse {
+  eventPb: EventPb[];
   pagination: PageResponse | undefined;
 }
 
@@ -607,6 +627,237 @@ export const QueryAllDeviceResponse = {
   },
 };
 
+function createBaseQueryGetEventPbRequest(): QueryGetEventPbRequest {
+  return { pubId: "" };
+}
+
+export const QueryGetEventPbRequest = {
+  encode(message: QueryGetEventPbRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.pubId !== "") {
+      writer.uint32(10).string(message.pubId);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetEventPbRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryGetEventPbRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.pubId = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetEventPbRequest {
+    return { pubId: isSet(object.pubId) ? String(object.pubId) : "" };
+  },
+
+  toJSON(message: QueryGetEventPbRequest): unknown {
+    const obj: any = {};
+    message.pubId !== undefined && (obj.pubId = message.pubId);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryGetEventPbRequest>, I>>(object: I): QueryGetEventPbRequest {
+    const message = createBaseQueryGetEventPbRequest();
+    message.pubId = object.pubId ?? "";
+    return message;
+  },
+};
+
+function createBaseQueryGetEventPbResponse(): QueryGetEventPbResponse {
+  return { eventPb: undefined };
+}
+
+export const QueryGetEventPbResponse = {
+  encode(message: QueryGetEventPbResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.eventPb !== undefined) {
+      EventPb.encode(message.eventPb, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetEventPbResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryGetEventPbResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.eventPb = EventPb.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetEventPbResponse {
+    return { eventPb: isSet(object.eventPb) ? EventPb.fromJSON(object.eventPb) : undefined };
+  },
+
+  toJSON(message: QueryGetEventPbResponse): unknown {
+    const obj: any = {};
+    message.eventPb !== undefined && (obj.eventPb = message.eventPb ? EventPb.toJSON(message.eventPb) : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryGetEventPbResponse>, I>>(object: I): QueryGetEventPbResponse {
+    const message = createBaseQueryGetEventPbResponse();
+    message.eventPb = (object.eventPb !== undefined && object.eventPb !== null)
+      ? EventPb.fromPartial(object.eventPb)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseQueryAllEventPbRequest(): QueryAllEventPbRequest {
+  return { pagination: undefined, pubId: "", topic: "" };
+}
+
+export const QueryAllEventPbRequest = {
+  encode(message: QueryAllEventPbRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pubId !== "") {
+      writer.uint32(18).string(message.pubId);
+    }
+    if (message.topic !== "") {
+      writer.uint32(26).string(message.topic);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllEventPbRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryAllEventPbRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        case 2:
+          message.pubId = reader.string();
+          break;
+        case 3:
+          message.topic = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllEventPbRequest {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
+      pubId: isSet(object.pubId) ? String(object.pubId) : "",
+      topic: isSet(object.topic) ? String(object.topic) : "",
+    };
+  },
+
+  toJSON(message: QueryAllEventPbRequest): unknown {
+    const obj: any = {};
+    message.pagination !== undefined
+      && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
+    message.pubId !== undefined && (obj.pubId = message.pubId);
+    message.topic !== undefined && (obj.topic = message.topic);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryAllEventPbRequest>, I>>(object: I): QueryAllEventPbRequest {
+    const message = createBaseQueryAllEventPbRequest();
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
+    message.pubId = object.pubId ?? "";
+    message.topic = object.topic ?? "";
+    return message;
+  },
+};
+
+function createBaseQueryAllEventPbResponse(): QueryAllEventPbResponse {
+  return { eventPb: [], pagination: undefined };
+}
+
+export const QueryAllEventPbResponse = {
+  encode(message: QueryAllEventPbResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.eventPb) {
+      EventPb.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllEventPbResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryAllEventPbResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.eventPb.push(EventPb.decode(reader, reader.uint32()));
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllEventPbResponse {
+    return {
+      eventPb: Array.isArray(object?.eventPb) ? object.eventPb.map((e: any) => EventPb.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
+    };
+  },
+
+  toJSON(message: QueryAllEventPbResponse): unknown {
+    const obj: any = {};
+    if (message.eventPb) {
+      obj.eventPb = message.eventPb.map((e) => e ? EventPb.toJSON(e) : undefined);
+    } else {
+      obj.eventPb = [];
+    }
+    message.pagination !== undefined
+      && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryAllEventPbResponse>, I>>(object: I): QueryAllEventPbResponse {
+    const message = createBaseQueryAllEventPbResponse();
+    message.eventPb = object.eventPb?.map((e) => EventPb.fromPartial(e)) || [];
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -617,6 +868,9 @@ export interface Query {
   /** Queries a list of Device items. */
   Device(request: QueryGetDeviceRequest): Promise<QueryGetDeviceResponse>;
   DeviceAll(request: QueryAllDeviceRequest): Promise<QueryAllDeviceResponse>;
+  /** Queries a list of EventPb items. */
+  EventPb(request: QueryGetEventPbRequest): Promise<QueryGetEventPbResponse>;
+  EventPbAll(request: QueryAllEventPbRequest): Promise<QueryAllEventPbResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -628,6 +882,8 @@ export class QueryClientImpl implements Query {
     this.KvAll = this.KvAll.bind(this);
     this.Device = this.Device.bind(this);
     this.DeviceAll = this.DeviceAll.bind(this);
+    this.EventPb = this.EventPb.bind(this);
+    this.EventPbAll = this.EventPbAll.bind(this);
   }
   Params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
@@ -657,6 +913,18 @@ export class QueryClientImpl implements Query {
     const data = QueryAllDeviceRequest.encode(request).finish();
     const promise = this.rpc.request("stccommunity.iotdepinprotocol.iotdepinprotocol.Query", "DeviceAll", data);
     return promise.then((data) => QueryAllDeviceResponse.decode(new _m0.Reader(data)));
+  }
+
+  EventPb(request: QueryGetEventPbRequest): Promise<QueryGetEventPbResponse> {
+    const data = QueryGetEventPbRequest.encode(request).finish();
+    const promise = this.rpc.request("stccommunity.iotdepinprotocol.iotdepinprotocol.Query", "EventPb", data);
+    return promise.then((data) => QueryGetEventPbResponse.decode(new _m0.Reader(data)));
+  }
+
+  EventPbAll(request: QueryAllEventPbRequest): Promise<QueryAllEventPbResponse> {
+    const data = QueryAllEventPbRequest.encode(request).finish();
+    const promise = this.rpc.request("stccommunity.iotdepinprotocol.iotdepinprotocol.Query", "EventPbAll", data);
+    return promise.then((data) => QueryAllEventPbResponse.decode(new _m0.Reader(data)));
   }
 }
 

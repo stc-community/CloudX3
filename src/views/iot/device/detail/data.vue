@@ -8,11 +8,4 @@ import IgntCrud from "@/components/IgntCrud.vue";
     store-name="StccommunityIotdepinprotocolIotdepinprotocol"
     item-name="Kv"
   />
-
-  <div class="divider" />
-
-  <IgntCrud
-    store-name="StccommunityIotdepinprotocolIotdepinprotocol"
-    item-name="Device"
-  />
 </template>

@@ -14,12 +14,14 @@ export interface State {
   visibleModal: string;
   activeItem: any;
   moduleAvailable: boolean;
+  items: Array<any>;
 }
 
 const initialState: State = {
   visibleModal: "",
   activeItem: {},
-  moduleAvailable: false
+  moduleAvailable: false,
+  items: []
 };
 const reader = ref<any>(null);
 const props = defineProps({
@@ -47,6 +49,25 @@ const moduleNameNormalized = computed(() =>
 
 state.moduleAvailable = !!(client as any)[props.storeName];
 const { activeItem, moduleAvailable, visibleModal } = toRefs(state);
+
+const disableCreate = computed<boolean>(() => {
+  const from = props.itemName.toLocaleLowerCase();
+  const condition1 = !address.value;
+
+  if (from === "device") {
+    return condition1 || !!state.items.length;
+  }
+
+  if (from === "eventpb") {
+    return true;
+  }
+
+  return condition1;
+});
+
+const onGetItems = values => {
+  state.items = values;
+};
 </script>
 
 <template>
@@ -56,7 +77,7 @@ const { activeItem, moduleAvailable, visibleModal } = toRefs(state);
       <div class="col-6 text-align--right">
         <IgntButton
           type="primary"
-          :disabled="!address"
+          :disabled="disableCreate"
           @click="visibleModal = 'create-item'"
         >
           Create {{ moduleNameNormalized }}
@@ -69,6 +90,7 @@ const { activeItem, moduleAvailable, visibleModal } = toRefs(state);
         :item-name="moduleNameNormalized"
         :command-name="`query${moduleNameNormalized}All`"
         ref="reader"
+        @getItems="onGetItems"
         @createItem="visibleModal = 'create-item'"
         @editItem="
           item => {

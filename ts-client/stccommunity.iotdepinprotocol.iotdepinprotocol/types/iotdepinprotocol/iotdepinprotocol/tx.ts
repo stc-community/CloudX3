@@ -1,4 +1,5 @@
 /* eslint-disable */
+import Long from "long";
 import _m0 from "protobufjs/minimal";
 
 export const protobufPackage = "stccommunity.iotdepinprotocol.iotdepinprotocol";
@@ -55,14 +56,36 @@ export interface MsgDeleteDevice {
 export interface MsgDeleteDeviceResponse {
 }
 
-export interface MsgOracleOperator {
+export interface MsgCreateEventPb {
   creator: string;
-  reqId: string;
-  operatorType: string;
-  data: string;
+  pubId: string;
+  topic: string;
+  pubType: string;
+  payload: string;
+  pubTime: number;
 }
 
-export interface MsgOracleOperatorResponse {
+export interface MsgCreateEventPbResponse {
+}
+
+export interface MsgUpdateEventPb {
+  creator: string;
+  pubId: string;
+  topic: string;
+  pubType: string;
+  payload: string;
+  pubTime: number;
+}
+
+export interface MsgUpdateEventPbResponse {
+}
+
+export interface MsgDeleteEventPb {
+  creator: string;
+  pubId: string;
+}
+
+export interface MsgDeleteEventPbResponse {
 }
 
 function createBaseMsgCreateKv(): MsgCreateKv {
@@ -683,31 +706,37 @@ export const MsgDeleteDeviceResponse = {
   },
 };
 
-function createBaseMsgOracleOperator(): MsgOracleOperator {
-  return { creator: "", reqId: "", operatorType: "", data: "" };
+function createBaseMsgCreateEventPb(): MsgCreateEventPb {
+  return { creator: "", pubId: "", topic: "", pubType: "", payload: "", pubTime: 0 };
 }
 
-export const MsgOracleOperator = {
-  encode(message: MsgOracleOperator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const MsgCreateEventPb = {
+  encode(message: MsgCreateEventPb, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.creator !== "") {
       writer.uint32(10).string(message.creator);
     }
-    if (message.reqId !== "") {
-      writer.uint32(18).string(message.reqId);
+    if (message.pubId !== "") {
+      writer.uint32(18).string(message.pubId);
     }
-    if (message.operatorType !== "") {
-      writer.uint32(26).string(message.operatorType);
+    if (message.topic !== "") {
+      writer.uint32(26).string(message.topic);
     }
-    if (message.data !== "") {
-      writer.uint32(34).string(message.data);
+    if (message.pubType !== "") {
+      writer.uint32(34).string(message.pubType);
+    }
+    if (message.payload !== "") {
+      writer.uint32(42).string(message.payload);
+    }
+    if (message.pubTime !== 0) {
+      writer.uint32(48).int64(message.pubTime);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgOracleOperator {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateEventPb {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgOracleOperator();
+    const message = createBaseMsgCreateEventPb();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -715,13 +744,19 @@ export const MsgOracleOperator = {
           message.creator = reader.string();
           break;
         case 2:
-          message.reqId = reader.string();
+          message.pubId = reader.string();
           break;
         case 3:
-          message.operatorType = reader.string();
+          message.topic = reader.string();
           break;
         case 4:
-          message.data = reader.string();
+          message.pubType = reader.string();
+          break;
+        case 5:
+          message.payload = reader.string();
+          break;
+        case 6:
+          message.pubTime = longToNumber(reader.int64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -731,47 +766,53 @@ export const MsgOracleOperator = {
     return message;
   },
 
-  fromJSON(object: any): MsgOracleOperator {
+  fromJSON(object: any): MsgCreateEventPb {
     return {
       creator: isSet(object.creator) ? String(object.creator) : "",
-      reqId: isSet(object.reqId) ? String(object.reqId) : "",
-      operatorType: isSet(object.operatorType) ? String(object.operatorType) : "",
-      data: isSet(object.data) ? String(object.data) : "",
+      pubId: isSet(object.pubId) ? String(object.pubId) : "",
+      topic: isSet(object.topic) ? String(object.topic) : "",
+      pubType: isSet(object.pubType) ? String(object.pubType) : "",
+      payload: isSet(object.payload) ? String(object.payload) : "",
+      pubTime: isSet(object.pubTime) ? Number(object.pubTime) : 0,
     };
   },
 
-  toJSON(message: MsgOracleOperator): unknown {
+  toJSON(message: MsgCreateEventPb): unknown {
     const obj: any = {};
     message.creator !== undefined && (obj.creator = message.creator);
-    message.reqId !== undefined && (obj.reqId = message.reqId);
-    message.operatorType !== undefined && (obj.operatorType = message.operatorType);
-    message.data !== undefined && (obj.data = message.data);
+    message.pubId !== undefined && (obj.pubId = message.pubId);
+    message.topic !== undefined && (obj.topic = message.topic);
+    message.pubType !== undefined && (obj.pubType = message.pubType);
+    message.payload !== undefined && (obj.payload = message.payload);
+    message.pubTime !== undefined && (obj.pubTime = Math.round(message.pubTime));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgOracleOperator>, I>>(object: I): MsgOracleOperator {
-    const message = createBaseMsgOracleOperator();
+  fromPartial<I extends Exact<DeepPartial<MsgCreateEventPb>, I>>(object: I): MsgCreateEventPb {
+    const message = createBaseMsgCreateEventPb();
     message.creator = object.creator ?? "";
-    message.reqId = object.reqId ?? "";
-    message.operatorType = object.operatorType ?? "";
-    message.data = object.data ?? "";
+    message.pubId = object.pubId ?? "";
+    message.topic = object.topic ?? "";
+    message.pubType = object.pubType ?? "";
+    message.payload = object.payload ?? "";
+    message.pubTime = object.pubTime ?? 0;
     return message;
   },
 };
 
-function createBaseMsgOracleOperatorResponse(): MsgOracleOperatorResponse {
+function createBaseMsgCreateEventPbResponse(): MsgCreateEventPbResponse {
   return {};
 }
 
-export const MsgOracleOperatorResponse = {
-  encode(_: MsgOracleOperatorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const MsgCreateEventPbResponse = {
+  encode(_: MsgCreateEventPbResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgOracleOperatorResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateEventPbResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgOracleOperatorResponse();
+    const message = createBaseMsgCreateEventPbResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -783,17 +824,247 @@ export const MsgOracleOperatorResponse = {
     return message;
   },
 
-  fromJSON(_: any): MsgOracleOperatorResponse {
+  fromJSON(_: any): MsgCreateEventPbResponse {
     return {};
   },
 
-  toJSON(_: MsgOracleOperatorResponse): unknown {
+  toJSON(_: MsgCreateEventPbResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgOracleOperatorResponse>, I>>(_: I): MsgOracleOperatorResponse {
-    const message = createBaseMsgOracleOperatorResponse();
+  fromPartial<I extends Exact<DeepPartial<MsgCreateEventPbResponse>, I>>(_: I): MsgCreateEventPbResponse {
+    const message = createBaseMsgCreateEventPbResponse();
+    return message;
+  },
+};
+
+function createBaseMsgUpdateEventPb(): MsgUpdateEventPb {
+  return { creator: "", pubId: "", topic: "", pubType: "", payload: "", pubTime: 0 };
+}
+
+export const MsgUpdateEventPb = {
+  encode(message: MsgUpdateEventPb, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.creator !== "") {
+      writer.uint32(10).string(message.creator);
+    }
+    if (message.pubId !== "") {
+      writer.uint32(18).string(message.pubId);
+    }
+    if (message.topic !== "") {
+      writer.uint32(26).string(message.topic);
+    }
+    if (message.pubType !== "") {
+      writer.uint32(34).string(message.pubType);
+    }
+    if (message.payload !== "") {
+      writer.uint32(42).string(message.payload);
+    }
+    if (message.pubTime !== 0) {
+      writer.uint32(48).int64(message.pubTime);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateEventPb {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgUpdateEventPb();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string();
+          break;
+        case 2:
+          message.pubId = reader.string();
+          break;
+        case 3:
+          message.topic = reader.string();
+          break;
+        case 4:
+          message.pubType = reader.string();
+          break;
+        case 5:
+          message.payload = reader.string();
+          break;
+        case 6:
+          message.pubTime = longToNumber(reader.int64() as Long);
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgUpdateEventPb {
+    return {
+      creator: isSet(object.creator) ? String(object.creator) : "",
+      pubId: isSet(object.pubId) ? String(object.pubId) : "",
+      topic: isSet(object.topic) ? String(object.topic) : "",
+      pubType: isSet(object.pubType) ? String(object.pubType) : "",
+      payload: isSet(object.payload) ? String(object.payload) : "",
+      pubTime: isSet(object.pubTime) ? Number(object.pubTime) : 0,
+    };
+  },
+
+  toJSON(message: MsgUpdateEventPb): unknown {
+    const obj: any = {};
+    message.creator !== undefined && (obj.creator = message.creator);
+    message.pubId !== undefined && (obj.pubId = message.pubId);
+    message.topic !== undefined && (obj.topic = message.topic);
+    message.pubType !== undefined && (obj.pubType = message.pubType);
+    message.payload !== undefined && (obj.payload = message.payload);
+    message.pubTime !== undefined && (obj.pubTime = Math.round(message.pubTime));
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgUpdateEventPb>, I>>(object: I): MsgUpdateEventPb {
+    const message = createBaseMsgUpdateEventPb();
+    message.creator = object.creator ?? "";
+    message.pubId = object.pubId ?? "";
+    message.topic = object.topic ?? "";
+    message.pubType = object.pubType ?? "";
+    message.payload = object.payload ?? "";
+    message.pubTime = object.pubTime ?? 0;
+    return message;
+  },
+};
+
+function createBaseMsgUpdateEventPbResponse(): MsgUpdateEventPbResponse {
+  return {};
+}
+
+export const MsgUpdateEventPbResponse = {
+  encode(_: MsgUpdateEventPbResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateEventPbResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgUpdateEventPbResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgUpdateEventPbResponse {
+    return {};
+  },
+
+  toJSON(_: MsgUpdateEventPbResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgUpdateEventPbResponse>, I>>(_: I): MsgUpdateEventPbResponse {
+    const message = createBaseMsgUpdateEventPbResponse();
+    return message;
+  },
+};
+
+function createBaseMsgDeleteEventPb(): MsgDeleteEventPb {
+  return { creator: "", pubId: "" };
+}
+
+export const MsgDeleteEventPb = {
+  encode(message: MsgDeleteEventPb, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.creator !== "") {
+      writer.uint32(10).string(message.creator);
+    }
+    if (message.pubId !== "") {
+      writer.uint32(18).string(message.pubId);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDeleteEventPb {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgDeleteEventPb();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string();
+          break;
+        case 2:
+          message.pubId = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgDeleteEventPb {
+    return {
+      creator: isSet(object.creator) ? String(object.creator) : "",
+      pubId: isSet(object.pubId) ? String(object.pubId) : "",
+    };
+  },
+
+  toJSON(message: MsgDeleteEventPb): unknown {
+    const obj: any = {};
+    message.creator !== undefined && (obj.creator = message.creator);
+    message.pubId !== undefined && (obj.pubId = message.pubId);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgDeleteEventPb>, I>>(object: I): MsgDeleteEventPb {
+    const message = createBaseMsgDeleteEventPb();
+    message.creator = object.creator ?? "";
+    message.pubId = object.pubId ?? "";
+    return message;
+  },
+};
+
+function createBaseMsgDeleteEventPbResponse(): MsgDeleteEventPbResponse {
+  return {};
+}
+
+export const MsgDeleteEventPbResponse = {
+  encode(_: MsgDeleteEventPbResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDeleteEventPbResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgDeleteEventPbResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgDeleteEventPbResponse {
+    return {};
+  },
+
+  toJSON(_: MsgDeleteEventPbResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgDeleteEventPbResponse>, I>>(_: I): MsgDeleteEventPbResponse {
+    const message = createBaseMsgDeleteEventPbResponse();
     return message;
   },
 };
@@ -806,7 +1077,9 @@ export interface Msg {
   CreateDevice(request: MsgCreateDevice): Promise<MsgCreateDeviceResponse>;
   UpdateDevice(request: MsgUpdateDevice): Promise<MsgUpdateDeviceResponse>;
   DeleteDevice(request: MsgDeleteDevice): Promise<MsgDeleteDeviceResponse>;
-  OracleOperator(request: MsgOracleOperator): Promise<MsgOracleOperatorResponse>;
+  CreateEventPb(request: MsgCreateEventPb): Promise<MsgCreateEventPbResponse>;
+  UpdateEventPb(request: MsgUpdateEventPb): Promise<MsgUpdateEventPbResponse>;
+  DeleteEventPb(request: MsgDeleteEventPb): Promise<MsgDeleteEventPbResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -819,7 +1092,9 @@ export class MsgClientImpl implements Msg {
     this.CreateDevice = this.CreateDevice.bind(this);
     this.UpdateDevice = this.UpdateDevice.bind(this);
     this.DeleteDevice = this.DeleteDevice.bind(this);
-    this.OracleOperator = this.OracleOperator.bind(this);
+    this.CreateEventPb = this.CreateEventPb.bind(this);
+    this.UpdateEventPb = this.UpdateEventPb.bind(this);
+    this.DeleteEventPb = this.DeleteEventPb.bind(this);
   }
   CreateKv(request: MsgCreateKv): Promise<MsgCreateKvResponse> {
     const data = MsgCreateKv.encode(request).finish();
@@ -857,16 +1132,47 @@ export class MsgClientImpl implements Msg {
     return promise.then((data) => MsgDeleteDeviceResponse.decode(new _m0.Reader(data)));
   }
 
-  OracleOperator(request: MsgOracleOperator): Promise<MsgOracleOperatorResponse> {
-    const data = MsgOracleOperator.encode(request).finish();
-    const promise = this.rpc.request("stccommunity.iotdepinprotocol.iotdepinprotocol.Msg", "OracleOperator", data);
-    return promise.then((data) => MsgOracleOperatorResponse.decode(new _m0.Reader(data)));
+  CreateEventPb(request: MsgCreateEventPb): Promise<MsgCreateEventPbResponse> {
+    const data = MsgCreateEventPb.encode(request).finish();
+    const promise = this.rpc.request("stccommunity.iotdepinprotocol.iotdepinprotocol.Msg", "CreateEventPb", data);
+    return promise.then((data) => MsgCreateEventPbResponse.decode(new _m0.Reader(data)));
+  }
+
+  UpdateEventPb(request: MsgUpdateEventPb): Promise<MsgUpdateEventPbResponse> {
+    const data = MsgUpdateEventPb.encode(request).finish();
+    const promise = this.rpc.request("stccommunity.iotdepinprotocol.iotdepinprotocol.Msg", "UpdateEventPb", data);
+    return promise.then((data) => MsgUpdateEventPbResponse.decode(new _m0.Reader(data)));
+  }
+
+  DeleteEventPb(request: MsgDeleteEventPb): Promise<MsgDeleteEventPbResponse> {
+    const data = MsgDeleteEventPb.encode(request).finish();
+    const promise = this.rpc.request("stccommunity.iotdepinprotocol.iotdepinprotocol.Msg", "DeleteEventPb", data);
+    return promise.then((data) => MsgDeleteEventPbResponse.decode(new _m0.Reader(data)));
   }
 }
 
 interface Rpc {
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
+
+declare var self: any | undefined;
+declare var window: any | undefined;
+declare var global: any | undefined;
+var globalThis: any = (() => {
+  if (typeof globalThis !== "undefined") {
+    return globalThis;
+  }
+  if (typeof self !== "undefined") {
+    return self;
+  }
+  if (typeof window !== "undefined") {
+    return window;
+  }
+  if (typeof global !== "undefined") {
+    return global;
+  }
+  throw "Unable to locate global object";
+})();
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
@@ -878,6 +1184,18 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+
+function longToNumber(long: Long): number {
+  if (long.gt(Number.MAX_SAFE_INTEGER)) {
+    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
+  }
+  return long.toNumber();
+}
+
+if (_m0.util.Long !== Long) {
+  _m0.util.Long = Long as any;
+  _m0.configure();
+}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

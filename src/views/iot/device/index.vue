@@ -95,7 +95,7 @@ const onSub = (row: Row) => {
       <div class="card-body">
         <router-link
           class="card-title text-primary hover:cursor-pointer hover:text-primary-focus"
-          :to="{ name: 'iot.device.metrics', params: { id: 1 } }"
+          :to="{ name: 'iot.device.metrics', params: { name: d.name } }"
         >
           <IconifyIconOnline
             icon="mingcute:device-line"

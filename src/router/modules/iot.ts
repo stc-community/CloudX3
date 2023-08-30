@@ -23,7 +23,7 @@ export default {
       component: () => import("@/views/iot/device/detail/index.vue"),
       children: [
         {
-          path: "/iot/device/:id/metrics",
+          path: "/iot/device/:name/metrics",
           name: "iot.device.metrics",
           component: () => import("@/views/iot/device/detail/metrics.vue"),
           meta: {
@@ -32,7 +32,7 @@ export default {
           }
         },
         {
-          path: "/iot/device/:id/devices",
+          path: "/iot/device/:name/devices",
           name: "iot.device.devices",
           component: () => import("@/views/iot/device/detail/devices.vue"),
           meta: {
@@ -41,7 +41,7 @@ export default {
           }
         },
         {
-          path: "/iot/device/:id/events",
+          path: "/iot/device/:name/events",
           name: "iot.device.events",
           component: () => import("@/views/iot/device/detail/events.vue"),
           meta: {
@@ -50,7 +50,7 @@ export default {
           }
         },
         {
-          path: "/iot/device/:id/data",
+          path: "/iot/device/:name/data",
           name: "iot.device.data",
           component: () => import("@/views/iot/device/detail/data.vue"),
           meta: {
@@ -59,7 +59,7 @@ export default {
           }
         },
         {
-          path: "/iot/device/:id/logs",
+          path: "/iot/device/:name/logs",
           name: "iot.device.logs",
           component: () => import("@/views/iot/device/detail/logs.vue"),
           meta: {

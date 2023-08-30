@@ -1,6 +1,7 @@
 import { loadData } from "@/utils/shared";
 import { reactive, type Ref } from "vue";
 import dayjs from "dayjs";
+import { useRoute } from "vue-router";
 
 type ApiChartsData = {
   metric: {
@@ -16,6 +17,7 @@ interface ChartReactive {
 
 export function useDeploymentShared() {
   const data = reactive({});
+  const route = useRoute();
   const fetchAndSetDeploymentMonitorChartData = (
     filter,
     loadingRef: Ref,
@@ -29,8 +31,8 @@ export function useDeploymentShared() {
         start: dayjs(new Date()).subtract(1, "hour").unix(),
         end: dayjs(new Date()).unix(),
         metrics_filter: "%5E" + filter + "$",
-        namespace: "oam",
-        deployment: "oam-apiserver"
+        namespace: "deviceshifu",
+        deployment: route.params.name || "test-thermometer"
       },
       loadingRef,
       () => {

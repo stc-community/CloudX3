@@ -1,30 +1,37 @@
 <script setup lang="ts">
 // vertical layout, and with site switch function
-import { watch } from "vue";
+import { watch, computed } from "vue";
 import { useRoute } from "vue-router";
 import { loadModuleRoutes } from "@/router/utils";
-import { getConfig } from "@/config";
-import { useNostrStore } from "@/store/modules/nostr";
 import { useAccountStore } from "@/store/modules/account";
 import { useLang } from "@/hooks/useLang";
+import { useNostr } from "@/hooks/useNostr";
+import KeplrWallet from "./keplr-wallet.vue";
+
+const props = defineProps<{
+  menus?: RouteChildrenConfigsTable[];
+  from?: "iot";
+}>();
+
 const { t } = useLang();
-
-const nostrStore = useNostrStore();
-const relay = getConfig()?.Relay || [];
-
-if (!nostrStore.getUrl) {
-  nostrStore.saveUrl(relay[0].url);
-}
-
+const { nostrStore, relay } = useNostr();
 const route = useRoute();
 
-const parentRoute = name => {
-  return name.split(".")[0];
-};
+const children = computed(() => {
+  if (props.menus) {
+    return props.menus;
+  }
 
-const children: Array<RouteConfigsTable> = loadModuleRoutes().find(
-  i => i.name === parentRoute(route.name)
-)?.children;
+  const parentRoute = name => {
+    return name.split(".")[0];
+  };
+
+  const children: Array<RouteConfigsTable> = loadModuleRoutes().find(
+    i => i.name === parentRoute(route.name)
+  )?.children;
+
+  return children;
+});
 
 watch(
   () => nostrStore.getUrl,
@@ -49,7 +56,12 @@ const accountStore = useAccountStore();
         </select>
         <ul class="menu bg-base-100 w-56 p-2 rounded-box">
           <li>
-            <router-link v-for="(m, k) in children" :key="k" :to="m.path">
+            <router-link
+              v-for="(m, k) in children"
+              :key="k"
+              :to="{ name: m.name, params: route.params }"
+              class="my-2"
+            >
               <IconifyIconOnline
                 :icon="m.meta.icon"
                 width="20px"
@@ -89,7 +101,13 @@ const accountStore = useAccountStore();
             <button />
           </div>
         </div>
-        <RouterView />
+        <div class="relative">
+          <KeplrWallet
+            v-if="from === 'iot'"
+            class="absolute top-[-50px] right-0"
+          />
+          <RouterView />
+        </div>
       </div>
     </div>
   </div>

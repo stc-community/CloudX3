@@ -9,6 +9,8 @@ type Events = {
   refreshServices: boolean;
   showPodMonitor: Pod;
   showServiceMonitor: Service;
+  refreshDevices: boolean;
+  keplrConnected: boolean;
 };
 
 const emitter = mitt<Events>(); // inferred as Emitter<Events>

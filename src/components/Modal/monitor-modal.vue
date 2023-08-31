@@ -1,83 +1,19 @@
 <script setup lang="ts">
-import { loadData } from "@/utils/shared";
 import EventBus from "@/utils/event-bus";
-import { reactive, onBeforeUnmount, ref } from "vue";
+import { onBeforeUnmount } from "vue";
 import { useLang } from "@/hooks/useLang";
-const { t } = useLang();
+import { usePod } from "@/hooks/usePod";
 
-const loading = ref(false);
-const data = reactive({});
+const { t } = useLang();
+const { loading, charts, getPodMonitorChartData } = usePod();
+
 onBeforeUnmount(() => {
   EventBus.off("showPodMonitor");
 });
 
 EventBus.on("showPodMonitor", pod => {
   console.log("on showPodMonitor");
-  loading.value = true;
-  loadData(
-    data,
-    "cloud.monitor.podmonitor",
-    {
-      name: pod.metadata.name,
-      namespace: pod.metadata.namespace
-    },
-    loading,
-    makeChartData
-  );
-});
-
-const charts = reactive({
-  cpu: { series: [], options: {} },
-  memory: { series: [], options: {} },
-  net_transmit: { series: [], options: {} },
-  net_receive: { series: [], options: {} }
-});
-const makeChartData = () => {
-  const { cpu, memory, net_transmit, net_receive } = data.data;
-
-  const makeData = obj => {
-    const _data = [];
-    const _categories = [];
-    obj.data.forEach(d => {
-      _categories.push(new Date(d[0] * 1000).toISOString());
-      _data.push(d[1]);
-    });
-
-    return {
-      series: [{ name: cpu.metric_name, data: _data }],
-      options: {
-        chart: {
-          height: 200,
-          type: "area",
-          toolbar: { show: false }
-        },
-        dataLabels: {
-          enabled: false
-        },
-        stroke: {
-          curve: "smooth"
-        },
-        xaxis: {
-          type: "datetime",
-          categories: _categories
-        },
-        tooltip: {
-          x: {
-            format: "dd/MM/yy HH:mm"
-          }
-        }
-      }
-    };
-  };
-
-  charts.cpu = makeData(cpu);
-  charts.memory = makeData(memory);
-  charts.net_transmit = makeData(net_transmit);
-  charts.net_receive = makeData(net_receive);
-};
-
-defineOptions({
-  name: "monitor-modal"
+  getPodMonitorChartData(pod);
 });
 </script>
 <template>

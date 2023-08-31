@@ -16,4 +16,10 @@ const exclude = [
   "@pureadmin/theme/dist/browser-utils"
 ];
 
-export { include, exclude };
+const esbuildOptions = {
+  define: {
+    global: "globalThis"
+  }
+};
+
+export { include, exclude, esbuildOptions };

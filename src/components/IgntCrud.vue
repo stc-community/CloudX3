@@ -58,9 +58,9 @@ const disableCreate = computed<boolean>(() => {
     return condition1 || !!state.items.length;
   }
 
-  if (from === "eventpb") {
-    return true;
-  }
+  // if (from === "eventpb") {
+  //   return true;
+  // }
 
   return condition1;
 });

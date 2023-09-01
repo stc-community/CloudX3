@@ -63,6 +63,16 @@ const itemFieldsFiltered = computed(() => {
     allFields.splice(index, 1);
   }
 
+  // hide device name
+  try {
+    const deviceIndex = allFields.findIndex(
+      (f: any) => f.name === "deviceName"
+    );
+    allFields.splice(deviceIndex, 1);
+  } catch (e) {
+    // ignore error
+  }
+
   return allFields;
 });
 const creator = address.value;
@@ -73,6 +83,9 @@ const submitItem = async () => {
     cloneFormData["index"] = "";
     cloneFormData["payload"] = window.btoa(cloneFormData["payload"]);
   }
+
+  // auto fill device name value
+  cloneFormData["deviceName"] = route.params.name;
 
   await (
     client[

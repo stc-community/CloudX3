@@ -10,7 +10,7 @@
     @submit="submitItem"
   >
     <template #body>
-      <div class="my-4" />
+      <div class="my-4 w-[500px]" />
       <div v-for="field in itemFieldsFiltered" :key="'field_' + field">
         <label :for="`p${field.name}`" class="sp-label capitalize-first-letter">
           {{ field.name }}
@@ -49,10 +49,17 @@ const props = defineProps({
   commandName: {
     type: String,
     required: true
+  },
+
+  initalData: {
+    type: Object,
+    default() {
+      return {};
+    }
   }
 });
 const emit = defineEmits(["close"]);
-const formData = reactive<any>({});
+const formData = reactive<any>(props.initalData);
 const { address } = useAddress();
 const client = useClient();
 // computed

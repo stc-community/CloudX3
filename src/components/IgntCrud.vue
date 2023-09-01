@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, reactive, ref, toRefs } from "vue";
+import { useRoute } from "vue-router";
 
 import { useAddress } from "@/def-composables/useAddress";
 import { IgntButton } from "@ignt/vue-library";
@@ -17,6 +18,7 @@ export interface State {
   items: Array<any>;
 }
 
+const route = useRoute();
 const initialState: State = {
   visibleModal: "",
   activeItem: {},
@@ -68,6 +70,16 @@ const disableCreate = computed<boolean>(() => {
 const onGetItems = values => {
   state.items = values;
 };
+
+const createModalInitalForm = computed(() => {
+  if (route.name === "iot.device.events") {
+    return {
+      topic: route.params.name
+    };
+  }
+
+  return {};
+});
 </script>
 
 <template>
@@ -111,6 +123,7 @@ const onGetItems = values => {
       :store-name="storeName"
       :item-name="moduleNameNormalized"
       :command-name="`sendMsgCreate${moduleNameNormalized}`"
+      :inital-data="createModalInitalForm"
       @close="
         visibleModal = '';
         reader?.refetch();

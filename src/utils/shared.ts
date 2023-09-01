@@ -7,6 +7,7 @@ import moment from "moment";
 import { getConfig } from "@/config";
 import type { EthersError } from "ethers";
 import CryptoJS from "crypto-js";
+import _ from "lodash";
 
 export function formatTime(timeStr, formatStr = "YYYY/MM/DD HH:mm:ss") {
   if (!timeStr) {
@@ -173,4 +174,12 @@ export function encrypt(text: string, key = "CloudX3") {
 
 export function decrypt(text: string, key = "CloudX3") {
   return CryptoJS.AES.decrypt(text, key).toString(CryptoJS.enc.Utf8);
+}
+
+export function smallCamelCase(str: string): string {
+  return _.camelCase(str);
+}
+
+export function bigCamelCase(str: string): string {
+  return _.upperFirst(_.camelCase(str));
 }

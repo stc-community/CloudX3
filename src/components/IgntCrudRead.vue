@@ -6,6 +6,7 @@ import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
 import { computed, ref } from "vue";
 import { useAddress } from "@/def-composables/useAddress";
 import { useRoute } from "vue-router";
+import { smallCamelCase, bigCamelCase } from "@/utils/shared";
 
 const route = useRoute();
 
@@ -45,7 +46,7 @@ const itemFields = (
       | "useKeplr"
     >
   ] as any
-).structure[props.itemName];
+).structure[bigCamelCase(props.itemName)];
 const items = ref<any>([]);
 
 const fetch = async () => {
@@ -67,7 +68,7 @@ const fetch = async () => {
     ).query[props.commandName]({
       deviceName: route.params.name
     })
-  ).data[props.itemName.toLowerCase()];
+  ).data[smallCamelCase(props.itemName)];
 };
 const refetch = async () => {
   items.value = await fetch();

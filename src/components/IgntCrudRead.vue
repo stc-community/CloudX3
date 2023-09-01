@@ -77,6 +77,16 @@ const refetch = async () => {
 };
 defineExpose({ refetch });
 await refetch();
+
+const showContent = (str, key) => {
+  if (route.name === "iot.device.events") {
+    if (key === "payload") {
+      return window.atob(str);
+    }
+  }
+
+  return str;
+};
 </script>
 
 <template>
@@ -97,7 +107,9 @@ await refetch();
             <div class="text-sm text-gray-400 font-semibold capitalize">
               {{ field.name }}
             </div>
-            <div class="mb-3 text-base">{{ item[field.name] }}</div>
+            <div class="mb-3 text-base">
+              {{ showContent(item[field.name], field.name) }}
+            </div>
           </div>
         </div>
         <div class="relative" v-if="address">

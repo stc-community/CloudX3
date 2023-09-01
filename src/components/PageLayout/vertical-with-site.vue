@@ -1,12 +1,13 @@
 <script setup lang="ts">
 // vertical layout, and with site switch function
-import { watch, computed } from "vue";
+import { watch, computed, ref } from "vue";
 import { useRoute } from "vue-router";
 import { loadModuleRoutes } from "@/router/utils";
 import { useAccountStore } from "@/store/modules/account";
 import { useLang } from "@/hooks/useLang";
 import { useNostr } from "@/hooks/useNostr";
 import KeplrWallet from "./keplr-wallet.vue";
+import { useIotDevices } from "@/hooks/useIotDevices";
 
 const props = defineProps<{
   menus?: RouteChildrenConfigsTable[];
@@ -16,6 +17,8 @@ const props = defineProps<{
 const { t } = useLang();
 const { nostrStore, relay } = useNostr();
 const route = useRoute();
+const { data, loading, getIotDevices } = useIotDevices();
+getIotDevices();
 
 const children = computed(() => {
   if (props.menus) {
@@ -42,12 +45,28 @@ watch(
 );
 
 const accountStore = useAccountStore();
+
+const currentDevice = ref(route.params.name);
 </script>
 <template>
   <div class="container mx-auto py-10">
     <div class="flex">
       <div>
         <select
+          v-if="from === 'iot'"
+          class="select select-primary w-52 ml-2"
+          v-model="currentDevice"
+        >
+          <option disabled>Pick a device</option>
+          <option v-if="loading" :value="currentDevice">
+            {{ currentDevice }}
+          </option>
+          <option v-else v-for="r in data.devices" :value="r.name">
+            {{ r.name }}
+          </option>
+        </select>
+        <select
+          v-else
           class="select select-primary w-52 ml-2"
           v-model="nostrStore.url"
         >

@@ -4,25 +4,29 @@ import _m0 from "protobufjs/minimal";
 export const protobufPackage = "stccommunity.iotdepinprotocol.iotdepinprotocol";
 
 export interface Device {
+  deviceName: string;
   address: string;
   value: string;
   creator: string;
 }
 
 function createBaseDevice(): Device {
-  return { address: "", value: "", creator: "" };
+  return { deviceName: "", address: "", value: "", creator: "" };
 }
 
 export const Device = {
   encode(message: Device, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.deviceName !== "") {
+      writer.uint32(10).string(message.deviceName);
+    }
     if (message.address !== "") {
-      writer.uint32(10).string(message.address);
+      writer.uint32(18).string(message.address);
     }
     if (message.value !== "") {
-      writer.uint32(18).string(message.value);
+      writer.uint32(26).string(message.value);
     }
     if (message.creator !== "") {
-      writer.uint32(26).string(message.creator);
+      writer.uint32(34).string(message.creator);
     }
     return writer;
   },
@@ -35,12 +39,15 @@ export const Device = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.address = reader.string();
+          message.deviceName = reader.string();
           break;
         case 2:
-          message.value = reader.string();
+          message.address = reader.string();
           break;
         case 3:
+          message.value = reader.string();
+          break;
+        case 4:
           message.creator = reader.string();
           break;
         default:
@@ -53,6 +60,7 @@ export const Device = {
 
   fromJSON(object: any): Device {
     return {
+      deviceName: isSet(object.deviceName) ? String(object.deviceName) : "",
       address: isSet(object.address) ? String(object.address) : "",
       value: isSet(object.value) ? String(object.value) : "",
       creator: isSet(object.creator) ? String(object.creator) : "",
@@ -61,6 +69,7 @@ export const Device = {
 
   toJSON(message: Device): unknown {
     const obj: any = {};
+    message.deviceName !== undefined && (obj.deviceName = message.deviceName);
     message.address !== undefined && (obj.address = message.address);
     message.value !== undefined && (obj.value = message.value);
     message.creator !== undefined && (obj.creator = message.creator);
@@ -69,6 +78,7 @@ export const Device = {
 
   fromPartial<I extends Exact<DeepPartial<Device>, I>>(object: I): Device {
     const message = createBaseDevice();
+    message.deviceName = object.deviceName ?? "";
     message.address = object.address ?? "";
     message.value = object.value ?? "";
     message.creator = object.creator ?? "";

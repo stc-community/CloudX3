@@ -6,11 +6,12 @@ export const protobufPackage = "stccommunity.iotdepinprotocol.iotdepinprotocol";
 export interface Kv {
   index: string;
   value: string;
+  deviceName: string;
   creator: string;
 }
 
 function createBaseKv(): Kv {
-  return { index: "", value: "", creator: "" };
+  return { index: "", value: "", deviceName: "", creator: "" };
 }
 
 export const Kv = {
@@ -21,8 +22,11 @@ export const Kv = {
     if (message.value !== "") {
       writer.uint32(18).string(message.value);
     }
+    if (message.deviceName !== "") {
+      writer.uint32(26).string(message.deviceName);
+    }
     if (message.creator !== "") {
-      writer.uint32(26).string(message.creator);
+      writer.uint32(34).string(message.creator);
     }
     return writer;
   },
@@ -41,6 +45,9 @@ export const Kv = {
           message.value = reader.string();
           break;
         case 3:
+          message.deviceName = reader.string();
+          break;
+        case 4:
           message.creator = reader.string();
           break;
         default:
@@ -55,6 +62,7 @@ export const Kv = {
     return {
       index: isSet(object.index) ? String(object.index) : "",
       value: isSet(object.value) ? String(object.value) : "",
+      deviceName: isSet(object.deviceName) ? String(object.deviceName) : "",
       creator: isSet(object.creator) ? String(object.creator) : "",
     };
   },
@@ -63,6 +71,7 @@ export const Kv = {
     const obj: any = {};
     message.index !== undefined && (obj.index = message.index);
     message.value !== undefined && (obj.value = message.value);
+    message.deviceName !== undefined && (obj.deviceName = message.deviceName);
     message.creator !== undefined && (obj.creator = message.creator);
     return obj;
   },
@@ -71,6 +80,7 @@ export const Kv = {
     const message = createBaseKv();
     message.index = object.index ?? "";
     message.value = object.value ?? "";
+    message.deviceName = object.deviceName ?? "";
     message.creator = object.creator ?? "";
     return message;
   },

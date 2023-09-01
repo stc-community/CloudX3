@@ -1,5 +1,4 @@
 /* eslint-disable */
-import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { PageRequest, PageResponse } from "../../cosmos/base/query/v1beta1/pagination";
 import { Device } from "./device";
@@ -19,28 +18,8 @@ export interface QueryParamsResponse {
   params: Params | undefined;
 }
 
-export interface QueryGetKvRequest {
-  index: string;
-  creator: string;
-}
-
-export interface QueryGetKvResponse {
-  kv: Kv | undefined;
-}
-
-export interface QueryAllKvRequest {
-  pagination: PageRequest | undefined;
-  creator: string;
-}
-
-export interface QueryAllKvResponse {
-  kv: Kv[];
-  pagination: PageResponse | undefined;
-}
-
 export interface QueryGetDeviceRequest {
-  address: string;
-  creator: string;
+  deviceName: string;
 }
 
 export interface QueryGetDeviceResponse {
@@ -49,7 +28,7 @@ export interface QueryGetDeviceResponse {
 
 export interface QueryAllDeviceRequest {
   pagination: PageRequest | undefined;
-  creator: string;
+  deviceName: string;
 }
 
 export interface QueryAllDeviceResponse {
@@ -57,21 +36,41 @@ export interface QueryAllDeviceResponse {
   pagination: PageResponse | undefined;
 }
 
+export interface QueryGetKvRequest {
+  index: string;
+  deviceName: string;
+}
+
+export interface QueryGetKvResponse {
+  kv: Kv | undefined;
+}
+
+export interface QueryAllKvRequest {
+  pagination: PageRequest | undefined;
+  deviceName: string;
+}
+
+export interface QueryAllKvResponse {
+  kv: Kv[];
+  pagination: PageResponse | undefined;
+}
+
 export interface QueryGetEventPbRequest {
-  id: number;
+  index: string;
+  deviceName: string;
 }
 
 export interface QueryGetEventPbResponse {
-  EventPb: EventPb | undefined;
+  eventPb: EventPb | undefined;
 }
 
 export interface QueryAllEventPbRequest {
   pagination: PageRequest | undefined;
-  topic: string;
+  deviceName: string;
 }
 
 export interface QueryAllEventPbResponse {
-  EventPb: EventPb[];
+  eventPb: EventPb[];
   pagination: PageResponse | undefined;
 }
 
@@ -163,248 +162,14 @@ export const QueryParamsResponse = {
   },
 };
 
-function createBaseQueryGetKvRequest(): QueryGetKvRequest {
-  return { index: "", creator: "" };
-}
-
-export const QueryGetKvRequest = {
-  encode(message: QueryGetKvRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.index !== "") {
-      writer.uint32(10).string(message.index);
-    }
-    if (message.creator !== "") {
-      writer.uint32(18).string(message.creator);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetKvRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryGetKvRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.index = reader.string();
-          break;
-        case 2:
-          message.creator = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-
-  fromJSON(object: any): QueryGetKvRequest {
-    return {
-      index: isSet(object.index) ? String(object.index) : "",
-      creator: isSet(object.creator) ? String(object.creator) : "",
-    };
-  },
-
-  toJSON(message: QueryGetKvRequest): unknown {
-    const obj: any = {};
-    message.index !== undefined && (obj.index = message.index);
-    message.creator !== undefined && (obj.creator = message.creator);
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<QueryGetKvRequest>, I>>(object: I): QueryGetKvRequest {
-    const message = createBaseQueryGetKvRequest();
-    message.index = object.index ?? "";
-    message.creator = object.creator ?? "";
-    return message;
-  },
-};
-
-function createBaseQueryGetKvResponse(): QueryGetKvResponse {
-  return { kv: undefined };
-}
-
-export const QueryGetKvResponse = {
-  encode(message: QueryGetKvResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.kv !== undefined) {
-      Kv.encode(message.kv, writer.uint32(10).fork()).ldelim();
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetKvResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryGetKvResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.kv = Kv.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-
-  fromJSON(object: any): QueryGetKvResponse {
-    return { kv: isSet(object.kv) ? Kv.fromJSON(object.kv) : undefined };
-  },
-
-  toJSON(message: QueryGetKvResponse): unknown {
-    const obj: any = {};
-    message.kv !== undefined && (obj.kv = message.kv ? Kv.toJSON(message.kv) : undefined);
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<QueryGetKvResponse>, I>>(object: I): QueryGetKvResponse {
-    const message = createBaseQueryGetKvResponse();
-    message.kv = (object.kv !== undefined && object.kv !== null) ? Kv.fromPartial(object.kv) : undefined;
-    return message;
-  },
-};
-
-function createBaseQueryAllKvRequest(): QueryAllKvRequest {
-  return { pagination: undefined, creator: "" };
-}
-
-export const QueryAllKvRequest = {
-  encode(message: QueryAllKvRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.pagination !== undefined) {
-      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
-    }
-    if (message.creator !== "") {
-      writer.uint32(18).string(message.creator);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllKvRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryAllKvRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
-          break;
-        case 2:
-          message.creator = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-
-  fromJSON(object: any): QueryAllKvRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
-      creator: isSet(object.creator) ? String(object.creator) : "",
-    };
-  },
-
-  toJSON(message: QueryAllKvRequest): unknown {
-    const obj: any = {};
-    message.pagination !== undefined
-      && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    message.creator !== undefined && (obj.creator = message.creator);
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<QueryAllKvRequest>, I>>(object: I): QueryAllKvRequest {
-    const message = createBaseQueryAllKvRequest();
-    message.pagination = (object.pagination !== undefined && object.pagination !== null)
-      ? PageRequest.fromPartial(object.pagination)
-      : undefined;
-    message.creator = object.creator ?? "";
-    return message;
-  },
-};
-
-function createBaseQueryAllKvResponse(): QueryAllKvResponse {
-  return { kv: [], pagination: undefined };
-}
-
-export const QueryAllKvResponse = {
-  encode(message: QueryAllKvResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.kv) {
-      Kv.encode(v!, writer.uint32(10).fork()).ldelim();
-    }
-    if (message.pagination !== undefined) {
-      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllKvResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryAllKvResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.kv.push(Kv.decode(reader, reader.uint32()));
-          break;
-        case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-
-  fromJSON(object: any): QueryAllKvResponse {
-    return {
-      kv: Array.isArray(object?.kv) ? object.kv.map((e: any) => Kv.fromJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
-    };
-  },
-
-  toJSON(message: QueryAllKvResponse): unknown {
-    const obj: any = {};
-    if (message.kv) {
-      obj.kv = message.kv.map((e) => e ? Kv.toJSON(e) : undefined);
-    } else {
-      obj.kv = [];
-    }
-    message.pagination !== undefined
-      && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<QueryAllKvResponse>, I>>(object: I): QueryAllKvResponse {
-    const message = createBaseQueryAllKvResponse();
-    message.kv = object.kv?.map((e) => Kv.fromPartial(e)) || [];
-    message.pagination = (object.pagination !== undefined && object.pagination !== null)
-      ? PageResponse.fromPartial(object.pagination)
-      : undefined;
-    return message;
-  },
-};
-
 function createBaseQueryGetDeviceRequest(): QueryGetDeviceRequest {
-  return { address: "", creator: "" };
+  return { deviceName: "" };
 }
 
 export const QueryGetDeviceRequest = {
   encode(message: QueryGetDeviceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.address !== "") {
-      writer.uint32(10).string(message.address);
-    }
-    if (message.creator !== "") {
-      writer.uint32(18).string(message.creator);
+    if (message.deviceName !== "") {
+      writer.uint32(10).string(message.deviceName);
     }
     return writer;
   },
@@ -417,10 +182,7 @@ export const QueryGetDeviceRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.address = reader.string();
-          break;
-        case 2:
-          message.creator = reader.string();
+          message.deviceName = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -431,23 +193,18 @@ export const QueryGetDeviceRequest = {
   },
 
   fromJSON(object: any): QueryGetDeviceRequest {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      creator: isSet(object.creator) ? String(object.creator) : "",
-    };
+    return { deviceName: isSet(object.deviceName) ? String(object.deviceName) : "" };
   },
 
   toJSON(message: QueryGetDeviceRequest): unknown {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.creator !== undefined && (obj.creator = message.creator);
+    message.deviceName !== undefined && (obj.deviceName = message.deviceName);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryGetDeviceRequest>, I>>(object: I): QueryGetDeviceRequest {
     const message = createBaseQueryGetDeviceRequest();
-    message.address = object.address ?? "";
-    message.creator = object.creator ?? "";
+    message.deviceName = object.deviceName ?? "";
     return message;
   },
 };
@@ -502,7 +259,7 @@ export const QueryGetDeviceResponse = {
 };
 
 function createBaseQueryAllDeviceRequest(): QueryAllDeviceRequest {
-  return { pagination: undefined, creator: "" };
+  return { pagination: undefined, deviceName: "" };
 }
 
 export const QueryAllDeviceRequest = {
@@ -510,8 +267,8 @@ export const QueryAllDeviceRequest = {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
-    if (message.creator !== "") {
-      writer.uint32(18).string(message.creator);
+    if (message.deviceName !== "") {
+      writer.uint32(18).string(message.deviceName);
     }
     return writer;
   },
@@ -527,7 +284,7 @@ export const QueryAllDeviceRequest = {
           message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
         case 2:
-          message.creator = reader.string();
+          message.deviceName = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -540,7 +297,7 @@ export const QueryAllDeviceRequest = {
   fromJSON(object: any): QueryAllDeviceRequest {
     return {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
-      creator: isSet(object.creator) ? String(object.creator) : "",
+      deviceName: isSet(object.deviceName) ? String(object.deviceName) : "",
     };
   },
 
@@ -548,7 +305,7 @@ export const QueryAllDeviceRequest = {
     const obj: any = {};
     message.pagination !== undefined
       && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    message.creator !== undefined && (obj.creator = message.creator);
+    message.deviceName !== undefined && (obj.deviceName = message.deviceName);
     return obj;
   },
 
@@ -557,7 +314,7 @@ export const QueryAllDeviceRequest = {
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
       ? PageRequest.fromPartial(object.pagination)
       : undefined;
-    message.creator = object.creator ?? "";
+    message.deviceName = object.deviceName ?? "";
     return message;
   },
 };
@@ -627,14 +384,248 @@ export const QueryAllDeviceResponse = {
   },
 };
 
+function createBaseQueryGetKvRequest(): QueryGetKvRequest {
+  return { index: "", deviceName: "" };
+}
+
+export const QueryGetKvRequest = {
+  encode(message: QueryGetKvRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.index !== "") {
+      writer.uint32(10).string(message.index);
+    }
+    if (message.deviceName !== "") {
+      writer.uint32(18).string(message.deviceName);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetKvRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryGetKvRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.index = reader.string();
+          break;
+        case 2:
+          message.deviceName = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetKvRequest {
+    return {
+      index: isSet(object.index) ? String(object.index) : "",
+      deviceName: isSet(object.deviceName) ? String(object.deviceName) : "",
+    };
+  },
+
+  toJSON(message: QueryGetKvRequest): unknown {
+    const obj: any = {};
+    message.index !== undefined && (obj.index = message.index);
+    message.deviceName !== undefined && (obj.deviceName = message.deviceName);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryGetKvRequest>, I>>(object: I): QueryGetKvRequest {
+    const message = createBaseQueryGetKvRequest();
+    message.index = object.index ?? "";
+    message.deviceName = object.deviceName ?? "";
+    return message;
+  },
+};
+
+function createBaseQueryGetKvResponse(): QueryGetKvResponse {
+  return { kv: undefined };
+}
+
+export const QueryGetKvResponse = {
+  encode(message: QueryGetKvResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.kv !== undefined) {
+      Kv.encode(message.kv, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetKvResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryGetKvResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.kv = Kv.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetKvResponse {
+    return { kv: isSet(object.kv) ? Kv.fromJSON(object.kv) : undefined };
+  },
+
+  toJSON(message: QueryGetKvResponse): unknown {
+    const obj: any = {};
+    message.kv !== undefined && (obj.kv = message.kv ? Kv.toJSON(message.kv) : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryGetKvResponse>, I>>(object: I): QueryGetKvResponse {
+    const message = createBaseQueryGetKvResponse();
+    message.kv = (object.kv !== undefined && object.kv !== null) ? Kv.fromPartial(object.kv) : undefined;
+    return message;
+  },
+};
+
+function createBaseQueryAllKvRequest(): QueryAllKvRequest {
+  return { pagination: undefined, deviceName: "" };
+}
+
+export const QueryAllKvRequest = {
+  encode(message: QueryAllKvRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.deviceName !== "") {
+      writer.uint32(18).string(message.deviceName);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllKvRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryAllKvRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        case 2:
+          message.deviceName = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllKvRequest {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
+      deviceName: isSet(object.deviceName) ? String(object.deviceName) : "",
+    };
+  },
+
+  toJSON(message: QueryAllKvRequest): unknown {
+    const obj: any = {};
+    message.pagination !== undefined
+      && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
+    message.deviceName !== undefined && (obj.deviceName = message.deviceName);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryAllKvRequest>, I>>(object: I): QueryAllKvRequest {
+    const message = createBaseQueryAllKvRequest();
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
+    message.deviceName = object.deviceName ?? "";
+    return message;
+  },
+};
+
+function createBaseQueryAllKvResponse(): QueryAllKvResponse {
+  return { kv: [], pagination: undefined };
+}
+
+export const QueryAllKvResponse = {
+  encode(message: QueryAllKvResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.kv) {
+      Kv.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllKvResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryAllKvResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.kv.push(Kv.decode(reader, reader.uint32()));
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllKvResponse {
+    return {
+      kv: Array.isArray(object?.kv) ? object.kv.map((e: any) => Kv.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
+    };
+  },
+
+  toJSON(message: QueryAllKvResponse): unknown {
+    const obj: any = {};
+    if (message.kv) {
+      obj.kv = message.kv.map((e) => e ? Kv.toJSON(e) : undefined);
+    } else {
+      obj.kv = [];
+    }
+    message.pagination !== undefined
+      && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryAllKvResponse>, I>>(object: I): QueryAllKvResponse {
+    const message = createBaseQueryAllKvResponse();
+    message.kv = object.kv?.map((e) => Kv.fromPartial(e)) || [];
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
+    return message;
+  },
+};
+
 function createBaseQueryGetEventPbRequest(): QueryGetEventPbRequest {
-  return { id: 0 };
+  return { index: "", deviceName: "" };
 }
 
 export const QueryGetEventPbRequest = {
   encode(message: QueryGetEventPbRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.id !== 0) {
-      writer.uint32(8).uint64(message.id);
+    if (message.index !== "") {
+      writer.uint32(10).string(message.index);
+    }
+    if (message.deviceName !== "") {
+      writer.uint32(18).string(message.deviceName);
     }
     return writer;
   },
@@ -647,7 +638,10 @@ export const QueryGetEventPbRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.id = longToNumber(reader.uint64() as Long);
+          message.index = reader.string();
+          break;
+        case 2:
+          message.deviceName = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -658,30 +652,35 @@ export const QueryGetEventPbRequest = {
   },
 
   fromJSON(object: any): QueryGetEventPbRequest {
-    return { id: isSet(object.id) ? Number(object.id) : 0 };
+    return {
+      index: isSet(object.index) ? String(object.index) : "",
+      deviceName: isSet(object.deviceName) ? String(object.deviceName) : "",
+    };
   },
 
   toJSON(message: QueryGetEventPbRequest): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = Math.round(message.id));
+    message.index !== undefined && (obj.index = message.index);
+    message.deviceName !== undefined && (obj.deviceName = message.deviceName);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryGetEventPbRequest>, I>>(object: I): QueryGetEventPbRequest {
     const message = createBaseQueryGetEventPbRequest();
-    message.id = object.id ?? 0;
+    message.index = object.index ?? "";
+    message.deviceName = object.deviceName ?? "";
     return message;
   },
 };
 
 function createBaseQueryGetEventPbResponse(): QueryGetEventPbResponse {
-  return { EventPb: undefined };
+  return { eventPb: undefined };
 }
 
 export const QueryGetEventPbResponse = {
   encode(message: QueryGetEventPbResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.EventPb !== undefined) {
-      EventPb.encode(message.EventPb, writer.uint32(10).fork()).ldelim();
+    if (message.eventPb !== undefined) {
+      EventPb.encode(message.eventPb, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
@@ -694,7 +693,7 @@ export const QueryGetEventPbResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.EventPb = EventPb.decode(reader, reader.uint32());
+          message.eventPb = EventPb.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -705,26 +704,26 @@ export const QueryGetEventPbResponse = {
   },
 
   fromJSON(object: any): QueryGetEventPbResponse {
-    return { EventPb: isSet(object.EventPb) ? EventPb.fromJSON(object.EventPb) : undefined };
+    return { eventPb: isSet(object.eventPb) ? EventPb.fromJSON(object.eventPb) : undefined };
   },
 
   toJSON(message: QueryGetEventPbResponse): unknown {
     const obj: any = {};
-    message.EventPb !== undefined && (obj.EventPb = message.EventPb ? EventPb.toJSON(message.EventPb) : undefined);
+    message.eventPb !== undefined && (obj.eventPb = message.eventPb ? EventPb.toJSON(message.eventPb) : undefined);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryGetEventPbResponse>, I>>(object: I): QueryGetEventPbResponse {
     const message = createBaseQueryGetEventPbResponse();
-    message.EventPb = (object.EventPb !== undefined && object.EventPb !== null)
-      ? EventPb.fromPartial(object.EventPb)
+    message.eventPb = (object.eventPb !== undefined && object.eventPb !== null)
+      ? EventPb.fromPartial(object.eventPb)
       : undefined;
     return message;
   },
 };
 
 function createBaseQueryAllEventPbRequest(): QueryAllEventPbRequest {
-  return { pagination: undefined, topic: "" };
+  return { pagination: undefined, deviceName: "" };
 }
 
 export const QueryAllEventPbRequest = {
@@ -732,8 +731,8 @@ export const QueryAllEventPbRequest = {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
-    if (message.topic !== "") {
-      writer.uint32(18).string(message.topic);
+    if (message.deviceName !== "") {
+      writer.uint32(18).string(message.deviceName);
     }
     return writer;
   },
@@ -749,7 +748,7 @@ export const QueryAllEventPbRequest = {
           message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
         case 2:
-          message.topic = reader.string();
+          message.deviceName = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -762,7 +761,7 @@ export const QueryAllEventPbRequest = {
   fromJSON(object: any): QueryAllEventPbRequest {
     return {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
-      topic: isSet(object.topic) ? String(object.topic) : "",
+      deviceName: isSet(object.deviceName) ? String(object.deviceName) : "",
     };
   },
 
@@ -770,7 +769,7 @@ export const QueryAllEventPbRequest = {
     const obj: any = {};
     message.pagination !== undefined
       && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    message.topic !== undefined && (obj.topic = message.topic);
+    message.deviceName !== undefined && (obj.deviceName = message.deviceName);
     return obj;
   },
 
@@ -779,18 +778,18 @@ export const QueryAllEventPbRequest = {
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
       ? PageRequest.fromPartial(object.pagination)
       : undefined;
-    message.topic = object.topic ?? "";
+    message.deviceName = object.deviceName ?? "";
     return message;
   },
 };
 
 function createBaseQueryAllEventPbResponse(): QueryAllEventPbResponse {
-  return { EventPb: [], pagination: undefined };
+  return { eventPb: [], pagination: undefined };
 }
 
 export const QueryAllEventPbResponse = {
   encode(message: QueryAllEventPbResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.EventPb) {
+    for (const v of message.eventPb) {
       EventPb.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
@@ -807,7 +806,7 @@ export const QueryAllEventPbResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.EventPb.push(EventPb.decode(reader, reader.uint32()));
+          message.eventPb.push(EventPb.decode(reader, reader.uint32()));
           break;
         case 2:
           message.pagination = PageResponse.decode(reader, reader.uint32());
@@ -822,17 +821,17 @@ export const QueryAllEventPbResponse = {
 
   fromJSON(object: any): QueryAllEventPbResponse {
     return {
-      EventPb: Array.isArray(object?.EventPb) ? object.EventPb.map((e: any) => EventPb.fromJSON(e)) : [],
+      eventPb: Array.isArray(object?.eventPb) ? object.eventPb.map((e: any) => EventPb.fromJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryAllEventPbResponse): unknown {
     const obj: any = {};
-    if (message.EventPb) {
-      obj.EventPb = message.EventPb.map((e) => e ? EventPb.toJSON(e) : undefined);
+    if (message.eventPb) {
+      obj.eventPb = message.eventPb.map((e) => e ? EventPb.toJSON(e) : undefined);
     } else {
-      obj.EventPb = [];
+      obj.eventPb = [];
     }
     message.pagination !== undefined
       && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
@@ -841,7 +840,7 @@ export const QueryAllEventPbResponse = {
 
   fromPartial<I extends Exact<DeepPartial<QueryAllEventPbResponse>, I>>(object: I): QueryAllEventPbResponse {
     const message = createBaseQueryAllEventPbResponse();
-    message.EventPb = object.EventPb?.map((e) => EventPb.fromPartial(e)) || [];
+    message.eventPb = object.eventPb?.map((e) => EventPb.fromPartial(e)) || [];
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
       ? PageResponse.fromPartial(object.pagination)
       : undefined;
@@ -853,12 +852,12 @@ export const QueryAllEventPbResponse = {
 export interface Query {
   /** Parameters queries the parameters of the module. */
   Params(request: QueryParamsRequest): Promise<QueryParamsResponse>;
-  /** Queries a list of Kv items. */
-  Kv(request: QueryGetKvRequest): Promise<QueryGetKvResponse>;
-  KvAll(request: QueryAllKvRequest): Promise<QueryAllKvResponse>;
   /** Queries a list of Device items. */
   Device(request: QueryGetDeviceRequest): Promise<QueryGetDeviceResponse>;
   DeviceAll(request: QueryAllDeviceRequest): Promise<QueryAllDeviceResponse>;
+  /** Queries a list of Kv items. */
+  Kv(request: QueryGetKvRequest): Promise<QueryGetKvResponse>;
+  KvAll(request: QueryAllKvRequest): Promise<QueryAllKvResponse>;
   /** Queries a list of EventPb items. */
   EventPb(request: QueryGetEventPbRequest): Promise<QueryGetEventPbResponse>;
   EventPbAll(request: QueryAllEventPbRequest): Promise<QueryAllEventPbResponse>;
@@ -869,10 +868,10 @@ export class QueryClientImpl implements Query {
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.Params = this.Params.bind(this);
-    this.Kv = this.Kv.bind(this);
-    this.KvAll = this.KvAll.bind(this);
     this.Device = this.Device.bind(this);
     this.DeviceAll = this.DeviceAll.bind(this);
+    this.Kv = this.Kv.bind(this);
+    this.KvAll = this.KvAll.bind(this);
     this.EventPb = this.EventPb.bind(this);
     this.EventPbAll = this.EventPbAll.bind(this);
   }
@@ -880,18 +879,6 @@ export class QueryClientImpl implements Query {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("stccommunity.iotdepinprotocol.iotdepinprotocol.Query", "Params", data);
     return promise.then((data) => QueryParamsResponse.decode(new _m0.Reader(data)));
-  }
-
-  Kv(request: QueryGetKvRequest): Promise<QueryGetKvResponse> {
-    const data = QueryGetKvRequest.encode(request).finish();
-    const promise = this.rpc.request("stccommunity.iotdepinprotocol.iotdepinprotocol.Query", "Kv", data);
-    return promise.then((data) => QueryGetKvResponse.decode(new _m0.Reader(data)));
-  }
-
-  KvAll(request: QueryAllKvRequest): Promise<QueryAllKvResponse> {
-    const data = QueryAllKvRequest.encode(request).finish();
-    const promise = this.rpc.request("stccommunity.iotdepinprotocol.iotdepinprotocol.Query", "KvAll", data);
-    return promise.then((data) => QueryAllKvResponse.decode(new _m0.Reader(data)));
   }
 
   Device(request: QueryGetDeviceRequest): Promise<QueryGetDeviceResponse> {
@@ -904,6 +891,18 @@ export class QueryClientImpl implements Query {
     const data = QueryAllDeviceRequest.encode(request).finish();
     const promise = this.rpc.request("stccommunity.iotdepinprotocol.iotdepinprotocol.Query", "DeviceAll", data);
     return promise.then((data) => QueryAllDeviceResponse.decode(new _m0.Reader(data)));
+  }
+
+  Kv(request: QueryGetKvRequest): Promise<QueryGetKvResponse> {
+    const data = QueryGetKvRequest.encode(request).finish();
+    const promise = this.rpc.request("stccommunity.iotdepinprotocol.iotdepinprotocol.Query", "Kv", data);
+    return promise.then((data) => QueryGetKvResponse.decode(new _m0.Reader(data)));
+  }
+
+  KvAll(request: QueryAllKvRequest): Promise<QueryAllKvResponse> {
+    const data = QueryAllKvRequest.encode(request).finish();
+    const promise = this.rpc.request("stccommunity.iotdepinprotocol.iotdepinprotocol.Query", "KvAll", data);
+    return promise.then((data) => QueryAllKvResponse.decode(new _m0.Reader(data)));
   }
 
   EventPb(request: QueryGetEventPbRequest): Promise<QueryGetEventPbResponse> {
@@ -923,25 +922,6 @@ interface Rpc {
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 export type DeepPartial<T> = T extends Builtin ? T
@@ -952,18 +932,6 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
-function longToNumber(long: Long): number {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = Long as any;
-  _m0.configure();
-}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

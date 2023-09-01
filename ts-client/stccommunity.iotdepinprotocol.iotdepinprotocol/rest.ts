@@ -10,15 +10,15 @@
  */
 
 export interface IotdepinprotocolDevice {
+  deviceName?: string;
   address?: string;
   value?: string;
   creator?: string;
 }
 
 export interface IotdepinprotocolEventPb {
-  /** @format uint64 */
-  id?: string;
-  topic?: string;
+  index?: string;
+  deviceName?: string;
   payload?: string;
   creator?: string;
 }
@@ -26,15 +26,13 @@ export interface IotdepinprotocolEventPb {
 export interface IotdepinprotocolKv {
   index?: string;
   value?: string;
+  deviceName?: string;
   creator?: string;
 }
 
 export type IotdepinprotocolMsgCreateDeviceResponse = object;
 
-export interface IotdepinprotocolMsgCreateEventPbResponse {
-  /** @format uint64 */
-  id?: string;
-}
+export type IotdepinprotocolMsgCreateEventPbResponse = object;
 
 export type IotdepinprotocolMsgCreateKvResponse = object;
 
@@ -71,7 +69,7 @@ export interface IotdepinprotocolQueryAllDeviceResponse {
 }
 
 export interface IotdepinprotocolQueryAllEventPbResponse {
-  EventPb?: IotdepinprotocolEventPb[];
+  eventPb?: IotdepinprotocolEventPb[];
 
   /**
    * PageResponse is to be embedded in gRPC response messages where the
@@ -105,7 +103,7 @@ export interface IotdepinprotocolQueryGetDeviceResponse {
 }
 
 export interface IotdepinprotocolQueryGetEventPbResponse {
-  EventPb?: IotdepinprotocolEventPb;
+  eventPb?: IotdepinprotocolEventPb;
 }
 
 export interface IotdepinprotocolQueryGetKvResponse {
@@ -342,7 +340,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       "pagination.limit"?: string;
       "pagination.count_total"?: boolean;
       "pagination.reverse"?: boolean;
-      creator?: string;
+      deviceName?: string;
     },
     params: RequestParams = {},
   ) =>
@@ -360,13 +358,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * @tags Query
    * @name QueryDevice
    * @summary Queries a list of Device items.
-   * @request GET:/stc-community/iot-depin-protocol/iotdepinprotocol/device/{address}
+   * @request GET:/stc-community/iot-depin-protocol/iotdepinprotocol/device/{deviceName}
    */
-  queryDevice = (address: string, query?: { creator?: string }, params: RequestParams = {}) =>
+  queryDevice = (deviceName: string, params: RequestParams = {}) =>
     this.request<IotdepinprotocolQueryGetDeviceResponse, RpcStatus>({
-      path: `/stc-community/iot-depin-protocol/iotdepinprotocol/device/${address}`,
+      path: `/stc-community/iot-depin-protocol/iotdepinprotocol/device/${deviceName}`,
       method: "GET",
-      query: query,
       format: "json",
       ...params,
     });
@@ -385,7 +382,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       "pagination.limit"?: string;
       "pagination.count_total"?: boolean;
       "pagination.reverse"?: boolean;
-      topic?: string;
+      deviceName?: string;
     },
     params: RequestParams = {},
   ) =>
@@ -403,12 +400,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * @tags Query
    * @name QueryEventPb
    * @summary Queries a list of EventPb items.
-   * @request GET:/stc-community/iot-depin-protocol/iotdepinprotocol/event_pb/{id}
+   * @request GET:/stc-community/iot-depin-protocol/iotdepinprotocol/event_pb/{index}
    */
-  queryEventPb = (id: string, params: RequestParams = {}) =>
+  queryEventPb = (index: string, query?: { deviceName?: string }, params: RequestParams = {}) =>
     this.request<IotdepinprotocolQueryGetEventPbResponse, RpcStatus>({
-      path: `/stc-community/iot-depin-protocol/iotdepinprotocol/event_pb/${id}`,
+      path: `/stc-community/iot-depin-protocol/iotdepinprotocol/event_pb/${index}`,
       method: "GET",
+      query: query,
       format: "json",
       ...params,
     });
@@ -427,7 +425,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       "pagination.limit"?: string;
       "pagination.count_total"?: boolean;
       "pagination.reverse"?: boolean;
-      creator?: string;
+      deviceName?: string;
     },
     params: RequestParams = {},
   ) =>
@@ -447,7 +445,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * @summary Queries a list of Kv items.
    * @request GET:/stc-community/iot-depin-protocol/iotdepinprotocol/kv/{index}
    */
-  queryKv = (index: string, query?: { creator?: string }, params: RequestParams = {}) =>
+  queryKv = (index: string, query?: { deviceName?: string }, params: RequestParams = {}) =>
     this.request<IotdepinprotocolQueryGetKvResponse, RpcStatus>({
       path: `/stc-community/iot-depin-protocol/iotdepinprotocol/kv/${index}`,
       method: "GET",

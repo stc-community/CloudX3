@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "sync:cosmosall": "sync:cosmos && sync:package",
     "sync:cosmos": "zx ./scripts/sync-cosmos.mjs",
+    "sync:package": "zx ./scripts/sync-package.mjs",
     "dev": "NODE_OPTIONS=--max-old-space-size=4096 vite",
     "serve": "pnpm dev",
     "build": "rimraf dist && NODE_OPTIONS=--max-old-space-size=8192 vite build",

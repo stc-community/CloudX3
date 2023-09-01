@@ -1,5 +1,4 @@
 /* eslint-disable */
-import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { Device } from "./device";
 import { EventPb } from "./event_pb";
@@ -11,14 +10,13 @@ export const protobufPackage = "stccommunity.iotdepinprotocol.iotdepinprotocol";
 /** GenesisState defines the iotdepinprotocol module's genesis state. */
 export interface GenesisState {
   params: Params | undefined;
-  kvList: Kv[];
   deviceList: Device[];
+  kvList: Kv[];
   eventPbList: EventPb[];
-  eventPbCount: number;
 }
 
 function createBaseGenesisState(): GenesisState {
-  return { params: undefined, kvList: [], deviceList: [], eventPbList: [], eventPbCount: 0 };
+  return { params: undefined, deviceList: [], kvList: [], eventPbList: [] };
 }
 
 export const GenesisState = {
@@ -26,17 +24,14 @@ export const GenesisState = {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
-    for (const v of message.kvList) {
-      Kv.encode(v!, writer.uint32(18).fork()).ldelim();
-    }
     for (const v of message.deviceList) {
-      Device.encode(v!, writer.uint32(26).fork()).ldelim();
+      Device.encode(v!, writer.uint32(18).fork()).ldelim();
+    }
+    for (const v of message.kvList) {
+      Kv.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     for (const v of message.eventPbList) {
       EventPb.encode(v!, writer.uint32(34).fork()).ldelim();
-    }
-    if (message.eventPbCount !== 0) {
-      writer.uint32(40).uint64(message.eventPbCount);
     }
     return writer;
   },
@@ -52,16 +47,13 @@ export const GenesisState = {
           message.params = Params.decode(reader, reader.uint32());
           break;
         case 2:
-          message.kvList.push(Kv.decode(reader, reader.uint32()));
+          message.deviceList.push(Device.decode(reader, reader.uint32()));
           break;
         case 3:
-          message.deviceList.push(Device.decode(reader, reader.uint32()));
+          message.kvList.push(Kv.decode(reader, reader.uint32()));
           break;
         case 4:
           message.eventPbList.push(EventPb.decode(reader, reader.uint32()));
-          break;
-        case 5:
-          message.eventPbCount = longToNumber(reader.uint64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -74,32 +66,30 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     return {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
-      kvList: Array.isArray(object?.kvList) ? object.kvList.map((e: any) => Kv.fromJSON(e)) : [],
       deviceList: Array.isArray(object?.deviceList) ? object.deviceList.map((e: any) => Device.fromJSON(e)) : [],
+      kvList: Array.isArray(object?.kvList) ? object.kvList.map((e: any) => Kv.fromJSON(e)) : [],
       eventPbList: Array.isArray(object?.eventPbList) ? object.eventPbList.map((e: any) => EventPb.fromJSON(e)) : [],
-      eventPbCount: isSet(object.eventPbCount) ? Number(object.eventPbCount) : 0,
     };
   },
 
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
-    if (message.kvList) {
-      obj.kvList = message.kvList.map((e) => e ? Kv.toJSON(e) : undefined);
-    } else {
-      obj.kvList = [];
-    }
     if (message.deviceList) {
       obj.deviceList = message.deviceList.map((e) => e ? Device.toJSON(e) : undefined);
     } else {
       obj.deviceList = [];
+    }
+    if (message.kvList) {
+      obj.kvList = message.kvList.map((e) => e ? Kv.toJSON(e) : undefined);
+    } else {
+      obj.kvList = [];
     }
     if (message.eventPbList) {
       obj.eventPbList = message.eventPbList.map((e) => e ? EventPb.toJSON(e) : undefined);
     } else {
       obj.eventPbList = [];
     }
-    message.eventPbCount !== undefined && (obj.eventPbCount = Math.round(message.eventPbCount));
     return obj;
   },
 
@@ -108,32 +98,12 @@ export const GenesisState = {
     message.params = (object.params !== undefined && object.params !== null)
       ? Params.fromPartial(object.params)
       : undefined;
-    message.kvList = object.kvList?.map((e) => Kv.fromPartial(e)) || [];
     message.deviceList = object.deviceList?.map((e) => Device.fromPartial(e)) || [];
+    message.kvList = object.kvList?.map((e) => Kv.fromPartial(e)) || [];
     message.eventPbList = object.eventPbList?.map((e) => EventPb.fromPartial(e)) || [];
-    message.eventPbCount = object.eventPbCount ?? 0;
     return message;
   },
 };
-
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
@@ -145,18 +115,6 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
-function longToNumber(long: Long): number {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = Long as any;
-  _m0.configure();
-}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

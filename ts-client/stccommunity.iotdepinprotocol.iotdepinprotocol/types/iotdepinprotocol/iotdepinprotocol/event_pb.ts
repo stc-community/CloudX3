@@ -1,27 +1,26 @@
 /* eslint-disable */
-import Long from "long";
 import _m0 from "protobufjs/minimal";
 
 export const protobufPackage = "stccommunity.iotdepinprotocol.iotdepinprotocol";
 
 export interface EventPb {
-  id: number;
-  topic: string;
+  index: string;
+  deviceName: string;
   payload: string;
   creator: string;
 }
 
 function createBaseEventPb(): EventPb {
-  return { id: 0, topic: "", payload: "", creator: "" };
+  return { index: "", deviceName: "", payload: "", creator: "" };
 }
 
 export const EventPb = {
   encode(message: EventPb, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.id !== 0) {
-      writer.uint32(8).uint64(message.id);
+    if (message.index !== "") {
+      writer.uint32(10).string(message.index);
     }
-    if (message.topic !== "") {
-      writer.uint32(18).string(message.topic);
+    if (message.deviceName !== "") {
+      writer.uint32(18).string(message.deviceName);
     }
     if (message.payload !== "") {
       writer.uint32(26).string(message.payload);
@@ -40,10 +39,10 @@ export const EventPb = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.id = longToNumber(reader.uint64() as Long);
+          message.index = reader.string();
           break;
         case 2:
-          message.topic = reader.string();
+          message.deviceName = reader.string();
           break;
         case 3:
           message.payload = reader.string();
@@ -61,8 +60,8 @@ export const EventPb = {
 
   fromJSON(object: any): EventPb {
     return {
-      id: isSet(object.id) ? Number(object.id) : 0,
-      topic: isSet(object.topic) ? String(object.topic) : "",
+      index: isSet(object.index) ? String(object.index) : "",
+      deviceName: isSet(object.deviceName) ? String(object.deviceName) : "",
       payload: isSet(object.payload) ? String(object.payload) : "",
       creator: isSet(object.creator) ? String(object.creator) : "",
     };
@@ -70,8 +69,8 @@ export const EventPb = {
 
   toJSON(message: EventPb): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = Math.round(message.id));
-    message.topic !== undefined && (obj.topic = message.topic);
+    message.index !== undefined && (obj.index = message.index);
+    message.deviceName !== undefined && (obj.deviceName = message.deviceName);
     message.payload !== undefined && (obj.payload = message.payload);
     message.creator !== undefined && (obj.creator = message.creator);
     return obj;
@@ -79,32 +78,13 @@ export const EventPb = {
 
   fromPartial<I extends Exact<DeepPartial<EventPb>, I>>(object: I): EventPb {
     const message = createBaseEventPb();
-    message.id = object.id ?? 0;
-    message.topic = object.topic ?? "";
+    message.index = object.index ?? "";
+    message.deviceName = object.deviceName ?? "";
     message.payload = object.payload ?? "";
     message.creator = object.creator ?? "";
     return message;
   },
 };
-
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
@@ -116,18 +96,6 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
-function longToNumber(long: Long): number {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
-
-if (_m0.util.Long !== Long) {
-  _m0.util.Long = Long as any;
-  _m0.configure();
-}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

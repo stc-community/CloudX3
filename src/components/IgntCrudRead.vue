@@ -1,3 +1,83 @@
+<script setup lang="ts">
+import { useClient } from "@/composables/useClient";
+import { IgntFileIcon } from "@ignt/vue-library";
+import { IgntDotsIcon } from "@ignt/vue-library";
+import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
+import { computed, ref } from "vue";
+import { useAddress } from "@/def-composables/useAddress";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
+
+const props = defineProps({
+  storeName: {
+    type: String,
+    required: true
+  },
+
+  itemName: {
+    type: String,
+    required: true
+  },
+
+  commandName: {
+    type: String,
+    required: true
+  }
+});
+const emit = defineEmits(["editItem", "deleteItem", "getItems"]);
+const client = useClient();
+const { address } = useAddress();
+const loggedIn = computed(() => {
+  return address.value != "";
+});
+const itemFields = (
+  client[
+    props.storeName as keyof Omit<
+      typeof client,
+      | "plugins"
+      | "env"
+      | "signer"
+      | "registry"
+      | "plugin"
+      | "signAndBroadcast"
+      | "useSigner"
+      | "useKeplr"
+    >
+  ] as any
+).structure[props.itemName];
+const items = ref<any>([]);
+
+const fetch = async () => {
+  return (
+    await (
+      client[
+        props.storeName as keyof Omit<
+          typeof client,
+          | "plugins"
+          | "env"
+          | "signer"
+          | "registry"
+          | "plugin"
+          | "signAndBroadcast"
+          | "useSigner"
+          | "useKeplr"
+        >
+      ] as any
+    ).query[props.commandName]({
+      deviceName: route.params.name
+    })
+  ).data[props.itemName.toLowerCase()];
+};
+const refetch = async () => {
+  items.value = await fetch();
+
+  emit("getItems", items.value);
+};
+defineExpose({ refetch });
+await refetch();
+</script>
+
 <template>
   <div>
     <div v-if="items" class="max-w-xl">
@@ -59,78 +139,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { useClient } from "@/composables/useClient";
-import { IgntFileIcon } from "@ignt/vue-library";
-import { IgntDotsIcon } from "@ignt/vue-library";
-import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
-import { computed, ref } from "vue";
-import { useAddress } from "@/def-composables/useAddress";
-
-const props = defineProps({
-  storeName: {
-    type: String,
-    required: true
-  },
-
-  itemName: {
-    type: String,
-    required: true
-  },
-
-  commandName: {
-    type: String,
-    required: true
-  }
-});
-const emit = defineEmits(["editItem", "deleteItem", "getItems"]);
-const client = useClient();
-const { address } = useAddress();
-const loggedIn = computed(() => {
-  return address.value != "";
-});
-const itemFields = (
-  client[
-    props.storeName as keyof Omit<
-      typeof client,
-      | "plugins"
-      | "env"
-      | "signer"
-      | "registry"
-      | "plugin"
-      | "signAndBroadcast"
-      | "useSigner"
-      | "useKeplr"
-    >
-  ] as any
-).structure[props.itemName];
-const items = ref<any>([]);
-
-const fetch = async () => {
-  return (
-    await (
-      client[
-        props.storeName as keyof Omit<
-          typeof client,
-          | "plugins"
-          | "env"
-          | "signer"
-          | "registry"
-          | "plugin"
-          | "signAndBroadcast"
-          | "useSigner"
-          | "useKeplr"
-        >
-      ] as any
-    ).query[props.commandName]()
-  ).data[props.itemName.toLowerCase()];
-};
-const refetch = async () => {
-  items.value = await fetch();
-
-  emit("getItems", items.value);
-};
-defineExpose({ refetch });
-await refetch();
-</script>

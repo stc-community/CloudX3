@@ -1,4 +1,5 @@
 /* eslint-disable */
+import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { PageRequest, PageResponse } from "../../cosmos/base/query/v1beta1/pagination";
 import { Device } from "./device";
@@ -57,21 +58,20 @@ export interface QueryAllDeviceResponse {
 }
 
 export interface QueryGetEventPbRequest {
-  pubId: string;
+  id: number;
 }
 
 export interface QueryGetEventPbResponse {
-  eventPb: EventPb | undefined;
+  EventPb: EventPb | undefined;
 }
 
 export interface QueryAllEventPbRequest {
   pagination: PageRequest | undefined;
-  pubId: string;
   topic: string;
 }
 
 export interface QueryAllEventPbResponse {
-  eventPb: EventPb[];
+  EventPb: EventPb[];
   pagination: PageResponse | undefined;
 }
 
@@ -628,13 +628,13 @@ export const QueryAllDeviceResponse = {
 };
 
 function createBaseQueryGetEventPbRequest(): QueryGetEventPbRequest {
-  return { pubId: "" };
+  return { id: 0 };
 }
 
 export const QueryGetEventPbRequest = {
   encode(message: QueryGetEventPbRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.pubId !== "") {
-      writer.uint32(10).string(message.pubId);
+    if (message.id !== 0) {
+      writer.uint32(8).uint64(message.id);
     }
     return writer;
   },
@@ -647,7 +647,7 @@ export const QueryGetEventPbRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.pubId = reader.string();
+          message.id = longToNumber(reader.uint64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -658,30 +658,30 @@ export const QueryGetEventPbRequest = {
   },
 
   fromJSON(object: any): QueryGetEventPbRequest {
-    return { pubId: isSet(object.pubId) ? String(object.pubId) : "" };
+    return { id: isSet(object.id) ? Number(object.id) : 0 };
   },
 
   toJSON(message: QueryGetEventPbRequest): unknown {
     const obj: any = {};
-    message.pubId !== undefined && (obj.pubId = message.pubId);
+    message.id !== undefined && (obj.id = Math.round(message.id));
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryGetEventPbRequest>, I>>(object: I): QueryGetEventPbRequest {
     const message = createBaseQueryGetEventPbRequest();
-    message.pubId = object.pubId ?? "";
+    message.id = object.id ?? 0;
     return message;
   },
 };
 
 function createBaseQueryGetEventPbResponse(): QueryGetEventPbResponse {
-  return { eventPb: undefined };
+  return { EventPb: undefined };
 }
 
 export const QueryGetEventPbResponse = {
   encode(message: QueryGetEventPbResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.eventPb !== undefined) {
-      EventPb.encode(message.eventPb, writer.uint32(10).fork()).ldelim();
+    if (message.EventPb !== undefined) {
+      EventPb.encode(message.EventPb, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
@@ -694,7 +694,7 @@ export const QueryGetEventPbResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.eventPb = EventPb.decode(reader, reader.uint32());
+          message.EventPb = EventPb.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -705,26 +705,26 @@ export const QueryGetEventPbResponse = {
   },
 
   fromJSON(object: any): QueryGetEventPbResponse {
-    return { eventPb: isSet(object.eventPb) ? EventPb.fromJSON(object.eventPb) : undefined };
+    return { EventPb: isSet(object.EventPb) ? EventPb.fromJSON(object.EventPb) : undefined };
   },
 
   toJSON(message: QueryGetEventPbResponse): unknown {
     const obj: any = {};
-    message.eventPb !== undefined && (obj.eventPb = message.eventPb ? EventPb.toJSON(message.eventPb) : undefined);
+    message.EventPb !== undefined && (obj.EventPb = message.EventPb ? EventPb.toJSON(message.EventPb) : undefined);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryGetEventPbResponse>, I>>(object: I): QueryGetEventPbResponse {
     const message = createBaseQueryGetEventPbResponse();
-    message.eventPb = (object.eventPb !== undefined && object.eventPb !== null)
-      ? EventPb.fromPartial(object.eventPb)
+    message.EventPb = (object.EventPb !== undefined && object.EventPb !== null)
+      ? EventPb.fromPartial(object.EventPb)
       : undefined;
     return message;
   },
 };
 
 function createBaseQueryAllEventPbRequest(): QueryAllEventPbRequest {
-  return { pagination: undefined, pubId: "", topic: "" };
+  return { pagination: undefined, topic: "" };
 }
 
 export const QueryAllEventPbRequest = {
@@ -732,11 +732,8 @@ export const QueryAllEventPbRequest = {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
-    if (message.pubId !== "") {
-      writer.uint32(18).string(message.pubId);
-    }
     if (message.topic !== "") {
-      writer.uint32(26).string(message.topic);
+      writer.uint32(18).string(message.topic);
     }
     return writer;
   },
@@ -752,9 +749,6 @@ export const QueryAllEventPbRequest = {
           message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
         case 2:
-          message.pubId = reader.string();
-          break;
-        case 3:
           message.topic = reader.string();
           break;
         default:
@@ -768,7 +762,6 @@ export const QueryAllEventPbRequest = {
   fromJSON(object: any): QueryAllEventPbRequest {
     return {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
-      pubId: isSet(object.pubId) ? String(object.pubId) : "",
       topic: isSet(object.topic) ? String(object.topic) : "",
     };
   },
@@ -777,7 +770,6 @@ export const QueryAllEventPbRequest = {
     const obj: any = {};
     message.pagination !== undefined
       && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    message.pubId !== undefined && (obj.pubId = message.pubId);
     message.topic !== undefined && (obj.topic = message.topic);
     return obj;
   },
@@ -787,19 +779,18 @@ export const QueryAllEventPbRequest = {
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
       ? PageRequest.fromPartial(object.pagination)
       : undefined;
-    message.pubId = object.pubId ?? "";
     message.topic = object.topic ?? "";
     return message;
   },
 };
 
 function createBaseQueryAllEventPbResponse(): QueryAllEventPbResponse {
-  return { eventPb: [], pagination: undefined };
+  return { EventPb: [], pagination: undefined };
 }
 
 export const QueryAllEventPbResponse = {
   encode(message: QueryAllEventPbResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.eventPb) {
+    for (const v of message.EventPb) {
       EventPb.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
@@ -816,7 +807,7 @@ export const QueryAllEventPbResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.eventPb.push(EventPb.decode(reader, reader.uint32()));
+          message.EventPb.push(EventPb.decode(reader, reader.uint32()));
           break;
         case 2:
           message.pagination = PageResponse.decode(reader, reader.uint32());
@@ -831,17 +822,17 @@ export const QueryAllEventPbResponse = {
 
   fromJSON(object: any): QueryAllEventPbResponse {
     return {
-      eventPb: Array.isArray(object?.eventPb) ? object.eventPb.map((e: any) => EventPb.fromJSON(e)) : [],
+      EventPb: Array.isArray(object?.EventPb) ? object.EventPb.map((e: any) => EventPb.fromJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryAllEventPbResponse): unknown {
     const obj: any = {};
-    if (message.eventPb) {
-      obj.eventPb = message.eventPb.map((e) => e ? EventPb.toJSON(e) : undefined);
+    if (message.EventPb) {
+      obj.EventPb = message.EventPb.map((e) => e ? EventPb.toJSON(e) : undefined);
     } else {
-      obj.eventPb = [];
+      obj.EventPb = [];
     }
     message.pagination !== undefined
       && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
@@ -850,7 +841,7 @@ export const QueryAllEventPbResponse = {
 
   fromPartial<I extends Exact<DeepPartial<QueryAllEventPbResponse>, I>>(object: I): QueryAllEventPbResponse {
     const message = createBaseQueryAllEventPbResponse();
-    message.eventPb = object.eventPb?.map((e) => EventPb.fromPartial(e)) || [];
+    message.EventPb = object.EventPb?.map((e) => EventPb.fromPartial(e)) || [];
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
       ? PageResponse.fromPartial(object.pagination)
       : undefined;
@@ -932,6 +923,25 @@ interface Rpc {
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
+declare var self: any | undefined;
+declare var window: any | undefined;
+declare var global: any | undefined;
+var globalThis: any = (() => {
+  if (typeof globalThis !== "undefined") {
+    return globalThis;
+  }
+  if (typeof self !== "undefined") {
+    return self;
+  }
+  if (typeof window !== "undefined") {
+    return window;
+  }
+  if (typeof global !== "undefined") {
+    return global;
+  }
+  throw "Unable to locate global object";
+})();
+
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 export type DeepPartial<T> = T extends Builtin ? T
@@ -942,6 +952,18 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+
+function longToNumber(long: Long): number {
+  if (long.gt(Number.MAX_SAFE_INTEGER)) {
+    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
+  }
+  return long.toNumber();
+}
+
+if (_m0.util.Long !== Long) {
+  _m0.util.Long = Long as any;
+  _m0.configure();
+}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

@@ -16,13 +16,10 @@ export interface IotdepinprotocolDevice {
 }
 
 export interface IotdepinprotocolEventPb {
-  pubId?: string;
+  /** @format uint64 */
+  id?: string;
   topic?: string;
-  pubType?: string;
   payload?: string;
-
-  /** @format int64 */
-  pubTime?: string;
   creator?: string;
 }
 
@@ -34,7 +31,10 @@ export interface IotdepinprotocolKv {
 
 export type IotdepinprotocolMsgCreateDeviceResponse = object;
 
-export type IotdepinprotocolMsgCreateEventPbResponse = object;
+export interface IotdepinprotocolMsgCreateEventPbResponse {
+  /** @format uint64 */
+  id?: string;
+}
 
 export type IotdepinprotocolMsgCreateKvResponse = object;
 
@@ -71,7 +71,7 @@ export interface IotdepinprotocolQueryAllDeviceResponse {
 }
 
 export interface IotdepinprotocolQueryAllEventPbResponse {
-  eventPb?: IotdepinprotocolEventPb[];
+  EventPb?: IotdepinprotocolEventPb[];
 
   /**
    * PageResponse is to be embedded in gRPC response messages where the
@@ -105,7 +105,7 @@ export interface IotdepinprotocolQueryGetDeviceResponse {
 }
 
 export interface IotdepinprotocolQueryGetEventPbResponse {
-  eventPb?: IotdepinprotocolEventPb;
+  EventPb?: IotdepinprotocolEventPb;
 }
 
 export interface IotdepinprotocolQueryGetKvResponse {
@@ -385,7 +385,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       "pagination.limit"?: string;
       "pagination.count_total"?: boolean;
       "pagination.reverse"?: boolean;
-      pubId?: string;
       topic?: string;
     },
     params: RequestParams = {},
@@ -404,11 +403,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * @tags Query
    * @name QueryEventPb
    * @summary Queries a list of EventPb items.
-   * @request GET:/stc-community/iot-depin-protocol/iotdepinprotocol/event_pb/{pubId}
+   * @request GET:/stc-community/iot-depin-protocol/iotdepinprotocol/event_pb/{id}
    */
-  queryEventPb = (pubId: string, params: RequestParams = {}) =>
+  queryEventPb = (id: string, params: RequestParams = {}) =>
     this.request<IotdepinprotocolQueryGetEventPbResponse, RpcStatus>({
-      path: `/stc-community/iot-depin-protocol/iotdepinprotocol/event_pb/${pubId}`,
+      path: `/stc-community/iot-depin-protocol/iotdepinprotocol/event_pb/${id}`,
       method: "GET",
       format: "json",
       ...params,

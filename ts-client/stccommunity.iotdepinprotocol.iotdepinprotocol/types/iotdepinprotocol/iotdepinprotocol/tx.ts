@@ -58,23 +58,19 @@ export interface MsgDeleteDeviceResponse {
 
 export interface MsgCreateEventPb {
   creator: string;
-  pubId: string;
   topic: string;
-  pubType: string;
   payload: string;
-  pubTime: number;
 }
 
 export interface MsgCreateEventPbResponse {
+  id: number;
 }
 
 export interface MsgUpdateEventPb {
   creator: string;
-  pubId: string;
+  id: number;
   topic: string;
-  pubType: string;
   payload: string;
-  pubTime: number;
 }
 
 export interface MsgUpdateEventPbResponse {
@@ -82,7 +78,7 @@ export interface MsgUpdateEventPbResponse {
 
 export interface MsgDeleteEventPb {
   creator: string;
-  pubId: string;
+  id: number;
 }
 
 export interface MsgDeleteEventPbResponse {
@@ -707,7 +703,7 @@ export const MsgDeleteDeviceResponse = {
 };
 
 function createBaseMsgCreateEventPb(): MsgCreateEventPb {
-  return { creator: "", pubId: "", topic: "", pubType: "", payload: "", pubTime: 0 };
+  return { creator: "", topic: "", payload: "" };
 }
 
 export const MsgCreateEventPb = {
@@ -715,20 +711,11 @@ export const MsgCreateEventPb = {
     if (message.creator !== "") {
       writer.uint32(10).string(message.creator);
     }
-    if (message.pubId !== "") {
-      writer.uint32(18).string(message.pubId);
-    }
     if (message.topic !== "") {
-      writer.uint32(26).string(message.topic);
-    }
-    if (message.pubType !== "") {
-      writer.uint32(34).string(message.pubType);
+      writer.uint32(18).string(message.topic);
     }
     if (message.payload !== "") {
-      writer.uint32(42).string(message.payload);
-    }
-    if (message.pubTime !== 0) {
-      writer.uint32(48).int64(message.pubTime);
+      writer.uint32(26).string(message.payload);
     }
     return writer;
   },
@@ -744,19 +731,10 @@ export const MsgCreateEventPb = {
           message.creator = reader.string();
           break;
         case 2:
-          message.pubId = reader.string();
-          break;
-        case 3:
           message.topic = reader.string();
           break;
-        case 4:
-          message.pubType = reader.string();
-          break;
-        case 5:
+        case 3:
           message.payload = reader.string();
-          break;
-        case 6:
-          message.pubTime = longToNumber(reader.int64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -769,43 +747,37 @@ export const MsgCreateEventPb = {
   fromJSON(object: any): MsgCreateEventPb {
     return {
       creator: isSet(object.creator) ? String(object.creator) : "",
-      pubId: isSet(object.pubId) ? String(object.pubId) : "",
       topic: isSet(object.topic) ? String(object.topic) : "",
-      pubType: isSet(object.pubType) ? String(object.pubType) : "",
       payload: isSet(object.payload) ? String(object.payload) : "",
-      pubTime: isSet(object.pubTime) ? Number(object.pubTime) : 0,
     };
   },
 
   toJSON(message: MsgCreateEventPb): unknown {
     const obj: any = {};
     message.creator !== undefined && (obj.creator = message.creator);
-    message.pubId !== undefined && (obj.pubId = message.pubId);
     message.topic !== undefined && (obj.topic = message.topic);
-    message.pubType !== undefined && (obj.pubType = message.pubType);
     message.payload !== undefined && (obj.payload = message.payload);
-    message.pubTime !== undefined && (obj.pubTime = Math.round(message.pubTime));
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<MsgCreateEventPb>, I>>(object: I): MsgCreateEventPb {
     const message = createBaseMsgCreateEventPb();
     message.creator = object.creator ?? "";
-    message.pubId = object.pubId ?? "";
     message.topic = object.topic ?? "";
-    message.pubType = object.pubType ?? "";
     message.payload = object.payload ?? "";
-    message.pubTime = object.pubTime ?? 0;
     return message;
   },
 };
 
 function createBaseMsgCreateEventPbResponse(): MsgCreateEventPbResponse {
-  return {};
+  return { id: 0 };
 }
 
 export const MsgCreateEventPbResponse = {
-  encode(_: MsgCreateEventPbResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: MsgCreateEventPbResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.id !== 0) {
+      writer.uint32(8).uint64(message.id);
+    }
     return writer;
   },
 
@@ -816,6 +788,9 @@ export const MsgCreateEventPbResponse = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1:
+          message.id = longToNumber(reader.uint64() as Long);
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -824,23 +799,25 @@ export const MsgCreateEventPbResponse = {
     return message;
   },
 
-  fromJSON(_: any): MsgCreateEventPbResponse {
-    return {};
+  fromJSON(object: any): MsgCreateEventPbResponse {
+    return { id: isSet(object.id) ? Number(object.id) : 0 };
   },
 
-  toJSON(_: MsgCreateEventPbResponse): unknown {
+  toJSON(message: MsgCreateEventPbResponse): unknown {
     const obj: any = {};
+    message.id !== undefined && (obj.id = Math.round(message.id));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateEventPbResponse>, I>>(_: I): MsgCreateEventPbResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgCreateEventPbResponse>, I>>(object: I): MsgCreateEventPbResponse {
     const message = createBaseMsgCreateEventPbResponse();
+    message.id = object.id ?? 0;
     return message;
   },
 };
 
 function createBaseMsgUpdateEventPb(): MsgUpdateEventPb {
-  return { creator: "", pubId: "", topic: "", pubType: "", payload: "", pubTime: 0 };
+  return { creator: "", id: 0, topic: "", payload: "" };
 }
 
 export const MsgUpdateEventPb = {
@@ -848,20 +825,14 @@ export const MsgUpdateEventPb = {
     if (message.creator !== "") {
       writer.uint32(10).string(message.creator);
     }
-    if (message.pubId !== "") {
-      writer.uint32(18).string(message.pubId);
+    if (message.id !== 0) {
+      writer.uint32(16).uint64(message.id);
     }
     if (message.topic !== "") {
       writer.uint32(26).string(message.topic);
     }
-    if (message.pubType !== "") {
-      writer.uint32(34).string(message.pubType);
-    }
     if (message.payload !== "") {
-      writer.uint32(42).string(message.payload);
-    }
-    if (message.pubTime !== 0) {
-      writer.uint32(48).int64(message.pubTime);
+      writer.uint32(34).string(message.payload);
     }
     return writer;
   },
@@ -877,19 +848,13 @@ export const MsgUpdateEventPb = {
           message.creator = reader.string();
           break;
         case 2:
-          message.pubId = reader.string();
+          message.id = longToNumber(reader.uint64() as Long);
           break;
         case 3:
           message.topic = reader.string();
           break;
         case 4:
-          message.pubType = reader.string();
-          break;
-        case 5:
           message.payload = reader.string();
-          break;
-        case 6:
-          message.pubTime = longToNumber(reader.int64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -902,33 +867,27 @@ export const MsgUpdateEventPb = {
   fromJSON(object: any): MsgUpdateEventPb {
     return {
       creator: isSet(object.creator) ? String(object.creator) : "",
-      pubId: isSet(object.pubId) ? String(object.pubId) : "",
+      id: isSet(object.id) ? Number(object.id) : 0,
       topic: isSet(object.topic) ? String(object.topic) : "",
-      pubType: isSet(object.pubType) ? String(object.pubType) : "",
       payload: isSet(object.payload) ? String(object.payload) : "",
-      pubTime: isSet(object.pubTime) ? Number(object.pubTime) : 0,
     };
   },
 
   toJSON(message: MsgUpdateEventPb): unknown {
     const obj: any = {};
     message.creator !== undefined && (obj.creator = message.creator);
-    message.pubId !== undefined && (obj.pubId = message.pubId);
+    message.id !== undefined && (obj.id = Math.round(message.id));
     message.topic !== undefined && (obj.topic = message.topic);
-    message.pubType !== undefined && (obj.pubType = message.pubType);
     message.payload !== undefined && (obj.payload = message.payload);
-    message.pubTime !== undefined && (obj.pubTime = Math.round(message.pubTime));
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<MsgUpdateEventPb>, I>>(object: I): MsgUpdateEventPb {
     const message = createBaseMsgUpdateEventPb();
     message.creator = object.creator ?? "";
-    message.pubId = object.pubId ?? "";
+    message.id = object.id ?? 0;
     message.topic = object.topic ?? "";
-    message.pubType = object.pubType ?? "";
     message.payload = object.payload ?? "";
-    message.pubTime = object.pubTime ?? 0;
     return message;
   },
 };
@@ -973,7 +932,7 @@ export const MsgUpdateEventPbResponse = {
 };
 
 function createBaseMsgDeleteEventPb(): MsgDeleteEventPb {
-  return { creator: "", pubId: "" };
+  return { creator: "", id: 0 };
 }
 
 export const MsgDeleteEventPb = {
@@ -981,8 +940,8 @@ export const MsgDeleteEventPb = {
     if (message.creator !== "") {
       writer.uint32(10).string(message.creator);
     }
-    if (message.pubId !== "") {
-      writer.uint32(18).string(message.pubId);
+    if (message.id !== 0) {
+      writer.uint32(16).uint64(message.id);
     }
     return writer;
   },
@@ -998,7 +957,7 @@ export const MsgDeleteEventPb = {
           message.creator = reader.string();
           break;
         case 2:
-          message.pubId = reader.string();
+          message.id = longToNumber(reader.uint64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1011,21 +970,21 @@ export const MsgDeleteEventPb = {
   fromJSON(object: any): MsgDeleteEventPb {
     return {
       creator: isSet(object.creator) ? String(object.creator) : "",
-      pubId: isSet(object.pubId) ? String(object.pubId) : "",
+      id: isSet(object.id) ? Number(object.id) : 0,
     };
   },
 
   toJSON(message: MsgDeleteEventPb): unknown {
     const obj: any = {};
     message.creator !== undefined && (obj.creator = message.creator);
-    message.pubId !== undefined && (obj.pubId = message.pubId);
+    message.id !== undefined && (obj.id = Math.round(message.id));
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<MsgDeleteEventPb>, I>>(object: I): MsgDeleteEventPb {
     const message = createBaseMsgDeleteEventPb();
     message.creator = object.creator ?? "";
-    message.pubId = object.pubId ?? "";
+    message.id = object.id ?? 0;
     return message;
   },
 };

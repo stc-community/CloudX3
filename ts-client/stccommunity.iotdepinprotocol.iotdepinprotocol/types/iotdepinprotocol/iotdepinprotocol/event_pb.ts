@@ -5,37 +5,29 @@ import _m0 from "protobufjs/minimal";
 export const protobufPackage = "stccommunity.iotdepinprotocol.iotdepinprotocol";
 
 export interface EventPb {
-  pubId: string;
+  id: number;
   topic: string;
-  pubType: string;
   payload: string;
-  pubTime: number;
   creator: string;
 }
 
 function createBaseEventPb(): EventPb {
-  return { pubId: "", topic: "", pubType: "", payload: "", pubTime: 0, creator: "" };
+  return { id: 0, topic: "", payload: "", creator: "" };
 }
 
 export const EventPb = {
   encode(message: EventPb, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.pubId !== "") {
-      writer.uint32(10).string(message.pubId);
+    if (message.id !== 0) {
+      writer.uint32(8).uint64(message.id);
     }
     if (message.topic !== "") {
       writer.uint32(18).string(message.topic);
     }
-    if (message.pubType !== "") {
-      writer.uint32(26).string(message.pubType);
-    }
     if (message.payload !== "") {
-      writer.uint32(34).string(message.payload);
-    }
-    if (message.pubTime !== 0) {
-      writer.uint32(40).int64(message.pubTime);
+      writer.uint32(26).string(message.payload);
     }
     if (message.creator !== "") {
-      writer.uint32(50).string(message.creator);
+      writer.uint32(34).string(message.creator);
     }
     return writer;
   },
@@ -48,21 +40,15 @@ export const EventPb = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.pubId = reader.string();
+          message.id = longToNumber(reader.uint64() as Long);
           break;
         case 2:
           message.topic = reader.string();
           break;
         case 3:
-          message.pubType = reader.string();
-          break;
-        case 4:
           message.payload = reader.string();
           break;
-        case 5:
-          message.pubTime = longToNumber(reader.int64() as Long);
-          break;
-        case 6:
+        case 4:
           message.creator = reader.string();
           break;
         default:
@@ -75,33 +61,27 @@ export const EventPb = {
 
   fromJSON(object: any): EventPb {
     return {
-      pubId: isSet(object.pubId) ? String(object.pubId) : "",
+      id: isSet(object.id) ? Number(object.id) : 0,
       topic: isSet(object.topic) ? String(object.topic) : "",
-      pubType: isSet(object.pubType) ? String(object.pubType) : "",
       payload: isSet(object.payload) ? String(object.payload) : "",
-      pubTime: isSet(object.pubTime) ? Number(object.pubTime) : 0,
       creator: isSet(object.creator) ? String(object.creator) : "",
     };
   },
 
   toJSON(message: EventPb): unknown {
     const obj: any = {};
-    message.pubId !== undefined && (obj.pubId = message.pubId);
+    message.id !== undefined && (obj.id = Math.round(message.id));
     message.topic !== undefined && (obj.topic = message.topic);
-    message.pubType !== undefined && (obj.pubType = message.pubType);
     message.payload !== undefined && (obj.payload = message.payload);
-    message.pubTime !== undefined && (obj.pubTime = Math.round(message.pubTime));
     message.creator !== undefined && (obj.creator = message.creator);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<EventPb>, I>>(object: I): EventPb {
     const message = createBaseEventPb();
-    message.pubId = object.pubId ?? "";
+    message.id = object.id ?? 0;
     message.topic = object.topic ?? "";
-    message.pubType = object.pubType ?? "";
     message.payload = object.payload ?? "";
-    message.pubTime = object.pubTime ?? 0;
     message.creator = object.creator ?? "";
     return message;
   },

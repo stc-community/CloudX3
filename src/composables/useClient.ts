@@ -1,5 +1,5 @@
-import { Client } from "stc-community-iot-depin-protocol-client-ts";
-import { env } from "../env";
+import { Client } from 'stc-community-iot-depin-protocol-client-ts'
+import { env } from '../env';
 
 const useClientInstance = () => {
   const client = new Client(env);

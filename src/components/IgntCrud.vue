@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, reactive, ref, toRefs } from "vue";
 import { useRoute } from "vue-router";
+import { getNewNostrPrivateKey } from "@/utils/shared";
 
 import { useAddress } from "@/def-composables/useAddress";
 import { IgntButton } from "@ignt/vue-library";
@@ -74,7 +75,12 @@ const onGetItems = values => {
 const createModalInitalForm = computed(() => {
   if (route.name === "iot.device.events") {
     return {
-      topic: route.params.name
+      deviceName: route.params.name,
+      index: getNewNostrPrivateKey()
+    };
+  } else if (route.name === "iot.device.devices") {
+    return {
+      deviceName: route.params.name
     };
   }
 

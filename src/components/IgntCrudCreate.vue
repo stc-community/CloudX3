@@ -1,39 +1,12 @@
-<template>
-  <IgntModal
-    :visible="true"
-    :title="`Create ${itemName}`"
-    :close-icon="true"
-    :submit-button="true"
-    :cancel-button="true"
-    style="text-align: center"
-    @close="$emit('close')"
-    @submit="submitItem"
-  >
-    <template #body>
-      <div class="my-4 w-[500px]" />
-      <div v-for="field in itemFieldsFiltered" :key="'field_' + field">
-        <label :for="`p${field.name}`" class="sp-label capitalize-first-letter">
-          {{ field.name }}
-        </label>
-        <input
-          :id="`p${field.name}`"
-          v-model="formData[field.name]"
-          :placeholder="`Enter ${field.name}`"
-          type="text"
-          :name="`p${field.name}`"
-          class="sp-input"
-        />
-        <div class="my-4" />
-      </div>
-    </template>
-  </IgntModal>
-</template>
-
 <script setup lang="ts">
 import { useClient } from "@/composables/useClient";
 import { useAddress } from "@/def-composables/useAddress";
 import { reactive, computed } from "vue";
 import { IgntModal } from "@ignt/vue-library";
+import { useRoute } from "vue-router";
+import { clone } from "lodash";
+
+const route = useRoute();
 
 const props = defineProps({
   storeName: {
@@ -79,12 +52,28 @@ const itemFields = (
   ] as any
 ).structure[props.itemName];
 
-const itemFieldsFiltered = computed(() =>
-  itemFields.fields.filter((f: any) => f.name !== "id" && f.name !== "creator")
-);
+const itemFieldsFiltered = computed(() => {
+  const allFields = itemFields.fields.filter(
+    (f: any) => f.name !== "id" && f.name !== "creator"
+  );
+
+  // The index field will gen by backend
+  if (route.name === "iot.device.events") {
+    const index = allFields.findIndex((f: any) => f.name === "index");
+    allFields.splice(index, 1);
+  }
+
+  return allFields;
+});
 const creator = address.value;
 
 const submitItem = async () => {
+  const cloneFormData = clone(formData);
+  if (route.name === "iot.device.events") {
+    cloneFormData["index"] = "";
+    cloneFormData["payload"] = window.btoa(cloneFormData["payload"]);
+  }
+
   await (
     client[
       props.storeName as keyof Omit<
@@ -100,11 +89,41 @@ const submitItem = async () => {
       >
     ] as any
   ).tx[props.commandName]({
-    value: { ...formData, creator }
+    value: { ...cloneFormData, creator }
   });
   emit("close");
 };
 </script>
+<template>
+  <IgntModal
+    :visible="true"
+    :title="`Create ${itemName}`"
+    :close-icon="true"
+    :submit-button="true"
+    :cancel-button="true"
+    style="text-align: center"
+    @close="$emit('close')"
+    @submit="submitItem"
+  >
+    <template #body>
+      <div class="my-4 w-[500px]" />
+      <div v-for="field in itemFieldsFiltered" :key="'field_' + field">
+        <label :for="`p${field.name}`" class="sp-label capitalize-first-letter">
+          {{ field.name }}
+        </label>
+        <input
+          :id="`p${field.name}`"
+          v-model="formData[field.name]"
+          :placeholder="`Enter ${field.name}`"
+          type="text"
+          :name="`p${field.name}`"
+          class="sp-input"
+        />
+        <div class="my-4" />
+      </div>
+    </template>
+  </IgntModal>
+</template>
 
 <style scoped lang="scss">
 .page-background {

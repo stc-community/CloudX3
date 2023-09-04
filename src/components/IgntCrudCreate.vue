@@ -87,23 +87,28 @@ const submitItem = async () => {
   // auto fill device name value
   cloneFormData["deviceName"] = route.params.name;
 
-  await (
-    client[
-      props.storeName as keyof Omit<
-        typeof client,
-        | "plugins"
-        | "env"
-        | "signer"
-        | "registry"
-        | "plugin"
-        | "signAndBroadcast"
-        | "useSigner"
-        | "useKeplr"
-      >
-    ] as any
-  ).tx[props.commandName]({
-    value: { ...cloneFormData, creator }
-  });
+  try {
+    await (
+      client[
+        props.storeName as keyof Omit<
+          typeof client,
+          | "plugins"
+          | "env"
+          | "signer"
+          | "registry"
+          | "plugin"
+          | "signAndBroadcast"
+          | "useSigner"
+          | "useKeplr"
+        >
+      ] as any
+    ).tx[props.commandName]({
+      value: { ...cloneFormData, creator }
+    });
+  } catch (e) {
+    window.alert(e.message);
+  }
+
   emit("close");
 };
 </script>

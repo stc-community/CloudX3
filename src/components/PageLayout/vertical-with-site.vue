@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // vertical layout, and with site switch function
 import { watch, computed, ref } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { loadModuleRoutes } from "@/router/utils";
 import { useAccountStore } from "@/store/modules/account";
 import { useLang } from "@/hooks/useLang";
@@ -17,6 +17,7 @@ const props = defineProps<{
 const { t } = useLang();
 const { nostrStore, relay } = useNostr();
 const route = useRoute();
+const router = useRouter();
 const { data, loading, getIotDevices } = useIotDevices();
 getIotDevices();
 
@@ -47,6 +48,18 @@ watch(
 const accountStore = useAccountStore();
 
 const currentDevice = ref(route.params.name);
+const onDeviceChange = v => {
+  router
+    .push({
+      name: route.name,
+      params: {
+        name: v
+      }
+    })
+    .then(() => {
+      location.reload();
+    });
+};
 </script>
 <template>
   <div class="container mx-auto py-10">
@@ -56,6 +69,7 @@ const currentDevice = ref(route.params.name);
           v-if="from === 'iot'"
           class="select select-primary w-52 ml-2"
           v-model="currentDevice"
+          @change="onDeviceChange(currentDevice)"
         >
           <option disabled>Pick a device</option>
           <option v-if="loading" :value="currentDevice">

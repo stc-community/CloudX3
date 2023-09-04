@@ -66,7 +66,8 @@ const fetch = async () => {
         >
       ] as any
     ).query[props.commandName]({
-      deviceName: route.params.name
+      deviceName: route.params.name,
+      "pagination.reverse": true
     })
   ).data[smallCamelCase(props.itemName)];
 };

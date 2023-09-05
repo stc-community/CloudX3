@@ -17,6 +17,6 @@ getPodLogs();
         class="border inline-block w-2 h-2 bg-green-500 rounded animate-pulse"
       />
     </p>
-    <pre class="break-all">{{ data?.data }}</pre>
+    <pre class="whitespace-normal leading-6">{{ data?.data }}</pre>
   </div>
 </template>

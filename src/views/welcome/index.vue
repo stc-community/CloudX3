@@ -52,7 +52,9 @@ watch(
 
 <template>
   <div class="text-center">
-    <h1 class="text-5xl font-bold mt-[120px] dark:text-slate-200">CloudX3</h1>
+    <h1 class="text-5xl font-bold mt-[120px] dark:text-slate-200">
+      CloudX3 IoT
+    </h1>
     <p
       class="py-6 text-xl max-w-[700px] mx-auto text-slate-500 dark:text-slate-400"
     >

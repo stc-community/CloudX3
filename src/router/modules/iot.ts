@@ -5,7 +5,7 @@ export default {
   component: () => import("@/views/iot/index.vue"),
   meta: {
     title: "iot",
-    rank: 20
+    rank: 2
   },
   children: [
     {

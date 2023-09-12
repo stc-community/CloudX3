@@ -5,7 +5,7 @@ export default {
   component: () => import("@/views/dao/index.vue"),
   meta: {
     title: "Market",
-    rank: 2
+    rank: 10
   },
   children: [
     // {

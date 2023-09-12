@@ -1,6 +1,10 @@
 // 合约相关的配置
 
-type ChainName = "Optimism Goerli Testnet" | "Sepolia" | "opBNB Testnet";
+type ChainName =
+  | "Optimism Goerli Testnet"
+  | "Sepolia"
+  | "opBNB Testnet"
+  | "Filecoin - Calibration testnet";
 
 export type Chain = {
   chainId: string;
@@ -152,10 +156,46 @@ const chains: Chain[] = [
     stcMarketTokenContract: "0x5d3c43875589f4881E769f4b46cFf6257dC5Ad1C", //
 
     userHubContract: "0xD436429Cf172a79A5E4D8F672c698A2E98315dc0" //
+  },
+  {
+    chainId: "0x4cb2f",
+    chainName: "Filecoin - Calibration testnet",
+    // chainlistUrl: "https://chainlist.org/chain/314159",
+    nativeCurrency: {
+      name: "tFIL",
+      symbol: "tFIL",
+      decimals: 18
+    },
+    rpcUrls: ["https://filecoin-calibration.chainup.net/rpc/v1"],
+    blockExplorerUrls: ["https://calibration.filscan.io/"],
+    iconUrls: ["https://filecoin.io/images/filecoin-logo.svg"],
+
+    oracle: "0xCe76ab89Cac76d67Bd43Ed901AE6544b03103a63",
+
+    podContract: "0x3aDb761e02a76e9E8C8aBD12B2744f32F15D7166",
+    podJobId: "780d3dd1933a4a9d839f4c78d92ab595",
+
+    deploymentContract: "0xD6540c5eC23f664D3Fee7E2Aa608C6B197FD24ce",
+    deploymentJobId: "68c1dc5cd63841459ff2395a931f042c",
+
+    nodeContract: "0x4a243dFb4EeFffb5a255b3b320681aa39915420B",
+    nodeJobId: "aa7198c0190f4cc29d4e4470c08f6391",
+    nodeOracle: "0x248E10ec1C54CB570F7A15933286BAa1D59B70c0",
+
+    zeroTrustContract: "0xA3A07c5fdd2b7cea1c7aD9d67292206dBf8832D8",
+
+    meshContract: "0x962E121f6067B0dA6F90D07d565ba21004922B9d",
+
+    codContract: "0x6051273DB68F2af68617589f30F8a91f859e5b82",
+
+    stcMarketContract: "0xe9aeeA52781Cb265a83c65d44DB398Ad78571892",
+    stcMarketTokenContract: "0x7A338445C1eAE2f13E294C28050541686187Cd5F",
+
+    userHubContract: "0x5FeeBB15A0cdb30EFd286Dc1210f4aB3D239d1E3"
   }
 ];
 
-let currentChain: ChainName = "Optimism Goerli Testnet";
+let currentChain: ChainName = "Filecoin - Calibration testnet";
 export function setCurrentChain(name: ChainName) {
   currentChain = name;
 }

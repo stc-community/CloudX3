@@ -31,7 +31,7 @@ const icons = [
   // starterIcon,
   // cbIcon,
   // weechainIcon,
-  wfIcon
+  // wfIcon
 ];
 
 const arr = ref([]);

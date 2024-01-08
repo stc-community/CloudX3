@@ -94,7 +94,7 @@ const chains: Chain[] = [
     },
     iconUrls: ["https://chainlist.org/unknown-logo.png"],
 
-    oracle: "0xC1A56c1c85a4D957a513719FdB30eac50a861433",
+    oracle: "0x84f146aD17078D9C278832768B0cd9EA597E0E67",
 
     podContract: "0xC7F694fbbc168CE02F2ce9cE84d748957F283336",
     podJobId: "c1efad95d1b34cc9b3e2ee06802a2a6d",

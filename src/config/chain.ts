@@ -96,11 +96,11 @@ const chains: Chain[] = [
 
     oracle: "0xC1A56c1c85a4D957a513719FdB30eac50a861433",
 
-    podContract: "0xC033615137D482f51718106489035bE6CCDcE0DD",
-    podJobId: "780d3dd1933a4a9d839f4c78d92ab595",
+    podContract: "0xC7F694fbbc168CE02F2ce9cE84d748957F283336",
+    podJobId: "c1efad95d1b34cc9b3e2ee06802a2a6d",
 
-    deploymentContract: "0x70F4C5425bf1eAcd1fcfdaC5BfF5393EF45cA53E",
-    deploymentJobId: "68c1dc5cd63841459ff2395a931f042c",
+    deploymentContract: "0x6Ca351492b3b137aBb94052B847Af891bb067eFe",
+    deploymentJobId: "d61b61a4e6684116be70d6ec6e58b52e",
 
     nodeContract: "0x1Acc504c02768ff00fBcEB331dB5Eda37fAC006E",
     nodeJobId: "aa7198c0190f4cc29d4e4470c08f6391",
@@ -112,10 +112,10 @@ const chains: Chain[] = [
 
     codContract: "0x754e87664F278f2be89b3f496955752f127fBdf8",
 
-    stcMarketContract: "0x6051273DB68F2af68617589f30F8a91f859e5b82",
-    stcMarketTokenContract: "0x8b321Dde4CAe93848f756895fdb34E889A6c831b",
+    stcMarketContract: "0xa05D733aE699a1cd3Eb3443ca932FfB69e1e7fFC",
+    stcMarketTokenContract: "0xe0bf50E501236845580A090c180B218CdAc46204",
 
-    userHubContract: "0xE87a986fDc35170c66C3a2449bC4Aee6350cc1F6"
+    userHubContract: "0x51923dcd6Bb170bd28AD4425A6Dd5cD0456F8e52"
   },
   {
     chainId: "0x15eb",
@@ -155,7 +155,7 @@ const chains: Chain[] = [
   }
 ];
 
-let currentChain: ChainName = "Optimism Goerli Testnet";
+let currentChain: ChainName = "Sepolia";
 export function setCurrentChain(name: ChainName) {
   currentChain = name;
 }

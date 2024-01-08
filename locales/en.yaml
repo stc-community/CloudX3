@@ -25,9 +25,11 @@ common:
 
   "pick a site": Pick a site
   "need key tips": Please provider your private key to get message safety.
-  connect: Connect
+  connect: Connect Wallet
+  disconnect: Disconnect Wallet
   update: Update
-  "public key": Public Key
+  "public key": Nostr Public Key
+  "wallet address": Wallet Address
   "input private key": Input your Private Key
   "input private key here": Type your key here
 

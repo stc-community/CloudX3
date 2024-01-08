@@ -12,6 +12,7 @@ export type setType = {
 
 export type accountType = {
   name: string; // show name
+  address: string; // show address
   publicKey: string; // public key
   privateKey: string; // private key
 };

@@ -4,13 +4,15 @@ import { accountType } from "./types";
 import { getPublicKey } from "nostr-tools";
 // import { storageLocal } from "@pureadmin/utils";
 import { getUserHubContract } from "@/utils/contract/user-hub";
-import { handleEtherError, decrypt } from "@/utils/shared";
+import { handleEtherError, decrypt, md5 } from "@/utils/shared";
 import { getWalletAddres, signMessage } from "@/utils/contract/web3";
+import { storageSession } from "@pureadmin/utils";
 
 export const useAccountStore = defineStore({
   id: "account-settings",
   state: (): accountType => ({
     name: "",
+    address: "",
     publicKey: "",
     privateKey: "" //storageLocal().getItem("sk") || ""
   }),
@@ -32,6 +34,9 @@ export const useAccountStore = defineStore({
     SET_PRIVATEKEY(key: string) {
       this.privateKey = key;
     },
+    SET_ADDRESS(key: string) {
+      this.address = key;
+    },
     async init(): Promise<any> {
       try {
         const address = await getWalletAddres();
@@ -41,8 +46,13 @@ export const useAccountStore = defineStore({
 
         const { privateKey } = data[1];
         try {
-          const signKey = await signMessage("CloudX3");
+          const cacheKey = await md5(address);
+          const signKey = storageSession().getItem(cacheKey) as string;
+          if (!signKey) {
+            return;
+          }
           const truePrivateKey = decrypt(privateKey, signKey);
+          this.SET_ADDRESS(address);
           this.savePrivateKey(truePrivateKey);
         } catch (e) {
           window.alert(

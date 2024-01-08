@@ -115,11 +115,10 @@ const networkConfig = {
     fee: "0.1",
     fundAmount: "100", // 100
     automationUpdateInterval: "30"
-  },
-
+  }
 };
-const developmentChains = ["hardhat", "localhost"]
-const VERIFICATION_BLOCK_CONFIRMATIONS = 6
+const developmentChains = ["hardhat", "localhost"];
+const VERIFICATION_BLOCK_CONFIRMATIONS = 6;
 
 module.exports = {
   networkConfig,

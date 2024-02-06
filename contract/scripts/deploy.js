@@ -1,6 +1,10 @@
 const hre = require("hardhat");
 
+const private_key = hre.network.config.accounts[0];
+const wallet = new hre.ethers.Wallet(private_key, hre.ethers.provider);
+
 async function main() {
+  console.log("Wallet Ethereum Address:", wallet.address);
   const STCMarket = await hre.ethers.getContractFactory("STCMarket");
   const lock = await STCMarket.deploy();
 

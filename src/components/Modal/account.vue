@@ -64,12 +64,19 @@ const handleSubmit = async () => {
     }
   } else {
     try {
+      loading.value = true;
+      console.log(1)
       const chainPrivateKey = data[1].privateKey;
+      console.log(2)
       const signKey = await signMessage("CloudX3");
+      console.log(3)
       const truePrivateKey = decrypt(chainPrivateKey, signKey);
+      console.log(4)
       useAccountStore().savePrivateKey(truePrivateKey);
+      console.log(5)
       window.location.reload();
     } catch (e) {
+      loading.value = false;
       window.alert(
         "Please sign the message for build security tunnel with server"
       );

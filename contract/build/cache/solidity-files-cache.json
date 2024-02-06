@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/chengqiang/icode/github/stc/GlobalDevDao/contract/contracts/Config.sol": {
-      "lastModificationDate": 1690956884079,
-      "contentHash": "79afe2569c8d7e45ff8423e72691fc09",
+      "lastModificationDate": 1703656026638,
+      "contentHash": "e53796c860eaa008c1b123cf4f10dddf",
       "sourceName": "contracts/Config.sol",
       "solcConfig": {
         "version": "0.8.13",

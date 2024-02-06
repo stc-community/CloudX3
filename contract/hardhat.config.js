@@ -16,6 +16,7 @@ const SEPOLIA_RPC_URL =
   process.env.SEPOLIA_RPC_URL ||
   "https://sepolia.infura.io/v3/60a1a58a3e8b4aa58451b9467a52818c";
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
+const COSMOS_PRIVATE_KEY = process.env.COSMOS_PRIVATE_KEY;
 const MAINNET_PRIVATE_KEY = process.env.MAINNET_PRIVATE_KEY;
 const REPORT_GAS = process.env.REPORT_GAS || false;
 
@@ -41,7 +42,13 @@ module.exports = {
       }
     ]
   },
+  defaultNetwork: "opbnb",
   networks: {
+    cosmos: {
+      chainId: 9000,
+      url: "http://localhost:8545/",
+      accounts: [COSMOS_PRIVATE_KEY]
+    },
     calibration: {
       chainId: 314159,
       url: "https://api.calibration.node.glif.io/rpc/v1",
@@ -66,9 +73,9 @@ module.exports = {
       url: "https://opbnb-testnet.nodereal.io/v1/57ac598465ef4545a95c2ee3d376cd57",
       accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
       chainId: 5611,
+      gasPrice: 3500,
     }
   },
-  defaultNetwork: "opbnb",
   gasReporter: {
     enabled: REPORT_GAS,
     currency: "USD",

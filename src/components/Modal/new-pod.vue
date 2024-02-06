@@ -46,6 +46,15 @@ const handleSubmit = async () => {
   listenIfNeeded();
 
   try {
+    console.log(
+      getCurrentChain().oracle,
+      getCurrentChain().podJobId,
+      window.btoa(data.requestData),
+      `https://stc-test.${getCurrentSiteName(
+        "gw"
+      )}.oneitfarm.com/brige/providers/pod`,
+      md5(accountStore.publicKey)
+    );
     const transaction = await contract.requestContainerPod(
       getCurrentChain().oracle,
       getCurrentChain().podJobId,

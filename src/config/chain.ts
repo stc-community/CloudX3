@@ -130,13 +130,13 @@ const chains: Chain[] = [
     blockExplorerUrls: ["https://mainnet.opbnbscan.com/"],
     iconUrls: ["https://docs.bnbchain.org/opbnb-docs/img/logo.svg"],
 
-    oracle: "0x141Ee019dE7bBd96441a6287C506B35C9718094f", //
+    oracle: "0xB27A3b7272c1b7c6f195e3066c144B18a33ce522", //
 
-    podContract: "0xc07f40758d3bb0f8B8E4C4d146f79265484ba6Fe", //
-    podJobId: "780d3dd1933a4a9d839f4c78d92ab595", //
+    podContract: "0x139E7c9ADfee9682E7997eb736F48f98B8821774", //
+    podJobId: "c1efad95d1b34cc9b3e2ee06802a2a6d", //
 
-    deploymentContract: "0x67F47fC6cdCcD13bbe6ee88B3E7eb71726225e97", //
-    deploymentJobId: "68c1dc5cd63841459ff2395a931f042c", //
+    deploymentContract: "0xC217097F4fe4640BcD541B09bDFaCc8e200cEa37", //
+    deploymentJobId: "d61b61a4e6684116be70d6ec6e58b52e", //
 
     nodeContract: "0x962E121f6067B0dA6F90D07d565ba21004922B9d", //
     nodeJobId: "aa7198c0190f4cc29d4e4470c08f6391",
@@ -151,11 +151,11 @@ const chains: Chain[] = [
     stcMarketContract: "0xBd0F68775aA77288Ea2083D7d7776D2D0C3bf0Ee", //
     stcMarketTokenContract: "0x5d3c43875589f4881E769f4b46cFf6257dC5Ad1C", //
 
-    userHubContract: "0xD436429Cf172a79A5E4D8F672c698A2E98315dc0" //
+    userHubContract: "0xbE5b30a59cdA47d40A0a15830a31aCA00b8af983" //
   }
 ];
 
-let currentChain: ChainName = "Sepolia";
+let currentChain: ChainName = "opBNB Testnet";
 export function setCurrentChain(name: ChainName) {
   currentChain = name;
 }

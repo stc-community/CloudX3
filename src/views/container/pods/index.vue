@@ -12,6 +12,7 @@ const loading = ref(true);
 const pods: Array<Pod> = reactive([]);
 let page = 1;
 const limit = 9;
+const name = "nginx";
 
 const loadOnePage = () => {
   loadData(
@@ -19,7 +20,8 @@ const loadOnePage = () => {
     "cloud.pod.list",
     {
       page,
-      limit
+      limit,
+      name
     },
     loading
   );

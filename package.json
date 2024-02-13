@@ -27,6 +27,10 @@
   ],
   "dependencies": {
     "@pureadmin/utils": "^1.8.5",
+    "@vue-flow/background": "^1.2.0",
+    "@vue-flow/controls": "^1.1.0",
+    "@vue-flow/core": "^1.21.1",
+    "@vue-flow/minimap": "^1.1.1",
     "@vueuse/core": "^9.6.0",
     "animate.css": "^4.1.1",
     "apexcharts": "^3.37.1",

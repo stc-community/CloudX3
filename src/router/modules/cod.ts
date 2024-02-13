@@ -52,6 +52,15 @@ export default {
         title: "Actors Market",
         icon: "mdi:marketplace"
       }
+    },
+    {
+      path: "/cod/editor",
+      name: "cod.editor",
+      component: () => import("@/views/cod/editor/index.vue"),
+      meta: {
+        title: "Editor",
+        icon: "mdi:pencil-ruler-outline"
+      }
     }
   ]
 } as RouteConfigsTable;

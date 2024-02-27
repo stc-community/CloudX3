@@ -106,11 +106,11 @@ const chains: Chain[] = [
     nodeJobId: "aa7198c0190f4cc29d4e4470c08f6391",
     nodeOracle: "0x248E10ec1C54CB570F7A15933286BAa1D59B70c0",
 
-    zeroTrustContract: "0x1Dd5940C70FFAeFe80EF4902ea5Ae9a2Ec3b574D",
+    zeroTrustContract: "0x5BD4fE0f1A2ad3C76a2F68Adbc1b1360A130d2aC",
 
-    meshContract: "0x51aeb604fBfC7D40aB331ffFc007F246C2Db9180",
+    meshContract: "0x230D4763Ff14daA524A27e61adef0a843396F02a",
 
-    codContract: "0x754e87664F278f2be89b3f496955752f127fBdf8",
+    codContract: "0xaeF46CbBDcC76C4053B6c39F7559379BB03C720F",
 
     stcMarketContract: "0xa05D733aE699a1cd3Eb3443ca932FfB69e1e7fFC",
     stcMarketTokenContract: "0xe0bf50E501236845580A090c180B218CdAc46204",
@@ -155,7 +155,7 @@ const chains: Chain[] = [
   }
 ];
 
-let currentChain: ChainName = "opBNB Testnet";
+let currentChain: ChainName = "Sepolia";
 export function setCurrentChain(name: ChainName) {
   currentChain = name;
 }

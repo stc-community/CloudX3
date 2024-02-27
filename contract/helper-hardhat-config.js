@@ -151,7 +151,7 @@ const networkConfig = {
     oracle: "0x84f146aD17078D9C278832768B0cd9EA597E0E67",
 
     // Serverless Oracle contract address
-    ZtControl: "0x1Dd5940C70FFAeFe80EF4902ea5Ae9a2Ec3b574D",
+    ZtControl: "0x5BD4fE0f1A2ad3C76a2F68Adbc1b1360A130d2aC",
     mesh: "0x51aeb604fBfC7D40aB331ffFc007F246C2Db9180",
     cod: "0x754e87664F278f2be89b3f496955752f127fBdf8",
     // Container contract
@@ -164,8 +164,8 @@ const networkConfig = {
     STCMarketToken: "0x8b321Dde4CAe93848f756895fdb34E889A6c831b",
 
     //Serverless Site Info
-    sitename: "gw105",
-    sitehost: "http://192.168.103.113:4441",
+    sitename: "gw103",
+    sitehost: "http://192.168.103.120:32575",
     ztMeshJob: "84981edb58a2455aade2e9d797ae86f1",
     codjob: "3c09c86cffbd4563a3c0b2b97f411aec",
     deploymentJobId: "d61b61a4e6684116be70d6ec6e58b52e",

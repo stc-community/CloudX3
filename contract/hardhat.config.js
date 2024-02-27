@@ -42,7 +42,7 @@ module.exports = {
       }
     ]
   },
-  defaultNetwork: "opbnb",
+  defaultNetwork: "sepolia",
   networks: {
     cosmos: {
       chainId: 9000,

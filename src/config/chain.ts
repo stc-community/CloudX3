@@ -106,11 +106,11 @@ const chains: Chain[] = [
     nodeJobId: "aa7198c0190f4cc29d4e4470c08f6391",
     nodeOracle: "0x248E10ec1C54CB570F7A15933286BAa1D59B70c0",
 
-    zeroTrustContract: "0x5BD4fE0f1A2ad3C76a2F68Adbc1b1360A130d2aC",
+    zeroTrustContract: "0x35035ABEfe99197A70adf322430C33c391160aa7",
 
-    meshContract: "0x230D4763Ff14daA524A27e61adef0a843396F02a",
+    meshContract: "0x844691e3D56D57FfbaF8E396d322BD93023aa9fB",
 
-    codContract: "0xaeF46CbBDcC76C4053B6c39F7559379BB03C720F",
+    codContract: "0xe407b4874ba25c86E0Ed5988b1f976Ec539DB3C5",
 
     stcMarketContract: "0xa05D733aE699a1cd3Eb3443ca932FfB69e1e7fFC",
     stcMarketTokenContract: "0xe0bf50E501236845580A090c180B218CdAc46204",

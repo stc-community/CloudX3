@@ -151,9 +151,9 @@ const networkConfig = {
     oracle: "0x84f146aD17078D9C278832768B0cd9EA597E0E67",
 
     // Serverless Oracle contract address
-    ZtControl: "0x5BD4fE0f1A2ad3C76a2F68Adbc1b1360A130d2aC",
-    mesh: "0x51aeb604fBfC7D40aB331ffFc007F246C2Db9180",
-    cod: "0x754e87664F278f2be89b3f496955752f127fBdf8",
+    ZtControl: "0x35035ABEfe99197A70adf322430C33c391160aa7",
+    mesh: "0x844691e3D56D57FfbaF8E396d322BD93023aa9fB",
+    cod: "0xe407b4874ba25c86E0Ed5988b1f976Ec539DB3C5",
     // Container contract
     pod: "0xC7F694fbbc168CE02F2ce9cE84d748957F283336",
     deployment: "0x6Ca351492b3b137aBb94052B847Af891bb067eFe",
@@ -167,7 +167,7 @@ const networkConfig = {
     sitename: "gw103",
     sitehost: "http://192.168.103.120:32575",
     ztMeshJob: "84981edb58a2455aade2e9d797ae86f1",
-    codjob: "3c09c86cffbd4563a3c0b2b97f411aec",
+    codjob: "84981edb58a2455aade2e9d797ae86f1",
     deploymentJobId: "d61b61a4e6684116be70d6ec6e58b52e",
     podJobId: "c1efad95d1b34cc9b3e2ee06802a2a6d",
     nodeJobId: "aa7198c0190f4cc29d4e4470c08f6391",

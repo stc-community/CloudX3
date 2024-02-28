@@ -1,11 +1,14 @@
 import { getWritebleContractInstance } from "./web3";
 
+import { getCurrentChain } from "@/config/chain";
 // @ts-ignore
 import ABI from "./fuse-limit-abi.json?raw";
-const ADDR = "0x51aeb604fBfC7D40aB331ffFc007F246C2Db9180";
 
 export async function getFuseLimitConrtact() {
-  const contract = await getWritebleContractInstance(ADDR, ABI);
+  const contract = await getWritebleContractInstance(
+    getCurrentChain().meshContract,
+    ABI
+  );
 
   return contract;
 }
